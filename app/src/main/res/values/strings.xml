@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Outclass DL</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_team1_info">Team1Info</string>
+    <string name="title_activity_team2_info">Team2Info</string>
+</resources>
