@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by Sachinda on 8/1/2015.
  */
 public class DataMap {
-    public void fiftyFortyData() {
+    public void fiftyFortyOneData() {
         Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(5000, 100.0);
         data.put(5001, 93.4);
@@ -671,7 +671,7 @@ public class DataMap {
 
     }
 
-    public void fortyThirtyData() {
+    public void fortyThirtyOneData() {
         Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(4000, 89.3);
         data.put(4001, 84.2);
@@ -1332,6 +1332,670 @@ public class DataMap {
         data.put(3017, 21.8);
         data.put(3018, 11.9);
         data.put(3019, 4.7);
+
+    }
+    
+    public void ThirtyTwentyOneData() {
+        Map<Integer, Double> data = new HashMap<Integer, Double>();
+        data.put(3000, 89.3);
+        data.put(3001, 84.2);
+        data.put(3002, 77.8);
+        data.put(3003, 69.6);
+        data.put(3004, 59.5);
+        data.put(3005, 47.6);
+        data.put(3006, 34.6);
+        data.put(3007, 22.0);
+        data.put(3008, 11.9);
+        data.put(3009, 4.7);
+
+        data.put(2950, 89.1);
+        data.put(2951, 84.0);
+        data.put(2952, 77.7);
+        data.put(2953, 69.5);
+        data.put(2954, 59.5);
+        data.put(2955, 47.5);
+        data.put(2956, 34.6);
+        data.put(2957, 22.0);
+        data.put(2958, 11.9);
+        data.put(2959, 4.7);
+
+        data.put(2940, 88.9);
+        data.put(2941, 83.9);
+        data.put(2942, 77.5);
+        data.put(2943, 69.4);
+        data.put(2944, 59.4);
+        data.put(2945, 47.5);
+        data.put(2946, 34.6);
+        data.put(2947, 22.0);
+        data.put(2948, 11.9);
+        data.put(2949, 4.7);
+
+        data.put(2930, 88.6);
+        data.put(2931, 83.7);
+        data.put(2932, 77.4);
+        data.put(2933, 69.3);
+        data.put(2934, 59.3);
+        data.put(2935, 47.5);
+        data.put(2936, 34.6);
+        data.put(2937, 22.0);
+        data.put(2938, 11.9);
+        data.put(2939, 4.7);
+
+        data.put(2920, 88.4);
+        data.put(2921, 83.5);
+        data.put(2922, 77.2);
+        data.put(2923, 69.2);
+        data.put(2924, 59.3);
+        data.put(2925, 47.4);
+        data.put(2926, 34.5);
+        data.put(2927, 22.0);
+        data.put(2928, 11.9);
+        data.put(2929, 4.7);
+
+        data.put(2910, 88.2);
+        data.put(2911, 83.3);
+        data.put(2912, 77.1);
+        data.put(2913, 69.1);
+        data.put(2914, 59.2);
+        data.put(2915, 47.4);
+        data.put(2916, 34.5);
+        data.put(2917, 22.0);
+        data.put(2918, 11.9);
+        data.put(2919, 4.7);
+
+        data.put(2900, 88.0);
+        data.put(2901, 83.1);
+        data.put(2902, 76.9);
+        data.put(2903, 69.0);
+        data.put(2904, 59.1);
+        data.put(2905, 47.4);
+        data.put(2906, 34.5);
+        data.put(2907, 22.0);
+        data.put(2908, 11.9);
+        data.put(2909, 4.7);
+
+        data.put(2850, 87.8);
+        data.put(2851, 83.0);
+        data.put(2852, 76.8);
+        data.put(2853, 68.9);
+        data.put(2854, 59.0);
+        data.put(2855, 47.3);
+        data.put(2856, 34.5);
+        data.put(2857, 21.9);
+        data.put(2858, 11.9);
+        data.put(2859, 4.7);
+
+        data.put(2840, 87.6);
+        data.put(2841, 82.8);
+        data.put(2842, 76.6);
+        data.put(2843, 68.7);
+        data.put(2844, 59.0);
+        data.put(2845, 47.3);
+        data.put(2846, 34.5);
+        data.put(2847, 21.9);
+        data.put(2848, 11.9);
+        data.put(2849, 4.7);
+
+        data.put(2830, 87.4);
+        data.put(2831, 82.6);
+        data.put(2832, 76.5);
+        data.put(2833, 68.6);
+        data.put(2834, 58.9);
+        data.put(2835, 47.3);
+        data.put(2836, 34.5);
+        data.put(2837, 21.9);
+        data.put(2838, 11.9);
+        data.put(2839, 4.7);
+
+        data.put(2820, 87.2);
+        data.put(2821, 82.4);
+        data.put(2822, 76.3);
+        data.put(2823, 68.5);
+        data.put(2824, 58.8);
+        data.put(2825, 47.2);
+        data.put(2826, 34.5);
+        data.put(2827, 21.9);
+        data.put(2828, 11.9);
+        data.put(2829, 4.7);
+
+        data.put(2810, 87.0);
+        data.put(2811, 82.2);
+        data.put(2812, 76.2);
+        data.put(2813, 68.4);
+        data.put(2814, 58.8);
+        data.put(2815, 47.2);
+        data.put(2816, 34.5);
+        data.put(2817, 21.9);
+        data.put(2818, 11.9);
+        data.put(2819, 4.7);
+        
+        data.put(2800, 86.7);
+        data.put(2801, 82.0);
+        data.put(2802, 76.0);
+        data.put(2803, 68.3);
+        data.put(2804, 58.7);
+        data.put(2805, 47.1);
+        data.put(2806, 34.5);
+        data.put(2807, 21.9);
+        data.put(2808, 11.9);
+        data.put(2809, 4.7);
+
+        data.put(2750, 86.5);
+        data.put(2751, 81.8);
+        data.put(2752, 75.8);
+        data.put(2753, 68.2);
+        data.put(2754, 58.6);
+        data.put(2755, 47.1);
+        data.put(2756, 34.4);
+        data.put(2757, 21.9);
+        data.put(2758, 11.9);
+        data.put(2759, 4.7);
+
+        data.put(2740, 86.3);
+        data.put(2741, 81.6);
+        data.put(2742, 75.7);
+        data.put(2743, 68.0);
+        data.put(2744, 58.5);
+        data.put(2745, 47.1);
+        data.put(2746, 34.4);
+        data.put(2747, 21.9);
+        data.put(2748, 11.9);
+        data.put(2749, 4.7);
+
+        data.put(2730, 86.1);
+        data.put(2731, 81.5);
+        data.put(2732, 75.5);
+        data.put(2733, 67.9);
+        data.put(2734, 58.4);
+        data.put(2735, 47.0);
+        data.put(2736, 34.4);
+        data.put(2737, 21.9);
+        data.put(2738, 11.9);
+        data.put(2739, 4.7);
+
+        data.put(2720, 85.9);
+        data.put(2721, 81.3);
+        data.put(2722, 75.4);
+        data.put(2723, 67.8);
+        data.put(2724, 58.4);
+        data.put(2725, 47.0);
+        data.put(2726, 34.4);
+        data.put(2727, 21.9);
+        data.put(2728, 11.9);
+        data.put(2729, 4.7);
+
+        data.put(2710, 85.6);
+        data.put(2711, 81.1);
+        data.put(2712, 75.2);
+        data.put(2713, 67.7);
+        data.put(2714, 58.3);
+        data.put(2715, 46.9);
+        data.put(2716, 34.4);
+        data.put(2717, 21.9);
+        data.put(2718, 11.9);
+        data.put(2719, 4.7);
+
+        data.put(2700, 85.4);
+        data.put(2701, 80.9);
+        data.put(2702, 75.0);
+        data.put(2703, 67.6);
+        data.put(2704, 58.2);
+        data.put(2705, 46.9);
+        data.put(2706, 34.4);
+        data.put(2707, 21.9);
+        data.put(2708, 11.9);
+        data.put(2709, 4.7);
+
+        data.put(2650, 85.2);
+        data.put(2651, 80.7);
+        data.put(2652, 74.9);
+        data.put(2653, 67.4);
+        data.put(2654, 58.1);
+        data.put(2655, 46.9);
+        data.put(2656, 34.4);
+        data.put(2657, 21.9);
+        data.put(2658, 11.9);
+        data.put(2659, 4.7);
+
+        data.put(2640, 85.0);
+        data.put(2641, 80.5);
+        data.put(2642, 74.7);
+        data.put(2643, 67.3);
+        data.put(2644, 58.0);
+        data.put(2645, 46.8);
+        data.put(2646, 34.4);
+        data.put(2647, 21.9);
+        data.put(2648, 11.9);
+        data.put(2649, 4.7);
+
+        data.put(2630, 84.8);
+        data.put(2631, 80.3);
+        data.put(2632, 74.6);
+        data.put(2633, 67.2);
+        data.put(2634, 58.0);
+        data.put(2635, 46.8);
+        data.put(2636, 34.3);
+        data.put(2637, 21.9);
+        data.put(2638, 11.9);
+        data.put(2639, 4.7);
+
+        data.put(2620, 84.5);
+        data.put(2621, 80.1);
+        data.put(2622, 74.4);
+        data.put(2623, 67.1);
+        data.put(2624, 57.9);
+        data.put(2625, 46.7);
+        data.put(2626, 34.3);
+        data.put(2627, 21.9);
+        data.put(2628, 11.9);
+        data.put(2629, 4.7);
+
+        data.put(2610, 84.3);
+        data.put(2611, 79.9);
+        data.put(2612, 74.2);
+        data.put(2613, 66.9);
+        data.put(2614, 57.8);
+        data.put(2615, 46.7);
+        data.put(2616, 34.3);
+        data.put(2617, 21.9);
+        data.put(2618, 11.9);
+        data.put(2619, 4.7);
+
+        data.put(2600, 84.1);
+        data.put(2601, 79.7);
+        data.put(2602, 74.1);
+        data.put(2603, 66.8);
+        data.put(2604, 57.7);
+        data.put(2605, 46.6);
+        data.put(2606, 34.3);
+        data.put(2607, 21.9);
+        data.put(2608, 11.9);
+        data.put(2609, 4.7);
+
+        data.put(2550, 83.8);
+        data.put(2551, 79.5);
+        data.put(2552, 73.9);
+        data.put(2553, 66.7);
+        data.put(2554, 57.6);
+        data.put(2555, 46.6);
+        data.put(2556, 34.3);
+        data.put(2557, 21.9);
+        data.put(2558, 11.9);
+        data.put(2559, 4.7);
+        
+        data.put(2540, 83.6);
+        data.put(2541, 79.3);
+        data.put(2542, 73.7);
+        data.put(2543, 66.6);
+        data.put(2544, 57.5);
+        data.put(2545, 46.6);
+        data.put(2546, 34.3);
+        data.put(2547, 21.9);
+        data.put(2548, 11.9);
+        data.put(2549, 4.7);
+
+        data.put(2530, 83.4);
+        data.put(2531, 79.1);
+        data.put(2532, 73.6);
+        data.put(2533, 66.4);
+        data.put(2534, 57.4);
+        data.put(2535, 46.5);
+        data.put(2536, 34.3);
+        data.put(2537, 21.9);
+        data.put(2538, 11.9);
+        data.put(2539, 4.7);
+
+        data.put(2520, 83.2);
+        data.put(2521, 78.9);
+        data.put(2522, 73.4);
+        data.put(2523, 66.3);
+        data.put(2524, 57.4);
+        data.put(2525, 46.5);
+        data.put(2526, 34.2);
+        data.put(2527, 21.9);
+        data.put(2528, 11.9);
+        data.put(2529, 4.7);
+
+        data.put(2510, 82.9);
+        data.put(2511, 78.7);
+        data.put(2512, 73.2);
+        data.put(2513, 66.2);
+        data.put(2514, 57.3);
+        data.put(2515, 46.4);
+        data.put(2516, 34.2);
+        data.put(2517, 21.9);
+        data.put(2518, 11.9);
+        data.put(2519, 4.7);
+
+        data.put(2500, 82.7);
+        data.put(2501, 78.5);
+        data.put(2502, 73.0);
+        data.put(2503, 66.0);
+        data.put(2504, 57.2);
+        data.put(2505, 46.4);
+        data.put(2506, 34.2);
+        data.put(2507, 21.9);
+        data.put(2508, 11.9);
+        data.put(2509, 4.7);
+
+        data.put(2450, 82.5);
+        data.put(2451, 78.3);
+        data.put(2452, 72.9);
+        data.put(2453, 65.9);
+        data.put(2454, 57.1);
+        data.put(2455, 46.3);
+        data.put(2456, 34.2);
+        data.put(2457, 21.9);
+        data.put(2458, 11.9);
+        data.put(2459, 4.7);
+
+        data.put(2440, 82.2);
+        data.put(2441, 78.0);
+        data.put(2442, 72.7);
+        data.put(2443, 65.8);
+        data.put(2444, 57.0);
+        data.put(2445, 46.3);
+        data.put(2446, 34.2);
+        data.put(2447, 21.9);
+        data.put(2448, 11.9);
+        data.put(2449, 4.7);
+
+        data.put(2430, 82.0);
+        data.put(2431, 77.8);
+        data.put(2432, 72.5);
+        data.put(2433, 65.6);
+        data.put(2434, 56.9);
+        data.put(2435, 46.2);
+        data.put(2436, 34.2);
+        data.put(2437, 21.9);
+        data.put(2438, 11.9);
+        data.put(2439, 4.7);
+
+        data.put(2420, 81.7);
+        data.put(2421, 77.6);
+        data.put(2422, 72.3);
+        data.put(2423, 65.5);
+        data.put(2424, 56.8);
+        data.put(2425, 46.2);
+        data.put(2426, 34.2);
+        data.put(2427, 21.9);
+        data.put(2428, 11.9);
+        data.put(2429, 4.7);
+
+        data.put(2410, 81.5);
+        data.put(2411, 77.4);
+        data.put(2412, 72.2);
+        data.put(2413, 65.3);
+        data.put(2414, 56.7);
+        data.put(2415, 46.1);
+        data.put(2416, 34.1);
+        data.put(2417, 21.9);
+        data.put(2418, 11.9);
+        data.put(2419, 4.7);
+
+        data.put(2400, 81.3);
+        data.put(2401, 77.2);
+        data.put(2402, 72.0);
+        data.put(2403, 65.2);
+        data.put(2404, 56.6);
+        data.put(2405, 46.1);
+        data.put(2406, 34.1);
+        data.put(2407, 21.9);
+        data.put(2408, 11.9);
+        data.put(2409, 4.7);
+
+        data.put(2350, 81.0);
+        data.put(2351, 77.0);
+        data.put(2352, 71.8);
+        data.put(2353, 65.1);
+        data.put(2354, 56.5);
+        data.put(2355, 46.0);
+        data.put(2356, 34.1);
+        data.put(2357, 21.9);
+        data.put(2358, 11.9);
+        data.put(2359, 4.7);
+
+        data.put(2340, 80.8);
+        data.put(2341, 76.8);
+        data.put(2342, 71.6);
+        data.put(2343, 64.9);
+        data.put(2344, 56.4);
+        data.put(2345, 46.0);
+        data.put(2346, 34.1);
+        data.put(2347, 21.9);
+        data.put(2348, 11.9);
+        data.put(2349, 4.7);
+
+        data.put(2330, 80.5);
+        data.put(2331, 76.6);
+        data.put(2332, 71.4);
+        data.put(2333, 64.8);
+        data.put(2334, 56.3);
+        data.put(2335, 45.9);
+        data.put(2336, 34.1);
+        data.put(2337, 21.9);
+        data.put(2338, 11.9);
+        data.put(2339, 4.7);
+
+        data.put(2320, 80.3);
+        data.put(2321, 76.3);
+        data.put(2322, 71.3);
+        data.put(2323, 64.6);
+        data.put(2324, 56.2);
+        data.put(2325, 45.9);
+        data.put(2326, 34.0);
+        data.put(2327, 21.9);
+        data.put(2328, 11.9);
+        data.put(2329, 4.7);
+
+        data.put(2310, 80.0);
+        data.put(2311, 76.1);
+        data.put(2312, 71.1);
+        data.put(2313, 64.5);
+        data.put(2314, 56.1);
+        data.put(2315, 45.8);
+        data.put(2316, 34.0);
+        data.put(2317, 21.9);
+        data.put(2318, 11.9);
+        data.put(2319, 4.7);
+
+        data.put(2300, 79.8);
+        data.put(2301, 75.9);
+        data.put(2302, 70.9);
+        data.put(2303, 64.4);
+        data.put(2304, 56.0);
+        data.put(2305, 45.8);
+        data.put(2306, 34.0);
+        data.put(2307, 21.9);
+        data.put(2308, 11.9);
+        data.put(2309, 4.7);
+
+        data.put(2250, 79.5);
+        data.put(2251, 75.7);
+        data.put(2252, 70.7);
+        data.put(2253, 64.2);
+        data.put(2254, 55.9);
+        data.put(2255, 45.7);
+        data.put(2256, 34.0);
+        data.put(2257, 21.9);
+        data.put(2258, 11.9);
+        data.put(2259, 4.7);
+
+        data.put(2240, 79.3);
+        data.put(2241, 75.5);
+        data.put(2242, 70.5);
+        data.put(2243, 64.1);
+        data.put(2244, 55.8);
+        data.put(2245, 45.7);
+        data.put(2246, 34.0);
+        data.put(2247, 21.9);
+        data.put(2248, 11.9);
+        data.put(2249, 4.7);
+
+        data.put(2230, 79.0);
+        data.put(2231, 75.2);
+        data.put(2232, 70.3);
+        data.put(2233, 63.9);
+        data.put(2234, 55.7);
+        data.put(2235, 45.6);
+        data.put(2236, 33.9);
+        data.put(2237, 21.9);
+        data.put(2238, 11.9);
+        data.put(2239, 4.7);
+
+        data.put(2220, 78.8);
+        data.put(2221, 75.0);
+        data.put(2222, 70.1);
+        data.put(2223, 63.8);
+        data.put(2224, 55.6);
+        data.put(2225, 45.5);
+        data.put(2226, 33.9);
+        data.put(2227, 21.9);
+        data.put(2228, 11.9);
+        data.put(2229, 4.7);
+
+        data.put(2210, 78.5);
+        data.put(2211, 74.8);
+        data.put(2212, 69.9);
+        data.put(2213, 63.6);
+        data.put(2214, 55.5);
+        data.put(2215, 45.5);
+        data.put(2216, 33.9);
+        data.put(2217, 21.9);
+        data.put(2218, 11.9);
+        data.put(2219, 4.7);
+
+        data.put(2200, 78.3);
+        data.put(2201, 74.6);
+        data.put(2202, 69.7);
+        data.put(2203, 63.5);
+        data.put(2204, 55.4);
+        data.put(2205, 45.4);
+        data.put(2206, 33.9);
+        data.put(2207, 21.9);
+        data.put(2208, 11.9);
+        data.put(2209, 4.7);
+
+        data.put(2150, 78.0);
+        data.put(2151, 74.3);
+        data.put(2152, 69.6);
+        data.put(2153, 63.3);
+        data.put(2154, 55.3);
+        data.put(2155, 45.4);
+        data.put(2156, 33.9);
+        data.put(2157, 21.9);
+        data.put(2158, 11.9);
+        data.put(2159, 4.7);
+
+        data.put(2140, 77.8);
+        data.put(2141, 74.1);
+        data.put(2142, 69.4);
+        data.put(2143, 63.2);
+        data.put(2144, 55.2);
+        data.put(2145, 45.3);
+        data.put(2146, 33.8);
+        data.put(2147, 21.9);
+        data.put(2148, 11.9);
+        data.put(2149, 4.7);
+
+        data.put(2130, 77.5);
+        data.put(2131, 73.9);
+        data.put(2132, 69.2);
+        data.put(2133, 63.0);
+        data.put(2134, 55.1);
+        data.put(2135, 45.2);
+        data.put(2136, 33.8);
+        data.put(2137, 21.9);
+        data.put(2138, 11.9);
+        data.put(2139, 4.7);
+
+        data.put(2120, 77.3);
+        data.put(2121, 73.6);
+        data.put(2122, 69.0);
+        data.put(2123, 62.8);
+        data.put(2124, 55.0);
+        data.put(2125, 45.2);
+        data.put(2126, 33.8);
+        data.put(2127, 21.9);
+        data.put(2128, 11.9);
+        data.put(2129, 4.7);
+
+        data.put(2110, 77.0);
+        data.put(2111, 73.4);
+        data.put(2112, 68.8);
+        data.put(2113, 62.7);
+        data.put(2114, 54.9);
+        data.put(2115, 45.1);
+        data.put(2116, 33.8);
+        data.put(2117, 21.9);
+        data.put(2118, 11.9);
+        data.put(2119, 4.7);
+
+        data.put(2100, 76.7);
+        data.put(2101, 73.2);
+        data.put(2102, 68.6);
+        data.put(2103, 62.5);
+        data.put(2104, 54.8);
+        data.put(2105, 45.1);
+        data.put(2106, 33.7);
+        data.put(2107, 21.9);
+        data.put(2108, 11.9);
+        data.put(2109, 4.7);
+
+        data.put(2050, 76.5);
+        data.put(2051, 72.9);
+        data.put(2052, 68.4);
+        data.put(2053, 62.4);
+        data.put(2054, 54.7);
+        data.put(2055, 45.0);
+        data.put(2056, 33.7);
+        data.put(2057, 21.9);
+        data.put(2058, 11.9);
+        data.put(2059, 4.7);
+
+        data.put(2040, 76.2);
+        data.put(2041, 72.7);
+        data.put(2042, 68.2);
+        data.put(2043, 62.2);
+        data.put(2044, 54.5);
+        data.put(2045, 44.9);
+        data.put(2046, 33.7);
+        data.put(2047, 21.9);
+        data.put(2048, 11.9);
+        data.put(2049, 4.7);
+
+        data.put(2030, 75.9);
+        data.put(2031, 72.5);
+        data.put(2032, 68.0);
+        data.put(2033, 62.0);
+        data.put(2034, 54.4);
+        data.put(2035, 44.9);
+        data.put(2036, 33.7);
+        data.put(2037, 21.8);
+        data.put(2038, 11.9);
+        data.put(2039, 4.7);
+
+        data.put(2020, 75.7);
+        data.put(2021, 72.2);
+        data.put(2022, 67.8);
+        data.put(2023, 61.9);
+        data.put(2024, 54.3);
+        data.put(2025, 44.8);
+        data.put(2026, 33.6);
+        data.put(2027, 21.8);
+        data.put(2028, 11.9);
+        data.put(2029, 4.7);
+
+        data.put(2010, 75.4);
+        data.put(2011, 72.0);
+        data.put(2012, 67.6);
+        data.put(2013, 61.7);
+        data.put(2014, 54.2);
+        data.put(2015, 44.7);
+        data.put(2016, 33.6);
+        data.put(2017, 21.8);
+        data.put(2018, 11.9);
+        data.put(2019, 4.7);
 
     }
 }
