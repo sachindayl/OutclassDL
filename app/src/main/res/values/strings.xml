@@ -5,4 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_team1_info">Team1Info</string>
     <string name="title_activity_team2_info">Team2Info</string>
+    <string name="title_activity_scenario1">Scenario1</string>
+    <string name="start_innings_overs">Number of overs available at the start of the innings</string>
+    <string name="team_1_full_amount">Did Team 1 bat the full amount of overs?</string>
+
+    <string-array name="yes_no">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
 </resources>

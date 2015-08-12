@@ -1,30 +1,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#B2DFDB"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-
-    <ListView
-        android:id="@+id/teamsList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+        android:background="#B2DFDB"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:weightSum="2"
+        tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/teamsList">
+        <LinearLayout
+            android:id="@+id/overs_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <ListView
+                android:id="@+id/teams_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="beforeDescendants"
+                android:listSelector="@android:color/transparent">
+
+            </ListView>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/edit_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+        <!--<Spinner-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:id="@+id/yes_no_spinner"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:ignore="NotSibling"-->
+        <!--android:background="@color/white"-->
+        <!--android:layout_alignTop="@id/team_1_bat"-->
+        <!--android:layout_toRightOf="@id/team_1_bat"-->
+        <!--android:layout_toEndOf="@id/team_1_bat" />-->
+
+
+    </LinearLayout>
 
     <Button
-        android:layout_centerHorizontal="true"
-        android:text="CALCULATE"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
+        android:id="@+id/next_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="25dp"
+        android:onClick="scenarioBtn"
+        android:text="Next" />
 </RelativeLayout>

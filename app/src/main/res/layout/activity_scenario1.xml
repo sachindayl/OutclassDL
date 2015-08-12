@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B2DFDB"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    tools:context=".MainActivity">
+
+
+    <include
+        android:id="@+id/teams_list1"
+        layout="@layout/listing_view"></include>
+
+
+    <Button
+        android:layout_centerHorizontal="true"
+        android:text="CALCULATE"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

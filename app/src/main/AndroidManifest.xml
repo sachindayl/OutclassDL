@@ -3,6 +3,7 @@
     package="com.sportsoutclass.outclassdl" >
 
     <application
+        android:name=".InningsOneComplete"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,6 +29,15 @@
             android:name=".Team2Info"
             android:label="@string/title_activity_team2_info"
             android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sportsoutclass.outclassdl.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Scenario1"
+            android:label="@string/title_activity_scenario1"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
