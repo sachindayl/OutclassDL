@@ -40,9 +40,6 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     private void teamsList() {
-        teamsListView = (ListView) findViewById(R.id.teams_list1);
-        String[] teams = {"Team 1 Information", "Team 2 Information", "Overs"};
-        ArrayAdapter<String> teamsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, teams);
-        teamsListView.setAdapter(teamsAdapter);
+
     }
 }

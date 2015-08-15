@@ -1,25 +1,152 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B2DFDB"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    tools:context=".MainActivity">
+    android:fillViewport="true">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B2DFDB"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        tools:context="com.sportsoutclass.outclassdl.Team1Info">
 
-    <include
-        android:id="@+id/teams_list1"
-        layout="@layout/listing_view"></include>
+        <TextView
+            android:id="@+id/interruptions_text_view"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:text="@string/interruptions"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <EditText
+            android:id="@+id/interruptions_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@+id/interruptions_text_view"
+            android:layout_toRightOf="@+id/interruptions_text_view"
+            android:hint="@string/interruptions_hint"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:paddingTop="15dp" />
 
-    <Button
-        android:layout_centerHorizontal="true"
-        android:text="CALCULATE"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25dp"
+            android:onClick="scenarioBtn"
+            android:text="@string/next" />
 
+        <TextView
+            android:id="@+id/interruption_1_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:text="@string/interruption_1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@id/interruptions_edit_text"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/which_over_interruption_1_text_view"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:text="@string/interruption_1_over"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@id/interruption_1_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/which_over_interruption_1_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/overs"
+            android:imeOptions="actionNext"
+            android:paddingTop="15dp"
+            android:inputType="number"
+            android:layout_alignBottom="@+id/which_over_interruption_1_text_view"
+            android:layout_toRightOf="@+id/which_over_interruption_1_text_view"
+            android:layout_toEndOf="@+id/which_over_interruption_1_text_view" />
+
+        <TextView
+            android:id="@+id/wickets_lost_interruption_1_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="55dp"
+            android:text="@string/interruption_1_wickets"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@id/which_over_interruption_1_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/wickets_lost_interruption_1_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="wickets"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/wickets_lost_interruption_1_text_view"
+            android:layout_toRightOf="@+id/wickets_lost_interruption_1_text_view"
+            android:layout_toEndOf="@+id/wickets_lost_interruption_1_text_view" />
+
+        <TextView
+            android:id="@+id/overs_remaining_interruption_1_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingRight="55dp"
+            android:text="@string/interruption_1_remaining"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@id/wickets_lost_interruption_1_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/interruption_2_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="@string/interruption_2"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@id/overs_remaining_interruption_1_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/which_over_interruption_2_text_view"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:text="@string/interruption_1_over"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@id/interruption_2_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/which_over_interruption_2_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/overs"
+            android:imeOptions="actionNext"
+            android:paddingTop="15dp"
+            android:inputType="number"
+            android:layout_alignBottom="@+id/which_over_interruption_2_text_view"
+            android:layout_toRightOf="@+id/which_over_interruption_2_text_view"
+            android:layout_toEndOf="@+id/which_over_interruption_2_text_view" />
+
+    </RelativeLayout>
+</ScrollView>
