@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Created by Sachinda on 8/1/2015.
+ * All the over rate data on 5 hash maps
  */
 public class DataMap {
     public void fiftyFortyOneData() {

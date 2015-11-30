@@ -29,7 +29,6 @@
             android:layout_alignParentRight="true"
             android:layout_toEndOf="@+id/interruptions_text_view"
             android:layout_toRightOf="@+id/interruptions_text_view"
-            android:hint="@string/interruptions_hint"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:paddingTop="15dp" />

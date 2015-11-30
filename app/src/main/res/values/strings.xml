@@ -8,11 +8,12 @@
     <string name="title_activity_scenario1">Scenario1</string>
     <string name="start_innings_overs">Number of overs available at the start of the innings (50 overs or less)</string>
     <string name="team_1_full_amount">Did Team 1 bat the full amount of overs?</string>
-    <string name="team_1_revised">Do you already know the revised target?</string>
-    <string name="interruptions">How many interruptions for team 1?</string>
-    <string name="interruptions_hint">interruptions</string>
+    <string name="team_1_revised">Do you already know the team 1 revised total?</string>
+    <string name="interruptions">How many interruptions for team 1? (Max. 3)</string>
+    <!--<string name="interruptions_hint">interruptions</string>-->
     <string name="interruption_1">Interruption 1</string>
     <string name="interruption_2">Interruption 2</string>
+    <string name="interruption_3">Interruption 3</string>
     <string name="interruption_1_over">Which over was the play interrupted?</string>
     <string name="interruption_1_wickets">Wickets lost at interruption</string>
     <string name="interruption_1_remaining">Overs remaining at the end of interruption</string>
