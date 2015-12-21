@@ -8,7 +8,7 @@ import java.util.Map;
  * All the over rate data on 5 hash maps
  */
 public class DataMap {
-    public void fiftyFortyOneData() {
+    public double fiftyFortyOneData(int key) {
         Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(5000, 100.0);
         data.put(5001, 93.4);
@@ -669,7 +669,8 @@ public class DataMap {
         data.put(4017, 22.0);
         data.put(4018, 11.9);
         data.put(4019, 4.7);
-
+        Object value = data.get(key);
+        return (double) value;
     }
 
     public void fortyThirtyOneData() {

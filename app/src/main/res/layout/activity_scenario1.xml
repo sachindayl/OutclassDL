@@ -44,7 +44,7 @@
                 android:layout_alignBottom="@id/interruptions_text_view"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:imeOptions="actionNone"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:paddingTop="15dp" />
             <!--android:hint="@string/interruptions_hint"-->
