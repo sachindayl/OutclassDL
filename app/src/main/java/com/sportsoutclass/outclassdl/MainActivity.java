@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     totalToS = "0";
                 }
                 total = Integer.parseInt(totalToS);
-                state.setTotal(total);
+                state.setTotalT1(total);
             }
         });
 

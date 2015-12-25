@@ -3,6 +3,7 @@ package com.sportsoutclass.outclassdl;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,22 +21,24 @@ import android.widget.Toast;
  * occurs to the second team.
  */
 public class Scenario1 extends AppCompatActivity {
-    TextView interruption1TextView, interruption2TextView, interruption3TextView,
+    TextView interruption1TextView, totalInter1TextView, totalInter2TextView, totalInter3TextView,
+            interruption2TextView, interruption3TextView,
             whichOverInterruption1TextView, whichOverInterruption2TextView,
             whichOverInterruption3TextView, wicketsLostInterruption1TextView,
             wicketsLostInterruption2TextView, wicketsLostInterruption3TextView,
             oversRemainingInterruption1TextView, oversRemainingInterruption2TextView,
             oversRemainingInterruption3TextView;
-    EditText team2InterruptionsEdit, whichOverInterruption1EditText, whichOverInterruption2EditText,
+    EditText totalInter1EditText, totalInter2EditText, totalInter3EditText, team2InterruptionsEdit, whichOverInterruption1EditText, whichOverInterruption2EditText,
             whichOverInterruption3EditText, wicketsLostInterruption1EditText,
             wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
             oversRemainingInterruption1EditText, oversRemainingInterruption2EditText,
             oversRemainingInterruption3EditText;
 
-    int totalWickets, inter1Wickets;
+    int totalWickets, inter1Wickets, inter1total;
     double inter1Over, inter1OversAtEnd;
     DataMap overData;
     StateClass state;
+    AlertDialog.Builder t2WinScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption1EditText.setVisibility(View.VISIBLE);
             wicketsLostInterruption1EditText.setVisibility(View.VISIBLE);
             oversRemainingInterruption1EditText.setVisibility(View.VISIBLE);
+            totalInter1TextView.setVisibility(View.VISIBLE);
+            totalInter1EditText.setVisibility(View.VISIBLE);
 
             interruption2TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
@@ -120,6 +125,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
+            totalInter2TextView.setVisibility(View.INVISIBLE);
+            totalInter2EditText.setVisibility(View.INVISIBLE);
             interruption3TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
@@ -127,6 +134,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
+            totalInter3EditText.setVisibility(View.INVISIBLE);
+            totalInter3TextView.setVisibility(View.INVISIBLE);
             oversRemainingInterruption1EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
@@ -140,6 +149,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption2EditText.setVisibility(View.VISIBLE);
             wicketsLostInterruption2EditText.setVisibility(View.VISIBLE);
             oversRemainingInterruption2EditText.setVisibility(View.VISIBLE);
+            totalInter2TextView.setVisibility(View.VISIBLE);
+            totalInter2EditText.setVisibility(View.VISIBLE);
 
             interruption3TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
@@ -148,6 +159,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
+            totalInter3EditText.setVisibility(View.INVISIBLE);
+            totalInter3TextView.setVisibility(View.INVISIBLE);
             oversRemainingInterruption2EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 3) {
@@ -160,6 +173,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption3EditText.setVisibility(View.VISIBLE);
             wicketsLostInterruption3EditText.setVisibility(View.VISIBLE);
             oversRemainingInterruption3EditText.setVisibility(View.VISIBLE);
+            totalInter3EditText.setVisibility(View.VISIBLE);
+            totalInter3TextView.setVisibility(View.VISIBLE);
             oversRemainingInterruption3EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
@@ -174,6 +189,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption1EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption1EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption1EditText.setVisibility(View.INVISIBLE);
+            totalInter1TextView.setVisibility(View.INVISIBLE);
+            totalInter1EditText.setVisibility(View.INVISIBLE);
             interruption2TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
             wicketsLostInterruption2TextView.setVisibility(View.INVISIBLE);
@@ -181,6 +198,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
+            totalInter2TextView.setVisibility(View.INVISIBLE);
+            totalInter2EditText.setVisibility(View.INVISIBLE);
             interruption3TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
@@ -188,6 +207,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
+            totalInter3EditText.setVisibility(View.INVISIBLE);
+            totalInter3TextView.setVisibility(View.INVISIBLE);
 
         } else {
             Toast.makeText(getApplicationContext(), "Maximum 3 Interruptions",
@@ -200,6 +221,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption1EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption1EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption1EditText.setVisibility(View.INVISIBLE);
+            totalInter1TextView.setVisibility(View.INVISIBLE);
+            totalInter1EditText.setVisibility(View.INVISIBLE);
             interruption2TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
             wicketsLostInterruption2TextView.setVisibility(View.INVISIBLE);
@@ -207,6 +230,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
+            totalInter2TextView.setVisibility(View.INVISIBLE);
+            totalInter2EditText.setVisibility(View.INVISIBLE);
             interruption3TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
@@ -214,6 +239,8 @@ public class Scenario1 extends AppCompatActivity {
             whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
             wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
             oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
+            totalInter3EditText.setVisibility(View.INVISIBLE);
+            totalInter3TextView.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -293,6 +320,29 @@ public class Scenario1 extends AppCompatActivity {
             }
         });
 
+        totalInter1EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter1total = 0;
+                String inter1OversAtEndToS = s.toString();
+                if (inter1OversAtEndToS.equals("")) {
+                    inter1OversAtEndToS = "0";
+                }
+                inter1total = Integer.parseInt(inter1OversAtEndToS);
+                state.setTotalT2(inter1total);
+            }
+        });
+
     }
 
     private int calculations() {
@@ -305,7 +355,7 @@ public class Scenario1 extends AppCompatActivity {
         double resAtStartofMatch = overData.DataSet(startOfInnsOversWickets);
         Log.v("ResourcesStartofMatch: ", String.valueOf(resAtStartofMatch));
         //Team 1 total score at the end of their innings
-        int t1TotalScore = state.getTotal();
+        int t1TotalScore = state.getTotalT1();
         Log.v("Team1 Total: ", String.valueOf(t1TotalScore));
         //Team 1 wickets at the end of their innings
         int t1Wickets = state.getWickets();
@@ -349,6 +399,7 @@ public class Scenario1 extends AppCompatActivity {
         String response = "";
         int target = 0;
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -362,6 +413,7 @@ public class Scenario1 extends AppCompatActivity {
             try {
                 target = calculations();
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
+
             } catch (Exception e) {
                 e.printStackTrace();
                 response = e.getMessage();
@@ -374,8 +426,23 @@ public class Scenario1 extends AppCompatActivity {
             super.onPostExecute(result);
 
             pd.dismiss();
+            toWinTarget(result);
 
         }
+    }
+
+    private void toWinTarget(int target) {
+        int toWin;
+        int team2Scored = state.getTotalT2();
+        toWin = target - team2Scored;
+        String toWinToS = String.valueOf(toWin);
+        Log.v("Need to win: ", String.valueOf(toWin));
+
+
+        t2WinScore.setTitle("Target");
+        t2WinScore.setMessage("Team 2 needs " + toWinToS + " runs to Win.");
+        t2WinScore.setPositiveButton("OK", null);
+        t2WinScore.show();
     }
 
     private void init() {
@@ -392,6 +459,9 @@ public class Scenario1 extends AppCompatActivity {
         oversRemainingInterruption1TextView = (TextView) findViewById(R.id.overs_remaining_interruption_1_text_view);
         oversRemainingInterruption2TextView = (TextView) findViewById(R.id.overs_remaining_interruption_2_text_view);
         oversRemainingInterruption3TextView = (TextView) findViewById(R.id.overs_remaining_interruption_3_text_view);
+        totalInter1TextView = (TextView) findViewById(R.id.team2_total_interruption_1_text_view);
+        totalInter2TextView = (TextView) findViewById(R.id.team2_total_interruption_2_text_view);
+        totalInter3TextView = (TextView) findViewById(R.id.team2_total_interruption_3_text_view);
         //Edit Text Assignments
         team2InterruptionsEdit = (EditText) findViewById(R.id.interruptions_edit_text);
         whichOverInterruption1EditText = (EditText) findViewById(R.id.which_over_interruption_1_edit_text);
@@ -403,9 +473,13 @@ public class Scenario1 extends AppCompatActivity {
         oversRemainingInterruption1EditText = (EditText) findViewById(R.id.overs_remaining_interruption_1_edit_text);
         oversRemainingInterruption2EditText = (EditText) findViewById(R.id.overs_remaining_interruption_2_edit_text);
         oversRemainingInterruption3EditText = (EditText) findViewById(R.id.overs_remaining_interruption_3_edit_text);
+        totalInter1EditText = (EditText) findViewById(R.id.total_interruption_1_edit_text);
+        totalInter2EditText = (EditText) findViewById(R.id.total_interruption_2_edit_text);
+        totalInter3EditText = (EditText) findViewById(R.id.total_interruption_3_edit_text);
 
         totalWickets = 10;
         overData = new DataMap();
         state = (StateClass) getApplicationContext();
+        t2WinScore = new AlertDialog.Builder(Scenario1.this);
     }
 }

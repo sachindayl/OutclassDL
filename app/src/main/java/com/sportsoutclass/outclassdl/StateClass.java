@@ -9,7 +9,7 @@ import android.app.Application;
 
 public class StateClass extends Application {
     public double overs, inter1StartOver, inter1EndOver;
-    public int wickets, total, inter1Wickets;
+    public int wickets, totalT1, totalT2, inter1Wickets;
 
 
     /**
@@ -19,8 +19,12 @@ public class StateClass extends Application {
         return this.overs;
     }
 
-    public int getTotal() {
-        return this.total;
+    public int getTotalT1() {
+        return this.totalT1;
+    }
+
+    public int getTotalT2() {
+        return this.totalT2;
     }
 
     public int getWickets() {
@@ -50,8 +54,12 @@ public class StateClass extends Application {
         this.wickets = value;
     }
 
-    public void setTotal(int value) {
-        this.total = value;
+    public void setTotalT1(int value) {
+        this.totalT1 = value;
+    }
+
+    public void setTotalT2(int value) {
+        this.totalT2 = value;
     }
 
     public void setInter1StartOver(double value) {
