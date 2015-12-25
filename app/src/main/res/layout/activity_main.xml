@@ -1,96 +1,155 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#B2DFDB"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B2DFDB"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        tools:context=".MainActivity">
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="25dp"
+        android:onClick="scenarioBtn"
+        android:text="@string/next" />
 
-        <TextView
-            android:id="@+id/number_overs_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:text="@string/start_innings_overs"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/next_button"
+        android:fillViewport="true">
 
-        <Switch
-            android:id="@+id/team_1_overs_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/team_1_overs_text_view"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_toEndOf="@+id/team_1_overs_text_view"
-            android:layout_toRightOf="@+id/team_1_overs_text_view"
-            android:checked="true" />
-
-        <EditText
-            android:id="@+id/number_overs_edit_text"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/number_overs_text_view"
-            android:layout_toEndOf="@+id/next_button"
-            android:layout_toRightOf="@+id/next_button"
-            android:hint="@string/overs"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:nextFocusForward="@id/team_1_overs_switch"
-            android:paddingTop="15dp" />
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-        <TextView
-            android:id="@+id/team_1_overs_text_view"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/number_overs_edit_text"
-            android:paddingTop="15dp"
-            android:text="@string/team_1_full_amount"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Switch
+                android:id="@+id/team_1_revised_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/team_1_revised_text_view"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/team_1_revised_text_view"
+                android:layout_toRightOf="@+id/team_1_revised_text_view"
+                android:checked="false"
+                android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/team_1_revised_text_view"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:visibility="invisible"
-            android:layout_below="@id/team_1_overs_text_view"
-            android:paddingTop="15dp"
-            android:text="@string/team_1_revised"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/number_overs_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="@string/start_innings_overs"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Switch
-            android:id="@+id/team_1_revised_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_alignBottom="@+id/team_1_revised_text_view"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_toEndOf="@+id/team_1_revised_text_view"
-            android:layout_toRightOf="@+id/team_1_revised_text_view"
-            android:checked="false" />
+            <Switch
+                android:id="@+id/team_1_overs_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/team_1_overs_text_view"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/team_1_overs_text_view"
+                android:layout_toRightOf="@+id/team_1_overs_text_view"
+                android:checked="true" />
 
 
-        <Button
-            android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="25dp"
-            android:onClick="scenarioBtn"
-            android:text="@string/next" />
+            <TextView
+                android:id="@+id/team_1_revised_text_view"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_overs_text_view"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/team_1_revised"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="invisible" />
 
 
-    </RelativeLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/team_1_score"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_overs_text_view"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/team_1_final_score"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
 
+
+            <TextView
+                android:id="@+id/team_1_wickets"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_score"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/wickets"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/team_1_wickets_edit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/team_1_score_edit"
+                android:layout_toLeftOf="@+id/team_1_overs_switch"
+                android:layout_toStartOf="@+id/team_1_overs_switch"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:paddingTop="15dp" />
+
+            <EditText
+                android:id="@+id/number_overs_edit_text"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/number_overs_text_view"
+                android:layout_toLeftOf="@+id/team_1_revised_switch"
+                android:layout_toStartOf="@+id/team_1_revised_switch"
+                android:hint="@string/overs"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:nextFocusDown="@id/team_1_wickets_edit"
+                android:paddingTop="15dp" />
+
+            <TextView
+                android:id="@+id/team_1_overs_text_view"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/number_overs_edit_text"
+                android:paddingTop="15dp"
+                android:text="@string/team_1_full_amount"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/team_1_score_edit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/team_1_overs_switch"
+                android:layout_toLeftOf="@+id/team_1_overs_switch"
+                android:layout_toStartOf="@+id/team_1_overs_switch"
+                android:hint="@string/total"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:nextFocusForward="@id/team_1_wickets_edit"
+                android:paddingTop="15dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

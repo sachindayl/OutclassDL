@@ -19,6 +19,9 @@
     <string name="interruption_1_remaining">Overs remaining at the end of interruption</string>
     <string name="overs">overs</string>
     <string name="next">next</string>
+    <string name="team_1_final_score">Team 1 final score</string>
+    <string name="total">Total</string>
+    <string name="wickets">Wickets</string>
 
     <string-array name="yes_no">
         <item>Yes</item>

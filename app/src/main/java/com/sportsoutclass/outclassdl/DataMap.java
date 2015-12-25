@@ -8,7 +8,7 @@ import java.util.Map;
  * All the over rate data on 5 hash maps
  */
 public class DataMap {
-    public double fiftyFortyOneData(int key) {
+    public double DataSet(int key) {
         Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(5000, 100.0);
         data.put(5001, 93.4);
@@ -669,12 +669,7 @@ public class DataMap {
         data.put(4017, 22.0);
         data.put(4018, 11.9);
         data.put(4019, 4.7);
-        Object value = data.get(key);
-        return (double) value;
-    }
 
-    public void fortyThirtyOneData() {
-        Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(4000, 89.3);
         data.put(4001, 84.2);
         data.put(4002, 77.8);
@@ -1335,10 +1330,6 @@ public class DataMap {
         data.put(3018, 11.9);
         data.put(3019, 4.7);
 
-    }
-    
-    public void ThirtyTwentyOneData() {
-        Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(3000, 75.1);
         data.put(3001, 71.8);
         data.put(3002, 67.3);
@@ -1470,7 +1461,7 @@ public class DataMap {
         data.put(2817, 21.8);
         data.put(2818, 11.9);
         data.put(2819, 4.7);
-        
+
         data.put(2800, 71.8);
         data.put(2801, 68.8);
         data.put(2802, 64.8);
@@ -1624,7 +1615,7 @@ public class DataMap {
         data.put(2557, 21.7);
         data.put(2558, 11.9);
         data.put(2559, 4.7);
-        
+
         data.put(2540, 67.7);
         data.put(2541, 65.0);
         data.put(2542, 61.5);
@@ -1999,10 +1990,6 @@ public class DataMap {
         data.put(2018, 11.9);
         data.put(2019, 4.7);
 
-    }
-
-    public void TwentyElevenData(){
-        Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(2000, 56.6);
         data.put(2001, 54.8);
         data.put(2002, 52.4);
@@ -2662,10 +2649,7 @@ public class DataMap {
         data.put(1017, 18.0);
         data.put(1018, 11.4);
         data.put(1019, 4.7);
-    }
 
-    public void TenZeroData(){
-        Map<Integer, Double> data = new HashMap<Integer, Double>();
         data.put(1000, 32.1);
         data.put(1001, 31.6);
         data.put(1002, 30.8);
@@ -3336,5 +3320,9 @@ public class DataMap {
         data.put(7, 0.0);
         data.put(8, 0.0);
         data.put(9, 0.0);
+
+        Double value = data.get(key);
+        return value;
     }
+
 }

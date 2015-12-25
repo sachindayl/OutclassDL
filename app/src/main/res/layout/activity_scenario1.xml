@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#B2DFDB">
 
     <Button
@@ -11,8 +12,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
-        android:clickable="false"
-        android:onClick="scenarioBtn"
+        android:clickable="true"
+        android:onClick="activateNextBtn"
         android:text="@string/next" />
 
     <ScrollView
