@@ -35,7 +35,7 @@ public class Scenario1 extends AppCompatActivity {
             wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
             oversRemainingInterruption1EditText, oversRemainingInterruption2EditText,
             oversRemainingInterruption3EditText;
-    int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
+    int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total, interuptns;
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
@@ -247,14 +247,29 @@ public class Scenario1 extends AppCompatActivity {
 
     }
 
-    //activating next button
+    //activating calculate button
     public void activateCalcBtn(View v) {
 
-        double intOverStart = state.getInter1StartOver();
-        double intOverEnd = state.getInter1EndOver();
-        double wholeOvers = state.getOvers();
-        double oversCanPut = wholeOvers - intOverStart;
-
+        int interrupt = state.getInterruptions();
+        double intOverStart;
+        double intOverEnd = 0.0;
+        double wholeOvers;
+        double oversCanPut = 0.0;
+        if (interrupt == 1) {
+            intOverStart = state.getInter1StartOver();
+            intOverEnd = state.getInter1EndOver();
+            wholeOvers = state.getOvers();
+            oversCanPut = wholeOvers - intOverStart;
+        } else if (interrupt == 2) {
+            intOverStart = state.getInter2StartOver();
+            Log.v("intOverStart: ", String.valueOf(intOverStart));
+            intOverEnd = state.getInter2EndOver();
+            Log.v("intOverEnd: ", String.valueOf(intOverEnd));
+            wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
+            Log.v("wholeOvers: ", String.valueOf(wholeOvers));
+            oversCanPut = wholeOvers - intOverStart;
+            Log.v("oversCanPut: ", String.valueOf(oversCanPut));
+        }
         if (oversCanPut < intOverEnd) {
             String oversCanPutToS = String.valueOf(oversCanPut);
             Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
@@ -264,8 +279,6 @@ public class Scenario1 extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
-
-
     }
 
     private void editTextData() {
@@ -541,7 +554,7 @@ public class Scenario1 extends AppCompatActivity {
     private int calculations() {
         int target = 0;
         //getting the number of interruptions
-        int interuptns = state.getInterruptions();
+        interuptns = state.getInterruptions();
         //Overs both teams has at the start of the match
         double startOfInnsOvers = state.getOvers();
         Log.v("overs in Scenario1: ", String.valueOf(startOfInnsOvers));
@@ -616,10 +629,35 @@ public class Scenario1 extends AppCompatActivity {
 //            double resourcesLeftAtEndInter = resAtStartofMatch - resourcesLost;
             Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInter));
             //setting up target
-            target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartofMatch)) + 1);
+            target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartofMatch)) + 1.5);
             Log.v("Target@calculations: ", String.valueOf(target));
         } else if (interuptns == 2) {
-
+            double oversAtInter2Start = state.getInter2StartOver();
+            //Team 2 Wickets at the start of the interruption 1
+            int wicketsAtInter2Start = state.getInter2Wickets();
+            double oversFinalizedAtInter1End = oversAtInter1Start + oversRemainingInterEnd;
+            Log.v("oversFinalizedAtInter1End: ", String.valueOf(oversFinalizedAtInter1End));
+            double oversRemainingAtInter2End = state.getInter2EndOver();
+            /**
+             * Make a check at button press for this.
+             */
+            double oversFinalizedAtInter2End = oversAtInter2Start + oversRemainingAtInter2End;
+            Log.v("oversFinalizedAtInter2End: ", String.valueOf(oversFinalizedAtInter2End));
+            double oversLeftAtInter2Start = oversFinalizedAtInter1End - oversAtInter2Start;
+            Log.v("oversLeftAtInter2Start: ", String.valueOf(oversLeftAtInter2Start));
+            int oversWktsLeftAtInter2Start = (int) ((oversLeftAtInter2Start * 100) + wicketsAtInter2Start);
+            Log.v("resLeftAtInter2Start: ", String.valueOf(oversWktsLeftAtInter2Start));
+            double resLeftAtInter2Start = overData.DataSet(oversWktsLeftAtInter2Start);
+            double oversLeftAtInter2End = oversFinalizedAtInter2End - oversAtInter2Start;
+            Log.v("oversLeftAtInter2End: ", String.valueOf(oversLeftAtInter2End));
+            int oversWktsLeftAtInter2End = (int) ((oversLeftAtInter2End * 100) + wicketsAtInter2Start);
+            Log.v("resLeftAtInter2End: ", String.valueOf(oversWktsLeftAtInter2End));
+            double resLeftAtInter2End = overData.DataSet(oversWktsLeftAtInter2End);
+            double resLostAtInt2 = resLeftAtInter2Start - resLeftAtInter2End;
+            double resLeftAtInt2 = resourcesLeftAtEndInter - resLostAtInt2;
+            Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
+            target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartofMatch)) + 1.5);
+            Log.v("targetInt2: ", String.valueOf(target));
         }
 
         return target;
@@ -627,10 +665,18 @@ public class Scenario1 extends AppCompatActivity {
 
     private void toWinTarget(int target) {
         int toWin;
-        int team2ScoredAtInt1 = state.getTotalT2int1();
-        toWin = target - team2ScoredAtInt1;
+        int team2score = 0;
+        double remainingOvers = 0.0;
+        if (interuptns == 1) {
+            team2score = state.getTotalT2int1();
+            remainingOvers = state.getInter1EndOver();
+        } else if (interuptns == 2) {
+            team2score = state.getTotalT2int2();
+            remainingOvers = state.getInter2EndOver();
+        }
+        toWin = target - team2score;
         String toWinToS = String.valueOf(toWin);
-        double remainingOvers = state.getInter1EndOver();
+
         Log.v("Need to win: ", String.valueOf(toWin));
 
 
