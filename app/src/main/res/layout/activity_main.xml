@@ -106,6 +106,7 @@
                 android:layout_toLeftOf="@+id/team_1_overs_switch"
                 android:layout_toStartOf="@+id/team_1_overs_switch"
                 android:imeOptions="actionDone"
+                android:digits="0123456789"
                 android:inputType="number"
                 android:paddingTop="15dp" />
 
@@ -119,8 +120,9 @@
                 android:layout_toLeftOf="@+id/team_1_revised_switch"
                 android:layout_toStartOf="@+id/team_1_revised_switch"
                 android:hint="@string/overs"
+                android:digits="0123456789."
                 android:imeOptions="actionNext"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:nextFocusDown="@id/team_1_wickets_edit"
                 android:paddingTop="15dp" />
 
@@ -143,6 +145,7 @@
                 android:layout_toLeftOf="@+id/team_1_overs_switch"
                 android:layout_toStartOf="@+id/team_1_overs_switch"
                 android:hint="@string/total"
+                android:digits="0123456789"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:nextFocusForward="@id/team_1_wickets_edit"

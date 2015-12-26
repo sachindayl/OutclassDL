@@ -1,6 +1,7 @@
 package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +35,8 @@ public class Scenario1 extends AppCompatActivity {
             wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
             oversRemainingInterruption1EditText, oversRemainingInterruption2EditText,
             oversRemainingInterruption3EditText;
-
-    int totalWickets, inter1Wickets, inter1total;
-    double inter1Over, inter1OversAtEnd;
+    int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
+    double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
     AlertDialog.Builder t2WinScore;
@@ -95,6 +96,7 @@ public class Scenario1 extends AppCompatActivity {
                 }
                 Log.v("interruptionsToS value", interruptionsToS);
                 interToInt = Integer.parseInt(interruptionsToS);
+                state.setInterruptions(interToInt);
                 InterruptionsAmountSetup(interToInt);
 
                 if (interToInt > 0 && interToInt < 4) {
@@ -246,9 +248,24 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     //activating next button
-    public void activateNextBtn(View v) {
-        AsyncCalculation calc = new AsyncCalculation();
-        calc.execute();
+    public void activateCalcBtn(View v) {
+
+        double intOverStart = state.getInter1StartOver();
+        double intOverEnd = state.getInter1EndOver();
+        double wholeOvers = state.getOvers();
+        double oversCanPut = wholeOvers - intOverStart;
+
+        if (oversCanPut < intOverEnd) {
+            String oversCanPutToS = String.valueOf(oversCanPut);
+            Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
+        } else {
+            AsyncCalculation calc = new AsyncCalculation();
+            calc.execute();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+
+
     }
 
     private void editTextData() {
@@ -271,8 +288,52 @@ public class Scenario1 extends AppCompatActivity {
                 if (inter1overToS.equals("")) {
                     inter1overToS = "0";
                 }
-                inter1Over = Integer.parseInt(inter1overToS);
+                inter1Over = Double.parseDouble(inter1overToS);
                 state.setInter1StartOver(inter1Over);
+            }
+        });
+        whichOverInterruption2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2Over = 0;
+                String inter2overToS = s.toString();
+                if (inter2overToS.equals("")) {
+                    inter2overToS = "0";
+                }
+                inter2Over = Double.parseDouble(inter2overToS);
+                state.setInter2StartOver(inter2Over);
+            }
+        });
+        whichOverInterruption3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3Over = 0;
+                String inter3overToS = s.toString();
+                if (inter3overToS.equals("")) {
+                    inter3overToS = "0";
+                }
+                inter3Over = Double.parseDouble(inter3overToS);
+                state.setInter3StartOver(inter3Over);
             }
         });
         wicketsLostInterruption1EditText.addTextChangedListener(new TextWatcher() {
@@ -297,6 +358,50 @@ public class Scenario1 extends AppCompatActivity {
                 state.setInter1Wickets(inter1Wickets);
             }
         });
+        wicketsLostInterruption2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2Wickets = 0;
+                String inter2WicketsToS = s.toString();
+                if (inter2WicketsToS.equals("")) {
+                    inter2WicketsToS = "0";
+                }
+                inter2Wickets = Integer.parseInt(inter2WicketsToS);
+                state.setInter2Wickets(inter2Wickets);
+            }
+        });
+        wicketsLostInterruption3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3Wickets = 0;
+                String inter3WicketsToS = s.toString();
+                if (inter3WicketsToS.equals("")) {
+                    inter3WicketsToS = "0";
+                }
+                inter3Wickets = Integer.parseInt(inter3WicketsToS);
+                state.setInter3Wickets(inter3Wickets);
+            }
+        });
         oversRemainingInterruption1EditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -315,8 +420,52 @@ public class Scenario1 extends AppCompatActivity {
                 if (inter1OversAtEndToS.equals("")) {
                     inter1OversAtEndToS = "0";
                 }
-                inter1OversAtEnd = Integer.parseInt(inter1OversAtEndToS);
+                inter1OversAtEnd = Double.parseDouble(inter1OversAtEndToS);
                 state.setInter1EndOver(inter1OversAtEnd);
+            }
+        });
+        oversRemainingInterruption2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2OversAtEnd = 0;
+                String inter2OversAtEndToS = s.toString();
+                if (inter2OversAtEndToS.equals("")) {
+                    inter2OversAtEndToS = "0";
+                }
+                inter2OversAtEnd = Double.parseDouble(inter2OversAtEndToS);
+                state.setInter2EndOver(inter2OversAtEnd);
+            }
+        });
+        oversRemainingInterruption3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3OversAtEnd = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                inter3OversAtEnd = Double.parseDouble(inter3OversAtEndToS);
+                state.setInter3EndOver(inter3OversAtEnd);
             }
         });
 
@@ -339,13 +488,60 @@ public class Scenario1 extends AppCompatActivity {
                     inter1OversAtEndToS = "0";
                 }
                 inter1total = Integer.parseInt(inter1OversAtEndToS);
-                state.setTotalT2(inter1total);
+                state.setTotalT2int1(inter1total);
+            }
+        });
+        totalInter2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2total = 0;
+                String inter2OversAtEndToS = s.toString();
+                if (inter2OversAtEndToS.equals("")) {
+                    inter2OversAtEndToS = "0";
+                }
+                inter2total = Integer.parseInt(inter2OversAtEndToS);
+                state.setTotalT2int2(inter2total);
+            }
+        });
+        totalInter3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3total = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                inter3total = Integer.parseInt(inter3OversAtEndToS);
+                state.setTotalT2int3(inter3total);
             }
         });
 
     }
 
     private int calculations() {
+        int target = 0;
+        //getting the number of interruptions
+        int interuptns = state.getInterruptions();
         //Overs both teams has at the start of the match
         double startOfInnsOvers = state.getOvers();
         Log.v("overs in Scenario1: ", String.valueOf(startOfInnsOvers));
@@ -373,8 +569,10 @@ public class Scenario1 extends AppCompatActivity {
         //resource percentage at the start of the interruption
         double percentageResourcesAtInterStart = overData.DataSet(oversAndWicketsStartTogether);
         Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStart));
+
         //overs remaining at the end of the interruption
         double oversRemainingInterEnd = state.getInter1EndOver();
+        Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
         //overs remaining *10 to get rid of decimal
         int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
         Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWickets));
@@ -386,61 +584,75 @@ public class Scenario1 extends AppCompatActivity {
         Log.v("resourcesLost: ", String.valueOf(resourcesLost));
         //resources left at end of interruption
         double resourcesLeftAtEndInter = resAtStartofMatch - resourcesLost;
-        Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInter));
-        //setting up target
-        int target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartofMatch)) + 1);
-        Log.v("Target@calculations: ", String.valueOf(target));
+
+        if (interuptns == 1) {
+//            //Team 2 Overs at the start of the interruption 1
+//            double oversAtInter1Start = state.getInter1StartOver();
+//            Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
+//            //Team 2 Wickets at the start of the interruption 1
+//            int wicketsAtInter1Start = state.getInter1Wickets();
+//            //overs remaining at the start of the interruption
+//            double remainingOversAtInterStart = startOfInnsOvers - oversAtInter1Start;
+//            //Team 2 Overs and wickets together when the interruption happened to set up key to find resource percentage
+//            int oversAndWicketsStartTogether = (int) ((remainingOversAtInterStart * 100) + wicketsAtInter1Start);
+//            Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsStartTogether));
+//            //resource percentage at the start of the interruption
+//            double percentageResourcesAtInterStart = overData.DataSet(oversAndWicketsStartTogether);
+//            Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStart));
+//
+//            //overs remaining at the end of the interruption
+//            double oversRemainingInterEnd = state.getInter1EndOver();
+//            Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
+//            //overs remaining *10 to get rid of decimal
+//            int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
+//            Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWickets));
+//            //resources left gathered from dataSet at the end of the interruption
+//            double resourceCheckForRemainderOvers = overData.DataSet(totalOversRemainingPlusWickets);
+//            Log.v("resForRemainder: ", String.valueOf(resourceCheckForRemainderOvers));
+//            //resources lost at the end of the interruption
+//            double resourcesLost = percentageResourcesAtInterStart - resourceCheckForRemainderOvers;
+//            Log.v("resourcesLost: ", String.valueOf(resourcesLost));
+//            //resources left at end of interruption
+//            double resourcesLeftAtEndInter = resAtStartofMatch - resourcesLost;
+            Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInter));
+            //setting up target
+            target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartofMatch)) + 1);
+            Log.v("Target@calculations: ", String.valueOf(target));
+        } else if (interuptns == 2) {
+
+        }
 
         return target;
     }
 
-    private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
-        ProgressDialog pd = new ProgressDialog(Scenario1.this);
-        String response = "";
-        int target = 0;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pd.setMessage("\tCalculating...");
-            pd.show();
-        }
-
-        @Override
-        protected Integer doInBackground(Integer... params) {
-
-            try {
-                target = calculations();
-                Log.v("theCalculatedTarget: ", String.valueOf(target));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = e.getMessage();
-            }
-            return target;
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            super.onPostExecute(result);
-
-            pd.dismiss();
-            toWinTarget(result);
-
-        }
-    }
-
     private void toWinTarget(int target) {
         int toWin;
-        int team2Scored = state.getTotalT2();
-        toWin = target - team2Scored;
+        int team2ScoredAtInt1 = state.getTotalT2int1();
+        toWin = target - team2ScoredAtInt1;
         String toWinToS = String.valueOf(toWin);
+        double remainingOvers = state.getInter1EndOver();
         Log.v("Need to win: ", String.valueOf(toWin));
 
 
         t2WinScore.setTitle("Target");
-        t2WinScore.setMessage("Team 2 needs " + toWinToS + " runs to Win.");
+        if (remainingOvers == 0.0) {
+            if (toWin <= 0) {
+                toWin = Math.abs(toWin);
+                toWinToS = String.valueOf(toWin);
+                t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+            } else {
+                toWin = toWin--;
+                toWinToS = String.valueOf(toWin);
+                t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
+            }
+
+        } else if (toWin <= 0) {
+            toWin = Math.abs(toWin);
+            toWinToS = String.valueOf(toWin);
+            t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+        } else {
+            t2WinScore.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
+        }
         t2WinScore.setPositiveButton("OK", null);
         t2WinScore.show();
     }
@@ -481,5 +693,42 @@ public class Scenario1 extends AppCompatActivity {
         overData = new DataMap();
         state = (StateClass) getApplicationContext();
         t2WinScore = new AlertDialog.Builder(Scenario1.this);
+    }
+
+    private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
+        ProgressDialog pd = new ProgressDialog(Scenario1.this);
+        String response = "";
+        int target = 0;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd.setMessage("\tCalculating...");
+            pd.show();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+
+            try {
+                target = calculations();
+                Log.v("theCalculatedTarget: ", String.valueOf(target));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = e.getMessage();
+            }
+            return target;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+            Log.v("theCalculatedTrgtPE: ", String.valueOf(result));
+            toWinTarget(result);
+            pd.dismiss();
+        }
     }
 }

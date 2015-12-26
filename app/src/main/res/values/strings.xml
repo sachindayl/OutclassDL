@@ -23,6 +23,7 @@
     <string name="total">Total</string>
     <string name="wickets">Wickets</string>
     <string name="total_at_interruption">Total at interruption</string>
+    <string name="calculate">Calculate</string>
 
     <string-array name="yes_no">
         <item>Yes</item>
