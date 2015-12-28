@@ -40,6 +40,7 @@ public class Scenario1 extends AppCompatActivity {
     DataMap overData;
     StateClass state;
     AlertDialog.Builder t2WinScore;
+    InterruptionSetup overFix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,7 @@ public class Scenario1 extends AppCompatActivity {
                 Log.v("interruptionsToS value", interruptionsToS);
                 interToInt = Integer.parseInt(interruptionsToS);
                 state.setInterruptions(interToInt);
-                InterruptionsAmountSetup(interToInt);
+                InterruptionsAmountVisibilitySetup(interToInt);
 
                 if (interToInt > 0 && interToInt < 4) {
                     team2InterruptionsEdit.setNextFocusForwardId(R.id.which_over_interruption_1_edit_text);
@@ -108,7 +109,7 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     //this enables disables visibility of number of interruptions available to edit
-    private void InterruptionsAmountSetup(int i) {
+    private void InterruptionsAmountVisibilitySetup(int i) {
         if (i == 1) {
             interruption1TextView.setVisibility(View.VISIBLE);
             whichOverInterruption1TextView.setVisibility(View.VISIBLE);
@@ -142,7 +143,7 @@ public class Scenario1 extends AppCompatActivity {
 
 
         } else if (i == 2) {
-            InterruptionsAmountSetup(1);
+            InterruptionsAmountVisibilitySetup(1);
             oversRemainingInterruption1EditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             interruption2TextView.setVisibility(View.VISIBLE);
             whichOverInterruption2TextView.setVisibility(View.VISIBLE);
@@ -166,7 +167,7 @@ public class Scenario1 extends AppCompatActivity {
             oversRemainingInterruption2EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 3) {
-            InterruptionsAmountSetup(2);
+            InterruptionsAmountVisibilitySetup(2);
             oversRemainingInterruption2EditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             interruption3TextView.setVisibility(View.VISIBLE);
             whichOverInterruption3TextView.setVisibility(View.VISIBLE);
@@ -259,7 +260,7 @@ public class Scenario1 extends AppCompatActivity {
             intOverStart = state.getInter1StartOver();
             intOverEnd = state.getInter1EndOver();
             wholeOvers = state.getOvers();
-            oversCanPut = wholeOvers - intOverStart;
+            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
         } else if (interrupt == 2) {
             intOverStart = state.getInter2StartOver();
             Log.v("intOverStart: ", String.valueOf(intOverStart));
@@ -267,7 +268,16 @@ public class Scenario1 extends AppCompatActivity {
             Log.v("intOverEnd: ", String.valueOf(intOverEnd));
             wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
             Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-            oversCanPut = wholeOvers - intOverStart;
+            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
+            Log.v("oversCanPut: ", String.valueOf(oversCanPut));
+        } else if (interrupt == 3) {
+            intOverStart = state.getInter3StartOver();
+            Log.v("intOverStart: ", String.valueOf(intOverStart));
+            intOverEnd = state.getInter3EndOver();
+            Log.v("intOverEnd: ", String.valueOf(intOverEnd));
+            wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
+            Log.v("wholeOvers: ", String.valueOf(wholeOvers));
+            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
             Log.v("oversCanPut: ", String.valueOf(oversCanPut));
         }
         if (oversCanPut < intOverEnd) {
@@ -275,7 +285,7 @@ public class Scenario1 extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
         } else {
             AsyncCalculation calc = new AsyncCalculation();
-            calc.execute();
+            calc.execute(interrupt);
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
@@ -551,128 +561,21 @@ public class Scenario1 extends AppCompatActivity {
 
     }
 
-    private int calculations() {
-        int target = 0;
-        //getting the number of interruptions
-        interuptns = state.getInterruptions();
-        //Overs both teams has at the start of the match
-        double startOfInnsOvers = state.getOvers();
-        Log.v("overs in Scenario1: ", String.valueOf(startOfInnsOvers));
-        //Setting up the key to grab the resource percentage at the start of the match
-        int startOfInnsOversWickets = (int) (startOfInnsOvers * 100);
-        //resources percentage at the start of the match
-        double resAtStartofMatch = overData.DataSet(startOfInnsOversWickets);
-        Log.v("ResourcesStartofMatch: ", String.valueOf(resAtStartofMatch));
-        //Team 1 total score at the end of their innings
-        int t1TotalScore = state.getTotalT1();
-        Log.v("Team1 Total: ", String.valueOf(t1TotalScore));
-        //Team 1 wickets at the end of their innings
-        int t1Wickets = state.getWickets();
-        Log.v("Team1 Wickets: ", String.valueOf(t1Wickets));
-        //Team 2 Overs at the start of the interruption 1
-        double oversAtInter1Start = state.getInter1StartOver();
-        Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
-        //Team 2 Wickets at the start of the interruption 1
-        int wicketsAtInter1Start = state.getInter1Wickets();
-        //overs remaining at the start of the interruption
-        double remainingOversAtInterStart = startOfInnsOvers - oversAtInter1Start;
-        //Team 2 Overs and wickets together when the interruption happened to set up key to find resource percentage
-        int oversAndWicketsStartTogether = (int) ((remainingOversAtInterStart * 100) + wicketsAtInter1Start);
-        Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsStartTogether));
-        //resource percentage at the start of the interruption
-        double percentageResourcesAtInterStart = overData.DataSet(oversAndWicketsStartTogether);
-        Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStart));
-
-        //overs remaining at the end of the interruption
-        double oversRemainingInterEnd = state.getInter1EndOver();
-        Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
-        //overs remaining *10 to get rid of decimal
-        int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
-        Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWickets));
-        //resources left gathered from dataSet at the end of the interruption
-        double resourceCheckForRemainderOvers = overData.DataSet(totalOversRemainingPlusWickets);
-        Log.v("resForRemainder: ", String.valueOf(resourceCheckForRemainderOvers));
-        //resources lost at the end of the interruption
-        double resourcesLost = percentageResourcesAtInterStart - resourceCheckForRemainderOvers;
-        Log.v("resourcesLost: ", String.valueOf(resourcesLost));
-        //resources left at end of interruption
-        double resourcesLeftAtEndInter = resAtStartofMatch - resourcesLost;
-
-        if (interuptns == 1) {
-//            //Team 2 Overs at the start of the interruption 1
-//            double oversAtInter1Start = state.getInter1StartOver();
-//            Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
-//            //Team 2 Wickets at the start of the interruption 1
-//            int wicketsAtInter1Start = state.getInter1Wickets();
-//            //overs remaining at the start of the interruption
-//            double remainingOversAtInterStart = startOfInnsOvers - oversAtInter1Start;
-//            //Team 2 Overs and wickets together when the interruption happened to set up key to find resource percentage
-//            int oversAndWicketsStartTogether = (int) ((remainingOversAtInterStart * 100) + wicketsAtInter1Start);
-//            Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsStartTogether));
-//            //resource percentage at the start of the interruption
-//            double percentageResourcesAtInterStart = overData.DataSet(oversAndWicketsStartTogether);
-//            Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStart));
-//
-//            //overs remaining at the end of the interruption
-//            double oversRemainingInterEnd = state.getInter1EndOver();
-//            Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
-//            //overs remaining *10 to get rid of decimal
-//            int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
-//            Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWickets));
-//            //resources left gathered from dataSet at the end of the interruption
-//            double resourceCheckForRemainderOvers = overData.DataSet(totalOversRemainingPlusWickets);
-//            Log.v("resForRemainder: ", String.valueOf(resourceCheckForRemainderOvers));
-//            //resources lost at the end of the interruption
-//            double resourcesLost = percentageResourcesAtInterStart - resourceCheckForRemainderOvers;
-//            Log.v("resourcesLost: ", String.valueOf(resourcesLost));
-//            //resources left at end of interruption
-//            double resourcesLeftAtEndInter = resAtStartofMatch - resourcesLost;
-            Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInter));
-            //setting up target
-            target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartofMatch)) + 1.5);
-            Log.v("Target@calculations: ", String.valueOf(target));
-        } else if (interuptns == 2) {
-            double oversAtInter2Start = state.getInter2StartOver();
-            //Team 2 Wickets at the start of the interruption 1
-            int wicketsAtInter2Start = state.getInter2Wickets();
-            double oversFinalizedAtInter1End = oversAtInter1Start + oversRemainingInterEnd;
-            Log.v("oversFinalizedAtInter1End: ", String.valueOf(oversFinalizedAtInter1End));
-            double oversRemainingAtInter2End = state.getInter2EndOver();
-            /**
-             * Make a check at button press for this.
-             */
-            double oversFinalizedAtInter2End = oversAtInter2Start + oversRemainingAtInter2End;
-            Log.v("oversFinalizedAtInter2End: ", String.valueOf(oversFinalizedAtInter2End));
-            double oversLeftAtInter2Start = oversFinalizedAtInter1End - oversAtInter2Start;
-            Log.v("oversLeftAtInter2Start: ", String.valueOf(oversLeftAtInter2Start));
-            int oversWktsLeftAtInter2Start = (int) ((oversLeftAtInter2Start * 100) + wicketsAtInter2Start);
-            Log.v("resLeftAtInter2Start: ", String.valueOf(oversWktsLeftAtInter2Start));
-            double resLeftAtInter2Start = overData.DataSet(oversWktsLeftAtInter2Start);
-            double oversLeftAtInter2End = oversFinalizedAtInter2End - oversAtInter2Start;
-            Log.v("oversLeftAtInter2End: ", String.valueOf(oversLeftAtInter2End));
-            int oversWktsLeftAtInter2End = (int) ((oversLeftAtInter2End * 100) + wicketsAtInter2Start);
-            Log.v("resLeftAtInter2End: ", String.valueOf(oversWktsLeftAtInter2End));
-            double resLeftAtInter2End = overData.DataSet(oversWktsLeftAtInter2End);
-            double resLostAtInt2 = resLeftAtInter2Start - resLeftAtInter2End;
-            double resLeftAtInt2 = resourcesLeftAtEndInter - resLostAtInt2;
-            Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
-            target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartofMatch)) + 1.5);
-            Log.v("targetInt2: ", String.valueOf(target));
-        }
-
-        return target;
-    }
-
     private void toWinTarget(int target) {
         int toWin;
         int team2score = 0;
         double remainingOvers = 0.0;
-        if (interuptns == 1) {
+        int interruptions = state.getInterruptions();
+        if (interruptions == 1) {
             team2score = state.getTotalT2int1();
             remainingOvers = state.getInter1EndOver();
-        } else if (interuptns == 2) {
+        } else if (interruptions == 2) {
             team2score = state.getTotalT2int2();
             remainingOvers = state.getInter2EndOver();
+        } else if (interruptions == 3) {
+            team2score = state.getTotalT2int3();
+            Log.v("team2scoreInt3: ", String.valueOf(team2score));
+            remainingOvers = state.getInter3EndOver();
         }
         toWin = target - team2score;
         String toWinToS = String.valueOf(toWin);
@@ -680,14 +583,15 @@ public class Scenario1 extends AppCompatActivity {
         Log.v("Need to win: ", String.valueOf(toWin));
 
 
-        t2WinScore.setTitle("Target");
+        t2WinScore.setTitle("Par Score");
         if (remainingOvers == 0.0) {
             if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
                 t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
             } else {
-                toWin = toWin--;
+                toWin = toWin - 1;
+                Log.v("Need to win: ", String.valueOf(toWin));
                 toWinToS = String.valueOf(toWin);
                 t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
             }
@@ -737,12 +641,14 @@ public class Scenario1 extends AppCompatActivity {
 
         totalWickets = 10;
         overData = new DataMap();
-        state = (StateClass) getApplicationContext();
+        overFix = new InterruptionSetup();
+        state = (StateClass) state.getContext();
         t2WinScore = new AlertDialog.Builder(Scenario1.this);
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
         ProgressDialog pd = new ProgressDialog(Scenario1.this);
+        InterruptionSetup interNew = new InterruptionSetup();
         String response = "";
         int target = 0;
 
@@ -755,10 +661,17 @@ public class Scenario1 extends AppCompatActivity {
         }
 
         @Override
-        protected Integer doInBackground(Integer... params) {
-
+        protected Integer doInBackground(Integer... interruptions) {
+            int interruption = interruptions[0];
             try {
-                target = calculations();
+                if (interruption == 1) {
+                    target = interNew.one_interruption();
+                } else if (interruption == 2) {
+                    target = interNew.two_interruptions();
+                } else if (interruption == 3) {
+                    target = interNew.three_interruptions();
+                }
+
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
 
             } catch (Exception e) {

@@ -1,6 +1,8 @@
 package com.sportsoutclass.outclassdl;
 
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by Sachinda on 12/24/2015.
@@ -8,10 +10,21 @@ import android.app.Application;
 
 
 public class StateClass extends Application {
-    public double overs, inter1StartOver, inter2StartOver, inter3StartOver, inter1EndOver, inter2EndOver, inter3EndOver;
+    public double overs, inter1StartOver, inter2StartOver, inter3StartOver, inter1EndOver, inter2EndOver, inter3EndOver, resAtEndInter;
     public int wickets, totalT1, totalT2int1, totalT2int2, totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
 
 
+    private static Context mContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mContext = getApplicationContext();
+    }
+
+    public static Context getContext() {
+        return mContext;
+    }
     /**
      * Getters
      */
@@ -53,7 +66,9 @@ public class StateClass extends Application {
     }
 
     public double getInter3StartOver() {
-        return this.inter3StartOver;
+        double answer = this.inter3StartOver;
+        Log.v("getInter3StartOver: ", String.valueOf(answer));
+        return answer;
     }
 
     public int getInter1Wickets() {
@@ -78,6 +93,10 @@ public class StateClass extends Application {
 
     public double getInter3EndOver() {
         return this.inter3EndOver;
+    }
+
+    public double getEndInterRes() {
+        return this.resAtEndInter;
     }
 
     /**
@@ -121,6 +140,7 @@ public class StateClass extends Application {
 
     public void setInter3StartOver(double value) {
         this.inter3StartOver = value;
+        Log.v("inter3StartOverVal: ", String.valueOf(value));
     }
 
     public void setInter1Wickets(int value) {
@@ -145,5 +165,9 @@ public class StateClass extends Application {
 
     public void setInter3EndOver(double value) {
         this.inter3EndOver = value;
+    }
+
+    public void setEndInterRes(double value) {
+        this.resAtEndInter = value;
     }
 }
