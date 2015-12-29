@@ -39,8 +39,8 @@ public class Scenario1 extends AppCompatActivity {
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
-    AlertDialog.Builder t2WinScore;
-    InterruptionSetup overFix;
+    AlertDialog.Builder t2WinScore, usrErrAlert;
+    InterruptionSetup fix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,7 +260,7 @@ public class Scenario1 extends AppCompatActivity {
             intOverStart = state.getInter1StartOver();
             intOverEnd = state.getInter1EndOver();
             wholeOvers = state.getOvers();
-            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
+            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
         } else if (interrupt == 2) {
             intOverStart = state.getInter2StartOver();
             Log.v("intOverStart: ", String.valueOf(intOverStart));
@@ -268,7 +268,7 @@ public class Scenario1 extends AppCompatActivity {
             Log.v("intOverEnd: ", String.valueOf(intOverEnd));
             wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
             Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
+            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
             Log.v("oversCanPut: ", String.valueOf(oversCanPut));
         } else if (interrupt == 3) {
             intOverStart = state.getInter3StartOver();
@@ -277,7 +277,7 @@ public class Scenario1 extends AppCompatActivity {
             Log.v("intOverEnd: ", String.valueOf(intOverEnd));
             wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
             Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-            oversCanPut = overFix.overCalculations(wholeOvers, intOverStart, "minus");
+            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
             Log.v("oversCanPut: ", String.valueOf(oversCanPut));
         }
         if (oversCanPut < intOverEnd) {
@@ -565,46 +565,50 @@ public class Scenario1 extends AppCompatActivity {
         int toWin;
         int team2score = 0;
         double remainingOvers = 0.0;
-        int interruptions = state.getInterruptions();
-        if (interruptions == 1) {
-            team2score = state.getTotalT2int1();
-            remainingOvers = state.getInter1EndOver();
-        } else if (interruptions == 2) {
-            team2score = state.getTotalT2int2();
-            remainingOvers = state.getInter2EndOver();
-        } else if (interruptions == 3) {
-            team2score = state.getTotalT2int3();
-            Log.v("team2scoreInt3: ", String.valueOf(team2score));
-            remainingOvers = state.getInter3EndOver();
-        }
-        toWin = target - team2score;
-        String toWinToS = String.valueOf(toWin);
+        if (target > -10000) {
+            int interruptions = state.getInterruptions();
+            if (interruptions == 1) {
+                team2score = state.getTotalT2int1();
+                remainingOvers = state.getInter1EndOver();
+            } else if (interruptions == 2) {
+                team2score = state.getTotalT2int2();
+                remainingOvers = state.getInter2EndOver();
+            } else if (interruptions == 3) {
+                team2score = state.getTotalT2int3();
+                Log.v("team2scoreInt3: ", String.valueOf(team2score));
+                remainingOvers = state.getInter3EndOver();
+            }
+            toWin = target - team2score;
+            String toWinToS = String.valueOf(toWin);
 
-        Log.v("Need to win: ", String.valueOf(toWin));
+            Log.v("Need to win: ", String.valueOf(toWin));
 
 
-        t2WinScore.setTitle("Par Score");
-        if (remainingOvers == 0.0) {
-            if (toWin <= 0) {
+            t2WinScore.setTitle("Par Score");
+            if (remainingOvers == 0.0) {
+                if (toWin <= 0) {
+                    toWin = Math.abs(toWin);
+                    toWinToS = String.valueOf(toWin);
+                    t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+                } else {
+                    toWin = toWin - 1;
+                    Log.v("Need to win: ", String.valueOf(toWin));
+                    toWinToS = String.valueOf(toWin);
+                    t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
+                }
+
+            } else if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
                 t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
             } else {
-                toWin = toWin - 1;
-                Log.v("Need to win: ", String.valueOf(toWin));
-                toWinToS = String.valueOf(toWin);
-                t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
+                t2WinScore.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
             }
-
-        } else if (toWin <= 0) {
-            toWin = Math.abs(toWin);
-            toWinToS = String.valueOf(toWin);
-            t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+            t2WinScore.setPositiveButton("OK", null);
+            t2WinScore.show();
         } else {
-            t2WinScore.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
+            interruptionErrors(target);
         }
-        t2WinScore.setPositiveButton("OK", null);
-        t2WinScore.show();
     }
 
     private void init() {
@@ -641,9 +645,21 @@ public class Scenario1 extends AppCompatActivity {
 
         totalWickets = 10;
         overData = new DataMap();
-        overFix = new InterruptionSetup();
+        fix = new InterruptionSetup();
         state = (StateClass) state.getContext();
         t2WinScore = new AlertDialog.Builder(Scenario1.this);
+        usrErrAlert = new AlertDialog.Builder(Scenario1.this);
+    }
+
+    public void interruptionErrors(int target) {
+        usrErrAlert.setTitle("Invalid Information");
+        if (target == -10001) {
+            usrErrAlert.setMessage("Interruption 1: Overs should be between 0 and 50");
+        } else if (target == -10002) {
+            usrErrAlert.setMessage("Interruption 1: Wickets should be between 0 and 10");
+        }
+        t2WinScore.setPositiveButton("OK", null);
+        usrErrAlert.show();
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
