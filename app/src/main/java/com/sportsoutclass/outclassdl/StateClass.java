@@ -10,8 +10,10 @@ import android.util.Log;
 
 
 public class StateClass extends Application {
-    public double overs, inter1StartOver, inter2StartOver, inter3StartOver, inter1EndOver, inter2EndOver, inter3EndOver, resAtEndInter;
-    public int wickets, totalT1, totalT2int1, totalT2int2, totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
+    public double overs, oversTwo, inter1StartOver, inter2StartOver, inter3StartOver,
+            inter1EndOver, inter2EndOver, inter3EndOver, resAtEndInter;
+    public int wickets, wicketsTwo, totalT1, totalT1Two, totalT2int1, totalT2int2,
+            totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
 
 
     private static Context mContext;
@@ -37,8 +39,16 @@ public class StateClass extends Application {
         return this.overs;
     }
 
+    public double getT1OversTwo() {
+        return this.oversTwo;
+    }
+
     public int getTotalT1() {
         return this.totalT1;
+    }
+
+    public int getTotalT1Two() {
+        return this.totalT1Two;
     }
 
     public int getTotalT2int1() {
@@ -55,6 +65,10 @@ public class StateClass extends Application {
 
     public int getWickets() {
         return this.wickets;
+    }
+
+    public int getWicketsTwo() {
+        return this.wicketsTwo;
     }
 
     public double getInter1StartOver() {
@@ -110,12 +124,24 @@ public class StateClass extends Application {
         this.overs = value;
     }
 
+    public void setT1OversTwo(double value) {
+        this.oversTwo = value;
+    }
+
     public void setWickets(int value) {
         this.wickets = value;
     }
 
+    public void setWicketsTwo(int value) {
+        this.wicketsTwo = value;
+    }
+
     public void setTotalT1(int value) {
         this.totalT1 = value;
+    }
+
+    public void setTotalT1Two(int value) {
+        this.totalT1Two = value;
     }
 
     public void setTotalT2int1(int value) {

@@ -33,12 +33,12 @@
                 android:id="@+id/team_1_revised_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/team_1_revised_text_view"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/team_1_revised_text_view"
-                android:layout_toRightOf="@+id/team_1_revised_text_view"
+                android:layout_below="@+id/team_1_overs_switch"
+                android:text="@string/team_1_revised"
                 android:checked="false"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:visibility="invisible" />
 
             <TextView
@@ -51,33 +51,21 @@
 
             <Switch
                 android:id="@+id/team_1_overs_switch"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/team_1_overs_text_view"
+                android:layout_below="@+id/number_overs_edit_text"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/team_1_overs_text_view"
-                android:layout_toRightOf="@+id/team_1_overs_text_view"
-                android:checked="true" />
-
-
-            <TextView
-                android:id="@+id/team_1_revised_text_view"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/team_1_overs_text_view"
-                android:paddingBottom="15dp"
                 android:paddingTop="15dp"
-                android:text="@string/team_1_revised"
+                android:text="@string/team_1_full_amount"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
-
+                android:checked="true" />
 
             <TextView
                 android:id="@+id/team_1_score"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/team_1_overs_text_view"
+                android:layout_below="@id/team_1_overs_switch"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
                 android:text="@string/team_1_final_score"
@@ -128,15 +116,6 @@
                 android:nextFocusDown="@id/team_1_wickets_edit"
                 android:paddingTop="15dp" />
 
-            <TextView
-                android:id="@+id/team_1_overs_text_view"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/number_overs_edit_text"
-                android:paddingTop="15dp"
-                android:text="@string/team_1_full_amount"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
             <EditText
                 android:id="@+id/team_1_score_edit"
                 android:layout_width="100dp"
@@ -153,6 +132,90 @@
                 android:inputType="number"
                 android:nextFocusForward="@id/team_1_wickets_edit"
                 android:paddingTop="15dp" />
+
+            <TextView
+                android:id="@+id/team_1_scoreTwo"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_revised_switch"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/team_1_score"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/team_1_wickets_editTwo"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/team_1_score_editTwo"
+                android:layout_toLeftOf="@+id/team_1_overs_switch"
+                android:layout_toStartOf="@+id/team_1_overs_switch"
+                android:imeOptions="actionNext"
+                android:maxLength="2"
+                android:visibility="invisible"
+                android:digits="0123456789"
+                android:inputType="number"
+                android:paddingTop="15dp" />
+
+            <EditText
+                android:id="@+id/team_1_score_editTwo"
+                android:layout_width="100dp"
+                android:maxLength="4"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/team_1_revised_switch"
+                android:layout_toLeftOf="@+id/team_1_revised_switch"
+                android:layout_toStartOf="@+id/team_1_revised_switch"
+                android:hint="@string/total"
+                android:digits="0123456789"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:nextFocusForward="@id/team_1_wickets_editTwo"
+                android:visibility="invisible"
+                android:paddingTop="15dp" />
+
+            <TextView
+                android:id="@+id/team_1_wicketsTwo"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_score_editTwo"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/wickets"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/team_1_oversTwo"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_1_wicketsTwo"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="@string/overs"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/team_1_overs_editTwo"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/team_1_wickets_editTwo"
+                android:layout_toLeftOf="@+id/team_1_overs_switch"
+                android:layout_toStartOf="@+id/team_1_overs_switch"
+                android:imeOptions="actionDone"
+                android:maxLength="4"
+                android:visibility="invisible"
+                android:digits="0123456789."
+                android:inputType="number"
+                android:paddingTop="15dp" />
+
 
         </RelativeLayout>
     </ScrollView>

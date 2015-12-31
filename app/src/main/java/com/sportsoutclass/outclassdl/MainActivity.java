@@ -17,14 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    //If the variable contains Two it is regarding scenario 2
     Intent nextPage;
     Switch team1OversSwitch, team1RevisedSwitch;
-    TextView team1RevisedText, team1TotalScoreText, team1WicketsText;
-    EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText;
-    double overs;
-    int total, wickets;
+    TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
+    EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team1OversDLEditText;
+    double overs, oversTwo;
+    int total, totalTwo, wickets, wicketsTwo;
     StateClass state;
     Button nextBtn;
+    InterruptionSetup setup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,30 +61,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scenarioBtn(View v) {
-        double correctOvers = state.getOvers();
-        int correctWickets = state.getWickets();
-        int correctTotal = state.getTotalT1();
-        if (correctOvers != 0 && correctTotal != 0) {
+        double innStartOvers = state.getOvers();
+        int innStartWickets = state.getWickets();
+        int innStartTotal = state.getTotalT1();
+        int revisedT1Total = state.getTotalT1Two();
+        int revisedT1Wickets = state.getWicketsTwo();
+        double revisedT1Overs = state.getT1OversTwo();
 
-            if (correctOvers > 0.0 && correctOvers <= 50.0 && correctWickets <= 10) {
-                nextPage = new Intent(this, Scenario1.class);
-                startActivity(nextPage);
+        if (team1OversSwitch.isChecked()) {
+            if (innStartOvers != 0 && innStartTotal != 0) {
+
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
+                    nextPage = new Intent(this, Scenario1.class);
+                    startActivity(nextPage);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                            Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
-                        Toast.LENGTH_SHORT).show();
+                if (innStartOvers == 0 && innStartTotal == 0) {
+                    Toast.makeText(getApplicationContext(), "Error: Overs and team 1 total must be entered",
+                            Toast.LENGTH_SHORT).show();
+                } else if (innStartTotal == 0) {
+                    Toast.makeText(getApplicationContext(), "Error: Team 1 total must be entered",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Team 1 overs must be entered",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         } else {
-            if (correctOvers == 0 && correctTotal == 0) {
-                Toast.makeText(getApplicationContext(), "Error: Overs and team 1 total must be entered",
-                        Toast.LENGTH_SHORT).show();
-            } else if (correctTotal == 0) {
-                Toast.makeText(getApplicationContext(), "Error: Team 1 total must be entered",
-                        Toast.LENGTH_SHORT).show();
-            } else if (correctOvers == 0) {
-                Toast.makeText(getApplicationContext(), "Error: Team 1 overs must be entered",
-                        Toast.LENGTH_SHORT).show();
+            if (innStartOvers != 0 && revisedT1Total != 0) {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Wickets <= 10) {
+                    /**
+                     * Must be scenario2
+                     */
+                    nextPage = new Intent(this, Scenario1.class);
+                    startActivity(nextPage);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }
+
     }
 
     private void OversInfo() {
@@ -95,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 String numberOfOversToS = s.toString();
@@ -107,6 +130,30 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 state.setOvers(overs);
+            }
+        });
+        team1OversDLEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String numberOfOversToS = s.toString();
+                if (numberOfOversToS.equals("")) {
+                    numberOfOversToS = "0";
+                }
+                oversTwo = Double.parseDouble(numberOfOversToS);
+                if (oversTwo > overs) {
+                    Toast.makeText(getApplicationContext(), "Overs should be between 0 and " + overs,
+                            Toast.LENGTH_SHORT).show();
+                }
+                state.setT1OversTwo(oversTwo);
             }
         });
 
@@ -132,6 +179,26 @@ public class MainActivity extends AppCompatActivity {
                 }
                 total = Integer.parseInt(totalToS);
                 state.setTotalT1(total);
+            }
+        });
+        team1TotalScoreDLEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                totalTwo = 0;
+                String totalToS = s.toString();
+                if (totalToS.equals("")) {
+                    totalToS = "0";
+                }
+                totalTwo = Integer.parseInt(totalToS);
+                state.setTotalT1Two(totalTwo);
             }
         });
 
@@ -160,6 +227,31 @@ public class MainActivity extends AppCompatActivity {
                 state.setWickets(wickets);
             }
         });
+        team1WicketsDLEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                wicketsTwo = 0;
+                String wicketsToS = s.toString();
+                Log.v("wicketsToS value", wicketsToS);
+                if (wicketsToS.equals("")) {
+                    wicketsToS = "0";
+                }
+                wicketsTwo = Integer.parseInt(wicketsToS);
+                if (wicketsTwo > 10) {
+                    Toast.makeText(getApplicationContext(), "Wickets should be between 0 and 10",
+                            Toast.LENGTH_SHORT).show();
+                }
+                state.setWicketsTwo(wicketsTwo);
+            }
+        });
     }
 
 
@@ -169,15 +261,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    team1RevisedText.setVisibility(View.INVISIBLE);
                     team1RevisedSwitch.setVisibility(View.INVISIBLE);
+                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
+                    team1WicketsDL.setVisibility(View.INVISIBLE);
+                    team1OversDL.setVisibility(View.INVISIBLE);
+                    team1OversDLEditText.setVisibility(View.INVISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
                     team1TotalScoreText.setVisibility(View.VISIBLE);
                     team1TotalScoreEditText.setVisibility(View.VISIBLE);
                     team1WicketsText.setVisibility(View.VISIBLE);
                     team1WicketsEditText.setVisibility(View.VISIBLE);
                 } else {
-                    team1RevisedText.setVisibility(View.VISIBLE);
                     team1RevisedSwitch.setVisibility(View.VISIBLE);
+                    team1RevisedSwitch.setChecked(true);
+                    team1TotalScoreDL.setVisibility(View.VISIBLE);
+                    team1WicketsDL.setVisibility(View.VISIBLE);
+                    team1OversDL.setVisibility(View.VISIBLE);
+                    team1OversDLEditText.setVisibility(View.VISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
                     team1TotalScoreText.setVisibility(View.INVISIBLE);
                     team1TotalScoreEditText.setVisibility(View.INVISIBLE);
                     team1WicketsText.setVisibility(View.INVISIBLE);
@@ -185,20 +288,49 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        team1RevisedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    team1TotalScoreDL.setVisibility(View.VISIBLE);
+                    team1WicketsDL.setVisibility(View.VISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
+                    team1OversDL.setVisibility(View.VISIBLE);
+                    team1OversDLEditText.setVisibility(View.VISIBLE);
+                } else {
+                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
+                    team1OversDL.setVisibility(View.INVISIBLE);
+                    team1OversDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDL.setVisibility(View.INVISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     private void init() {
-        team1RevisedText = (TextView) findViewById(R.id.team_1_revised_text_view);
         numberOfOversEditText = (EditText) findViewById(R.id.number_overs_edit_text);
         team1TotalScoreText = (TextView) findViewById(R.id.team_1_score);
+        team1TotalScoreDL = (TextView) findViewById(R.id.team_1_scoreTwo);
+        team1OversDL = (TextView) findViewById(R.id.team_1_oversTwo);
+        team1TotalScoreDLEditText = (EditText) findViewById(R.id.team_1_score_editTwo);
+        team1OversDLEditText = (EditText) findViewById(R.id.team_1_overs_editTwo);
         team1TotalScoreEditText = (EditText) findViewById(R.id.team_1_score_edit);
         team1WicketsText = (TextView) findViewById(R.id.team_1_wickets);
+        team1WicketsDL = (TextView) findViewById(R.id.team_1_wicketsTwo);
         team1WicketsEditText = (EditText) findViewById(R.id.team_1_wickets_edit);
+        team1WicketsDLEditText = (EditText) findViewById(R.id.team_1_wickets_editTwo);
         //Switch to see if the team 1 completed all the overs or not and total runs and wickets
         team1OversSwitch = (Switch) findViewById(R.id.team_1_overs_switch);
         team1RevisedSwitch = (Switch) findViewById(R.id.team_1_revised_switch);
         state = (StateClass) getApplicationContext();
+        setup = new InterruptionSetup();
         nextBtn = (Button) findViewById(R.id.next_button);
+
         retrieveData();
 
     }
@@ -219,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         }
         int retrieveT1Wickets = state.getWickets();
         if (retrieveT1Wickets == 0) {
-            team1WicketsEditText.setHint("Wickets");
+            team1WicketsEditText.setHint("");
         } else {
             team1WicketsEditText.setText(String.valueOf(retrieveT1Wickets));
         }

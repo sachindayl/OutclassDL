@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Outclass DL</string>
+    <string name="app_name">DL Calculator</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -17,9 +17,10 @@
     <string name="interruption_1_over">Which over was the play interrupted?</string>
     <string name="interruption_1_wickets">Wickets lost at interruption</string>
     <string name="interruption_1_remaining">Overs remaining at the end of interruption</string>
-    <string name="overs">overs</string>
+    <string name="overs">Overs</string>
     <string name="next">next</string>
     <string name="team_1_final_score">Team 1 final score</string>
+    <string name="team_1_score">Team 1 score</string>
     <string name="total">Total</string>
     <string name="wickets">Wickets</string>
     <string name="total_at_interruption">Total at interruption</string>
