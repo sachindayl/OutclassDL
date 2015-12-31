@@ -563,6 +563,7 @@ public class Scenario1 extends AppCompatActivity {
 
     private void toWinTarget(int target) {
         int toWin;
+        int t1total = state.getTotalT1();
         int team2score = 0;
         double remainingOvers = 0.0;
         if (target > -10000) {
@@ -657,8 +658,12 @@ public class Scenario1 extends AppCompatActivity {
             usrErrAlert.setMessage("Interruption 1: Overs should be between 0 and 50");
         } else if (target == -10002) {
             usrErrAlert.setMessage("Interruption 1: Wickets should be between 0 and 10");
+        } else if (target == -10003) {
+            usrErrAlert.setMessage("Interruption 2: Wickets should be between 0 and 10");
+        } else if (target == -10004) {
+            usrErrAlert.setMessage("Interruption 3: Wickets should be between 0 and 10");
         }
-        t2WinScore.setPositiveButton("OK", null);
+        usrErrAlert.setPositiveButton("OK", null);
         usrErrAlert.show();
     }
 

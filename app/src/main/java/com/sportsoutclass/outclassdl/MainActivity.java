@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //If the variable contains Two it is regarding scenario 2
-    Intent nextPage;
+    Intent scenario1, scenario2;
     Switch team1OversSwitch, team1RevisedSwitch;
     TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
     EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team1OversDLEditText;
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             if (innStartOvers != 0 && innStartTotal != 0) {
 
                 if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
-                    nextPage = new Intent(this, Scenario1.class);
-                    startActivity(nextPage);
+                    scenario1 = new Intent(this, Scenario1.class);
+                    startActivity(scenario1);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
                             Toast.LENGTH_SHORT).show();
@@ -91,18 +91,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else {
-            if (innStartOvers != 0 && revisedT1Total != 0) {
-                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Wickets <= 10) {
-                    /**
-                     * Must be scenario2
-                     */
-                    nextPage = new Intent(this, Scenario1.class);
-                    startActivity(nextPage);
+            if (team1RevisedSwitch.isChecked()) {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Overs < innStartOvers && revisedT1Wickets <= 10) {
+                    scenario1 = new Intent(this, Scenario1.class);
+                    startActivity(scenario1);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
                             Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0) {
+                    scenario2 = new Intent(this, Scenario2.class);
+                    startActivity(scenario2);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
+
         }
 
     }
@@ -132,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 state.setOvers(overs);
             }
         });
+        overs = state.getOvers();
         team1OversDLEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

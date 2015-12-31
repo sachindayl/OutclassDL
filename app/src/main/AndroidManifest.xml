@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Team1Info"
-            android:label="@string/title_activity_team1_info"
+            android:name=".Scenario2"
+            android:label="@string/title_activity_scenario2"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name=".Scenario1"
-            android:label="@string/title_activity_scenario2"
+            android:label="@string/title_activity_scenario1"
             android:windowSoftInputMode="stateVisible"
             android:parentActivityName=".MainActivity">
             <meta-data

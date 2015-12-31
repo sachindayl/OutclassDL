@@ -1,7 +1,6 @@
 package com.sportsoutclass.outclassdl;
 
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Created by Sachinda on 12/28/2015.
@@ -47,10 +46,6 @@ public class InterruptionSetup {
 
         //overs remaining at the end of the interruption
         double oversRemainingInterEnd = state.getInter1EndOver();
-        if (oversRemainingInterEnd > remainingOversAtInterStart) {
-            Toast.makeText(state, "Overs remaining should be less than " + String.valueOf(remainingOversAtInterStart) + " overs",
-                    Toast.LENGTH_SHORT).show();
-        }
         Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
         //overs remaining *10 to get rid of decimal
         int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
@@ -80,6 +75,10 @@ public class InterruptionSetup {
         double oversAtInter2Start = state.getInter2StartOver();
         //Team 2 Wickets at the start of the interruption 1
         int wicketsAtInter2Start = state.getInter2Wickets();
+        if (wicketsAtInter2Start > 10) {
+            target = -10003;
+            return target;
+        }
         double oversFinalizedAtInter1End = overCalculations(oversAtInter1Start, oversRemainingInterEnd, "plus");
         Log.v("oversFinalizedAtInter1End: ", String.valueOf(oversFinalizedAtInter1End));
         double oversRemainingAtInter2End = state.getInter2EndOver();
@@ -116,6 +115,10 @@ public class InterruptionSetup {
         Log.v("oversAtInter3Start: ", String.valueOf(oversAtInter3Start));
         int wicketsAtInter3Start = state.getInter3Wickets();
         Log.v("wicketsAtInter3Start: ", String.valueOf(wicketsAtInter3Start));
+        if (wicketsAtInter3Start > 10) {
+            target = -10004;
+            return target;
+        }
         double oversFinalizedAtInter2End = overCalculations(state.getInter2StartOver(), state.getInter2EndOver(), "plus");
         Log.v("oversFinalizedAtInter2End: ", String.valueOf(oversFinalizedAtInter2End));
         double oversLeftAtInter3Start = overCalculations(oversFinalizedAtInter2End, oversAtInter3Start, "minus");
