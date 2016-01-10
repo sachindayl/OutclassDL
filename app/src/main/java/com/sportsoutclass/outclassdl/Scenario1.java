@@ -35,12 +35,13 @@ public class Scenario1 extends AppCompatActivity {
             wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
             oversRemainingInterruption1EditText, oversRemainingInterruption2EditText,
             oversRemainingInterruption3EditText;
-    int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total, interuptns;
+    int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
     AlertDialog.Builder t2WinScore, usrErrAlert;
     InterruptionSetup fix;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,42 +253,51 @@ public class Scenario1 extends AppCompatActivity {
     public void activateCalcBtn(View v) {
 
         int interrupt = state.getInterruptions();
+        boolean allFieldsFilled = whichFieldsTocheck(interrupt);
         double intOverStart;
         double intOverEnd = 0.0;
         double wholeOvers;
         double oversCanPut = 0.0;
-        if (interrupt == 1) {
-            intOverStart = state.getInter1StartOver();
-            intOverEnd = state.getInter1EndOver();
-            wholeOvers = state.getOvers();
-            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-        } else if (interrupt == 2) {
-            intOverStart = state.getInter2StartOver();
-            Log.v("intOverStart: ", String.valueOf(intOverStart));
-            intOverEnd = state.getInter2EndOver();
-            Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-            wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
-            Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-            Log.v("oversCanPut: ", String.valueOf(oversCanPut));
-        } else if (interrupt == 3) {
-            intOverStart = state.getInter3StartOver();
-            Log.v("intOverStart: ", String.valueOf(intOverStart));
-            intOverEnd = state.getInter3EndOver();
-            Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-            wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
-            Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-            oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-            Log.v("oversCanPut: ", String.valueOf(oversCanPut));
-        }
-        if (oversCanPut < intOverEnd) {
-            String oversCanPutToS = String.valueOf(oversCanPut);
-            Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
+        if (allFieldsFilled) {
+            if (interrupt == 1) {
+                intOverStart = state.getInter1StartOver();
+                intOverEnd = state.getInter1EndOver();
+                wholeOvers = state.getOvers();
+                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
+            } else if (interrupt == 2) {
+                intOverStart = state.getInter2StartOver();
+                Log.v("intOverStart: ", String.valueOf(intOverStart));
+                intOverEnd = state.getInter2EndOver();
+                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
+                wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
+                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
+                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
+                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
+            } else if (interrupt == 3) {
+                intOverStart = state.getInter3StartOver();
+                Log.v("intOverStart: ", String.valueOf(intOverStart));
+                intOverEnd = state.getInter3EndOver();
+                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
+                wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
+                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
+                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
+                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
+            }
+            if (oversCanPut < intOverEnd) {
+                String oversCanPutToS = String.valueOf(oversCanPut);
+                Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
+            } else {
+                AsyncCalculation calc = new AsyncCalculation();
+                calc.execute(interrupt);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
         } else {
-            AsyncCalculation calc = new AsyncCalculation();
-            calc.execute(interrupt);
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            usrErrAlert.setTitle("Incomplete Information");
+            usrErrAlert.setMessage("Please fill all the blanks");
+            usrErrAlert.setPositiveButton("OK", null);
+            usrErrAlert.show();
+
         }
     }
 
@@ -563,7 +573,6 @@ public class Scenario1 extends AppCompatActivity {
 
     private void toWinTarget(int target) {
         int toWin;
-        int t1total = state.getTotalT1();
         int team2score = 0;
         double remainingOvers = 0.0;
         if (target > -10000) {
@@ -608,7 +617,7 @@ public class Scenario1 extends AppCompatActivity {
             t2WinScore.setPositiveButton("OK", null);
             t2WinScore.show();
         } else {
-            interruptionErrors(target);
+            InterruptionSetup.interruptionErrors(usrErrAlert, target);
         }
     }
 
@@ -647,24 +656,50 @@ public class Scenario1 extends AppCompatActivity {
         totalWickets = 10;
         overData = new DataMap();
         fix = new InterruptionSetup();
-        state = (StateClass) state.getContext();
+        state = (StateClass) StateClass.getContext();
         t2WinScore = new AlertDialog.Builder(Scenario1.this);
         usrErrAlert = new AlertDialog.Builder(Scenario1.this);
     }
 
-    public void interruptionErrors(int target) {
-        usrErrAlert.setTitle("Invalid Information");
-        if (target == -10001) {
-            usrErrAlert.setMessage("Interruption 1: Overs should be between 0 and 50");
-        } else if (target == -10002) {
-            usrErrAlert.setMessage("Interruption 1: Wickets should be between 0 and 10");
-        } else if (target == -10003) {
-            usrErrAlert.setMessage("Interruption 2: Wickets should be between 0 and 10");
-        } else if (target == -10004) {
-            usrErrAlert.setMessage("Interruption 3: Wickets should be between 0 and 10");
+
+    public boolean whichFieldsTocheck(int inter) {
+        boolean empty = false;
+        if (inter == 1) {
+            boolean x1 = editTextFieldCheck(totalInter1EditText);
+            boolean x2 = editTextFieldCheck(whichOverInterruption1EditText);
+            boolean x3 = editTextFieldCheck(wicketsLostInterruption1EditText);
+            if (x1 && x2 && x3) {
+                empty = true;
+            }
+
+        } else if (inter == 2) {
+            boolean x1 = whichFieldsTocheck(1);
+            boolean x2 = editTextFieldCheck(totalInter2EditText);
+            boolean x3 = editTextFieldCheck(whichOverInterruption2EditText);
+            boolean x4 = editTextFieldCheck(wicketsLostInterruption2EditText);
+            if (x1 && x2 && x3 && x4) {
+                empty = true;
+            }
+
+        } else if (inter == 3) {
+            boolean x1 = whichFieldsTocheck(2);
+            boolean x2 = editTextFieldCheck(totalInter3EditText);
+            boolean x3 = editTextFieldCheck(whichOverInterruption3EditText);
+            boolean x4 = editTextFieldCheck(wicketsLostInterruption3EditText);
+            if (x1 && x2 && x3 && x4) {
+                empty = true;
+            }
         }
-        usrErrAlert.setPositiveButton("OK", null);
-        usrErrAlert.show();
+        return empty;
+    }
+
+    public boolean editTextFieldCheck(EditText x) {
+        boolean fieldNotEmpty = false;
+        int len = x.getText().toString().length();
+        if (len != 0) {
+            fieldNotEmpty = true;
+        }
+        return fieldNotEmpty;
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {

@@ -20,6 +20,7 @@
         <activity
             android:name=".Scenario2"
             android:label="@string/title_activity_scenario2"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,7 +37,7 @@
         <activity
             android:name=".Scenario1"
             android:label="@string/title_activity_scenario1"
-            android:windowSoftInputMode="stateVisible"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

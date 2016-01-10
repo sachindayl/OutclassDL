@@ -140,7 +140,7 @@
                 android:layout_below="@id/team_1_revised_switch"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
-                android:text="@string/team_1_score"
+                android:text="@string/team_1_score_DL"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:visibility="invisible" />
 

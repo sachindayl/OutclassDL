@@ -1,13 +1,16 @@
 package com.sportsoutclass.outclassdl;
 
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 /**
- * Created by Sachinda on 12/28/2015.
+ * This page contains the process that works for Scenario 1 which is the DL Method for 2nd team.
+ * This page also converts decimal values to over values.
  */
 public class InterruptionSetup {
 
     StateClass state;
+    Scenario2 sc2;
     DataMap overData;
     int target, t1TotalScore, startOfInnsOversWickets;
     double startOfInnsOvers, resAtStartOfMatch;
@@ -183,10 +186,90 @@ public class InterruptionSetup {
 
     }
 
+    public int one_interruption_sc2() {
+        init();
+        double t1Overs = state.getOvers();
+        Log.v("ResourcesStartofMatch: ", String.valueOf(resAtStartOfMatch));
+        int team1FinalTotalb4Rev = state.getTotalT1Sc2();
+        int team1TotalatInt1 = state.getTotalT1int1Sc2();
+        //Team 1 Overs at the start of the interruption 1
+        double oversAtInter1StartSc2 = state.getInter1StartOverSc2();
+        Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1StartSc2));
+        if (oversAtInter1StartSc2 > t1Overs) {
+            target = -10001;
+            return target;
+        }
+        //Team 2 Wickets at the start of the interruption 1
+        int wicketsAtInter1StartSc2 = state.getInter1WicketsSc2();
+        if (wicketsAtInter1StartSc2 > 10) {
+            target = -10002;
+            return target;
+//            sc2.team1ScoreCalc(target);
+        }
+        //overs remaining at the start of the interruption
+        double remainingOversAtInterStartSc2 = overCalculations(startOfInnsOvers, oversAtInter1StartSc2, "minus");
+        //Team 2 Overs and wickets together when the interruption happened to set up key to find resource percentage
+        int oversAndWicketsStartTogetherSc2 = (int) ((remainingOversAtInterStartSc2 * 100) + wicketsAtInter1StartSc2);
+        Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsStartTogetherSc2));
+        //resource percentage at the start of the interruption
+        double percentageResourcesAtInterStartSc2 = overData.DataSet(oversAndWicketsStartTogetherSc2);
+        Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStartSc2));
+
+        //overs remaining at the end of the interruption
+        double oversRemainingInterEndSc2 = state.getInter1EndOverSc2();
+        Log.v("netOvers: ", String.valueOf(remainingOversAtInterStartSc2));
+        //overs remaining *10 to get rid of decimal
+        int totalOversRemainingPlusWicketsSc2 = (int) ((oversRemainingInterEndSc2 * 100) + wicketsAtInter1StartSc2);
+        Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWicketsSc2));
+        //resources left gathered from dataSet at the end of the interruption
+        double resourceCheckForRemainderOversSc2 = overData.DataSet(totalOversRemainingPlusWicketsSc2);
+        Log.v("resForRemainder: ", String.valueOf(resourceCheckForRemainderOversSc2));
+        //resources lost at the end of the interruption
+        double resourcesLost = percentageResourcesAtInterStartSc2 - resourceCheckForRemainderOversSc2;
+        Log.v("resourcesLost: ", String.valueOf(resourcesLost));
+        //resources left at end of interruption
+        double resourcesLeftAtEndInterSc2 = resAtStartOfMatch - resourcesLost;
+        state.setEndInterResSc2(resourcesLeftAtEndInterSc2);
+        Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInterSc2));
+
+        double oversForT2AtStartSc2 = state.getOversT2startSc2();
+        double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
+
+        if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
+            target = (int) (team1TotalatInt1 + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1);
+        } else {
+            target = (int) (team1TotalatInt1 * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1);
+        }
+        return target;
+    }
+
+    /**
+     * This method contains all the error that Alert builder will show the user.
+     *
+     * @param usrErr    alertBuilder for different scenarios
+     * @param errorCode error code
+     */
+    public static void interruptionErrors(AlertDialog.Builder usrErr, int errorCode) {
+
+        usrErr.setTitle("Invalid Information");
+        if (errorCode == -10001) {
+            usrErr.setMessage("Interruption 1: Overs should be between 0 and 50");
+        } else if (errorCode == -10002) {
+            usrErr.setMessage("Interruption 1: Wickets should be between 0 and 10");
+        } else if (errorCode == -10003) {
+            usrErr.setMessage("Interruption 2: Wickets should be between 0 and 10");
+        } else if (errorCode == -10004) {
+            usrErr.setMessage("Interruption 3: Wickets should be between 0 and 10");
+        }
+        usrErr.setPositiveButton("OK", null);
+        usrErr.show();
+    }
+
 
     private void init() {
-        state = (StateClass) state.getContext();
+        state = (StateClass) StateClass.getContext();
         overData = new DataMap();
+        sc2 = new Scenario2();
         target = 0;
         t1TotalScore = state.getTotalT1();
         Log.v("t1TotalScoreInISInit: ", String.valueOf(t1TotalScore));
