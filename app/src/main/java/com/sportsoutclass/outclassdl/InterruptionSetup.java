@@ -184,7 +184,6 @@ public class InterruptionSetup {
             }
         }
         return z;
-
     }
 
     /**
@@ -220,7 +219,6 @@ public class InterruptionSetup {
         //resource percentage at the start of the interruption
         double percentageResourcesAtInterStartSc2 = overData.DataSet(oversAndWicketsInt1StartTogetherSc2);
         Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStartSc2));
-
         //overs remaining at the end of the interruption
         double oversRemainingInterEndSc2 = state.getInter1EndOverSc2();
         Log.v("netOvers: ", String.valueOf(remainingOversAtInterStartSc2));
@@ -285,18 +283,13 @@ public class InterruptionSetup {
         double resourcesLeftAtEndInterSc2 = state.getEndInterResSc2();
         double resLeftAtInt2Sc2 = resourcesLeftAtEndInterSc2 - resLostAtInt2Sc2;
         state.setEndInterResSc2(resLeftAtInt2Sc2);
-
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
-
-
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
             target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
         } else {
             target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1.5);
         }
-
-
         return target;
     }
 
@@ -320,7 +313,6 @@ public class InterruptionSetup {
         Log.v("oversLeftAtInter3Start: ", String.valueOf(oversLeftAtInter3StartSc2));
         int oversWktsLeftAtInter3StartSc2 = (int) ((oversLeftAtInter3StartSc2 * 100) + wicketsAtInter3StartSc2);
         Log.v("oversWktsLeftAtInter3Start: ", String.valueOf(oversWktsLeftAtInter3StartSc2));
-
         double oversFinalizedAtInter3EndSc2 = overCalculations(oversAtInter3StartSc2, state.getInter3EndOverSc2(), "plus");
         double resLeftAtInter3StartSc2 = overData.DataSet(oversWktsLeftAtInter3StartSc2);
         double oversLeftAtInter3EndSc2 = overCalculations(oversFinalizedAtInter3EndSc2, oversAtInter3StartSc2, "minus");
@@ -333,20 +325,16 @@ public class InterruptionSetup {
         Log.v("resLostAtInt3: ", String.valueOf(resLostAtInt3Sc2));
         double resLeftAtInt2Sc2 = state.getEndInterResSc2();
         Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2Sc2));
-
         double resLeftAtInt3Sc2 = resLeftAtInt2Sc2 - resLostAtInt3Sc2;
         Log.v("resourcesAvailable: ", String.valueOf(resLeftAtInt3Sc2));
         state.setEndInterResSc2(resLeftAtInt3Sc2);
-
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
-
         if (resForT2AtStartSc2 > resLeftAtInt2Sc2) {
             target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resLeftAtInt2Sc2) / 100 + 1.5);
         } else {
             target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resLeftAtInt2Sc2 + 1.5);
         }
-
         Log.v("target: ", String.valueOf(target));
         return target;
     }

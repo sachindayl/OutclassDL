@@ -254,8 +254,6 @@ public class Scenario2 extends AppCompatActivity {
     public void activateNextBtnSc2(View v) {
 
         int interrupt = stateSc2.getInterruptionsSc2();
-//        AsyncEmptyFieldCheck fieldCheck = new AsyncEmptyFieldCheck();
-//        fieldCheck.execute(interrupt);
         allFieldsFilled = whichFieldsTocheck(interrupt);
         double intOverStart;
         double intOverEnd = 0.0;
