@@ -678,36 +678,6 @@ public class Scenario2 extends AppCompatActivity {
         return fieldNotEmpty;
     }
 
-
-    private class AsyncEmptyFieldCheck extends AsyncTask<Integer, Void, Boolean> {
-        String response = "";
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Boolean doInBackground(Integer... interruptions) {
-            int interruption = interruptions[0];
-            try {
-                Log.v("allFieldsFilledBefore: ", String.valueOf(allFieldsFilled));
-                allFieldsFilled = whichFieldsTocheck(interruption);
-                Log.v("allFieldsFilledAfter: ", String.valueOf(allFieldsFilled));
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = e.getMessage();
-            }
-            return allFieldsFilled;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-        }
-
-    }
-
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
         ProgressDialog pd = new ProgressDialog(Scenario2.this);
         InterruptionSetup interNew = new InterruptionSetup();
@@ -727,11 +697,11 @@ public class Scenario2 extends AppCompatActivity {
             int interruption = interruptions[0];
             try {
                 if (interruption == 1) {
-                    target = interNew.one_interruption_sc2();
+                    target = interNew.one_Interruption_Sc2();
                 } else if (interruption == 2) {
-                    target = interNew.two_interruptions();
+                    target = interNew.two_Interruptions_Sc2();
                 } else if (interruption == 3) {
-                    target = interNew.three_interruptions();
+                    target = interNew.three_Interruptions_Sc2();
                 }
 
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
