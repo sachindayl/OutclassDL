@@ -38,6 +38,7 @@ public class Scenario2 extends AppCompatActivity {
             oversRemainingInterruption3EditTextSc2, team2OversStartOfInnsSc2, team1FinalTotalB4RevSc2;
     int totalWicketsSc2, inter1WicketsSc2, inter2WicketsSc2, inter3WicketsSc2, inter1totalSc2, inter2totalSc2, inter3totalSc2, team1finalTotB4rev;
     double inter1OverSc2, inter2OverSc2, inter3OverSc2, inter1OversAtEndSc2, inter2OversAtEndSc2, inter3OversAtEndSc2, team2OversAtStartSc2;
+    boolean allFieldsFilled;
     DataMap overDataSc2;
     StateClass stateSc2;
     AlertDialog.Builder t1WinTarget, usrErrAlertSc2;
@@ -252,12 +253,15 @@ public class Scenario2 extends AppCompatActivity {
     //activating calculate button
     public void activateNextBtnSc2(View v) {
 
-        int interrupt = stateSc2.getInterruptions();
-        boolean allFieldsFilled = whichFieldsTocheck(interrupt);
+        int interrupt = stateSc2.getInterruptionsSc2();
+//        AsyncEmptyFieldCheck fieldCheck = new AsyncEmptyFieldCheck();
+//        fieldCheck.execute(interrupt);
+        allFieldsFilled = whichFieldsTocheck(interrupt);
         double intOverStart;
         double intOverEnd = 0.0;
         double wholeOvers;
         double oversCanPut = 0.0;
+        Log.v("allFieldsFilledBtn: ", String.valueOf(allFieldsFilled));
         if (allFieldsFilled) {
             if (interrupt == 1) {
                 intOverStart = stateSc2.getInter1StartOverSc2();
@@ -297,12 +301,11 @@ public class Scenario2 extends AppCompatActivity {
             usrErrAlertSc2.setMessage("Please fill all the blanks");
             usrErrAlertSc2.setPositiveButton("OK", null);
             usrErrAlertSc2.show();
-
         }
     }
 
     private void editTextData() {
-
+        //overs at the start of interruption
         whichOverInterruption1EditTextSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -369,6 +372,7 @@ public class Scenario2 extends AppCompatActivity {
                 stateSc2.setInter3StartOverSc2(inter3OverSc2);
             }
         });
+        //wickets at the start of interruption
         wicketsLostInterruption1EditTextSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -435,6 +439,7 @@ public class Scenario2 extends AppCompatActivity {
                 stateSc2.setInter3WicketsSc2(inter3WicketsSc2);
             }
         });
+        //overs remaining till end of play
         oversRemainingInterruption1EditTextSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -501,7 +506,7 @@ public class Scenario2 extends AppCompatActivity {
                 stateSc2.setInter3EndOverSc2(inter3OversAtEndSc2);
             }
         });
-
+        //total at the interruption
         totalInter1EditTextSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -568,7 +573,7 @@ public class Scenario2 extends AppCompatActivity {
                 stateSc2.setTotalT1int3Sc2(inter3totalSc2);
             }
         });
-
+        //overs given for team 2
         team2OversStartOfInnsSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -591,6 +596,7 @@ public class Scenario2 extends AppCompatActivity {
                 stateSc2.setOversT2StartSc2(team2OversAtStartSc2);
             }
         });
+        //team1 final total before is revised
         team1FinalTotalB4RevSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -621,61 +627,23 @@ public class Scenario2 extends AppCompatActivity {
         if (target > -10000) {
             t1WinTarget.setTitle("Par Score");
             t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " to win.");
+            t1WinTarget.setPositiveButton("OK", null);
+            t1WinTarget.show();
         } else {
             InterruptionSetup.interruptionErrors(usrErrAlertSc2, target);
         }
     }
 
-    private void init() {
-        //TextView Assignments
-        interruption1TextViewSc2 = (TextView) findViewById(R.id.interruption_1_text_view_sc2);
-        interruption2TextViewSc2 = (TextView) findViewById(R.id.interruption_2_text_view_sc2);
-        interruption3TextViewSc2 = (TextView) findViewById(R.id.interruption_3_text_view_sc2);
-        whichOverInterruption1TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_1_text_view_sc2);
-        whichOverInterruption2TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_2_text_view_sc2);
-        whichOverInterruption3TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_3_text_view_sc2);
-        wicketsLostInterruption1TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_1_text_view_sc2);
-        wicketsLostInterruption2TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_2_text_view_sc2);
-        wicketsLostInterruption3TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_3_text_view_sc2);
-        oversRemainingInterruption1TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_1_text_view_sc2);
-        oversRemainingInterruption2TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_2_text_view_sc2);
-        oversRemainingInterruption3TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_3_text_view_sc2);
-        totalInter1TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_1_text_view_sc2);
-        totalInter2TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_2_text_view_sc2);
-        totalInter3TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_3_text_view_sc2);
-        //Edit Text Assignments
-        team2InterruptionsEditSc2 = (EditText) findViewById(R.id.interruptions_edit_text_sc2);
-        whichOverInterruption1EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_1_edit_text_sc2);
-        whichOverInterruption2EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_2_edit_text_sc2);
-        whichOverInterruption3EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_3_edit_text_sc2);
-        wicketsLostInterruption1EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_1_edit_text_sc2);
-        wicketsLostInterruption2EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_2_edit_text_sc2);
-        wicketsLostInterruption3EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_3_edit_text_sc2);
-        oversRemainingInterruption1EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_1_edit_text_sc2);
-        oversRemainingInterruption2EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_2_edit_text_sc2);
-        oversRemainingInterruption3EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_3_edit_text_sc2);
-        totalInter1EditTextSc2 = (EditText) findViewById(R.id.total_interruption_1_edit_text_sc2);
-        totalInter2EditTextSc2 = (EditText) findViewById(R.id.total_interruption_2_edit_text_sc2);
-        totalInter3EditTextSc2 = (EditText) findViewById(R.id.total_interruption_3_edit_text_sc2);
-        team2OversStartOfInnsSc2 = (EditText) findViewById(R.id.team2_overs_sc2_editText);
-        team1FinalTotalB4RevSc2 = (EditText) findViewById(R.id.team1_final_totalEditTextsc2);
 
-        totalWicketsSc2 = 10;
-        overDataSc2 = new DataMap();
-        fix = new InterruptionSetup();
-        stateSc2 = (StateClass) StateClass.getContext();
-        t1WinTarget = new AlertDialog.Builder(Scenario2.this);
-        usrErrAlertSc2 = new AlertDialog.Builder(Scenario2.this);
-    }
 
     public boolean whichFieldsTocheck(int inter) {
-        boolean empty = false;
+        boolean notEmpty = false;
         if (inter == 1) {
             boolean x1 = editTextFieldCheck(totalInter1EditTextSc2);
             boolean x2 = editTextFieldCheck(whichOverInterruption1EditTextSc2);
             boolean x3 = editTextFieldCheck(wicketsLostInterruption1EditTextSc2);
             if (x1 && x2 && x3) {
-                empty = true;
+                notEmpty = true;
             }
 
         } else if (inter == 2) {
@@ -684,7 +652,7 @@ public class Scenario2 extends AppCompatActivity {
             boolean x3 = editTextFieldCheck(whichOverInterruption2EditTextSc2);
             boolean x4 = editTextFieldCheck(wicketsLostInterruption2EditTextSc2);
             if (x1 && x2 && x3 && x4) {
-                empty = true;
+                notEmpty = true;
             }
 
         } else if (inter == 3) {
@@ -693,19 +661,51 @@ public class Scenario2 extends AppCompatActivity {
             boolean x3 = editTextFieldCheck(whichOverInterruption3EditTextSc2);
             boolean x4 = editTextFieldCheck(wicketsLostInterruption3EditTextSc2);
             if (x1 && x2 && x3 && x4) {
-                empty = true;
+                notEmpty = true;
             }
         }
-        return empty;
+        return notEmpty;
     }
 
     public boolean editTextFieldCheck(EditText x) {
         boolean fieldNotEmpty = false;
         int len = x.getText().toString().length();
+        Log.v("length: ", String.valueOf(len));
         if (len != 0) {
             fieldNotEmpty = true;
         }
+        Log.v("fieldNotEmpty: ", String.valueOf(fieldNotEmpty));
         return fieldNotEmpty;
+    }
+
+
+    private class AsyncEmptyFieldCheck extends AsyncTask<Integer, Void, Boolean> {
+        String response = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... interruptions) {
+            int interruption = interruptions[0];
+            try {
+                Log.v("allFieldsFilledBefore: ", String.valueOf(allFieldsFilled));
+                allFieldsFilled = whichFieldsTocheck(interruption);
+                Log.v("allFieldsFilledAfter: ", String.valueOf(allFieldsFilled));
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = e.getMessage();
+            }
+            return allFieldsFilled;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+        }
+
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
@@ -751,5 +751,48 @@ public class Scenario2 extends AppCompatActivity {
             team1ScoreCalc(result);
             pd.dismiss();
         }
+    }
+
+    private void init() {
+        //TextView Assignments
+        interruption1TextViewSc2 = (TextView) findViewById(R.id.interruption_1_text_view_sc2);
+        interruption2TextViewSc2 = (TextView) findViewById(R.id.interruption_2_text_view_sc2);
+        interruption3TextViewSc2 = (TextView) findViewById(R.id.interruption_3_text_view_sc2);
+        whichOverInterruption1TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_1_text_view_sc2);
+        whichOverInterruption2TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_2_text_view_sc2);
+        whichOverInterruption3TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_3_text_view_sc2);
+        wicketsLostInterruption1TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_1_text_view_sc2);
+        wicketsLostInterruption2TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_2_text_view_sc2);
+        wicketsLostInterruption3TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_3_text_view_sc2);
+        oversRemainingInterruption1TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_1_text_view_sc2);
+        oversRemainingInterruption2TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_2_text_view_sc2);
+        oversRemainingInterruption3TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_3_text_view_sc2);
+        totalInter1TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_1_text_view_sc2);
+        totalInter2TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_2_text_view_sc2);
+        totalInter3TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_3_text_view_sc2);
+        //Edit Text Assignments
+        team2InterruptionsEditSc2 = (EditText) findViewById(R.id.interruptions_edit_text_sc2);
+        whichOverInterruption1EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_1_edit_text_sc2);
+        whichOverInterruption2EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_2_edit_text_sc2);
+        whichOverInterruption3EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_3_edit_text_sc2);
+        wicketsLostInterruption1EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_1_edit_text_sc2);
+        wicketsLostInterruption2EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_2_edit_text_sc2);
+        wicketsLostInterruption3EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_3_edit_text_sc2);
+        oversRemainingInterruption1EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_1_edit_text_sc2);
+        oversRemainingInterruption2EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_2_edit_text_sc2);
+        oversRemainingInterruption3EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_3_edit_text_sc2);
+        totalInter1EditTextSc2 = (EditText) findViewById(R.id.total_interruption_1_edit_text_sc2);
+        totalInter2EditTextSc2 = (EditText) findViewById(R.id.total_interruption_2_edit_text_sc2);
+        totalInter3EditTextSc2 = (EditText) findViewById(R.id.total_interruption_3_edit_text_sc2);
+        team2OversStartOfInnsSc2 = (EditText) findViewById(R.id.team2_overs_sc2_editText);
+        team1FinalTotalB4RevSc2 = (EditText) findViewById(R.id.team1_final_totalEditTextsc2);
+
+        totalWicketsSc2 = 10;
+        overDataSc2 = new DataMap();
+        fix = new InterruptionSetup();
+        stateSc2 = (StateClass) StateClass.getContext();
+        t1WinTarget = new AlertDialog.Builder(Scenario2.this);
+        usrErrAlertSc2 = new AlertDialog.Builder(Scenario2.this);
+        allFieldsFilled = false;
     }
 }

@@ -32,7 +32,7 @@ public class StateClass extends Application {
         return mContext;
     }
     /**
-     * Getters
+     * Getters Scenario 1
      */
     public int getInterruptions() {
         return this.interruptions;
@@ -118,6 +118,9 @@ public class StateClass extends Application {
         return this.resAtEndInter;
     }
 
+    /**
+     * Getters for Scenario 2
+     */
     public int getInterruptionsSc2() {
         return this.interruptions_sc2;
     }
@@ -201,7 +204,7 @@ public class StateClass extends Application {
     }
 
     /**
-     * setters
+     * Setters for scenario 1
      */
     public void setInterruptions(int value) {
         this.interruptions = value;
@@ -285,6 +288,9 @@ public class StateClass extends Application {
         this.resAtEndInter = value;
     }
 
+    /**
+     * Setters for scenario 2
+     */
     public void setInterruptionsSc2(int value) {
         this.interruptions_sc2 = value;
     }

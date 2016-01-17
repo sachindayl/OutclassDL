@@ -10,7 +10,6 @@ import android.util.Log;
 public class InterruptionSetup {
 
     StateClass state;
-    Scenario2 sc2;
     DataMap overData;
     int target, t1TotalScore, startOfInnsOversWickets;
     double startOfInnsOvers, resAtStartOfMatch;
@@ -195,12 +194,14 @@ public class InterruptionSetup {
         //Team 1 Overs at the start of the interruption 1
         double oversAtInter1StartSc2 = state.getInter1StartOverSc2();
         Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1StartSc2));
+        //Error message if overs at the interruption is greater than the overall overs
         if (oversAtInter1StartSc2 > t1Overs) {
             target = -10001;
             return target;
         }
         //Team 2 Wickets at the start of the interruption 1
         int wicketsAtInter1StartSc2 = state.getInter1WicketsSc2();
+        //Error message if wickets are greater than 10
         if (wicketsAtInter1StartSc2 > 10) {
             target = -10002;
             return target;
@@ -209,16 +210,16 @@ public class InterruptionSetup {
         //overs remaining at the start of the interruption
         double remainingOversAtInterStartSc2 = overCalculations(startOfInnsOvers, oversAtInter1StartSc2, "minus");
         //Team 2 Overs and wickets together when the interruption happened to set up key to find resource percentage
-        int oversAndWicketsStartTogetherSc2 = (int) ((remainingOversAtInterStartSc2 * 100) + wicketsAtInter1StartSc2);
-        Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsStartTogetherSc2));
+        int oversAndWicketsInt1StartTogetherSc2 = (int) ((remainingOversAtInterStartSc2 * 100) + wicketsAtInter1StartSc2);
+        Log.v("WktsAndOvrs2gthrStart: ", String.valueOf(oversAndWicketsInt1StartTogetherSc2));
         //resource percentage at the start of the interruption
-        double percentageResourcesAtInterStartSc2 = overData.DataSet(oversAndWicketsStartTogetherSc2);
+        double percentageResourcesAtInterStartSc2 = overData.DataSet(oversAndWicketsInt1StartTogetherSc2);
         Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStartSc2));
 
         //overs remaining at the end of the interruption
         double oversRemainingInterEndSc2 = state.getInter1EndOverSc2();
         Log.v("netOvers: ", String.valueOf(remainingOversAtInterStartSc2));
-        //overs remaining *10 to get rid of decimal
+        //overs remaining plus wickets to get rid of decimal
         int totalOversRemainingPlusWicketsSc2 = (int) ((oversRemainingInterEndSc2 * 100) + wicketsAtInter1StartSc2);
         Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWicketsSc2));
         //resources left gathered from dataSet at the end of the interruption
@@ -236,9 +237,9 @@ public class InterruptionSetup {
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
 
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
-            target = (int) (team1TotalatInt1 + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1);
+            target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1);
         } else {
-            target = (int) (team1TotalatInt1 * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1);
+            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1);
         }
         return target;
     }
@@ -269,7 +270,6 @@ public class InterruptionSetup {
     private void init() {
         state = (StateClass) StateClass.getContext();
         overData = new DataMap();
-        sc2 = new Scenario2();
         target = 0;
         t1TotalScore = state.getTotalT1();
         Log.v("t1TotalScoreInISInit: ", String.valueOf(t1TotalScore));
