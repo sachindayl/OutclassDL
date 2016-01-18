@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/app_bar"
-        android:background="@color/lightPrimaryColor">
+        android:background="@color/white">
 
 
         <Button
             android:id="@+id/next_button3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -35,7 +35,8 @@
             android:paddingBottom="5dp"
             android:paddingLeft="15dp"
             android:text="@string/team2overs_sc2"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/team1_final_totalsc2"
@@ -44,8 +45,10 @@
             android:layout_above="@id/team2_overs_sc2"
             android:paddingBottom="5dp"
             android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="Team 1 final total"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/team1_final_totalEditTextsc2"
@@ -59,7 +62,8 @@
             android:maxLength="4"
             android:paddingEnd="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
+            android:paddingRight="15dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
             android:id="@+id/team2_overs_sc2_editText"
@@ -73,7 +77,8 @@
             android:maxLength="4"
             android:paddingEnd="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
+            android:paddingRight="15dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -84,6 +89,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 tools:context=".Scenario2">
@@ -95,7 +101,8 @@
                     android:paddingRight="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruptions2"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/interruptions_edit_text_sc2"
@@ -108,7 +115,8 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:paddingTop="15dp" />
+                    android:paddingTop="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
                     android:id="@+id/interruption_1_text_view_sc2"
@@ -119,7 +127,9 @@
                     android:layout_below="@id/interruptions_edit_text_sc2"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_1"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -132,7 +142,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -148,6 +159,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -160,7 +172,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -176,6 +189,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -188,7 +202,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -205,6 +220,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -217,7 +233,8 @@
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -233,6 +250,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -244,7 +262,9 @@
                     android:layout_below="@id/overs_remaining_interruption_1_text_view_sc2"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_2"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -257,7 +277,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -273,6 +294,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingTop="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -285,7 +307,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <TextView
@@ -298,7 +321,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -314,6 +338,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <EditText
@@ -330,6 +355,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -342,7 +368,8 @@
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -358,6 +385,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -369,7 +397,9 @@
                     android:layout_below="@id/overs_remaining_interruption_2_text_view_sc2"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_3"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -382,7 +412,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -398,6 +429,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingTop="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -410,7 +442,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -426,6 +459,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -438,7 +472,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -455,6 +490,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
                 <TextView
@@ -466,8 +502,10 @@
                     android:layout_below="@id/wickets_lost_interruption_3_text_view_sc2"
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -483,6 +521,7 @@
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:visibility="invisible" />
 
             </RelativeLayout>
@@ -490,3 +529,4 @@
 
     </RelativeLayout>
 </RelativeLayout>
+

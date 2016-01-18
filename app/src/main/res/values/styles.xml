@@ -17,7 +17,7 @@
     </style>
 
     <style name="PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
 </resources>

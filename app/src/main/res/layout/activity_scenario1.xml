@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/app_bar"
-        android:background="@color/lightPrimaryColor"
+        android:background="@color/white"
         android:fillViewport="true">
 
         <Button
             android:id="@+id/calc_button1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -46,7 +46,8 @@
                     android:paddingRight="30dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruptions"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/interruptions_edit_text"
@@ -58,6 +59,7 @@
                     android:digits="123"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:maxLength="1"
                     android:paddingTop="15dp" />
 
@@ -70,7 +72,9 @@
                     android:layout_below="@id/interruptions_edit_text"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_1"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -83,7 +87,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -97,6 +102,7 @@
                     android:hint="@string/overs"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
                     android:visibility="invisible" />
@@ -111,7 +117,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -124,6 +131,7 @@
                     android:digits="0123456789"
                     android:hint="@string/total"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -139,7 +147,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -153,6 +162,7 @@
                     android:layout_toRightOf="@+id/wickets_lost_interruption_1_text_view"
                     android:digits="0123456789"
                     android:hint="wickets"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
@@ -168,7 +178,8 @@
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -181,6 +192,7 @@
                     android:digits="0123456789."
                     android:hint="@string/overs"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -195,7 +207,9 @@
                     android:layout_below="@id/overs_remaining_interruption_1_text_view"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_2"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -208,7 +222,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -221,6 +236,7 @@
                     android:digits="0123456789."
                     android:hint="@string/overs"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingTop="15dp"
@@ -236,7 +252,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <TextView
@@ -249,7 +266,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -262,6 +280,7 @@
                     android:digits="0123456789"
                     android:hint="@string/total"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -279,6 +298,7 @@
                     android:digits="0123456789"
                     android:hint="wickets"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="number"
                     android:maxLength="2"
                     android:visibility="invisible" />
@@ -293,7 +313,8 @@
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -306,6 +327,7 @@
                     android:digits="0123456789."
                     android:hint="@string/overs"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -320,7 +342,9 @@
                     android:layout_below="@id/overs_remaining_interruption_2_text_view"
                     android:paddingTop="25dp"
                     android:text="@string/interruption_3"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -333,7 +357,8 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/interruption_1_over"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -346,6 +371,7 @@
                     android:digits="0123456789."
                     android:hint="@string/overs"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingTop="15dp"
@@ -361,7 +387,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/total_at_interruption"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -374,6 +401,7 @@
                     android:digits="0123456789"
                     android:hint="@string/total"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="number"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -389,7 +417,8 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="5dp"
                     android:text="@string/interruption_1_wickets"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -404,6 +433,7 @@
                     android:digits="0123456789"
                     android:hint="wickets"
                     android:imeOptions="actionNext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="number"
                     android:maxLength="2"
                     android:visibility="invisible" />
@@ -418,7 +448,8 @@
                     android:paddingRight="55dp"
                     android:paddingTop="10dp"
                     android:text="@string/interruption_1_remaining"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
                     android:visibility="invisible" />
 
                 <EditText
@@ -431,6 +462,7 @@
                     android:digits="0123456789."
                     android:hint="@string/overs"
                     android:imeOptions="actionDone"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:inputType="numberDecimal"
                     android:maxLength="4"
                     android:paddingBottom="15dp"
@@ -441,3 +473,4 @@
 
     </RelativeLayout>
 </RelativeLayout>
+

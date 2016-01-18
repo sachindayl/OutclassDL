@@ -3,6 +3,7 @@ package com.sportsoutclass.outclassdl;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
     StateClass state;
     Button nextBtn;
     InterruptionSetup setup;
+    private Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
         init();
         visibilityOnCreate();
         OversInfo();
@@ -349,7 +353,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void retrieveData() {
         double retrieveOvers = state.getOvers();
         if (retrieveOvers == 0.0) {
@@ -371,6 +374,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
 
