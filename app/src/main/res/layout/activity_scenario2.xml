@@ -1,481 +1,492 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#B2DFDB">
+    android:layout_height="wrap_content">
 
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
 
-    <Button
-        android:id="@+id/next_button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:onClick="activateNextBtnSc2"
-        android:text="@string/calculate" />
-
-
-    <TextView
-        android:id="@+id/team2_overs_sc2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/next_button3"
-        android:paddingBottom="5dp"
-        android:paddingLeft="15dp"
-        android:text="@string/team2overs_sc2"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/team1_final_totalsc2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/team2_overs_sc2"
-        android:paddingBottom="5dp"
-        android:paddingLeft="15dp"
-        android:text="Team 1 final total"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/team1_final_totalEditTextsc2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/team1_final_totalsc2"
-        android:layout_toRightOf="@id/team1_final_totalsc2"
-        android:digits="0123456789"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:maxLength="4"
-        android:paddingEnd="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp" />
-
-    <EditText
-        android:id="@+id/team2_overs_sc2_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/team2_overs_sc2"
-        android:layout_toRightOf="@id/team2_overs_sc2"
-        android:digits="0123456789."
-        android:imeOptions="actionNext"
-        android:inputType="numberDecimal"
-        android:maxLength="4"
-        android:paddingEnd="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp" />
-
-    <ScrollView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/team1_final_totalsc2"
-        android:fillViewport="true">
+        android:layout_below="@id/app_bar"
+        android:background="@color/lightPrimaryColor">
 
-        <RelativeLayout
+
+        <Button
+            android:id="@+id/next_button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:onClick="activateNextBtnSc2"
+            android:text="@string/calculate" />
+
+
+        <TextView
+            android:id="@+id/team2_overs_sc2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/next_button3"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:text="@string/team2overs_sc2"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/team1_final_totalsc2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/team2_overs_sc2"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:text="Team 1 final total"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/team1_final_totalEditTextsc2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/team1_final_totalsc2"
+            android:layout_toRightOf="@id/team1_final_totalsc2"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingEnd="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            tools:context=".Scenario2">
+            android:paddingRight="15dp" />
 
-            <TextView
-                android:id="@+id/interruptions_text_view_sc2"
-                android:layout_width="230dp"
+        <EditText
+            android:id="@+id/team2_overs_sc2_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/team2_overs_sc2"
+            android:layout_toRightOf="@id/team2_overs_sc2"
+            android:digits="0123456789."
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal"
+            android:maxLength="4"
+            android:paddingEnd="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/team1_final_totalsc2"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:paddingTop="15dp"
-                android:text="@string/interruptions2"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                tools:context=".Scenario2">
 
-            <EditText
-                android:id="@+id/interruptions_edit_text_sc2"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/interruptions_text_view_sc2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:digits="123"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="1"
-                android:paddingTop="15dp" />
+                <TextView
+                    android:id="@+id/interruptions_text_view_sc2"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/interruptions2"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/interruption_1_text_view_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/interruptions_edit_text_sc2"
-                android:paddingTop="25dp"
-                android:text="@string/interruption_1"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/interruptions_edit_text_sc2"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/interruptions_text_view_sc2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:digits="123"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:paddingTop="15dp" />
 
-            <TextView
-                android:id="@+id/which_over_interruption_1_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/interruption_1_text_view_sc2"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:text="@string/interruption_1_over"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/interruption_1_text_view_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/interruptions_edit_text_sc2"
+                    android:paddingTop="25dp"
+                    android:text="@string/interruption_1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/which_over_interruption_1_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/which_over_interruption_1_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/which_over_interruption_1_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/interruption_1_text_view_sc2"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/interruption_1_over"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/team2_total_interruption_1_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/which_over_interruption_1_edit_text_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/total_at_interruption"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/which_over_interruption_1_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/which_over_interruption_1_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/total_interruption_1_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/team2_total_interruption_1_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/total"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/team2_total_interruption_1_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/which_over_interruption_1_edit_text_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/total_at_interruption"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/wickets_lost_interruption_1_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/team2_total_interruption_1_text_view_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/interruption_1_wickets"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/total_interruption_1_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/team2_total_interruption_1_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/total"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/wickets_lost_interruption_1_edit_text_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/wickets_lost_interruption_1_text_view_sc2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/wickets_lost_interruption_1_text_view_sc2"
-                android:layout_toRightOf="@+id/wickets_lost_interruption_1_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/wickets"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="2"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/wickets_lost_interruption_1_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/team2_total_interruption_1_text_view_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/interruption_1_wickets"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/overs_remaining_interruption_1_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/wickets_lost_interruption_1_text_view_sc2"
-                android:paddingRight="55dp"
-                android:paddingTop="10dp"
-                android:text="@string/interruption_1_remaining"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/wickets_lost_interruption_1_edit_text_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/wickets_lost_interruption_1_text_view_sc2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/wickets_lost_interruption_1_text_view_sc2"
+                    android:layout_toRightOf="@+id/wickets_lost_interruption_1_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/wickets"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/overs_remaining_interruption_1_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/overs_remaining_interruption_1_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/overs_remaining_interruption_1_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/wickets_lost_interruption_1_text_view_sc2"
+                    android:paddingRight="55dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/interruption_1_remaining"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/interruption_2_text_view_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/overs_remaining_interruption_1_text_view_sc2"
-                android:paddingTop="25dp"
-                android:text="@string/interruption_2"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/overs_remaining_interruption_1_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/overs_remaining_interruption_1_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_1_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/which_over_interruption_2_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/interruption_2_text_view_sc2"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:text="@string/interruption_1_over"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/interruption_2_text_view_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/overs_remaining_interruption_1_text_view_sc2"
+                    android:paddingTop="25dp"
+                    android:text="@string/interruption_2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/which_over_interruption_2_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/which_over_interruption_2_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingTop="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/which_over_interruption_2_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/interruption_2_text_view_sc2"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/interruption_1_over"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/team2_total_interruption_2_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/which_over_interruption_2_edit_text_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/total_at_interruption"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/which_over_interruption_2_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/which_over_interruption_2_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingTop="15dp"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/wickets_lost_interruption_2_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/team2_total_interruption_2_text_view_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/interruption_1_wickets"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/team2_total_interruption_2_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/which_over_interruption_2_edit_text_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/total_at_interruption"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/total_interruption_2_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/team2_total_interruption_2_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/total"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/wickets_lost_interruption_2_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/team2_total_interruption_2_text_view_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/interruption_1_wickets"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/wickets_lost_interruption_2_edit_text_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/wickets_lost_interruption_2_text_view_sc2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/wickets_lost_interruption_2_text_view_sc2"
-                android:layout_toRightOf="@+id/wickets_lost_interruption_2_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/wickets"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="2"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/total_interruption_2_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/team2_total_interruption_2_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/total"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/overs_remaining_interruption_2_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/wickets_lost_interruption_2_text_view_sc2"
-                android:paddingRight="55dp"
-                android:paddingTop="10dp"
-                android:text="@string/interruption_1_remaining"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/wickets_lost_interruption_2_edit_text_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/wickets_lost_interruption_2_text_view_sc2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/wickets_lost_interruption_2_text_view_sc2"
+                    android:layout_toRightOf="@+id/wickets_lost_interruption_2_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/wickets"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/overs_remaining_interruption_2_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/overs_remaining_interruption_2_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/overs_remaining_interruption_2_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/wickets_lost_interruption_2_text_view_sc2"
+                    android:paddingRight="55dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/interruption_1_remaining"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/interruption_3_text_view_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/overs_remaining_interruption_2_text_view_sc2"
-                android:paddingTop="25dp"
-                android:text="@string/interruption_3"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/overs_remaining_interruption_2_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/overs_remaining_interruption_2_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_2_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/which_over_interruption_3_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/interruption_3_text_view_sc2"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:text="@string/interruption_1_over"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/interruption_3_text_view_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/overs_remaining_interruption_2_text_view_sc2"
+                    android:paddingTop="25dp"
+                    android:text="@string/interruption_3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/which_over_interruption_3_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/which_over_interruption_3_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingTop="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/which_over_interruption_3_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/interruption_3_text_view_sc2"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="@string/interruption_1_over"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/team2_total_interruption_3_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/which_over_interruption_3_edit_text_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/total_at_interruption"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/which_over_interruption_3_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/which_over_interruption_3_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingTop="15dp"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/total_interruption_3_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/team2_total_interruption_3_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/total"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/team2_total_interruption_3_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/which_over_interruption_3_edit_text_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/total_at_interruption"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/wickets_lost_interruption_3_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/team2_total_interruption_3_text_view_sc2"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
-                android:text="@string/interruption_1_wickets"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/total_interruption_3_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/team2_total_interruption_3_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/total"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/wickets_lost_interruption_3_edit_text_sc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/wickets_lost_interruption_3_text_view_sc2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/wickets_lost_interruption_3_text_view_sc2"
-                android:layout_toRightOf="@+id/wickets_lost_interruption_3_text_view_sc2"
-                android:digits="0123456789"
-                android:hint="@string/wickets"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="2"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/wickets_lost_interruption_3_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/team2_total_interruption_3_text_view_sc2"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/interruption_1_wickets"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/overs_remaining_interruption_3_text_view_sc2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/wickets_lost_interruption_3_text_view_sc2"
-                android:paddingRight="55dp"
-                android:paddingTop="10dp"
-                android:text="@string/interruption_1_remaining"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/wickets_lost_interruption_3_edit_text_sc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/wickets_lost_interruption_3_text_view_sc2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/wickets_lost_interruption_3_text_view_sc2"
+                    android:layout_toRightOf="@+id/wickets_lost_interruption_3_text_view_sc2"
+                    android:digits="0123456789"
+                    android:hint="@string/wickets"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/overs_remaining_interruption_3_edit_text_sc2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/overs_remaining_interruption_3_text_view_sc2"
-                android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
-                android:digits="0123456789."
-                android:hint="@string/overs"
-                android:imeOptions="actionDone"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:paddingBottom="15dp"
-                android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/overs_remaining_interruption_3_text_view_sc2"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/wickets_lost_interruption_3_text_view_sc2"
+                    android:paddingRight="55dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/interruption_1_remaining"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
 
-        </RelativeLayout>
-    </ScrollView>
+                <EditText
+                    android:id="@+id/overs_remaining_interruption_3_edit_text_sc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/overs_remaining_interruption_3_text_view_sc2"
+                    android:layout_toEndOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:layout_toRightOf="@+id/which_over_interruption_3_text_view_sc2"
+                    android:digits="0123456789."
+                    android:hint="@string/overs"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:paddingBottom="15dp"
+                    android:visibility="invisible" />
 
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
 </RelativeLayout>

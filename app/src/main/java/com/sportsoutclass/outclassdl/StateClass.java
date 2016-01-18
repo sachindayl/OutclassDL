@@ -11,13 +11,13 @@ import android.util.Log;
 
 
 public class StateClass extends Application {
-    public double overs, oversTwo, inter1StartOver, inter2StartOver, inter3StartOver,
+    public double overs, inter1StartOver, inter2StartOver, inter3StartOver,
             inter1EndOver, inter2EndOver, inter3EndOver, resAtEndInter;
-    public double overs_sc2, oversTwo_sc2, inter1StartOver_sc2, inter2StartOver_sc2, inter3StartOver_sc2,
+    public double overs_sc2, inter1StartOver_sc2, inter2StartOver_sc2, inter3StartOver_sc2,
             inter1EndOver_sc2, inter2EndOver_sc2, inter3EndOver_sc2, resAtEndInter_sc2;
     public int wickets, wicketsTwo, totalT1, totalT1Two, totalT2int1, totalT2int2,
             totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
-    public int wickets_sc2, wicketsTwo_sc2, totalT1_sc2, totalT1Two_sc2, totalT1int1_sc2, totalT1int2_sc2,
+    public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
             totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2;
 
     private static Context mContext;
@@ -38,13 +38,8 @@ public class StateClass extends Application {
         return this.interruptions;
     }
 
-
     public double getOvers() {
         return this.overs;
-    }
-
-    public double getT1OversTwo() {
-        return this.oversTwo;
     }
 
     public int getTotalT1() {
@@ -129,36 +124,12 @@ public class StateClass extends Application {
         return this.overs_sc2;
     }
 
-    public double getT1OversTwoSc2() {
-        return this.oversTwo_sc2;
-    }
-
     public int getTotalT1Sc2() {
         return this.totalT1_sc2;
     }
 
-    public int getTotalT1TwoSc2() {
-        return this.totalT1Two_sc2;
-    }
-
     public int getTotalT1int1Sc2() {
         return this.totalT1int1_sc2;
-    }
-
-    public int getTotalT1int2Sc2() {
-        return this.totalT1int2_sc2;
-    }
-
-    public int getTotalT1int3Sc2() {
-        return this.totalT1int3_sc2;
-    }
-
-    public int getWicketsSc2() {
-        return this.wickets_sc2;
-    }
-
-    public int getWicketsTwoSc2() {
-        return this.wicketsTwo_sc2;
     }
 
     public double getInter1StartOverSc2() {
@@ -214,25 +185,12 @@ public class StateClass extends Application {
         this.overs = value;
     }
 
-
-    public void setT1OversTwo(double value) {
-        this.oversTwo = value;
-    }
-
     public void setWickets(int value) {
         this.wickets = value;
     }
 
-    public void setWicketsTwo(int value) {
-        this.wicketsTwo = value;
-    }
-
     public void setTotalT1(int value) {
         this.totalT1 = value;
-    }
-
-    public void setTotalT1Two(int value) {
-        this.totalT1Two = value;
     }
 
     public void setTotalT2int1(int value) {
@@ -299,24 +257,8 @@ public class StateClass extends Application {
         this.overs_sc2 = value;
     }
 
-    public void setT1OversTwoSc2(double value) {
-        this.oversTwo_sc2 = value;
-    }
-
-    public void setWicketsSc2(int value) {
-        this.wickets_sc2 = value;
-    }
-
-    public void setWicketsTwoSc2(int value) {
-        this.wicketsTwo_sc2 = value;
-    }
-
     public void setTotalT1Sc2(int value) {
         this.totalT1_sc2 = value;
-    }
-
-    public void setTotalT1TwoSc2(int value) {
-        this.totalT1Two_sc2 = value;
     }
 
     public void setTotalT1int1Sc2(int value) {

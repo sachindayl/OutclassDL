@@ -267,20 +267,20 @@ public class Scenario2 extends AppCompatActivity {
                 wholeOvers = stateSc2.getOvers();
                 oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
             } else if (interrupt == 2) {
-                intOverStart = stateSc2.getInter2StartOver();
+                intOverStart = stateSc2.getInter2StartOverSc2();
                 Log.v("intOverStart: ", String.valueOf(intOverStart));
-                intOverEnd = stateSc2.getInter2EndOver();
+                intOverEnd = stateSc2.getInter2EndOverSc2();
                 Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-                wholeOvers = stateSc2.getInter1StartOver() + stateSc2.getInter1EndOver();
+                wholeOvers = stateSc2.getInter1StartOverSc2() + stateSc2.getInter1EndOverSc2();
                 Log.v("wholeOvers: ", String.valueOf(wholeOvers));
                 oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
                 Log.v("oversCanPut: ", String.valueOf(oversCanPut));
             } else if (interrupt == 3) {
-                intOverStart = stateSc2.getInter3StartOver();
+                intOverStart = stateSc2.getInter3StartOverSc2();
                 Log.v("intOverStart: ", String.valueOf(intOverStart));
-                intOverEnd = stateSc2.getInter3EndOver();
+                intOverEnd = stateSc2.getInter3EndOverSc2();
                 Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-                wholeOvers = stateSc2.getInter2StartOver() + stateSc2.getInter2EndOver();
+                wholeOvers = stateSc2.getInter2StartOverSc2() + stateSc2.getInter2EndOverSc2();
                 Log.v("wholeOvers: ", String.valueOf(wholeOvers));
                 oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
                 Log.v("oversCanPut: ", String.valueOf(oversCanPut));
@@ -758,7 +758,7 @@ public class Scenario2 extends AppCompatActivity {
         totalWicketsSc2 = 10;
         overDataSc2 = new DataMap();
         fix = new InterruptionSetup();
-        stateSc2 = (StateClass) StateClass.getContext();
+        stateSc2 = (StateClass) getApplicationContext();
         t1WinTarget = new AlertDialog.Builder(Scenario2.this);
         usrErrAlertSc2 = new AlertDialog.Builder(Scenario2.this);
         allFieldsFilled = false;

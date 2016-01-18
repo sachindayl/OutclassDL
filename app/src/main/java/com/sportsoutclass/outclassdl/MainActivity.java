@@ -23,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
     TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
     EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team1OversDLEditText;
     double overs, oversTwo;
-    int total, totalTwo, wickets, wicketsTwo;
+    int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
     StateClass state;
     Button nextBtn;
     InterruptionSetup setup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
         double innStartOvers = state.getOvers();
         int innStartWickets = state.getWickets();
         int innStartTotal = state.getTotalT1();
-        int revisedT1Total = state.getTotalT1Two();
-        int revisedT1Wickets = state.getWicketsTwo();
-        double revisedT1Overs = state.getT1OversTwo();
+        int revisedT1Total = state.getTotalT1();
+        int revisedT1Wickets = state.getWickets();
+        double revisedT1Overs = state.getOvers();
 
         if (team1OversSwitch.isChecked()) {
             if (innStartOvers != 0 && innStartTotal != 0) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             if (team1RevisedSwitch.isChecked()) {
-                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Overs < innStartOvers && revisedT1Wickets <= 10) {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
                     scenario1 = new Intent(this, Scenario1.class);
                     startActivity(scenario1);
                 } else {
@@ -137,8 +138,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 state.setOvers(overs);
+
             }
         });
+
         overs = state.getOvers();
         team1OversDLEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -161,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Overs should be between 0 and " + overs,
                             Toast.LENGTH_SHORT).show();
                 }
-                state.setT1OversTwo(oversTwo);
+                state.setOvers(oversTwo);
+
             }
         });
 
@@ -200,13 +204,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                totalTwo = 0;
+                totalT1AfterRevised = 0;
                 String totalToS = s.toString();
                 if (totalToS.equals("")) {
                     totalToS = "0";
                 }
-                totalTwo = Integer.parseInt(totalToS);
-                state.setTotalT1Two(totalTwo);
+                totalT1AfterRevised = Integer.parseInt(totalToS);
+                state.setTotalT1(totalT1AfterRevised);
             }
         });
 
@@ -246,18 +250,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                wicketsTwo = 0;
+                wicketsAfterRevised = 0;
                 String wicketsToS = s.toString();
                 Log.v("wicketsToS value", wicketsToS);
                 if (wicketsToS.equals("")) {
                     wicketsToS = "0";
                 }
-                wicketsTwo = Integer.parseInt(wicketsToS);
-                if (wicketsTwo > 10) {
+                wicketsAfterRevised = Integer.parseInt(wicketsToS);
+                if (wicketsAfterRevised > 10) {
                     Toast.makeText(getApplicationContext(), "Wickets should be between 0 and 10",
                             Toast.LENGTH_SHORT).show();
                 }
-                state.setWicketsTwo(wicketsTwo);
+                state.setWickets(wicketsAfterRevised);
             }
         });
     }
@@ -321,16 +325,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         numberOfOversEditText = (EditText) findViewById(R.id.number_overs_edit_text);
         team1TotalScoreText = (TextView) findViewById(R.id.team_1_score);
+        team1TotalScoreEditText = (EditText) findViewById(R.id.team_1_score_edit);
+        team1WicketsText = (TextView) findViewById(R.id.team_1_wickets);
+        team1WicketsEditText = (EditText) findViewById(R.id.team_1_wickets_edit);
+        //Two means revised info for team1
         team1TotalScoreDL = (TextView) findViewById(R.id.team_1_scoreTwo);
         team1OversDL = (TextView) findViewById(R.id.team_1_oversTwo);
         team1TotalScoreDLEditText = (EditText) findViewById(R.id.team_1_score_editTwo);
         team1OversDLEditText = (EditText) findViewById(R.id.team_1_overs_editTwo);
-        team1TotalScoreEditText = (EditText) findViewById(R.id.team_1_score_edit);
-        team1WicketsText = (TextView) findViewById(R.id.team_1_wickets);
         team1WicketsDL = (TextView) findViewById(R.id.team_1_wicketsTwo);
-        team1WicketsEditText = (EditText) findViewById(R.id.team_1_wickets_edit);
         team1WicketsDLEditText = (EditText) findViewById(R.id.team_1_wickets_editTwo);
         //Switch to see if the team 1 completed all the overs or not and total runs and wickets
         team1OversSwitch = (Switch) findViewById(R.id.team_1_overs_switch);

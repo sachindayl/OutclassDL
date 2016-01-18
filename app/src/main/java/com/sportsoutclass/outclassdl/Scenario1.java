@@ -656,7 +656,7 @@ public class Scenario1 extends AppCompatActivity {
         totalWickets = 10;
         overData = new DataMap();
         fix = new InterruptionSetup();
-        state = (StateClass) StateClass.getContext();
+        state = (StateClass) getApplicationContext();
         t2WinScore = new AlertDialog.Builder(Scenario1.this);
         usrErrAlert = new AlertDialog.Builder(Scenario1.this);
     }

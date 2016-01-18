@@ -16,7 +16,8 @@ public class InterruptionSetup {
 
     public int one_interruption() {
         init();
-        double t1Overs = state.getOvers();
+        //Overs T2 will be playing at start of their inning
+        double oversForT2 = state.getOvers();
         Log.v("ResourcesStartofMatch: ", String.valueOf(resAtStartOfMatch));
         //Team 1 total score at the end of their innings
         int t1TotalScore = state.getTotalT1();
@@ -27,7 +28,7 @@ public class InterruptionSetup {
         //Team 2 Overs at the start of the interruption 1
         double oversAtInter1Start = state.getInter1StartOver();
         Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
-        if (oversAtInter1Start > t1Overs) {
+        if (oversAtInter1Start > oversForT2) {
             target = -10001;
             return target;
         }
