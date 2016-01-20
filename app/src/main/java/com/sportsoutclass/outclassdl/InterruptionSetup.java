@@ -174,15 +174,20 @@ public class InterruptionSetup {
             int digitCheck = (int) (z + 0.5);
             digitCheck = digitCheck / 10;
             char decimal;
-            if (digitCheck == 0) {
-                decimal = doubleToS.charAt(2);
+            if (z < 0) {
+                z = -1;
             } else {
-                decimal = doubleToS.charAt(3);
+                if (digitCheck == 0) {
+                    decimal = doubleToS.charAt(2);
+                } else {
+                    decimal = doubleToS.charAt(3);
+                }
+                int decimalToInt = Integer.parseInt(String.valueOf(decimal));
+                if (decimalToInt > 4) {
+                    z = z - 0.4;
+                }
             }
-            int decimalToInt = Integer.parseInt(String.valueOf(decimal));
-            if (decimalToInt > 4) {
-                z = z - 0.4;
-            }
+
         }
         return z;
     }
@@ -346,9 +351,9 @@ public class InterruptionSetup {
      * @param usrErr    alertBuilder for different scenarios
      * @param errorCode error code
      */
-    public static void interruptionErrors(AlertDialog.Builder usrErr, int errorCode) {
+    public static void interruptionErrors(AlertDialog.Builder usrErr, int errorCode, String title, String value) {
 
-        usrErr.setTitle("Invalid Information");
+        usrErr.setTitle(title);
         if (errorCode == -10001) {
             usrErr.setMessage("Interruption 1: Overs should be between 0 and 50");
         } else if (errorCode == -10002) {
@@ -357,7 +362,27 @@ public class InterruptionSetup {
             usrErr.setMessage("Interruption 2: Wickets should be between 0 and 10");
         } else if (errorCode == -10004) {
             usrErr.setMessage("Interruption 3: Wickets should be between 0 and 10");
+        } else if (errorCode == -10005) {
+            usrErr.setMessage("Over that the interruption 2 happened must be over " + value + " overs");
+        } else if (errorCode == -10006) {
+            usrErr.setMessage("Over that the interruption 1 happened must be less than " + value + " overs");
+        } else if (errorCode == -10007) {
+            usrErr.setMessage("Overs remaining cannot be greater than " + value + " overs");
+        } else if (errorCode == -10008) {
+            usrErr.setMessage("Please enter valid information");
+        } else if (errorCode == -10009) {
+            usrErr.setMessage("Overs and team 1 total must be entered");
+        } else if (errorCode == -10010) {
+            usrErr.setMessage("Team 1 total must be entered");
+        } else if (errorCode == -10011) {
+            usrErr.setMessage("Number of overs Team 2 will be playing must be entered");
+        } else if (errorCode == -10012) {
+            usrErr.setMessage("Overs should be between 0 and 50");
+        } else if (errorCode == -10013) {
+            usrErr.setMessage("Over that the interruption 3 happened must be over " + value + " overs");
         }
+
+
         usrErr.setPositiveButton("OK", null);
         usrErr.show();
     }

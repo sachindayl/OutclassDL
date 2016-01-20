@@ -37,7 +37,7 @@ public class Scenario2 extends AppCompatActivity {
             whichOverInterruption3EditTextSc2, wicketsLostInterruption1EditTextSc2,
             wicketsLostInterruption2EditTextSc2, wicketsLostInterruption3EditTextSc2,
             oversRemainingInterruption1EditTextSc2, oversRemainingInterruption2EditTextSc2,
-            oversRemainingInterruption3EditTextSc2, team2OversStartOfInnsSc2, team1FinalTotalB4RevSc2;
+            oversRemainingInterruption3EditTextSc2, team2OversStartOfInnsSc2, team1FinalTotalAfterRevSc2;
     int totalWicketsSc2, inter1WicketsSc2, inter2WicketsSc2, inter3WicketsSc2, inter1totalSc2, inter2totalSc2, inter3totalSc2, team1finalTotB4rev;
     double inter1OverSc2, inter2OverSc2, inter3OverSc2, inter1OversAtEndSc2, inter2OversAtEndSc2, inter3OversAtEndSc2, team2OversAtStartSc2;
     boolean allFieldsFilled;
@@ -76,7 +76,7 @@ public class Scenario2 extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
             return true;
         }
         if (id == android.R.id.home) {
@@ -194,8 +194,7 @@ public class Scenario2 extends AppCompatActivity {
 
 
         } else if (i == 0) {
-            Toast.makeText(getApplicationContext(), "You need to have an interruption!",
-                    Toast.LENGTH_SHORT).show();
+
 
             interruption1TextViewSc2.setVisibility(View.INVISIBLE);
             whichOverInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
@@ -226,8 +225,6 @@ public class Scenario2 extends AppCompatActivity {
             totalInter3TextViewSc2.setVisibility(View.INVISIBLE);
 
         } else {
-            Toast.makeText(getApplicationContext(), "Maximum 3 Interruptions",
-                    Toast.LENGTH_SHORT).show();
 
             interruption1TextViewSc2.setVisibility(View.INVISIBLE);
             whichOverInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
@@ -605,7 +602,7 @@ public class Scenario2 extends AppCompatActivity {
             }
         });
         //team1 final total before is revised
-        team1FinalTotalB4RevSc2.addTextChangedListener(new TextWatcher() {
+        team1FinalTotalAfterRevSc2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -638,10 +635,9 @@ public class Scenario2 extends AppCompatActivity {
             t1WinTarget.setPositiveButton("OK", null);
             t1WinTarget.show();
         } else {
-            InterruptionSetup.interruptionErrors(usrErrAlertSc2, target);
+            InterruptionSetup.interruptionErrors(usrErrAlertSc2, target, "Invalid Information", "");
         }
     }
-
 
 
     public boolean whichFieldsTocheck(int inter) {
@@ -650,7 +646,10 @@ public class Scenario2 extends AppCompatActivity {
             boolean x1 = editTextFieldCheck(totalInter1EditTextSc2);
             boolean x2 = editTextFieldCheck(whichOverInterruption1EditTextSc2);
             boolean x3 = editTextFieldCheck(wicketsLostInterruption1EditTextSc2);
-            if (x1 && x2 && x3) {
+            boolean x4 = editTextFieldCheck(team1FinalTotalAfterRevSc2);
+            boolean x5 = editTextFieldCheck(team2OversStartOfInnsSc2);
+
+            if (x1 && x2 && x3 && x4 && x5) {
                 notEmpty = true;
             }
 
@@ -763,7 +762,7 @@ public class Scenario2 extends AppCompatActivity {
         totalInter2EditTextSc2 = (EditText) findViewById(R.id.total_interruption_2_edit_text_sc2);
         totalInter3EditTextSc2 = (EditText) findViewById(R.id.total_interruption_3_edit_text_sc2);
         team2OversStartOfInnsSc2 = (EditText) findViewById(R.id.team2_overs_sc2_editText);
-        team1FinalTotalB4RevSc2 = (EditText) findViewById(R.id.team1_final_totalEditTextsc2);
+        team1FinalTotalAfterRevSc2 = (EditText) findViewById(R.id.team1_final_totalEditTextsc2);
 
         totalWicketsSc2 = 10;
         overDataSc2 = new DataMap();

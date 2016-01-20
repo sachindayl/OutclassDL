@@ -27,6 +27,8 @@
     <string name="total_at_interruption">Total at interruption</string>
     <string name="calculate">Calculate</string>
     <string name="team2overs_sc2">Number of overs Team 2 will be playing at the start of their inning</string>
+    <string name="team_1_final_total">Team 1 final total</string>
+    <string name="app_bar_about">About</string>
 
     <string-array name="yes_no">
         <item>Yes</item>

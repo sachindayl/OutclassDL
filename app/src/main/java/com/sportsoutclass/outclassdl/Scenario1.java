@@ -18,7 +18,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
@@ -43,13 +42,12 @@ public class Scenario1 extends AppCompatActivity {
     StateClass state;
     AlertDialog.Builder t2WinScore, usrErrAlert;
     InterruptionSetup fix;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario1);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,7 +72,7 @@ public class Scenario1 extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
             return true;
         }
         if (id == android.R.id.home) {
@@ -192,8 +190,6 @@ public class Scenario1 extends AppCompatActivity {
 
 
         } else if (i == 0) {
-            Toast.makeText(getApplicationContext(), "You need to have an interruption!",
-                    Toast.LENGTH_SHORT).show();
 
             interruption1TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption1TextView.setVisibility(View.INVISIBLE);
@@ -224,8 +220,6 @@ public class Scenario1 extends AppCompatActivity {
             totalInter3TextView.setVisibility(View.INVISIBLE);
 
         } else {
-            Toast.makeText(getApplicationContext(), "Maximum 3 Interruptions",
-                    Toast.LENGTH_SHORT).show();
 
             interruption1TextView.setVisibility(View.INVISIBLE);
             whichOverInterruption1TextView.setVisibility(View.INVISIBLE);
@@ -259,14 +253,15 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     //activating calculate button
-    public void activateCalcBtn(View v) {
+    public int activateCalcBtn(View v) {
 
         int interrupt = state.getInterruptions();
         boolean allFieldsFilled = whichFieldsTocheck(interrupt);
         double intOverStart;
         double intOverEnd = 0.0;
-        double wholeOvers;
+        double wholeOvers = 0.0;
         double oversCanPut = 0.0;
+
         if (allFieldsFilled) {
             if (interrupt == 1) {
                 intOverStart = state.getInter1StartOver();
@@ -274,33 +269,45 @@ public class Scenario1 extends AppCompatActivity {
                 wholeOvers = state.getOvers();
                 oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
             } else if (interrupt == 2) {
-                intOverStart = state.getInter2StartOver();
-                Log.v("intOverStart: ", String.valueOf(intOverStart));
+                intOverStart = state.getInter1StartOver();
+                double int2OverStart = state.getInter2StartOver();
+                if (int2OverStart < intOverStart) {
+                    String intOversStartToS = String.valueOf(intOverStart);
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Invalid Information", intOversStartToS);
+                    return 0;
+                }
                 intOverEnd = state.getInter2EndOver();
-                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
                 wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
-                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
                 oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
             } else if (interrupt == 3) {
-                intOverStart = state.getInter3StartOver();
-                Log.v("intOverStart: ", String.valueOf(intOverStart));
+                double int2OverStart = state.getInter2StartOver();
+                double int3OverStart = state.getInter3StartOver();
+                if (int3OverStart < int2OverStart) {
+                    String int2OversStartToS = String.valueOf(int2OverStart);
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Invalid Information", int2OversStartToS);
+                    return 0;
+                }
                 intOverEnd = state.getInter3EndOver();
-                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
                 wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
-                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
+                oversCanPut = fix.overCalculations(wholeOvers, int3OverStart, "minus");
             }
-            if (oversCanPut < intOverEnd) {
-                String oversCanPutToS = String.valueOf(oversCanPut);
-                Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
+            if (oversCanPut <= 0) {
+                String wholeOversToS = String.valueOf(wholeOvers);
+                InterruptionSetup.interruptionErrors(usrErrAlert, -10006, "Invalid Information", wholeOversToS);
+                return 0;
             } else {
-                AsyncCalculation calc = new AsyncCalculation();
-                calc.execute(interrupt);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                if (oversCanPut < intOverEnd) {
+                    String oversCanPutToS = String.valueOf(oversCanPut);
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10007, "Invalid Information", oversCanPutToS);
+                    return 0;
+                } else {
+                    AsyncCalculation calc = new AsyncCalculation();
+                    calc.execute(interrupt);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
             }
+
         } else {
             usrErrAlert.setTitle("Incomplete Information");
             usrErrAlert.setMessage("Please fill all the blanks");
@@ -308,6 +315,7 @@ public class Scenario1 extends AppCompatActivity {
             usrErrAlert.show();
 
         }
+        return 0;
     }
 
     private void editTextData() {
@@ -626,7 +634,7 @@ public class Scenario1 extends AppCompatActivity {
             t2WinScore.setPositiveButton("OK", null);
             t2WinScore.show();
         } else {
-            InterruptionSetup.interruptionErrors(usrErrAlert, target);
+            InterruptionSetup.interruptionErrors(usrErrAlert, target, "Invalid Information", "");
         }
     }
 
