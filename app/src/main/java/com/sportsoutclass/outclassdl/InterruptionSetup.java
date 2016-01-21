@@ -27,16 +27,29 @@ public class InterruptionSetup {
         Log.v("Team1 Wickets: ", String.valueOf(t1Wickets));
         //Team 2 Overs at the start of the interruption 1
         double oversAtInter1Start = state.getInter1StartOver();
+        double oversCanPut = overCalculations(oversForT2, oversAtInter1Start, "minus");
+        //overs remaining at the end of the interruption
+        double oversRemainingInterEnd = state.getInter1EndOver();
+        if (oversCanPut <= 0) {
+            String wholeOversToS = String.valueOf(oversForT2);
+            state.setErrorMessageValue(wholeOversToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10006;
+        }
+        if (oversCanPut < oversRemainingInterEnd) {
+            String oversCanPutToS = String.valueOf(oversCanPut);
+            state.setErrorMessageValue(oversCanPutToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10007;
+        }
         Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
         if (oversAtInter1Start > oversForT2) {
-            target = -10001;
-            return target;
+            return -10001;
         }
         //Team 2 Wickets at the start of the interruption 1
         int wicketsAtInter1Start = state.getInter1Wickets();
         if (wicketsAtInter1Start > 10) {
-            target = -10002;
-            return target;
+            return -10002;
         }
         //overs remaining at the start of the interruption
         double remainingOversAtInterStart = overCalculations(startOfInnsOvers, oversAtInter1Start, "minus");
@@ -46,10 +59,6 @@ public class InterruptionSetup {
         //resource percentage at the start of the interruption
         double percentageResourcesAtInterStart = overData.DataSet(oversAndWicketsStartTogether);
         Log.v("resources@interStart: ", String.valueOf(percentageResourcesAtInterStart));
-
-        //overs remaining at the end of the interruption
-        double oversRemainingInterEnd = state.getInter1EndOver();
-        Log.v("netOvers: ", String.valueOf(remainingOversAtInterStart));
         //overs remaining *10 to get rid of decimal
         int totalOversRemainingPlusWickets = (int) ((oversRemainingInterEnd * 100) + wicketsAtInter1Start);
         Log.v("TotalOversAndWkts: ", String.valueOf(totalOversRemainingPlusWickets));
@@ -75,23 +84,52 @@ public class InterruptionSetup {
         one_interruption();
         target = -1000;
         double oversAtInter1Start = state.getInter1StartOver();
-        double oversRemainingInterEnd = state.getInter1EndOver();
+        double oversRemainingInter1End = state.getInter1EndOver();
         double oversAtInter2Start = state.getInter2StartOver();
         //Team 2 Wickets at the start of the interruption 1
+        int wicketsAtInter1Start = state.getInter1Wickets();
         int wicketsAtInter2Start = state.getInter2Wickets();
-        if (wicketsAtInter2Start > 10) {
-            target = -10003;
-            return target;
-        }
-        double oversFinalizedAtInter1End = overCalculations(oversAtInter1Start, oversRemainingInterEnd, "plus");
+        double oversFinalizedAtInter1End = overCalculations(oversAtInter1Start, oversRemainingInter1End, "plus");
         Log.v("oversFinalizedAtInter1End: ", String.valueOf(oversFinalizedAtInter1End));
+        double oversCanPut = overCalculations(oversFinalizedAtInter1End, oversAtInter2Start, "minus");
         double oversRemainingAtInter2End = state.getInter2EndOver();
-        /**
-         * Make a check at button press for this.
-         */
+        if (oversCanPut <= 0) {
+            String wholeOversToS = String.valueOf(oversFinalizedAtInter1End);
+            state.setErrorMessageValue(wholeOversToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10016;
+        }
+        if (oversCanPut < oversRemainingAtInter2End) {
+            String oversCanPutToS = String.valueOf(oversCanPut);
+            state.setErrorMessageValue(oversCanPutToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10018;
+        }
+        if (wicketsAtInter2Start > 10) {
+            return -10003;
+        }
+        if (oversAtInter2Start < oversAtInter1Start) {
+            String intOversStartToS = String.valueOf(oversAtInter1Start);
+            state.setErrorMessageValue(intOversStartToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10005;
+        }
+        if (wicketsAtInter2Start < wicketsAtInter1Start) {
+            String int1WicketsToS = String.valueOf(wicketsAtInter1Start);
+            state.setErrorMessageValue(int1WicketsToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10014;
+        }
         double oversFinalizedAtInter2End = overCalculations(oversAtInter2Start, oversRemainingAtInter2End, "plus");
         Log.v("oversFinalizedAtInter2End: ", String.valueOf(oversFinalizedAtInter2End));
         double oversLeftAtInter2Start = overCalculations(oversFinalizedAtInter1End, oversAtInter2Start, "minus");
+
+        if (oversFinalizedAtInter2End >= oversFinalizedAtInter1End) {
+            String oversLeftAtInter2StartToS = String.valueOf(oversLeftAtInter2Start);
+            state.setErrorMessageValue(oversLeftAtInter2StartToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10020;
+        }
         Log.v("oversLeftAtInter2Start: ", String.valueOf(oversLeftAtInter2Start));
         int oversWktsLeftAtInter2Start = (int) ((oversLeftAtInter2Start * 100) + wicketsAtInter2Start);
         Log.v("resLeftAtInter2Start: ", String.valueOf(oversWktsLeftAtInter2Start));
@@ -108,6 +146,7 @@ public class InterruptionSetup {
         Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
         target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartOfMatch)) + 1.5);
         Log.v("targetInt2: ", String.valueOf(target));
+
         return target;
     }
 
@@ -116,22 +155,55 @@ public class InterruptionSetup {
         one_interruption();
         two_interruptions();
         target = -1000;
+        double oversAtInter2Start = state.getInter2StartOver();
         double oversAtInter3Start = state.getInter3StartOver();
         Log.v("oversAtInter3Start: ", String.valueOf(oversAtInter3Start));
+        int wicketsAtInter2Start = state.getInter2Wickets();
         int wicketsAtInter3Start = state.getInter3Wickets();
         Log.v("wicketsAtInter3Start: ", String.valueOf(wicketsAtInter3Start));
-        if (wicketsAtInter3Start > 10) {
-            target = -10004;
-            return target;
-        }
         double oversFinalizedAtInter2End = overCalculations(state.getInter2StartOver(), state.getInter2EndOver(), "plus");
+        double oversCanPut = overCalculations(oversFinalizedAtInter2End, state.getInter3StartOver(), "minus");
+        double oversRemainingAtInter3End = state.getInter3EndOver();
+        if (oversCanPut <= 0) {
+            String wholeOversToS = String.valueOf(oversFinalizedAtInter2End);
+            state.setErrorMessageValue(wholeOversToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10017;
+        }
+        if (oversAtInter3Start < oversAtInter2Start) {
+            String int2OversStartToS = String.valueOf(oversAtInter2Start);
+            state.setErrorMessageTitle("Invalid Information");
+            state.setErrorMessageValue(int2OversStartToS);
+            return -10013;
+        }
+        if (oversCanPut < oversRemainingAtInter3End) {
+            String oversCanPutToS = String.valueOf(oversCanPut);
+            state.setErrorMessageValue(oversCanPutToS);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10019;
+        }
+        if (wicketsAtInter3Start > 10) {
+            return -10004;
+        }
+        if (wicketsAtInter3Start < wicketsAtInter2Start) {
+            String int2WicketsToS = String.valueOf(wicketsAtInter2Start);
+            state.setErrorMessageTitle("Invalid Information");
+            state.setErrorMessageValue(int2WicketsToS);
+            return -10015;
+        }
         Log.v("oversFinalizedAtInter2End: ", String.valueOf(oversFinalizedAtInter2End));
+        double oversFinalizedAtInter3End = overCalculations(oversAtInter3Start, state.getInter3EndOver(), "plus");
         double oversLeftAtInter3Start = overCalculations(oversFinalizedAtInter2End, oversAtInter3Start, "minus");
         Log.v("oversLeftAtInter3Start: ", String.valueOf(oversLeftAtInter3Start));
+
+        if (oversFinalizedAtInter3End >= oversFinalizedAtInter2End) {
+            String oversLeftAtInter3StartTos = String.valueOf(oversLeftAtInter3Start);
+            state.setErrorMessageValue(oversLeftAtInter3StartTos);
+            state.setErrorMessageTitle("Invalid Information");
+            return -10021;
+        }
         int oversWktsLeftAtInter3Start = (int) ((oversLeftAtInter3Start * 100) + wicketsAtInter3Start);
         Log.v("oversWktsLeftAtInter3Start: ", String.valueOf(oversWktsLeftAtInter3Start));
-
-        double oversFinalizedAtInter3End = overCalculations(oversAtInter3Start, state.getInter3EndOver(), "plus");
         double resLeftAtInter3Start = overData.DataSet(oversWktsLeftAtInter3Start);
         double oversLeftAtInter3End = overCalculations(oversFinalizedAtInter3End, oversAtInter3Start, "minus");
         Log.v("oversLeftAtInter3End: ", String.valueOf(oversLeftAtInter3End));
@@ -200,7 +272,6 @@ public class InterruptionSetup {
         double t1Overs = state.getOvers();
         Log.v("ResourcesStartofMatch: ", String.valueOf(resAtStartOfMatch));
         int team1FinalTotalb4Rev = state.getTotalT1Sc2();
-        int team1TotalatInt1 = state.getTotalT1int1Sc2();
         //Team 1 Overs at the start of the interruption 1
         double oversAtInter1StartSc2 = state.getInter1StartOverSc2();
         Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1StartSc2));
@@ -363,11 +434,11 @@ public class InterruptionSetup {
         } else if (errorCode == -10004) {
             usrErr.setMessage("Interruption 3: Wickets should be between 0 and 10");
         } else if (errorCode == -10005) {
-            usrErr.setMessage("Over that the interruption 2 happened must be over " + value + " overs");
+            usrErr.setMessage("Over that the interruption 2 happened must be greater than " + value + " overs");
         } else if (errorCode == -10006) {
             usrErr.setMessage("Over that the interruption 1 happened must be less than " + value + " overs");
         } else if (errorCode == -10007) {
-            usrErr.setMessage("Overs remaining cannot be greater than " + value + " overs");
+            usrErr.setMessage("Interruption 1: Overs remaining cannot be greater than " + value + " overs");
         } else if (errorCode == -10008) {
             usrErr.setMessage("Please enter valid information");
         } else if (errorCode == -10009) {
@@ -379,7 +450,23 @@ public class InterruptionSetup {
         } else if (errorCode == -10012) {
             usrErr.setMessage("Overs should be between 0 and 50");
         } else if (errorCode == -10013) {
-            usrErr.setMessage("Over that the interruption 3 happened must be over " + value + " overs");
+            usrErr.setMessage("Over that the interruption 3 happened must be greater than " + value + " overs");
+        } else if (errorCode == -10014) {
+            usrErr.setMessage("Interruption 2: fallen wickets cannot be less than " + value + " wickets");
+        } else if (errorCode == -10015) {
+            usrErr.setMessage("Interruption 3: fallen wickets cannot be less than " + value + " wickets");
+        } else if (errorCode == -10016) {
+            usrErr.setMessage("Over that the interruption 2 happened must be less than " + value + " overs");
+        } else if (errorCode == -10017) {
+            usrErr.setMessage("Over that the interruption 3 happened must be less than " + value + " overs");
+        } else if (errorCode == -10018) {
+            usrErr.setMessage("Interruption 2: Overs remaining cannot be greater than " + value + " overs");
+        } else if (errorCode == -10019) {
+            usrErr.setMessage("Interruption 3: Overs remaining cannot be greater than " + value + " overs");
+        } else if (errorCode == -10020) {
+            usrErr.setMessage("Interruption 2: Overs remaining must be less than " + value + " overs");
+        } else if (errorCode == -10021) {
+            usrErr.setMessage("Interruption 3: Overs remaining must be less than " + value + " overs");
         }
 
 

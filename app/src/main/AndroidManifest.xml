@@ -27,8 +27,8 @@
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
         </activity>
         <activity
-            android:name=".Team2Info"
-            android:label="@string/title_activity_team2_info"
+            android:name=".AboutPage"
+            android:label="@string/title_activity_about_page"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

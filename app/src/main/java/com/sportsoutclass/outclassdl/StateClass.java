@@ -19,6 +19,7 @@ public class StateClass extends Application {
             totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
     public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
             totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2;
+    public String errorMsgValue, errorMsgTitle;
 
     private static Context mContext;
 
@@ -34,6 +35,14 @@ public class StateClass extends Application {
     /**
      * Getters Scenario 1
      */
+    public String getErrorMessageValue() {
+        return this.errorMsgValue;
+    }
+
+    public String getErrorMessageTitle() {
+        return this.errorMsgTitle;
+    }
+
     public int getInterruptions() {
         return this.interruptions;
     }
@@ -66,7 +75,6 @@ public class StateClass extends Application {
         return this.wickets;
     }
 
-    //revised Wickets after a change
     public int getWicketsTwo() {
         return this.wicketsTwo;
     }
@@ -177,6 +185,13 @@ public class StateClass extends Application {
     /**
      * Setters for scenario 1
      */
+    public void setErrorMessageValue(String value) {
+        this.errorMsgValue = value;
+    }
+
+    public void setErrorMessageTitle(String value) {
+        this.errorMsgTitle = value;
+    }
     public void setInterruptions(int value) {
         this.interruptions = value;
     }

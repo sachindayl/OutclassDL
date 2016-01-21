@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //If the variable contains Two it is regarding scenario 2
-    Intent scenario1, scenario2;
+    Intent scenario1, scenario2, aboutPg;
     Switch team1OversSwitch, team1RevisedSwitch;
     TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
     EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team2OversDLEditText;
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            return true;
+            aboutPg = new Intent(this, AboutPage.class);
+            startActivity(aboutPg);
         }
 
         return super.onOptionsItemSelected(item);

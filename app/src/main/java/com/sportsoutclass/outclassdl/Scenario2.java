@@ -2,6 +2,7 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -25,6 +26,7 @@ import android.widget.Toast;
  * occurs to the second team.
  */
 public class Scenario2 extends AppCompatActivity {
+    Intent aboutPg;
     TextView interruption1TextViewSc2, totalInter1TextViewSc2, totalInter2TextViewSc2, totalInter3TextViewSc2,
             interruption2TextViewSc2, interruption3TextViewSc2,
             whichOverInterruption1TextViewSc2, whichOverInterruption2TextViewSc2,
@@ -77,7 +79,8 @@ public class Scenario2 extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            return true;
+            aboutPg = new Intent(this, AboutPage.class);
+            startActivity(aboutPg);
         }
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
@@ -397,6 +400,9 @@ public class Scenario2 extends AppCompatActivity {
                     inter1WicketsToS = "0";
                 }
                 inter1WicketsSc2 = Integer.parseInt(inter1WicketsToS);
+                if (inter1WicketsSc2 > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlertSc2, -10002, "Error", inter1WicketsToS);
+                }
                 stateSc2.setInter1WicketsSc2(inter1WicketsSc2);
             }
         });
@@ -419,6 +425,9 @@ public class Scenario2 extends AppCompatActivity {
                     inter2WicketsToS = "0";
                 }
                 inter2WicketsSc2 = Integer.parseInt(inter2WicketsToS);
+                if (inter2WicketsSc2 > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlertSc2, -10003, "Error", inter2WicketsToS);
+                }
                 stateSc2.setInter2WicketsSc2(inter2WicketsSc2);
             }
         });
@@ -441,6 +450,9 @@ public class Scenario2 extends AppCompatActivity {
                     inter3WicketsToS = "0";
                 }
                 inter3WicketsSc2 = Integer.parseInt(inter3WicketsToS);
+                if (inter3WicketsSc2 > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlertSc2, -10004, "Error", inter3WicketsToS);
+                }
                 stateSc2.setInter3WicketsSc2(inter3WicketsSc2);
             }
         });

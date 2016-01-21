@@ -2,6 +2,7 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -24,6 +25,7 @@ import android.widget.TextView;
  * occurs to the second team.
  */
 public class Scenario1 extends AppCompatActivity {
+    Intent aboutPg;
     TextView interruption1TextView, totalInter1TextView, totalInter2TextView, totalInter3TextView,
             interruption2TextView, interruption3TextView,
             whichOverInterruption1TextView, whichOverInterruption2TextView,
@@ -73,7 +75,8 @@ public class Scenario1 extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            return true;
+            aboutPg = new Intent(this, AboutPage.class);
+            startActivity(aboutPg);
         }
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
@@ -257,56 +260,13 @@ public class Scenario1 extends AppCompatActivity {
 
         int interrupt = state.getInterruptions();
         boolean allFieldsFilled = whichFieldsTocheck(interrupt);
-        double intOverStart;
-        double intOverEnd = 0.0;
-        double wholeOvers = 0.0;
-        double oversCanPut = 0.0;
 
         if (allFieldsFilled) {
-            if (interrupt == 1) {
-                intOverStart = state.getInter1StartOver();
-                intOverEnd = state.getInter1EndOver();
-                wholeOvers = state.getOvers();
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-            } else if (interrupt == 2) {
-                intOverStart = state.getInter1StartOver();
-                double int2OverStart = state.getInter2StartOver();
-                if (int2OverStart < intOverStart) {
-                    String intOversStartToS = String.valueOf(intOverStart);
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Invalid Information", intOversStartToS);
-                    return 0;
-                }
-                intOverEnd = state.getInter2EndOver();
-                wholeOvers = state.getInter1StartOver() + state.getInter1EndOver();
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-            } else if (interrupt == 3) {
-                double int2OverStart = state.getInter2StartOver();
-                double int3OverStart = state.getInter3StartOver();
-                if (int3OverStart < int2OverStart) {
-                    String int2OversStartToS = String.valueOf(int2OverStart);
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Invalid Information", int2OversStartToS);
-                    return 0;
-                }
-                intOverEnd = state.getInter3EndOver();
-                wholeOvers = state.getInter2StartOver() + state.getInter2EndOver();
-                oversCanPut = fix.overCalculations(wholeOvers, int3OverStart, "minus");
-            }
-            if (oversCanPut <= 0) {
-                String wholeOversToS = String.valueOf(wholeOvers);
-                InterruptionSetup.interruptionErrors(usrErrAlert, -10006, "Invalid Information", wholeOversToS);
-                return 0;
-            } else {
-                if (oversCanPut < intOverEnd) {
-                    String oversCanPutToS = String.valueOf(oversCanPut);
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10007, "Invalid Information", oversCanPutToS);
-                    return 0;
-                } else {
+
                     AsyncCalculation calc = new AsyncCalculation();
                     calc.execute(interrupt);
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                }
-            }
 
         } else {
             usrErrAlert.setTitle("Incomplete Information");
@@ -405,6 +365,9 @@ public class Scenario1 extends AppCompatActivity {
                     inter1WicketsToS = "0";
                 }
                 inter1Wickets = Integer.parseInt(inter1WicketsToS);
+                if (inter1Wickets > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10002, "Error", inter1WicketsToS);
+                }
                 state.setInter1Wickets(inter1Wickets);
             }
         });
@@ -427,6 +390,9 @@ public class Scenario1 extends AppCompatActivity {
                     inter2WicketsToS = "0";
                 }
                 inter2Wickets = Integer.parseInt(inter2WicketsToS);
+                if (inter2Wickets > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter2WicketsToS);
+                }
                 state.setInter2Wickets(inter2Wickets);
             }
         });
@@ -449,6 +415,9 @@ public class Scenario1 extends AppCompatActivity {
                     inter3WicketsToS = "0";
                 }
                 inter3Wickets = Integer.parseInt(inter3WicketsToS);
+                if (inter3Wickets > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter3WicketsToS);
+                }
                 state.setInter3Wickets(inter3Wickets);
             }
         });
@@ -518,7 +487,6 @@ public class Scenario1 extends AppCompatActivity {
                 state.setInter3EndOver(inter3OversAtEnd);
             }
         });
-
         totalInter1EditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -611,30 +579,36 @@ public class Scenario1 extends AppCompatActivity {
             Log.v("Need to win: ", String.valueOf(toWin));
 
 
-            t2WinScore.setTitle("Par Score");
+
             if (remainingOvers == 0.0) {
                 if (toWin <= 0) {
                     toWin = Math.abs(toWin);
                     toWinToS = String.valueOf(toWin);
+                    t2WinScore.setTitle("Final Result");
                     t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
                 } else {
                     toWin = toWin - 1;
                     Log.v("Need to win: ", String.valueOf(toWin));
                     toWinToS = String.valueOf(toWin);
+                    t2WinScore.setTitle("Final Result");
                     t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
                 }
 
             } else if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
+                t2WinScore.setTitle("Final Result");
                 t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
             } else {
+                t2WinScore.setTitle("Par Score");
                 t2WinScore.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
             }
             t2WinScore.setPositiveButton("OK", null);
             t2WinScore.show();
         } else {
-            InterruptionSetup.interruptionErrors(usrErrAlert, target, "Invalid Information", "");
+            String errMsgValue = state.getErrorMessageValue();
+            String errMsgTitle = state.getErrorMessageTitle();
+            InterruptionSetup.interruptionErrors(usrErrAlert, target, errMsgTitle, errMsgValue);
         }
     }
 
