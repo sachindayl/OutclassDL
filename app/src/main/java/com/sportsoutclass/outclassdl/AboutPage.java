@@ -50,7 +50,7 @@ public class AboutPage extends AppCompatActivity {
 
     private void init() {
         about_ListView = (ListView) findViewById(R.id.aboutListView);
-        values = new String[]{"Version", "Feedback"};
+        values = new String[]{"Developer", "Version", "Feedback"};
         list = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
             list.add(values[i]);

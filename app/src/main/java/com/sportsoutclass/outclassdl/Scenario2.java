@@ -19,7 +19,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
@@ -265,45 +264,15 @@ public class Scenario2 extends AppCompatActivity {
 
         int interrupt = stateSc2.getInterruptionsSc2();
         allFieldsFilled = whichFieldsTocheck(interrupt);
-        double intOverStart;
-        double intOverEnd = 0.0;
-        double wholeOvers;
-        double oversCanPut = 0.0;
+
         Log.v("allFieldsFilledBtn: ", String.valueOf(allFieldsFilled));
         if (allFieldsFilled) {
-            if (interrupt == 1) {
-                intOverStart = stateSc2.getInter1StartOverSc2();
-                intOverEnd = stateSc2.getInter1EndOverSc2();
-                wholeOvers = stateSc2.getOvers();
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-            } else if (interrupt == 2) {
-                intOverStart = stateSc2.getInter2StartOverSc2();
-                Log.v("intOverStart: ", String.valueOf(intOverStart));
-                intOverEnd = stateSc2.getInter2EndOverSc2();
-                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-                wholeOvers = stateSc2.getInter1StartOverSc2() + stateSc2.getInter1EndOverSc2();
-                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
-            } else if (interrupt == 3) {
-                intOverStart = stateSc2.getInter3StartOverSc2();
-                Log.v("intOverStart: ", String.valueOf(intOverStart));
-                intOverEnd = stateSc2.getInter3EndOverSc2();
-                Log.v("intOverEnd: ", String.valueOf(intOverEnd));
-                wholeOvers = stateSc2.getInter2StartOverSc2() + stateSc2.getInter2EndOverSc2();
-                Log.v("wholeOvers: ", String.valueOf(wholeOvers));
-                oversCanPut = fix.overCalculations(wholeOvers, intOverStart, "minus");
-                Log.v("oversCanPut: ", String.valueOf(oversCanPut));
-            }
-            if (oversCanPut < intOverEnd) {
-                String oversCanPutToS = String.valueOf(oversCanPut);
-                Toast.makeText(getApplicationContext(), "Overs remaining cannot be greater than " + oversCanPutToS + " overs!", Toast.LENGTH_SHORT).show();
-            } else {
-                AsyncCalculation calc = new AsyncCalculation();
+
+            AsyncCalculation calc = new AsyncCalculation();
                 calc.execute(interrupt);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            }
+
         } else {
             usrErrAlertSc2.setTitle("Incomplete Information");
             usrErrAlertSc2.setMessage("Please fill all the blanks");
