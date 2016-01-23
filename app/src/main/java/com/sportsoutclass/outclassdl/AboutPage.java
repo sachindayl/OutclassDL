@@ -1,31 +1,55 @@
 package com.sportsoutclass.outclassdl;
 
+import android.app.ActivityManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
+import android.widget.LinearLayout;
 
 public class AboutPage extends AppCompatActivity {
 
     private Toolbar toolbar;
-    ListView about_ListView;
-    ArrayList<String> list;
-    ListAdapter listViewAdapter;
-    String[] values;
+    String[] titleValues, subTitleValues;
+    RecyclerView aboutRecycler;
+    private aboutPageRVAdapter adapter;
+    LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_page);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+        aboutRecycler = (RecyclerView) findViewById(R.id.about_recycler);
         setSupportActionBar(toolbar);
         init();
+        ll = (LinearLayout) findViewById(R.id.about_row_ll);
+        aboutRecycler.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        aboutRecycler.setLayoutManager(llm);
+
+        adapter = new aboutPageRVAdapter(titleValues, subTitleValues);
+        aboutRecycler.setAdapter(adapter);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.recents_icon); // Initialize this to whatever you want
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme theme = getTheme();
+            theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+            int color = typedValue.data;
+            ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(null, bm, color);
+            setTaskDescription(description);
+            bm.recycle();
+        }
+
     }
 
     @Override
@@ -49,13 +73,8 @@ public class AboutPage extends AppCompatActivity {
     }
 
     private void init() {
-        about_ListView = (ListView) findViewById(R.id.aboutListView);
-        values = new String[]{"Developer", "Version", "Feedback"};
-        list = new ArrayList<>();
-        for (int i = 0; i < values.length; i++) {
-            list.add(values[i]);
-        }
-        listViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        about_ListView.setAdapter(listViewAdapter);
+        String version = BuildConfig.VERSION_NAME;
+        titleValues = new String[]{"Developer", "Version", "Feedback"};
+        subTitleValues = new String[]{"Sachinda Liyanaarachchi", version, "Give your feedback @ dlcalculatorapp@gmail.com"};
     }
 }

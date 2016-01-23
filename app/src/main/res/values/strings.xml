@@ -6,11 +6,11 @@
     <string name="title_activity_scenario2">Team 1 Interruptions</string>
     <string name="title_activity_about_page">About</string>
     <string name="title_activity_scenario1">Team 2 Interruptions</string>
-    <string name="start_innings_overs">Number of overs available at the start of the innings (50 overs or less)</string>
-    <string name="team_1_full_amount">Did Team 1 bat the full amount of overs?</string>
-    <string name="team_1_revised">Do you already know the Team 1 revised total?</string>
-    <string name="interruptions">How many interruptions for Team 2? (Max. 3)</string>
-    <string name="interruptions2">How many interruptions for Team 1? (Max. 3)</string>
+    <string name="start_innings_overs">Number of overs per side (50 overs or less)</string>
+    <string name="team_1_full_amount">Did Team 1 bat their full amount of overs?</string>
+    <string name="team_1_revised">Have you already calculated Team 1\'s revised total?</string>
+    <string name="interruptions">How many interruptions were in Team 2\'s inning? (Max. 3)</string>
+    <string name="interruptions2">How many interruptions were in Team 1\'s inning? (Max. 3)</string>
     <string name="interruption_1">Interruption 1</string>
     <string name="interruption_2">Interruption 2</string>
     <string name="interruption_3">Interruption 3</string>
@@ -21,14 +21,15 @@
     <string name="next">next</string>
     <string name="team_1_final_score">Team 1 final score</string>
     <string name="team_1_score">Team 1 score</string>
-    <string name="team_1_score_DL">Team 1 score after DL calculation</string>
+    <string name="team_1_score_DL">Team 1\'s score after DL calculation</string>
     <string name="total">Total</string>
-    <string name="wickets">Wickets</string>
+    <string name="wickets">Wickets lost</string>
     <string name="total_at_interruption">Total at interruption</string>
     <string name="calculate">Calculate</string>
-    <string name="team2overs_sc2">Number of overs Team 2 will be playing at the start of their inning</string>
+    <string name="team2overs_sc2">How many overs available to Team 2 at the start of their inning</string>
     <string name="team_1_final_total">Team 1 final total</string>
     <string name="app_bar_about">About</string>
+    <string name="version">1.0</string>
 
     <string-array name="yes_no">
         <item>Yes</item>
