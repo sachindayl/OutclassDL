@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sportsoutclass.outclassdl"
-    android:versionCode="1"
-    android:versionName="@string/version">
+    package="com.sportsoutclass.outclassdl">
 
     <application
         android:name=".StateClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,8 +20,8 @@
         <activity
             android:name=".Scenario2"
             android:label="@string/title_activity_scenario2"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
@@ -31,7 +29,7 @@
         <activity
             android:name=".AboutPage"
             android:label="@string/title_activity_about_page"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
@@ -39,8 +37,8 @@
         <activity
             android:name=".Scenario1"
             android:label="@string/title_activity_scenario1"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />

@@ -628,11 +628,13 @@ public class Scenario2 extends AppCompatActivity {
         //values less than -10000 contains error codes
         if (target > -10000) {
             t1WinTarget.setTitle("Par Score");
-            t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " to win.");
+            t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " runs to win.");
             t1WinTarget.setPositiveButton("OK", null);
             t1WinTarget.show();
         } else {
-            InterruptionSetup.interruptionErrors(usrErrAlertSc2, target, "Invalid Information", "");
+            String value = stateSc2.getErrorMessageValue();
+            String title = stateSc2.getErrorMessageTitle();
+            InterruptionSetup.interruptionErrors(usrErrAlertSc2, target, title, value);
         }
     }
 

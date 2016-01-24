@@ -1,6 +1,7 @@
 package com.sportsoutclass.outclassdl;
 
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ public class AboutPage extends AppCompatActivity {
     RecyclerView aboutRecycler;
     private aboutPageRVAdapter adapter;
     LinearLayout ll;
+    final Context context = StateClass.getContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class AboutPage extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         aboutRecycler.setLayoutManager(llm);
 
-        adapter = new aboutPageRVAdapter(titleValues, subTitleValues);
+        adapter = new aboutPageRVAdapter(context, titleValues, subTitleValues);
         aboutRecycler.setAdapter(adapter);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -74,7 +76,9 @@ public class AboutPage extends AppCompatActivity {
 
     private void init() {
         String version = BuildConfig.VERSION_NAME;
-        titleValues = new String[]{"Developer", "Version", "Feedback"};
-        subTitleValues = new String[]{"Sachinda Liyanaarachchi", version, "Give your feedback @ dlcalculatorapp@gmail.com"};
+        titleValues = new String[]{"Developer", "Version", "Feedback", "Rate"};
+        subTitleValues = new String[]{"Sachinda Liyanaarachchi", version, "Give your feedback @ dlcalculatorapp@gmail.com", "Please rate this app on store"};
     }
+
+
 }

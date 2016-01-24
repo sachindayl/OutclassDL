@@ -272,7 +272,7 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     //activating calculate button
-    public int activateCalcBtn(View v) {
+    public void activateCalcBtn(View v) {
 
         int interrupt = state.getInterruptions();
         boolean allFieldsFilled = whichFieldsTocheck(interrupt);
@@ -291,7 +291,6 @@ public class Scenario1 extends AppCompatActivity {
             usrErrAlert.show();
 
         }
-        return 0;
     }
 
     private void editTextData() {

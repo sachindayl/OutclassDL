@@ -13,16 +13,15 @@
             android:id="@+id/row_mainLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dummy Text"
+            android:text="@string/dummy_text"
             android:textColor="@color/black"
-            android:textSize="@dimen/abc_text_size_menu_material"
-            android:textStyle="bold" />
+            android:textSize="@dimen/abc_text_size_menu_material" />
 
         <TextView
             android:id="@+id/row_subLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sub Dummy Text"
+            android:text="@string/dummy_text"
             android:textSize="@dimen/abc_text_size_body_1_material" />
 
     </LinearLayout>
