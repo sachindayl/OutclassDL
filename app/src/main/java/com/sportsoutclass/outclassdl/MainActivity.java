@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.recents_icon); // Initialize this to whatever you want
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
             TypedValue typedValue = new TypedValue();
             Resources.Theme theme = getTheme();
             theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);

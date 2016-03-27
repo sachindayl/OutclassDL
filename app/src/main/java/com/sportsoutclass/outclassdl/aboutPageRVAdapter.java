@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +30,6 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
     private static final String GooglePlayStorePackageNameOld = "com.google.market";
     private static final String GooglePlayStorePackageNameNew = "com.android.vending";
 
-
     public static class aboutPageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView about_Title;
         public TextView about_subTitle;
@@ -43,11 +44,16 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
         @Override
         public void onClick(View v) {
             /**
-             * If position 2 goes to email intent for user feedback
-             * If position 3 goes to Play Store or Amazon Appstore for rating
+             * If position 3, goes to email intent for user feedback
+             * If position 4, goes to Play Store or Amazon Appstore for rating
              */
             int position = getAdapterPosition();
-            if (position == 2) {
+            if (position == 0) {
+                Intent howTo = new Intent(ctx, HowToPage.class);
+                howTo.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ctx.startActivity(howTo);
+
+            } else if (position == 3) {
                 Intent sendEmail = new Intent(Intent.ACTION_SEND);
                 sendEmail.setType("message/rfc822");
                 sendEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"dlcalculatorapp@gmail.com"});
@@ -58,7 +64,7 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(ctx, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                 }
-            } else if (position == 3) {
+            } else if (position == 4) {
                 boolean googlePlay = checkWhichStore();
                 Log.v("googlePlay: ", String.valueOf(googlePlay));
                 final String appPackageName = ctx.getPackageName(); // getPackageName() from Context or Activity object

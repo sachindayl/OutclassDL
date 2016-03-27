@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                tools:context=".Scenario2">
+                tools:context=".Scenario1">
 
                 <TextView
                     android:id="@+id/interruptions_text_view"

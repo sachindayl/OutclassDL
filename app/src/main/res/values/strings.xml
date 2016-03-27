@@ -8,6 +8,7 @@
     <string name="title_activity_scenario2">Team 1 Interruptions</string>
     <string name="title_activity_about_page">About</string>
     <string name="title_activity_scenario1">Team 2 Interruptions</string>
+    <string name="title_activity_how_to_page">Instructions</string>
     <string name="start_innings_overs">Number of overs per side (50 overs or less)</string>
     <string name="team_1_full_amount">Did Team 1 bat their full amount of overs?</string>
     <string name="team_1_revised">Have you already calculated Team 1\'s revised total?</string>
@@ -38,4 +39,10 @@
         <item>Yes</item>
         <item>No</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_to_team1_completed_body_text">When looking for par score for team 2, the user must insert the Number of overs (both teams agreed to play at the start of the match). Did the team 1 bat their full amount of overs? Yes. Insert the Team 1 total, wickets and click next. Insert the number of interruptions that occurred for Team 2. If it is 1, insert the over (eg: over 25.2) that was interrupted, the total and wickets at the interruption. Finally, insert the number of overs Team 2 will be getting after the interruption and click calculate. If 2nd and 3rd interruptions occur after awhile, Please change the number of interruptions to accordingly and fill in the information.</string>
+    <string name="how_to_team1_completed_title_text">Par Score for Team 2 After Team 1 Completed the Whole Number of Overs</string>
+    <string name="how_to_team1_incomplete_no_data_title_text">Calculate Team 1 Score</string>
 </resources>

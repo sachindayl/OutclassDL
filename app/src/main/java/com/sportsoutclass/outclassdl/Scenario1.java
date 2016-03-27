@@ -60,7 +60,7 @@ public class Scenario1 extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.recents_icon); // Initialize this to whatever you want
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
             TypedValue typedValue = new TypedValue();
             Resources.Theme theme = getTheme();
             theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);

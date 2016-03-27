@@ -1,6 +1,7 @@
 package com.sportsoutclass.outclassdl;
 
 import android.app.Application;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ public class StateClass extends Application {
     public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
             totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2;
     public String errorMsgValue, errorMsgTitle;
+    public FragmentManager fm;
 
     private static Context mContext;
 
@@ -35,6 +37,10 @@ public class StateClass extends Application {
     /**
      * Getters Scenario 1
      */
+    public FragmentManager getFragManager() {
+        return this.fm;
+    }
+
     public String getErrorMessageValue() {
         return this.errorMsgValue;
     }
@@ -193,6 +199,9 @@ public class StateClass extends Application {
     /**
      * Setters for scenario 1
      */
+    public void setFragManager(FragmentManager value){
+        this.fm = value;
+    }
     public void setErrorMessageValue(String value) {
         this.errorMsgValue = value;
     }
