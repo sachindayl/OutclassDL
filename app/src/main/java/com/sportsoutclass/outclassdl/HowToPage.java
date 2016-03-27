@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class HowToPage extends AppCompatActivity {
-    TextView howToText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,6 @@ public class HowToPage extends AppCompatActivity {
             setTaskDescription(description);
             bm.recycle();
         }
-        howToText = (TextView)findViewById(R.id.how_to_team1_completed_title);
     }
 
     @Override

@@ -37,10 +37,6 @@ public class StateClass extends Application {
     /**
      * Getters Scenario 1
      */
-    public FragmentManager getFragManager() {
-        return this.fm;
-    }
-
     public String getErrorMessageValue() {
         return this.errorMsgValue;
     }
@@ -61,10 +57,6 @@ public class StateClass extends Application {
         return this.totalT1;
     }
 
-    public int getTotalT1Two() {
-        return this.totalT1Two;
-    }
-
     public int getTotalT2int1() {
         return this.totalT2int1;
     }
@@ -79,10 +71,6 @@ public class StateClass extends Application {
 
     public int getWickets() {
         return this.wickets;
-    }
-
-    public int getWicketsTwo() {
-        return this.wicketsTwo;
     }
 
     public double getInter1StartOver() {
@@ -199,9 +187,6 @@ public class StateClass extends Application {
     /**
      * Setters for scenario 1
      */
-    public void setFragManager(FragmentManager value){
-        this.fm = value;
-    }
     public void setErrorMessageValue(String value) {
         this.errorMsgValue = value;
     }

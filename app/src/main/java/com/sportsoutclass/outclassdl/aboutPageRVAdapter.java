@@ -33,7 +33,6 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
     public static class aboutPageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView about_Title;
         public TextView about_subTitle;
-
         public aboutPageViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
@@ -48,12 +47,7 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
              * If position 4, goes to Play Store or Amazon Appstore for rating
              */
             int position = getAdapterPosition();
-            if (position == 0) {
-                Intent howTo = new Intent(ctx, HowToPage.class);
-                howTo.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ctx.startActivity(howTo);
-
-            } else if (position == 3) {
+            if (position == 2) {
                 Intent sendEmail = new Intent(Intent.ACTION_SEND);
                 sendEmail.setType("message/rfc822");
                 sendEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"dlcalculatorapp@gmail.com"});
@@ -64,7 +58,7 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(ctx, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                 }
-            } else if (position == 4) {
+            } else if (position == 3) {
                 boolean googlePlay = checkWhichStore();
                 Log.v("googlePlay: ", String.valueOf(googlePlay));
                 final String appPackageName = ctx.getPackageName(); // getPackageName() from Context or Activity object

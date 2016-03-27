@@ -30,7 +30,8 @@
         <activity
             android:name=".AboutPage"
             android:label="@string/title_activity_about_page"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
@@ -46,11 +47,11 @@
         </activity>
         <activity android:name=".HowToPage"
             android:label="@string/title_activity_how_to_page"
-            android:parentActivityName=".AboutPage"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sportsoutclass.outclassdl.AboutPage" />
+                android:value="com.sportsoutclass.outclassdl.MainActivity" />
         </activity>
     </application>
 
