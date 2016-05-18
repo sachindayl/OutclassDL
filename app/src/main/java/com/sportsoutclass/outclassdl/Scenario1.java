@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,7 +33,8 @@ import android.widget.TextView;
  * occurs to the second team.
  */
 public class Scenario1 extends AppCompatActivity {
-    Intent aboutPg;
+    Intent aboutPg,insPg;
+    Button calcBtn;
     TextView interruption1TextView, totalInter1TextView, totalInter2TextView, totalInter3TextView,
             interruption2TextView, interruption3TextView,
             whichOverInterruption1TextView, whichOverInterruption2TextView,
@@ -50,6 +53,7 @@ public class Scenario1 extends AppCompatActivity {
     StateClass state;
     AlertDialog.Builder t2WinScore, usrErrAlert;
     InterruptionSetup fix;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,9 @@ public class Scenario1 extends AppCompatActivity {
         if (id == R.id.action_about) {
             aboutPg = new Intent(this, AboutPage.class);
             startActivity(aboutPg);
+        }else if (id == R.id.action_instructions) {
+            insPg = new Intent(this, HowToPage.class);
+            startActivity(insPg);
         }
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
@@ -628,6 +635,9 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     private void init() {
+        calcBtn = (Button) findViewById(R.id.calc_button1);
+        calcBtn.setBackgroundResource(R.color.primaryColor);
+        calcBtn.setTextColor(Color.WHITE);
         //TextView Assignments
         interruption1TextView = (TextView) findViewById(R.id.interruption_1_text_view);
         interruption2TextView = (TextView) findViewById(R.id.interruption_2_text_view);

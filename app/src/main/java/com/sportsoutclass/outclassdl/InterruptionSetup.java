@@ -11,8 +11,17 @@ public class InterruptionSetup {
 
     StateClass state;
     DataMap overData;
-    int target, t1TotalScore, startOfInnsOversWickets;
+    int target, t1TotalScore, startOfInnsOversWickets, g50_index, g50_value;
     double startOfInnsOvers, resAtStartOfMatch;
+
+    private void g50_setup(){
+        g50_index = state.getG50();
+        if(g50_index == 1){
+            g50_value = 200;
+        }else if(g50_index == 2){
+            g50_value = 245;
+        }
+    }
 
     public int one_interruption() {
         init();
@@ -271,6 +280,7 @@ public class InterruptionSetup {
      */
     public int one_Interruption_Sc2() {
         init();
+        g50_setup();
         double oversForT2Sc2 = state.getOvers();
         Log.v("oversForT2Sc2: ", String.valueOf(oversForT2Sc2));
         int team1FinalTotalb4Rev = state.getTotalT1Sc2();
@@ -343,7 +353,7 @@ public class InterruptionSetup {
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
 
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
-            target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
         } else {
             target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1.5);
         }
@@ -352,6 +362,7 @@ public class InterruptionSetup {
 
     public int two_Interruptions_Sc2() {
         init();
+        g50_setup();
         one_Interruption_Sc2();
         target = -1000;
         int team1FinalTotalb4Rev = state.getTotalT1Sc2();
@@ -436,7 +447,7 @@ public class InterruptionSetup {
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
-            target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
         } else {
             target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1.5);
         }
@@ -445,6 +456,7 @@ public class InterruptionSetup {
 
     public int three_Interruptions_Sc2() {
         init();
+        g50_setup();
         one_Interruption_Sc2();
         two_Interruptions_Sc2();
         target = -1000;
@@ -530,7 +542,7 @@ public class InterruptionSetup {
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
         if (resForT2AtStartSc2 > resLeftAtInt2Sc2) {
-            target = (int) (team1FinalTotalb4Rev + 200 * (resForT2AtStartSc2 - resLeftAtInt2Sc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resLeftAtInt2Sc2) / 100 + 1.5);
         } else {
             target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resLeftAtInt2Sc2 + 1.5);
         }

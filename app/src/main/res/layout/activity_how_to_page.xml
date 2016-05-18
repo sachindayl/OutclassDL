@@ -23,12 +23,36 @@
             tools:context=".HowToPage">
 
             <TextView
-                android:id="@+id/how_to_team1_completed_title"
+                android:id="@+id/g50_intro_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:paddingTop="10dp"
+                android:text="@string/g50_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/g50_intro_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/g50_intro_title"
+                android:text="@string/g50_intro"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/how_to_team1_completed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/g50_intro_body"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:paddingTop="10dp"
                 android:text="@string/how_to_team1_completed_title_text"
                 android:textAppearance="?android:attr/textAppearanceMedium"

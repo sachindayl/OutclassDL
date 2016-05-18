@@ -17,12 +17,21 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Color;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     //If the variable contains Two it is regarding scenario 2
@@ -37,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     InterruptionSetup setup;
     AlertDialog.Builder usrErrAlert;
     private Toolbar toolbar;
-
+    Spinner spinner;
+    List<Map<String, String>> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +66,37 @@ public class MainActivity extends AppCompatActivity {
             bm.recycle();
         }
         init();
+
+        SimpleAdapter adapter = new SimpleAdapter(this, items,
+                android.R.layout.simple_spinner_item,
+                new String[]{"text", "subText"},
+                new int[]{android.R.id.text1, android.R.id.text2}
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_2);
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==1){
+                    state.setG50(1);
+                }else if(position == 2){
+                    state.setG50(2);
+                }else {
+                    state.setG50(0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         visibilityOnCreate();
         OversInfo();
         TotalAndWicketsInfo();
+
     }
 
     @Override
@@ -79,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             aboutPg = new Intent(this, AboutPage.class);
             startActivity(aboutPg);
-        }else if (id == R.id.action_instructions) {
+        } else if (id == R.id.action_instructions) {
             insPg = new Intent(this, HowToPage.class);
             startActivity(insPg);
         }
@@ -94,46 +132,51 @@ public class MainActivity extends AppCompatActivity {
         int revisedT1Total = state.getTotalT1();
         int revisedT1Wickets = state.getWickets();
         double revisedT1Overs = state.getOvers();
+        if(state.getG50() != 0){
+            if (team1OversSwitch.isChecked()) {
+                if (innStartOvers != 0 && innStartTotal != 0) {
 
-        if (team1OversSwitch.isChecked()) {
-            if (innStartOvers != 0 && innStartTotal != 0) {
-
-                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
-                    scenario1 = new Intent(this, Scenario1.class);
-                    startActivity(scenario1);
+                    if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
+                        scenario1 = new Intent(this, Scenario1.class);
+                        startActivity(scenario1);
+                    } else {
+                        InterruptionSetup.interruptionErrors(usrErrAlert, -10008, "Error", "");
+                    }
                 } else {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10008, "Error", "");
+                    if (innStartOvers == 0 && innStartTotal == 0) {
+                        InterruptionSetup.interruptionErrors(usrErrAlert, -10009, "Error", "");
+                    } else if (innStartTotal == 0) {
+                        InterruptionSetup.interruptionErrors(usrErrAlert, -10010, "Error", "");
+                    } else {
+                        InterruptionSetup.interruptionErrors(usrErrAlert, -10011, "Error", "");
+                    }
                 }
             } else {
-                if (innStartOvers == 0 && innStartTotal == 0) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10009, "Error", "");
-                } else if (innStartTotal == 0) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10010, "Error", "");
+                if (team1RevisedSwitch.isChecked()) {
+                    if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
+                        scenario1 = new Intent(this, Scenario1.class);
+                        startActivity(scenario1);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10011, "Error", "");
-                }
-            }
-        } else {
-            if (team1RevisedSwitch.isChecked()) {
-                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
-                    scenario1 = new Intent(this, Scenario1.class);
-                    startActivity(scenario1);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
-                            Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                if (innStartOvers > 0.0 && innStartOvers <= 50.0) {
-                    scenario2 = new Intent(this, Scenario2.class);
-                    startActivity(scenario2);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
-                            Toast.LENGTH_SHORT).show();
+                    if (innStartOvers > 0.0 && innStartOvers <= 50.0) {
+                        scenario2 = new Intent(this, Scenario2.class);
+                        startActivity(scenario2);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
-
+        }else{
+            Toast.makeText(getApplicationContext(), "Please select the G50 value",
+                    Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -348,6 +391,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
 
+        spinner = (Spinner) findViewById(R.id.g50_spinner);
+        items = new ArrayList<>();
+        Map<String, String> item0 = new HashMap<>(2);
+        item0.put("text", "G50");
+        item0.put("subText", "Expected Average Score");
+        items.add(item0);
+
+        Map<String, String> item1 = new HashMap<>(2);
+        item1.put("text", "200");
+        item1.put("subText", "U-19, U-15, Associate Nations");
+        items.add(item1);
+
+        Map<String, String> item2 = new HashMap<>(2);
+        item2.put("text", "245");
+        item2.put("subText", "First Class Cricket and Above");
+        items.add(item2);
+
         numberOfOversEditText = (EditText) findViewById(R.id.number_overs_edit_text);
         team1TotalScoreText = (TextView) findViewById(R.id.team_1_score);
         team1TotalScoreEditText = (EditText) findViewById(R.id.team_1_score_edit);
@@ -367,6 +427,8 @@ public class MainActivity extends AppCompatActivity {
         setup = new InterruptionSetup();
         usrErrAlert = new AlertDialog.Builder(MainActivity.this);
         nextBtn = (Button) findViewById(R.id.next_button);
+        nextBtn.setBackgroundResource(R.color.primaryColor);
+        nextBtn.setTextColor(Color.WHITE);
 
         retrieveData();
 

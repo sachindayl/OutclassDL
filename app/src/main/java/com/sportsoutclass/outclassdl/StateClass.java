@@ -19,7 +19,7 @@ public class StateClass extends Application {
     public int wickets, wicketsTwo, totalT1, totalT1Two, totalT2int1, totalT2int2,
             totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
     public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
-            totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2;
+            totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2, g50;
     public String errorMsgValue, errorMsgTitle;
     public FragmentManager fm;
 
@@ -41,6 +41,9 @@ public class StateClass extends Application {
         return this.errorMsgValue;
     }
 
+    public int getG50() {
+        return this.g50;
+    }
     public String getErrorMessageTitle() {
         return this.errorMsgTitle;
     }
@@ -187,6 +190,9 @@ public class StateClass extends Application {
     /**
      * Setters for scenario 1
      */
+    public void setG50(int value) {
+        this.g50 = value;
+    }
     public void setErrorMessageValue(String value) {
         this.errorMsgValue = value;
     }

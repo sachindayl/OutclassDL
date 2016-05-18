@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,7 +33,8 @@ import android.widget.TextView;
  * occurs to the second team.
  */
 public class Scenario2 extends AppCompatActivity {
-    Intent aboutPg;
+    Intent aboutPg, insPg;
+    Button calcBtn;
     TextView interruption1TextViewSc2, totalInter1TextViewSc2, totalInter2TextViewSc2, totalInter3TextViewSc2,
             interruption2TextViewSc2, interruption3TextViewSc2,
             whichOverInterruption1TextViewSc2, whichOverInterruption2TextViewSc2,
@@ -96,6 +99,9 @@ public class Scenario2 extends AppCompatActivity {
         if (id == R.id.action_about) {
             aboutPg = new Intent(this, AboutPage.class);
             startActivity(aboutPg);
+        }else if (id == R.id.action_instructions) {
+            insPg = new Intent(this, HowToPage.class);
+            startActivity(insPg);
         }
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
@@ -730,6 +736,9 @@ public class Scenario2 extends AppCompatActivity {
     }
 
     private void init() {
+        calcBtn = (Button)findViewById(R.id.next_button3);
+        calcBtn.setBackgroundResource(R.color.primaryColor);
+        calcBtn.setTextColor(Color.WHITE);
         //TextView Assignments
         interruption1TextViewSc2 = (TextView) findViewById(R.id.interruption_1_text_view_sc2);
         interruption2TextViewSc2 = (TextView) findViewById(R.id.interruption_2_text_view_sc2);

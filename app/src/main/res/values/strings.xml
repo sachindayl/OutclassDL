@@ -41,12 +41,21 @@
         <item>No</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="g50_prompt">G50</string>
+
+    <string-array name="g50_arrays">
+        <item>G50: Expected Average Score</item>
+        <item>200</item>
+        <item>245</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="g50_title">1. What is G50?</string>
+    <string name="g50_intro">G50 is the average score expected from the team batting first in an uninterrupted 50 overs-per-innings match. This will vary with the level of competition and over time. The annual ICC Playing Handbook gives the values of G50 to be used each year when the D/L Standard Edition is applied:\n\n200: Teams below first class cricket (U-19, U-15, Associate nations)\n245: First class cricket and above</string>
     <string name="how_to_team1_completed_body_text">When calculating the par score for team 2, the user must insert the Number of overs (the overs both teams agreed to play at the start of the match). Did the team 1 bat their full amount of overs? Yes. Insert the Team 1 total, wickets and click next. Insert the number of interruptions that occurred for Team 2. If it is 1, insert the over (eg: over 25.2) that was interrupted, the total and wickets at the interruption. Finally, insert the number of overs Team 2 will be getting after the interruption and click calculate. If 2nd and 3rd interruptions occur after awhile, Please change the number of interruptions accordingly and fill in the information.</string>
-    <string name="how_to_team1_completed_title_text">1. Par Score for Team 2 After Team 1 Completed their Allotted Number of Overs</string>
-    <string name="how_to_team1_incomplete_no_data_title_text">2. Calculate Team 1 Score in the Case of not being able to Finish Batting their Allotted Number of Overs</string>
+    <string name="how_to_team1_completed_title_text">2. Par Score for Team 2 After Team 1 Completed their Allotted Number of Overs</string>
+    <string name="how_to_team1_incomplete_no_data_title_text">3. Calculate Team 1 Score in the Case of not being able to Finish Batting their Allotted Number of Overs</string>
     <string name="how_to_team1_incomplete_no_data_body_text">When there are interruptions for Team 1, insert the number of overs teams started to play. Turn the switch off since the Team 1 have not batted the complete number of overs. Then, turn off the switch for the Team 1 revised total and click next. Add the number of interruptions and If it is 1, insert the over (eg: over 25.2) that was interrupted, the total and wickets at the interruption. Insert the number of overs Team 1 will be getting after the interruption. Finally, insert the total Team 1 managed to get for the number of overs they batted and insert the number of overs Team 2 will be batting and click calculate.</string>
-    <string name="how_to_team1_incomplete_yes_data_title_text">3. Calculate the Par Score for Team 2 when both teams had Interruptions</string>
+    <string name="how_to_team1_incomplete_yes_data_title_text">4. Calculate the Par Score for Team 2 when both teams had Interruptions</string>
     <string name="how_to_team1_incomplete_yes_data_body_text">To calculate Team 1 total, please read topic 2. Afterwards, come back to main page and insert the number of overs teams had at the start of the match. Then, turn off the switch for team 1 bat their full amount of overs. Keep the switch on for knowing Team 1 revised total. Then, insert the data that was calculated according to topic 2. Next, insert the number of overs Team 2 will be getting at the start of their inning and click next. Finally, insert the interruption information according to topic 1 and calculate.</string>
 </resources>
