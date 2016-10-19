@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -33,10 +34,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     //If the variable contains Two it is regarding scenario 2
     Intent scenario1, scenario2, aboutPg, insPg;
-    Switch team1OversSwitch, team1RevisedSwitch;
     TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
     EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team2OversDLEditText;
     double overs, oversTwo;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     InterruptionSetup setup;
     AlertDialog.Builder usrErrAlert;
     private Toolbar toolbar;
-    Spinner spinner;
+    Spinner g50_Spinner, did_team_1_bat_spinner,team_1_revised_total_spinner;
     List<Map<String, String>> items;
 
     @Override
@@ -75,25 +75,26 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_2);
 
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==1){
-                    state.setG50(1);
-                }else if(position == 2){
-                    state.setG50(2);
-                }else {
-                    state.setG50(0);
-                }
-            }
+        g50_Spinner.setAdapter(adapter);
+        g50_Spinner.setOnItemSelectedListener(this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        did_team_1_bat_spinner = (Spinner) findViewById(R.id.did_team_1_bat_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> did_team_1_bat_adapter = ArrayAdapter.createFromResource(this,
+                R.array.did_team_1_bat_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        did_team_1_bat_spinner.setAdapter(did_team_1_bat_adapter);
+        did_team_1_bat_spinner.setOnItemSelectedListener(this);
 
-            }
-        });
-        visibilityOnCreate();
+        team_1_revised_total_spinner = (Spinner) findViewById(R.id.team_1_revised_total_spinner);
+        ArrayAdapter<CharSequence> team_1_revised_total_adapter = ArrayAdapter.createFromResource(this,
+                R.array.team_1_revised_total_array, android.R.layout.simple_spinner_item);
+        did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        team_1_revised_total_spinner.setAdapter(team_1_revised_total_adapter);
+        team_1_revised_total_spinner.setOnItemSelectedListener(this);
+
         OversInfo();
         TotalAndWicketsInfo();
 
@@ -132,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
         int revisedT1Total = state.getTotalT1();
         int revisedT1Wickets = state.getWickets();
         double revisedT1Overs = state.getOvers();
-        if(state.getG50() != 0){
-            if (team1OversSwitch.isChecked()) {
+        if (state.getG50() != 0) {
+            if (g50_Spinner.getSelectedItemPosition() == 1) {
                 if (innStartOvers != 0 && innStartTotal != 0) {
 
                     if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             } else {
-                if (team1RevisedSwitch.isChecked()) {
+                if (team_1_revised_total_spinner.getSelectedItemPosition() == 1) {
                     if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
                         scenario1 = new Intent(this, Scenario1.class);
                         startActivity(scenario1);
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Please select the G50 value",
                     Toast.LENGTH_SHORT).show();
         }
@@ -331,67 +332,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    //visibility of elements on create of this activity
-    private void visibilityOnCreate() {
-        team1OversSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    team1RevisedSwitch.setVisibility(View.INVISIBLE);
-                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
-                    team1WicketsDL.setVisibility(View.INVISIBLE);
-                    team1OversDL.setVisibility(View.INVISIBLE);
-                    team2OversDLEditText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreText.setVisibility(View.VISIBLE);
-                    team1TotalScoreEditText.setVisibility(View.VISIBLE);
-                    team1WicketsText.setVisibility(View.VISIBLE);
-                    team1WicketsEditText.setVisibility(View.VISIBLE);
-                } else {
-                    team1RevisedSwitch.setVisibility(View.VISIBLE);
-                    team1RevisedSwitch.setChecked(true);
-                    team1TotalScoreDL.setVisibility(View.VISIBLE);
-                    team1WicketsDL.setVisibility(View.VISIBLE);
-                    team1OversDL.setVisibility(View.VISIBLE);
-                    team2OversDLEditText.setVisibility(View.VISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
-                    team1TotalScoreText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsText.setVisibility(View.INVISIBLE);
-                    team1WicketsEditText.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-
-        team1RevisedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    team1TotalScoreDL.setVisibility(View.VISIBLE);
-                    team1WicketsDL.setVisibility(View.VISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
-                    team1OversDL.setVisibility(View.VISIBLE);
-                    team2OversDLEditText.setVisibility(View.VISIBLE);
-                } else {
-                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
-                    team1OversDL.setVisibility(View.INVISIBLE);
-                    team2OversDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDL.setVisibility(View.INVISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-    }
-
     private void init() {
 
-        spinner = (Spinner) findViewById(R.id.g50_spinner);
+        g50_Spinner = (Spinner) findViewById(R.id.g50_spinner);
         items = new ArrayList<>();
         Map<String, String> item0 = new HashMap<>(2);
         item0.put("text", "G50");
@@ -421,8 +364,6 @@ public class MainActivity extends AppCompatActivity {
         team1WicketsDL = (TextView) findViewById(R.id.team_1_wicketsTwo);
         team1WicketsDLEditText = (EditText) findViewById(R.id.team_1_wickets_editTwo);
         //Switch to see if the team 1 completed all the overs or not and total runs and wickets
-        team1OversSwitch = (Switch) findViewById(R.id.team_1_overs_switch);
-        team1RevisedSwitch = (Switch) findViewById(R.id.team_1_revised_switch);
         state = (StateClass) getApplicationContext();
         setup = new InterruptionSetup();
         usrErrAlert = new AlertDialog.Builder(MainActivity.this);
@@ -456,6 +397,65 @@ public class MainActivity extends AppCompatActivity {
         } else {
             team1WicketsEditText.setText(String.valueOf(retrieveT1Wickets));
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+        switch (adapterView.getId()){
+            case R.id.g50_spinner:
+                if (pos == 1) state.setG50(1);
+                else if (pos == 2) state.setG50(2);
+                else state.setG50(0);
+                break;
+            case R.id.did_team_1_bat_spinner:
+                if(pos == 1){
+                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
+                    team1WicketsDL.setVisibility(View.INVISIBLE);
+                    team1OversDL.setVisibility(View.INVISIBLE);
+                    team2OversDLEditText.setVisibility(View.INVISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
+                    team1TotalScoreText.setVisibility(View.VISIBLE);
+                    team1TotalScoreEditText.setVisibility(View.VISIBLE);
+                    team1WicketsText.setVisibility(View.VISIBLE);
+                    team1WicketsEditText.setVisibility(View.VISIBLE);
+                }else if(pos == 2){
+                    team1TotalScoreDL.setVisibility(View.VISIBLE);
+                    team1WicketsDL.setVisibility(View.VISIBLE);
+                    team1OversDL.setVisibility(View.VISIBLE);
+                    team2OversDLEditText.setVisibility(View.VISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
+                    team1TotalScoreText.setVisibility(View.INVISIBLE);
+                    team1TotalScoreEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsText.setVisibility(View.INVISIBLE);
+                    team1WicketsEditText.setVisibility(View.INVISIBLE);
+                }
+                break;
+            case R.id.team_1_revised_total_spinner:
+                if(pos == 1){
+                    team1TotalScoreDL.setVisibility(View.VISIBLE);
+                    team1WicketsDL.setVisibility(View.VISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
+                    team1OversDL.setVisibility(View.VISIBLE);
+                    team2OversDLEditText.setVisibility(View.VISIBLE);
+                }else if(pos == 2){
+                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
+                    team1OversDL.setVisibility(View.INVISIBLE);
+                    team2OversDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDL.setVisibility(View.INVISIBLE);
+                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
+                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
 
