@@ -21,7 +21,6 @@ public class StateClass extends Application {
     public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
             totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2, g50;
     public String errorMsgValue, errorMsgTitle;
-    public FragmentManager fm;
 
     private static Context mContext;
 

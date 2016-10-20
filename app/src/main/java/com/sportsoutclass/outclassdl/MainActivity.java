@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         g50_Spinner.setAdapter(adapter);
         g50_Spinner.setOnItemSelectedListener(this);
+        state.setG50(0);
 
         did_team_1_bat_spinner = (Spinner) findViewById(R.id.did_team_1_bat_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -94,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         team_1_revised_total_spinner.setAdapter(team_1_revised_total_adapter);
         team_1_revised_total_spinner.setOnItemSelectedListener(this);
+
+        //At start team 1 bat the whole amount of overs spinner is set to yes and team revised total is disabled
+        did_team_1_bat_spinner.setSelection(0);
+        team_1_revised_total_spinner.setEnabled(false);
 
         OversInfo();
         TotalAndWicketsInfo();
@@ -133,8 +138,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int revisedT1Total = state.getTotalT1();
         int revisedT1Wickets = state.getWickets();
         double revisedT1Overs = state.getOvers();
-        if (state.getG50() != 0) {
-            if (g50_Spinner.getSelectedItemPosition() == 1) {
+            if (g50_Spinner.getSelectedItemPosition() == 0) {
                 if (innStartOvers != 0 && innStartTotal != 0) {
 
                     if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
@@ -153,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
                 }
             } else {
-                if (team_1_revised_total_spinner.getSelectedItemPosition() == 1) {
+                if (team_1_revised_total_spinner.getSelectedItemPosition() == 0) {
                     if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
                         scenario1 = new Intent(this, Scenario1.class);
                         startActivity(scenario1);
@@ -173,10 +177,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
 
             }
-        } else {
-            Toast.makeText(getApplicationContext(), "Please select the G50 value",
-                    Toast.LENGTH_SHORT).show();
-        }
+
 
 
     }
@@ -336,20 +337,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         g50_Spinner = (Spinner) findViewById(R.id.g50_spinner);
         items = new ArrayList<>();
+
         Map<String, String> item0 = new HashMap<>(2);
-        item0.put("text", "G50");
-        item0.put("subText", "Expected Average Score");
+        item0.put("text", "200");
+        item0.put("subText", "U-19, U-15, Associate Nations");
         items.add(item0);
 
         Map<String, String> item1 = new HashMap<>(2);
-        item1.put("text", "200");
-        item1.put("subText", "U-19, U-15, Associate Nations");
+        item1.put("text", "245");
+        item1.put("subText", "First Class Cricket and Above");
         items.add(item1);
-
-        Map<String, String> item2 = new HashMap<>(2);
-        item2.put("text", "245");
-        item2.put("subText", "First Class Cricket and Above");
-        items.add(item2);
 
         numberOfOversEditText = (EditText) findViewById(R.id.number_overs_edit_text);
         team1TotalScoreText = (TextView) findViewById(R.id.team_1_score);
@@ -403,12 +400,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
         switch (adapterView.getId()){
             case R.id.g50_spinner:
-                if (pos == 1) state.setG50(1);
-                else if (pos == 2) state.setG50(2);
-                else state.setG50(0);
+                if (pos == 0) state.setG50(0);
+                else if (pos == 1) state.setG50(1);
                 break;
             case R.id.did_team_1_bat_spinner:
-                if(pos == 1){
+                if(pos == 0){
+                    team_1_revised_total_spinner.setEnabled(false);
+
                     team1TotalScoreDL.setVisibility(View.INVISIBLE);
                     team1WicketsDL.setVisibility(View.INVISIBLE);
                     team1OversDL.setVisibility(View.INVISIBLE);
@@ -419,7 +417,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     team1TotalScoreEditText.setVisibility(View.VISIBLE);
                     team1WicketsText.setVisibility(View.VISIBLE);
                     team1WicketsEditText.setVisibility(View.VISIBLE);
-                }else if(pos == 2){
+                }else if(pos == 1){
+                    team_1_revised_total_spinner.setEnabled(true);
+
                     team1TotalScoreDL.setVisibility(View.VISIBLE);
                     team1WicketsDL.setVisibility(View.VISIBLE);
                     team1OversDL.setVisibility(View.VISIBLE);
@@ -433,14 +433,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 break;
             case R.id.team_1_revised_total_spinner:
-                if(pos == 1){
+                if(pos == 0){
                     team1TotalScoreDL.setVisibility(View.VISIBLE);
                     team1WicketsDL.setVisibility(View.VISIBLE);
                     team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
                     team1WicketsDLEditText.setVisibility(View.VISIBLE);
                     team1OversDL.setVisibility(View.VISIBLE);
                     team2OversDLEditText.setVisibility(View.VISIBLE);
-                }else if(pos == 2){
+                }else if(pos == 1){
                     team1TotalScoreDL.setVisibility(View.INVISIBLE);
                     team1OversDL.setVisibility(View.INVISIBLE);
                     team2OversDLEditText.setVisibility(View.INVISIBLE);
