@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -20,32 +21,43 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     //If the variable contains Two it is regarding scenario 2
     Intent scenario1, scenario2, aboutPg, insPg;
-    TextView team1TotalScoreText, team1WicketsText, team1TotalScoreDL, team1WicketsDL, team1OversDL;
-    EditText numberOfOversEditText, team1TotalScoreEditText, team1WicketsEditText, team1TotalScoreDLEditText, team1WicketsDLEditText, team2OversDLEditText;
+    //Using butter knife to bind views
+    @BindView(R.id.team_1_score) TextView team1TotalScoreText;
+    @BindView(R.id.team_1_wickets) TextView team1WicketsText;
+    @BindView(R.id.team_1_scoreTwo) TextView team1TotalScoreDL;
+    @BindView(R.id.team_1_wicketsTwo) TextView team1WicketsDL;
+    @BindView(R.id.team_1_oversTwo) TextView team1OversDL;
+    @BindView(R.id.number_overs_edit_text) EditText numberOfOversEditText;
+    @BindView(R.id.team_1_score_edit) EditText team1TotalScoreEditText;
+    @BindView(R.id.team_1_wickets_edit) EditText team1WicketsEditText;
+    @BindView(R.id.team_1_score_editTwo) EditText team1TotalScoreDLEditText;
+    @BindView(R.id.team_1_wickets_editTwo) EditText team1WicketsDLEditText;
+    @BindView(R.id.team_1_overs_editTwo) EditText team2OversDLEditText;
+
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
     StateClass state;
     Button nextBtn;
     InterruptionSetup setup;
     AlertDialog.Builder usrErrAlert;
-    private Toolbar toolbar;
+    Toolbar toolbar;
     Spinner g50_Spinner, did_team_1_bat_spinner,team_1_revised_total_spinner;
     List<Map<String, String>> items;
 
@@ -53,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -98,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //At start team 1 bat the whole amount of overs spinner is set to yes and team revised total is disabled
         did_team_1_bat_spinner.setSelection(0);
+        team_1_revised_total_spinner.setSelection(1);
         team_1_revised_total_spinner.setEnabled(false);
 
         OversInfo();
@@ -348,18 +362,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         item1.put("subText", "First Class Cricket and Above");
         items.add(item1);
 
-        numberOfOversEditText = (EditText) findViewById(R.id.number_overs_edit_text);
-        team1TotalScoreText = (TextView) findViewById(R.id.team_1_score);
-        team1TotalScoreEditText = (EditText) findViewById(R.id.team_1_score_edit);
-        team1WicketsText = (TextView) findViewById(R.id.team_1_wickets);
-        team1WicketsEditText = (EditText) findViewById(R.id.team_1_wickets_edit);
         //Two means revised info for team1
-        team1TotalScoreDL = (TextView) findViewById(R.id.team_1_scoreTwo);
-        team1OversDL = (TextView) findViewById(R.id.team_1_oversTwo);
-        team1TotalScoreDLEditText = (EditText) findViewById(R.id.team_1_score_editTwo);
-        team2OversDLEditText = (EditText) findViewById(R.id.team_1_overs_editTwo);
-        team1WicketsDL = (TextView) findViewById(R.id.team_1_wicketsTwo);
-        team1WicketsDLEditText = (EditText) findViewById(R.id.team_1_wickets_editTwo);
         //Switch to see if the team 1 completed all the overs or not and total runs and wickets
         state = (StateClass) getApplicationContext();
         setup = new InterruptionSetup();
@@ -405,6 +408,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.did_team_1_bat_spinner:
                 if(pos == 0){
+                    team_1_revised_total_spinner.setSelection(1);
                     team_1_revised_total_spinner.setEnabled(false);
 
                     team1TotalScoreDL.setVisibility(View.INVISIBLE);
@@ -418,6 +422,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     team1WicketsText.setVisibility(View.VISIBLE);
                     team1WicketsEditText.setVisibility(View.VISIBLE);
                 }else if(pos == 1){
+                    team_1_revised_total_spinner.setSelection(0);
                     team_1_revised_total_spinner.setEnabled(true);
 
                     team1TotalScoreDL.setVisibility(View.VISIBLE);
