@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @BindView(R.id.team_1_score_editTwo) EditText team1TotalScoreDLEditText;
     @BindView(R.id.team_1_wickets_editTwo) EditText team1WicketsDLEditText;
     @BindView(R.id.team_1_overs_editTwo) EditText team2OversDLEditText;
+    @BindView(R.id.app_bar) Toolbar toolbar;
+    @BindView(R.id.g50_spinner) Spinner g50_Spinner;
+    @BindView(R.id.did_team_1_bat_spinner) Spinner did_team_1_bat_spinner;
+    @BindView(R.id.team_1_revised_total_spinner) Spinner team_1_revised_total_spinner;
+    @BindView(R.id.team1_info_container) View team1_info_container;
+    @BindView(R.id.team1_revised_info_container) View team1_revised_info_container;
 
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
@@ -57,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button nextBtn;
     InterruptionSetup setup;
     AlertDialog.Builder usrErrAlert;
-    Toolbar toolbar;
-    Spinner g50_Spinner, did_team_1_bat_spinner,team_1_revised_total_spinner;
+
+
     List<Map<String, String>> items;
 
     @Override
@@ -66,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
@@ -78,7 +84,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             setTaskDescription(description);
             bm.recycle();
         }
+        team1_info_container.setVisibility(View.VISIBLE);
+        team1_revised_info_container.setVisibility(View.GONE);
+
         init();
+
+
 
         SimpleAdapter adapter = new SimpleAdapter(this, items,
                 android.R.layout.simple_spinner_item,
@@ -92,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         g50_Spinner.setOnItemSelectedListener(this);
         state.setG50(0);
 
-        did_team_1_bat_spinner = (Spinner) findViewById(R.id.did_team_1_bat_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> did_team_1_bat_adapter = ArrayAdapter.createFromResource(this,
                 R.array.did_team_1_bat_array, android.R.layout.simple_spinner_item);
@@ -102,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         did_team_1_bat_spinner.setAdapter(did_team_1_bat_adapter);
         did_team_1_bat_spinner.setOnItemSelectedListener(this);
 
-        team_1_revised_total_spinner = (Spinner) findViewById(R.id.team_1_revised_total_spinner);
         ArrayAdapter<CharSequence> team_1_revised_total_adapter = ArrayAdapter.createFromResource(this,
                 R.array.team_1_revised_total_array, android.R.layout.simple_spinner_item);
         did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -349,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void init() {
 
-        g50_Spinner = (Spinner) findViewById(R.id.g50_spinner);
         items = new ArrayList<>();
 
         Map<String, String> item0 = new HashMap<>(2);
@@ -399,6 +407,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+
+    //Spinner functionality happens here according id of spinner
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
         switch (adapterView.getId()){
@@ -410,48 +420,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if(pos == 0){
                     team_1_revised_total_spinner.setSelection(1);
                     team_1_revised_total_spinner.setEnabled(false);
+                    team1_revised_info_container.setVisibility(View.GONE);
+                    team1_info_container.setVisibility(View.VISIBLE);
 
-                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
-                    team1WicketsDL.setVisibility(View.INVISIBLE);
-                    team1OversDL.setVisibility(View.INVISIBLE);
-                    team2OversDLEditText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreText.setVisibility(View.VISIBLE);
-                    team1TotalScoreEditText.setVisibility(View.VISIBLE);
-                    team1WicketsText.setVisibility(View.VISIBLE);
-                    team1WicketsEditText.setVisibility(View.VISIBLE);
                 }else if(pos == 1){
                     team_1_revised_total_spinner.setSelection(0);
                     team_1_revised_total_spinner.setEnabled(true);
 
-                    team1TotalScoreDL.setVisibility(View.VISIBLE);
-                    team1WicketsDL.setVisibility(View.VISIBLE);
-                    team1OversDL.setVisibility(View.VISIBLE);
-                    team2OversDLEditText.setVisibility(View.VISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
-                    team1TotalScoreText.setVisibility(View.INVISIBLE);
-                    team1TotalScoreEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsText.setVisibility(View.INVISIBLE);
-                    team1WicketsEditText.setVisibility(View.INVISIBLE);
                 }
                 break;
             case R.id.team_1_revised_total_spinner:
                 if(pos == 0){
-                    team1TotalScoreDL.setVisibility(View.VISIBLE);
-                    team1WicketsDL.setVisibility(View.VISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.VISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.VISIBLE);
-                    team1OversDL.setVisibility(View.VISIBLE);
-                    team2OversDLEditText.setVisibility(View.VISIBLE);
+                    team1_info_container.setVisibility(View.GONE);
+                    team1_revised_info_container.setVisibility(View.VISIBLE);
+
                 }else if(pos == 1){
-                    team1TotalScoreDL.setVisibility(View.INVISIBLE);
-                    team1OversDL.setVisibility(View.INVISIBLE);
-                    team2OversDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDL.setVisibility(View.INVISIBLE);
-                    team1TotalScoreDLEditText.setVisibility(View.INVISIBLE);
-                    team1WicketsDLEditText.setVisibility(View.INVISIBLE);
+                    team1_info_container.setVisibility(View.GONE);
+                    team1_revised_info_container.setVisibility(View.GONE);
+
                 }
                 break;
         }
