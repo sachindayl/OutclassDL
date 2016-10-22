@@ -37,29 +37,68 @@ import butterknife.ButterKnife;
  */
 public class Scenario1 extends AppCompatActivity {
     Intent aboutPg, insPg;
+    @BindView(R.id.calc_button1)
     Button calcBtn;
     //TextView Assignments (Butter knife binding)
-    @BindView(R.id.interruption_1_text_view) TextView interruption1TextView;
-    @BindView(R.id.team2_total_interruption_1_text_view) TextView totalInter1TextView;
-    @BindView(R.id.team2_total_interruption_2_text_view) TextView totalInter2TextView;
-    @BindView(R.id.team2_total_interruption_3_text_view) TextView totalInter3TextView;
-    @BindView(R.id.interruption_2_text_view) TextView interruption2TextView;
-    @BindView(R.id.interruption_3_text_view) TextView interruption3TextView;
-    @BindView(R.id.which_over_interruption_1_text_view) TextView whichOverInterruption1TextView;
-    @BindView(R.id.which_over_interruption_2_text_view) TextView whichOverInterruption2TextView;
-    @BindView(R.id.which_over_interruption_3_text_view) TextView whichOverInterruption3TextView;
-    @BindView(R.id.wickets_lost_interruption_1_text_view) TextView wicketsLostInterruption1TextView;
-    @BindView(R.id.wickets_lost_interruption_2_text_view) TextView wicketsLostInterruption2TextView;
-    @BindView(R.id.wickets_lost_interruption_3_text_view) TextView wicketsLostInterruption3TextView;
-    @BindView(R.id.overs_remaining_interruption_1_text_view) TextView oversRemainingInterruption1TextView;
-    @BindView(R.id.overs_remaining_interruption_2_text_view) TextView oversRemainingInterruption2TextView;
-    @BindView(R.id.overs_remaining_interruption_3_text_view) TextView oversRemainingInterruption3TextView;
-
-    EditText totalInter1EditText, totalInter2EditText, totalInter3EditText, team2InterruptionsEdit, whichOverInterruption1EditText, whichOverInterruption2EditText,
-            whichOverInterruption3EditText, wicketsLostInterruption1EditText,
-            wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
-            oversRemainingInterruption1EditText, oversRemainingInterruption2EditText,
-            oversRemainingInterruption3EditText;
+    @BindView(R.id.interruption_1_text_view)
+    TextView interruption1TextView;
+    @BindView(R.id.team2_total_interruption_1_text_view)
+    TextView totalInter1TextView;
+    @BindView(R.id.team2_total_interruption_2_text_view)
+    TextView totalInter2TextView;
+    @BindView(R.id.team2_total_interruption_3_text_view)
+    TextView totalInter3TextView;
+    @BindView(R.id.interruption_2_text_view)
+    TextView interruption2TextView;
+    @BindView(R.id.interruption_3_text_view)
+    TextView interruption3TextView;
+    @BindView(R.id.which_over_interruption_1_text_view)
+    TextView whichOverInterruption1TextView;
+    @BindView(R.id.which_over_interruption_2_text_view)
+    TextView whichOverInterruption2TextView;
+    @BindView(R.id.which_over_interruption_3_text_view)
+    TextView whichOverInterruption3TextView;
+    @BindView(R.id.wickets_lost_interruption_1_text_view)
+    TextView wicketsLostInterruption1TextView;
+    @BindView(R.id.wickets_lost_interruption_2_text_view)
+    TextView wicketsLostInterruption2TextView;
+    @BindView(R.id.wickets_lost_interruption_3_text_view)
+    TextView wicketsLostInterruption3TextView;
+    @BindView(R.id.overs_remaining_interruption_1_text_view)
+    TextView oversRemainingInterruption1TextView;
+    @BindView(R.id.overs_remaining_interruption_2_text_view)
+    TextView oversRemainingInterruption2TextView;
+    @BindView(R.id.overs_remaining_interruption_3_text_view)
+    TextView oversRemainingInterruption3TextView;
+    //EditText Assignments
+    @BindView(R.id.total_interruption_1_edit_text)
+    EditText totalInter1EditText;
+    @BindView(R.id.total_interruption_2_edit_text)
+    EditText totalInter2EditText;
+    @BindView(R.id.total_interruption_3_edit_text)
+    EditText totalInter3EditText;
+    @BindView(R.id.interruptions_edit_text)
+    EditText team2InterruptionsEdit;
+    @BindView(R.id.which_over_interruption_1_edit_text)
+    EditText whichOverInterruption1EditText;
+    @BindView(R.id.which_over_interruption_2_edit_text)
+    EditText whichOverInterruption2EditText;
+    @BindView(R.id.which_over_interruption_3_edit_text)
+    EditText whichOverInterruption3EditText;
+    @BindView(R.id.wickets_lost_interruption_1_edit_text)
+    EditText wicketsLostInterruption1EditText;
+    @BindView(R.id.wickets_lost_interruption_2_edit_text)
+    EditText wicketsLostInterruption2EditText;
+    @BindView(R.id.wickets_lost_interruption_3_edit_text)
+    EditText wicketsLostInterruption3EditText;
+    @BindView(R.id.overs_remaining_interruption_1_edit_text)
+    EditText oversRemainingInterruption1EditText;
+    @BindView(R.id.overs_remaining_interruption_2_edit_text)
+    EditText oversRemainingInterruption2EditText;
+    @BindView(R.id.overs_remaining_interruption_3_edit_text)
+    EditText oversRemainingInterruption3EditText;
+    @BindView(R.id.app_bar)
+    Toolbar toolbar;
     int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
@@ -73,7 +112,6 @@ public class Scenario1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario1);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -188,7 +226,6 @@ public class Scenario1 extends AppCompatActivity {
             totalInter3EditText.setVisibility(View.INVISIBLE);
             totalInter3TextView.setVisibility(View.INVISIBLE);
             oversRemainingInterruption1EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
@@ -614,7 +651,6 @@ public class Scenario1 extends AppCompatActivity {
 
             Log.v("Need to win: ", String.valueOf(toWin));
 
-
             if (remainingOvers == 0.0) {
                 if (toWin <= 0) {
                     toWin = Math.abs(toWin);
@@ -647,25 +683,9 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     private void init() {
-        calcBtn = (Button) findViewById(R.id.calc_button1);
         calcBtn.setBackgroundResource(R.color.primaryColor);
         calcBtn.setTextColor(Color.WHITE);
-
         //Edit Text Assignments
-        team2InterruptionsEdit = (EditText) findViewById(R.id.interruptions_edit_text);
-        whichOverInterruption1EditText = (EditText) findViewById(R.id.which_over_interruption_1_edit_text);
-        whichOverInterruption2EditText = (EditText) findViewById(R.id.which_over_interruption_2_edit_text);
-        whichOverInterruption3EditText = (EditText) findViewById(R.id.which_over_interruption_3_edit_text);
-        wicketsLostInterruption1EditText = (EditText) findViewById(R.id.wickets_lost_interruption_1_edit_text);
-        wicketsLostInterruption2EditText = (EditText) findViewById(R.id.wickets_lost_interruption_2_edit_text);
-        wicketsLostInterruption3EditText = (EditText) findViewById(R.id.wickets_lost_interruption_3_edit_text);
-        oversRemainingInterruption1EditText = (EditText) findViewById(R.id.overs_remaining_interruption_1_edit_text);
-        oversRemainingInterruption2EditText = (EditText) findViewById(R.id.overs_remaining_interruption_2_edit_text);
-        oversRemainingInterruption3EditText = (EditText) findViewById(R.id.overs_remaining_interruption_3_edit_text);
-        totalInter1EditText = (EditText) findViewById(R.id.total_interruption_1_edit_text);
-        totalInter2EditText = (EditText) findViewById(R.id.total_interruption_2_edit_text);
-        totalInter3EditText = (EditText) findViewById(R.id.total_interruption_3_edit_text);
-
         totalWickets = 10;
         overData = new DataMap();
         fix = new InterruptionSetup();
@@ -684,7 +704,6 @@ public class Scenario1 extends AppCompatActivity {
             if (x1 && x2 && x3) {
                 empty = true;
             }
-
         } else if (inter == 2) {
             boolean x1 = whichFieldsTocheck(1);
             boolean x2 = editTextFieldCheck(totalInter2EditText);
@@ -693,7 +712,6 @@ public class Scenario1 extends AppCompatActivity {
             if (x1 && x2 && x3 && x4) {
                 empty = true;
             }
-
         } else if (inter == 3) {
             boolean x1 = whichFieldsTocheck(2);
             boolean x2 = editTextFieldCheck(totalInter3EditText);
@@ -721,7 +739,6 @@ public class Scenario1 extends AppCompatActivity {
         String response = "";
         int target = 0;
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -740,7 +757,6 @@ public class Scenario1 extends AppCompatActivity {
                 } else if (interruption == 3) {
                     target = interNew.three_interruptions();
                 }
-
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
 
             } catch (Exception e) {
@@ -753,7 +769,6 @@ public class Scenario1 extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-
             Log.v("theCalculatedTrgtPE: ", String.valueOf(result));
             toWinTarget(result);
             pd.dismiss();

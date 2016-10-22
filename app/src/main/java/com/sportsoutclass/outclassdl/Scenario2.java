@@ -28,26 +28,81 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+
 /**
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
  * occurs to the second team.
  */
 public class Scenario2 extends AppCompatActivity {
     Intent aboutPg, insPg;
+    @BindView(R.id.next_button3)
     Button calcBtn;
-    TextView interruption1TextViewSc2, totalInter1TextViewSc2, totalInter2TextViewSc2, totalInter3TextViewSc2,
-            interruption2TextViewSc2, interruption3TextViewSc2,
-            whichOverInterruption1TextViewSc2, whichOverInterruption2TextViewSc2,
-            whichOverInterruption3TextViewSc2, wicketsLostInterruption1TextViewSc2,
-            wicketsLostInterruption2TextViewSc2, wicketsLostInterruption3TextViewSc2,
-            oversRemainingInterruption1TextViewSc2, oversRemainingInterruption2TextViewSc2,
-            oversRemainingInterruption3TextViewSc2;
-    EditText totalInter1EditTextSc2, totalInter2EditTextSc2, totalInter3EditTextSc2,
-            team2InterruptionsEditSc2, whichOverInterruption1EditTextSc2, whichOverInterruption2EditTextSc2,
-            whichOverInterruption3EditTextSc2, wicketsLostInterruption1EditTextSc2,
-            wicketsLostInterruption2EditTextSc2, wicketsLostInterruption3EditTextSc2,
-            oversRemainingInterruption1EditTextSc2, oversRemainingInterruption2EditTextSc2,
-            oversRemainingInterruption3EditTextSc2, team2OversStartOfInnsSc2, team1FinalTotalAfterRevSc2;
+    @BindView(R.id.app_bar)
+    Toolbar toolbar;
+    //Textview Bindings
+    @BindView(R.id.interruption_1_text_view_sc2)
+    TextView interruption1TextViewSc2;
+    @BindView(R.id.team2_total_interruption_1_text_view_sc2)
+    TextView totalInter1TextViewSc2;
+    @BindView(R.id.team2_total_interruption_2_text_view_sc2)
+    TextView totalInter2TextViewSc2;
+    @BindView(R.id.team2_total_interruption_3_text_view_sc2)
+    TextView totalInter3TextViewSc2;
+    @BindView(R.id.interruption_2_text_view_sc2)
+    TextView interruption2TextViewSc2;
+    @BindView(R.id.interruption_3_text_view_sc2)
+    TextView interruption3TextViewSc2;
+    @BindView(R.id.which_over_interruption_1_text_view_sc2)
+    TextView whichOverInterruption1TextViewSc2;
+    @BindView(R.id.which_over_interruption_2_text_view_sc2)
+    TextView whichOverInterruption2TextViewSc2;
+    @BindView(R.id.which_over_interruption_3_text_view_sc2)
+    TextView whichOverInterruption3TextViewSc2;
+    @BindView(R.id.wickets_lost_interruption_1_text_view_sc2)
+    TextView wicketsLostInterruption1TextViewSc2;
+    @BindView(R.id.wickets_lost_interruption_2_text_view_sc2)
+    TextView wicketsLostInterruption2TextViewSc2;
+    @BindView(R.id.wickets_lost_interruption_3_text_view_sc2)
+    TextView wicketsLostInterruption3TextViewSc2;
+    @BindView(R.id.overs_remaining_interruption_1_text_view_sc2)
+    TextView oversRemainingInterruption1TextViewSc2;
+    @BindView(R.id.overs_remaining_interruption_2_text_view_sc2)
+    TextView oversRemainingInterruption2TextViewSc2;
+    @BindView(R.id.overs_remaining_interruption_3_text_view_sc2)
+    TextView oversRemainingInterruption3TextViewSc2;
+    //EditText Bindings
+    @BindView(R.id.total_interruption_1_edit_text_sc2)
+    EditText totalInter1EditTextSc2;
+    @BindView(R.id.total_interruption_2_edit_text_sc2)
+    EditText totalInter2EditTextSc2;
+    @BindView(R.id.total_interruption_3_edit_text_sc2)
+    EditText totalInter3EditTextSc2;
+    @BindView(R.id.interruptions_edit_text_sc2)
+    EditText team2InterruptionsEditSc2;
+    @BindView(R.id.which_over_interruption_1_edit_text_sc2)
+    EditText whichOverInterruption1EditTextSc2;
+    @BindView(R.id.which_over_interruption_2_edit_text_sc2)
+    EditText whichOverInterruption2EditTextSc2;
+    @BindView(R.id.which_over_interruption_3_edit_text_sc2)
+    EditText whichOverInterruption3EditTextSc2;
+    @BindView(R.id.wickets_lost_interruption_1_edit_text_sc2)
+    EditText wicketsLostInterruption1EditTextSc2;
+    @BindView(R.id.wickets_lost_interruption_2_edit_text_sc2)
+    EditText wicketsLostInterruption2EditTextSc2;
+    @BindView(R.id.wickets_lost_interruption_3_edit_text_sc2)
+    EditText wicketsLostInterruption3EditTextSc2;
+    @BindView(R.id.overs_remaining_interruption_1_edit_text_sc2)
+    EditText oversRemainingInterruption1EditTextSc2;
+    @BindView(R.id.overs_remaining_interruption_2_edit_text_sc2)
+    EditText oversRemainingInterruption2EditTextSc2;
+    @BindView(R.id.overs_remaining_interruption_3_edit_text_sc2)
+    EditText oversRemainingInterruption3EditTextSc2;
+    @BindView(R.id.team2_overs_sc2_editText)
+    EditText team2OversStartOfInnsSc2;
+    @BindView(R.id.team1_final_totalEditTextsc2)
+    EditText team1FinalTotalAfterRevSc2;
+
     int totalWicketsSc2, inter1WicketsSc2, inter2WicketsSc2, inter3WicketsSc2, inter1totalSc2, inter2totalSc2, inter3totalSc2, team1finalTotB4rev;
     double inter1OverSc2, inter2OverSc2, inter3OverSc2, inter1OversAtEndSc2, inter2OversAtEndSc2, inter3OversAtEndSc2, team2OversAtStartSc2;
     boolean allFieldsFilled;
@@ -60,7 +115,6 @@ public class Scenario2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -98,7 +152,7 @@ public class Scenario2 extends AppCompatActivity {
         if (id == R.id.action_about) {
             aboutPg = new Intent(this, AboutPage.class);
             startActivity(aboutPg);
-        }else if (id == R.id.action_instructions) {
+        } else if (id == R.id.action_instructions) {
             insPg = new Intent(this, HowToPage.class);
             startActivity(insPg);
         }
@@ -290,9 +344,9 @@ public class Scenario2 extends AppCompatActivity {
         if (allFieldsFilled) {
 
             AsyncCalculation calc = new AsyncCalculation();
-                calc.execute(interrupt);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            calc.execute(interrupt);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
         } else {
             usrErrAlertSc2.setTitle("Incomplete Information");
@@ -735,41 +789,10 @@ public class Scenario2 extends AppCompatActivity {
     }
 
     private void init() {
-        calcBtn = (Button)findViewById(R.id.next_button3);
         calcBtn.setBackgroundResource(R.color.primaryColor);
         calcBtn.setTextColor(Color.WHITE);
         //TextView Assignments
-        interruption1TextViewSc2 = (TextView) findViewById(R.id.interruption_1_text_view_sc2);
-        interruption2TextViewSc2 = (TextView) findViewById(R.id.interruption_2_text_view_sc2);
-        interruption3TextViewSc2 = (TextView) findViewById(R.id.interruption_3_text_view_sc2);
-        whichOverInterruption1TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_1_text_view_sc2);
-        whichOverInterruption2TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_2_text_view_sc2);
-        whichOverInterruption3TextViewSc2 = (TextView) findViewById(R.id.which_over_interruption_3_text_view_sc2);
-        wicketsLostInterruption1TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_1_text_view_sc2);
-        wicketsLostInterruption2TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_2_text_view_sc2);
-        wicketsLostInterruption3TextViewSc2 = (TextView) findViewById(R.id.wickets_lost_interruption_3_text_view_sc2);
-        oversRemainingInterruption1TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_1_text_view_sc2);
-        oversRemainingInterruption2TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_2_text_view_sc2);
-        oversRemainingInterruption3TextViewSc2 = (TextView) findViewById(R.id.overs_remaining_interruption_3_text_view_sc2);
-        totalInter1TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_1_text_view_sc2);
-        totalInter2TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_2_text_view_sc2);
-        totalInter3TextViewSc2 = (TextView) findViewById(R.id.team2_total_interruption_3_text_view_sc2);
         //Edit Text Assignments
-        team2InterruptionsEditSc2 = (EditText) findViewById(R.id.interruptions_edit_text_sc2);
-        whichOverInterruption1EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_1_edit_text_sc2);
-        whichOverInterruption2EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_2_edit_text_sc2);
-        whichOverInterruption3EditTextSc2 = (EditText) findViewById(R.id.which_over_interruption_3_edit_text_sc2);
-        wicketsLostInterruption1EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_1_edit_text_sc2);
-        wicketsLostInterruption2EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_2_edit_text_sc2);
-        wicketsLostInterruption3EditTextSc2 = (EditText) findViewById(R.id.wickets_lost_interruption_3_edit_text_sc2);
-        oversRemainingInterruption1EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_1_edit_text_sc2);
-        oversRemainingInterruption2EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_2_edit_text_sc2);
-        oversRemainingInterruption3EditTextSc2 = (EditText) findViewById(R.id.overs_remaining_interruption_3_edit_text_sc2);
-        totalInter1EditTextSc2 = (EditText) findViewById(R.id.total_interruption_1_edit_text_sc2);
-        totalInter2EditTextSc2 = (EditText) findViewById(R.id.total_interruption_2_edit_text_sc2);
-        totalInter3EditTextSc2 = (EditText) findViewById(R.id.total_interruption_3_edit_text_sc2);
-        team2OversStartOfInnsSc2 = (EditText) findViewById(R.id.team2_overs_sc2_editText);
-        team1FinalTotalAfterRevSc2 = (EditText) findViewById(R.id.team1_final_totalEditTextsc2);
 
         totalWicketsSc2 = 10;
         overDataSc2 = new DataMap();

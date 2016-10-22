@@ -37,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    @BindView(R.id.app_bar) Toolbar toolbar;
     //If the variable contains Two it is regarding scenario 2
     Intent scenario1, scenario2, aboutPg, insPg;
     //Using butter knife to bind views
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @BindView(R.id.team_1_score_editTwo) EditText team1TotalScoreDLEditText;
     @BindView(R.id.team_1_wickets_editTwo) EditText team1WicketsDLEditText;
     @BindView(R.id.team_1_overs_editTwo) EditText team2OversDLEditText;
-    @BindView(R.id.app_bar) Toolbar toolbar;
     @BindView(R.id.g50_spinner) Spinner g50_Spinner;
     @BindView(R.id.did_team_1_bat_spinner) Spinner did_team_1_bat_spinner;
     @BindView(R.id.team_1_revised_total_spinner) Spinner team_1_revised_total_spinner;
