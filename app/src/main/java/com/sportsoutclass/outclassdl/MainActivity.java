@@ -28,6 +28,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +38,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.name;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     @BindView(R.id.app_bar) Toolbar toolbar;
@@ -58,10 +63,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @BindView(R.id.team1_info_container) View team1_info_container;
     @BindView(R.id.team1_revised_info_container) View team1_revised_info_container;
     @BindView(R.id.team_1_revised_total_spinner_container) View team_1_revised_total_spinner_container;
-
+    StateClass state;
+    private Tracker mTracker;
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
-    StateClass state;
+    // Obtain the shared Tracker instance.
+
     Button nextBtn;
     InterruptionSetup setup;
     AlertDialog.Builder usrErrAlert;
@@ -75,6 +82,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        state = (StateClass) getApplication();
+        mTracker = state.getDefaultTracker();
+        Log.i("TAG", "Setting screen name: MainActivity");
+        mTracker.setScreenName("MainActivity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
             TypedValue typedValue = new TypedValue();
@@ -127,6 +142,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TotalAndWicketsInfo();
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

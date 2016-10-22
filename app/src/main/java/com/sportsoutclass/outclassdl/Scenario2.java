@@ -28,6 +28,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import butterknife.BindView;
 
 /**
@@ -108,6 +111,7 @@ public class Scenario2 extends AppCompatActivity {
     boolean allFieldsFilled;
     DataMap overDataSc2;
     StateClass stateSc2;
+    private Tracker mTracker;
     AlertDialog.Builder t1WinTarget, usrErrAlertSc2;
     InterruptionSetup fix;
 
@@ -118,6 +122,12 @@ public class Scenario2 extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        stateSc2 = (StateClass) getApplication();
+        mTracker = stateSc2.getDefaultTracker();
+        Log.i("TAG", "Setting screen name: Scenario2");
+        mTracker.setScreenName("Scenario2");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
             TypedValue typedValue = new TypedValue();
@@ -797,7 +807,6 @@ public class Scenario2 extends AppCompatActivity {
         totalWicketsSc2 = 10;
         overDataSc2 = new DataMap();
         fix = new InterruptionSetup();
-        stateSc2 = (StateClass) getApplicationContext();
         t1WinTarget = new AlertDialog.Builder(Scenario2.this);
         usrErrAlertSc2 = new AlertDialog.Builder(Scenario2.this);
         allFieldsFilled = false;

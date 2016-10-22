@@ -4,7 +4,8 @@ import android.app.Application;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.util.Log;
-
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 /**
  * Created by Sachinda on 12/24/2015.
  * Contains all the states that will be saved from edit texts
@@ -12,6 +13,8 @@ import android.util.Log;
 
 
 public class StateClass extends Application {
+    private Tracker mTracker;
+
     public double overs, inter1StartOver, inter2StartOver, inter3StartOver,
             inter1EndOver, inter2EndOver, inter3EndOver, resAtEndInter;
     public double overs_sc2, inter1StartOver_sc2, inter2StartOver_sc2, inter3StartOver_sc2,
@@ -29,6 +32,21 @@ public class StateClass extends Application {
         super.onCreate();
         mContext = getApplicationContext();
     }
+
+    /**
+     * Gets the default {@link Tracker} for this {@link Application}.
+     *
+     * @return tracker
+     */
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker(R.xml.global_tracker);
+        }
+        return mTracker;
+    }
+
 
     public static Context getContext() {
         return mContext;

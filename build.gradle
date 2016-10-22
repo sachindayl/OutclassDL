@@ -13,6 +13,9 @@ buildscript {
         classpath "com.jdroidframework:jdroid-gradle-plugin:0.10.1"
         // the latest version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        // google services plugin
+        classpath 'com.google.gms:google-services:3.0.0'
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
