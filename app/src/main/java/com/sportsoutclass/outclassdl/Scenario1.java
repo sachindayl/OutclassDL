@@ -40,8 +40,8 @@ import butterknife.ButterKnife;
  */
 public class Scenario1 extends AppCompatActivity {
     Intent aboutPg, insPg;
-    @BindView(R.id.calc_button1)
-    Button calcBtn;
+    @BindView(R.id.app_bar) Toolbar toolbar;
+
     //TextView Assignments (Butter knife binding)
     @BindView(R.id.interruption_1_text_view)
     TextView interruption1TextView;
@@ -100,13 +100,13 @@ public class Scenario1 extends AppCompatActivity {
     EditText oversRemainingInterruption2EditText;
     @BindView(R.id.overs_remaining_interruption_3_edit_text)
     EditText oversRemainingInterruption3EditText;
-    @BindView(R.id.app_bar)
-    Toolbar toolbar;
+
+    Button calcBtn;
     int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
-    private Tracker mTracker;
+    Tracker mTracker;
     AlertDialog.Builder t2WinScore, usrErrAlert;
     InterruptionSetup fix;
 
@@ -124,6 +124,8 @@ public class Scenario1 extends AppCompatActivity {
         Log.i("TAG", "Setting screen name: Scenario1");
         mTracker.setScreenName("Scenario1");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        calcBtn = (Button) findViewById(R.id.calc_button1);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want

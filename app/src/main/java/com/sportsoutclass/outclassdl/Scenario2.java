@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,17 +33,17 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
  * occurs to the second team.
  */
 public class Scenario2 extends AppCompatActivity {
+    @BindView(R.id.app_bar) Toolbar toolbar;
     Intent aboutPg, insPg;
     @BindView(R.id.next_button3)
     Button calcBtn;
-    @BindView(R.id.app_bar)
-    Toolbar toolbar;
     //Textview Bindings
     @BindView(R.id.interruption_1_text_view_sc2)
     TextView interruption1TextViewSc2;
@@ -111,7 +112,7 @@ public class Scenario2 extends AppCompatActivity {
     boolean allFieldsFilled;
     DataMap overDataSc2;
     StateClass stateSc2;
-    private Tracker mTracker;
+    Tracker mTracker;
     AlertDialog.Builder t1WinTarget, usrErrAlertSc2;
     InterruptionSetup fix;
 
@@ -119,9 +120,11 @@ public class Scenario2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario2);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
         stateSc2 = (StateClass) getApplication();
         mTracker = stateSc2.getDefaultTracker();
         Log.i("TAG", "Setting screen name: Scenario2");
@@ -138,6 +141,9 @@ public class Scenario2 extends AppCompatActivity {
             setTaskDescription(description);
             bm.recycle();
         }
+        calcBtn.setBackgroundResource(R.color.primaryColor);
+        calcBtn.setTextColor(Color.WHITE);
+
         init();
         InterruptionsValueEdit();
         editTextData();
@@ -799,8 +805,7 @@ public class Scenario2 extends AppCompatActivity {
     }
 
     private void init() {
-        calcBtn.setBackgroundResource(R.color.primaryColor);
-        calcBtn.setTextColor(Color.WHITE);
+
         //TextView Assignments
         //Edit Text Assignments
 
