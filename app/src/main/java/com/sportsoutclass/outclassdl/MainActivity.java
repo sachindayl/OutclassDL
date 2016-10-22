@@ -18,11 +18,11 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @BindView(R.id.team_1_revised_total_spinner) Spinner team_1_revised_total_spinner;
     @BindView(R.id.team1_info_container) View team1_info_container;
     @BindView(R.id.team1_revised_info_container) View team1_revised_info_container;
+    @BindView(R.id.team_1_revised_total_spinner_container) View team_1_revised_total_spinner_container;
 
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             bm.recycle();
         }
         team1_info_container.setVisibility(View.VISIBLE);
+        team_1_revised_total_spinner_container.setVisibility(View.GONE);
         team1_revised_info_container.setVisibility(View.GONE);
 
         init();
@@ -120,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //At start team 1 bat the whole amount of overs spinner is set to yes and team revised total is disabled
         did_team_1_bat_spinner.setSelection(0);
-        team_1_revised_total_spinner.setSelection(1);
-        team_1_revised_total_spinner.setEnabled(false);
 
         OversInfo();
         TotalAndWicketsInfo();
@@ -155,13 +155,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void scenarioBtn(View v) {
+        //overs at the start of the innings for both teams
         double innStartOvers = state.getOvers();
+        //wickets fell for team 1
         int innStartWickets = state.getWickets();
+        //total for team 1
         int innStartTotal = state.getTotalT1();
+        //team 1 revised total if they didn't finish the whole overs
         int revisedT1Total = state.getTotalT1();
+        //wickets when team 1 had to stop playing
         int revisedT1Wickets = state.getWickets();
+        //overs available to team 2 because of revision
         double revisedT1Overs = state.getOvers();
-            if (g50_Spinner.getSelectedItemPosition() == 0) {
+
+            if (did_team_1_bat_spinner.getSelectedItemPosition() == 0) {
                 if (innStartOvers != 0 && innStartTotal != 0) {
 
                     if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
@@ -193,14 +200,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         scenario2 = new Intent(this, Scenario2.class);
                         startActivity(scenario2);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
-                                Toast.LENGTH_SHORT).show();
+                        if(innStartOvers == 0){
+                            Toast.makeText(getApplicationContext(), "Error: Please enter the number of overs",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                 }
 
             }
-
 
 
     }
@@ -418,28 +426,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.did_team_1_bat_spinner:
                 if(pos == 0){
-                    team_1_revised_total_spinner.setSelection(1);
-                    team_1_revised_total_spinner.setEnabled(false);
+                    numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+                    team_1_revised_total_spinner.setSelection(0);
+                    team_1_revised_total_spinner_container.setVisibility(View.GONE);
                     team1_revised_info_container.setVisibility(View.GONE);
                     team1_info_container.setVisibility(View.VISIBLE);
 
                 }else if(pos == 1){
+                    numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+                    team_1_revised_total_spinner_container.setVisibility(View.VISIBLE);
+                    team1_revised_info_container.setVisibility(View.VISIBLE);
+                    team1_info_container.setVisibility(View.GONE);
                     team_1_revised_total_spinner.setSelection(0);
-                    team_1_revised_total_spinner.setEnabled(true);
+                    team1_revised_info_container.setVisibility(View.VISIBLE);
 
                 }
                 break;
             case R.id.team_1_revised_total_spinner:
                 if(pos == 0){
-                    team1_info_container.setVisibility(View.GONE);
+                    numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                     team1_revised_info_container.setVisibility(View.VISIBLE);
 
                 }else if(pos == 1){
+                    numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     team1_info_container.setVisibility(View.GONE);
                     team1_revised_info_container.setVisibility(View.GONE);
 
                 }
+
                 break;
+
         }
 
     }

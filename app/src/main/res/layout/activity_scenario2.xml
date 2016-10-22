@@ -48,6 +48,7 @@
             android:layout_above="@id/team2_overs_sc2"
             android:paddingBottom="5dp"
             android:paddingEnd="0dp"
+            android:layout_marginTop="5dp"
             android:paddingLeft="15dp"
             android:paddingRight="0dp"
             android:paddingStart="15dp"
@@ -100,6 +101,7 @@
                 android:background="@color/white"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
+                android:layout_marginBottom="20dp"
                 tools:context=".Scenario2">
 
                 <TextView
@@ -541,6 +543,7 @@
                     android:paddingRight="55dp"
                     android:paddingStart="0dp"
                     android:paddingTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/interruption_1_remaining"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black"

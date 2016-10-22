@@ -28,20 +28,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
  * occurs to the second team.
  */
 public class Scenario1 extends AppCompatActivity {
-    Intent aboutPg,insPg;
+    Intent aboutPg, insPg;
     Button calcBtn;
-    TextView interruption1TextView, totalInter1TextView, totalInter2TextView, totalInter3TextView,
-            interruption2TextView, interruption3TextView,
-            whichOverInterruption1TextView, whichOverInterruption2TextView,
-            whichOverInterruption3TextView, wicketsLostInterruption1TextView,
-            wicketsLostInterruption2TextView, wicketsLostInterruption3TextView,
-            oversRemainingInterruption1TextView, oversRemainingInterruption2TextView,
-            oversRemainingInterruption3TextView;
+    //TextView Assignments (Butter knife binding)
+    @BindView(R.id.interruption_1_text_view) TextView interruption1TextView;
+    @BindView(R.id.team2_total_interruption_1_text_view) TextView totalInter1TextView;
+    @BindView(R.id.team2_total_interruption_2_text_view) TextView totalInter2TextView;
+    @BindView(R.id.team2_total_interruption_3_text_view) TextView totalInter3TextView;
+    @BindView(R.id.interruption_2_text_view) TextView interruption2TextView;
+    @BindView(R.id.interruption_3_text_view) TextView interruption3TextView;
+    @BindView(R.id.which_over_interruption_1_text_view) TextView whichOverInterruption1TextView;
+    @BindView(R.id.which_over_interruption_2_text_view) TextView whichOverInterruption2TextView;
+    @BindView(R.id.which_over_interruption_3_text_view) TextView whichOverInterruption3TextView;
+    @BindView(R.id.wickets_lost_interruption_1_text_view) TextView wicketsLostInterruption1TextView;
+    @BindView(R.id.wickets_lost_interruption_2_text_view) TextView wicketsLostInterruption2TextView;
+    @BindView(R.id.wickets_lost_interruption_3_text_view) TextView wicketsLostInterruption3TextView;
+    @BindView(R.id.overs_remaining_interruption_1_text_view) TextView oversRemainingInterruption1TextView;
+    @BindView(R.id.overs_remaining_interruption_2_text_view) TextView oversRemainingInterruption2TextView;
+    @BindView(R.id.overs_remaining_interruption_3_text_view) TextView oversRemainingInterruption3TextView;
+
     EditText totalInter1EditText, totalInter2EditText, totalInter3EditText, team2InterruptionsEdit, whichOverInterruption1EditText, whichOverInterruption2EditText,
             whichOverInterruption3EditText, wicketsLostInterruption1EditText,
             wicketsLostInterruption2EditText, wicketsLostInterruption3EditText,
@@ -59,6 +72,7 @@ public class Scenario1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario1);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -97,7 +111,7 @@ public class Scenario1 extends AppCompatActivity {
         if (id == R.id.action_about) {
             aboutPg = new Intent(this, AboutPage.class);
             startActivity(aboutPg);
-        }else if (id == R.id.action_instructions) {
+        } else if (id == R.id.action_instructions) {
             insPg = new Intent(this, HowToPage.class);
             startActivity(insPg);
         }
@@ -286,10 +300,10 @@ public class Scenario1 extends AppCompatActivity {
 
         if (allFieldsFilled) {
 
-                    AsyncCalculation calc = new AsyncCalculation();
-                    calc.execute(interrupt);
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            AsyncCalculation calc = new AsyncCalculation();
+            calc.execute(interrupt);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
         } else {
             usrErrAlert.setTitle("Incomplete Information");
@@ -601,26 +615,24 @@ public class Scenario1 extends AppCompatActivity {
             Log.v("Need to win: ", String.valueOf(toWin));
 
 
-
             if (remainingOvers == 0.0) {
                 if (toWin <= 0) {
                     toWin = Math.abs(toWin);
                     toWinToS = String.valueOf(toWin);
                     t2WinScore.setTitle("Final Result");
-                    t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+                    t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " run(s).");
                 } else {
-                    toWin = toWin - 1;
                     Log.v("Need to win: ", String.valueOf(toWin));
                     toWinToS = String.valueOf(toWin);
                     t2WinScore.setTitle("Final Result");
-                    t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " runs.");
+                    t2WinScore.setMessage("Team 1 has won the match by " + toWinToS + " run(s).");
                 }
 
             } else if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
                 t2WinScore.setTitle("Final Result");
-                t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " runs.");
+                t2WinScore.setMessage("Team 2 has won the match by " + toWinToS + " run(s).");
             } else {
                 t2WinScore.setTitle("Par Score");
                 t2WinScore.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
@@ -638,22 +650,7 @@ public class Scenario1 extends AppCompatActivity {
         calcBtn = (Button) findViewById(R.id.calc_button1);
         calcBtn.setBackgroundResource(R.color.primaryColor);
         calcBtn.setTextColor(Color.WHITE);
-        //TextView Assignments
-        interruption1TextView = (TextView) findViewById(R.id.interruption_1_text_view);
-        interruption2TextView = (TextView) findViewById(R.id.interruption_2_text_view);
-        interruption3TextView = (TextView) findViewById(R.id.interruption_3_text_view);
-        whichOverInterruption1TextView = (TextView) findViewById(R.id.which_over_interruption_1_text_view);
-        whichOverInterruption2TextView = (TextView) findViewById(R.id.which_over_interruption_2_text_view);
-        whichOverInterruption3TextView = (TextView) findViewById(R.id.which_over_interruption_3_text_view);
-        wicketsLostInterruption1TextView = (TextView) findViewById(R.id.wickets_lost_interruption_1_text_view);
-        wicketsLostInterruption2TextView = (TextView) findViewById(R.id.wickets_lost_interruption_2_text_view);
-        wicketsLostInterruption3TextView = (TextView) findViewById(R.id.wickets_lost_interruption_3_text_view);
-        oversRemainingInterruption1TextView = (TextView) findViewById(R.id.overs_remaining_interruption_1_text_view);
-        oversRemainingInterruption2TextView = (TextView) findViewById(R.id.overs_remaining_interruption_2_text_view);
-        oversRemainingInterruption3TextView = (TextView) findViewById(R.id.overs_remaining_interruption_3_text_view);
-        totalInter1TextView = (TextView) findViewById(R.id.team2_total_interruption_1_text_view);
-        totalInter2TextView = (TextView) findViewById(R.id.team2_total_interruption_2_text_view);
-        totalInter3TextView = (TextView) findViewById(R.id.team2_total_interruption_3_text_view);
+
         //Edit Text Assignments
         team2InterruptionsEdit = (EditText) findViewById(R.id.interruptions_edit_text);
         whichOverInterruption1EditText = (EditText) findViewById(R.id.which_over_interruption_1_edit_text);
