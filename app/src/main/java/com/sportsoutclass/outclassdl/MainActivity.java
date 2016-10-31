@@ -42,7 +42,8 @@ import butterknife.ButterKnife;
 import static android.R.attr.name;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    @BindView(R.id.app_bar) Toolbar toolbar;
+    @BindView(R.id.app_bar)
+    Toolbar toolbar;
     //If the variable contains Two it is regarding scenario 2
     Intent scenario1, scenario2, aboutPg, insPg;
     //Using butter knife to bind views

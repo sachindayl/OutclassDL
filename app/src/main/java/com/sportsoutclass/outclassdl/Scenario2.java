@@ -25,8 +25,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -39,8 +42,9 @@ import butterknife.ButterKnife;
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
  * occurs to the second team.
  */
-public class Scenario2 extends AppCompatActivity {
-    @BindView(R.id.app_bar) Toolbar toolbar;
+public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    @BindView(R.id.app_bar)
+    Toolbar toolbar;
     Intent aboutPg, insPg;
     @BindView(R.id.next_button3)
     Button calcBtn;
@@ -82,8 +86,6 @@ public class Scenario2 extends AppCompatActivity {
     EditText totalInter2EditTextSc2;
     @BindView(R.id.total_interruption_3_edit_text_sc2)
     EditText totalInter3EditTextSc2;
-    @BindView(R.id.interruptions_edit_text_sc2)
-    EditText team2InterruptionsEditSc2;
     @BindView(R.id.which_over_interruption_1_edit_text_sc2)
     EditText whichOverInterruption1EditTextSc2;
     @BindView(R.id.which_over_interruption_2_edit_text_sc2)
@@ -106,6 +108,8 @@ public class Scenario2 extends AppCompatActivity {
     EditText team2OversStartOfInnsSc2;
     @BindView(R.id.team1_final_totalEditTextsc2)
     EditText team1FinalTotalAfterRevSc2;
+    @BindView(R.id.interruptions_sc2_spinner)
+    Spinner sc2_Interruption_Spinner;
 
     int totalWicketsSc2, inter1WicketsSc2, inter2WicketsSc2, inter3WicketsSc2, inter1totalSc2, inter2totalSc2, inter3totalSc2, team1finalTotB4rev;
     double inter1OverSc2, inter2OverSc2, inter3OverSc2, inter1OversAtEndSc2, inter2OversAtEndSc2, inter3OversAtEndSc2, team2OversAtStartSc2;
@@ -115,6 +119,7 @@ public class Scenario2 extends AppCompatActivity {
     Tracker mTracker;
     AlertDialog.Builder t1WinTarget, usrErrAlertSc2;
     InterruptionSetup fix;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +149,15 @@ public class Scenario2 extends AppCompatActivity {
         calcBtn.setBackgroundResource(R.color.primaryColor);
         calcBtn.setTextColor(Color.WHITE);
 
+        ArrayAdapter<CharSequence> interruptions_adapter = ArrayAdapter.createFromResource(this,
+                R.array.interruptions_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        interruptions_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sc2_Interruption_Spinner.setAdapter(interruptions_adapter);
+        sc2_Interruption_Spinner.setOnItemSelectedListener(this);
+
         init();
-        InterruptionsValueEdit();
         editTextData();
 
     }
@@ -179,39 +191,6 @@ public class Scenario2 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //this edits the number for interruptions
-    private void InterruptionsValueEdit() {
-        team2InterruptionsEditSc2.addTextChangedListener(new TextWatcher() {
-            int interToInt;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String interruptionsToS = s.toString();
-                if (interruptionsToS.equals("")) {
-                    interruptionsToS = "0";
-                }
-                Log.v("interruptionsToS value", interruptionsToS);
-                interToInt = Integer.parseInt(interruptionsToS);
-                stateSc2.setInterruptionsSc2(interToInt);
-                InterruptionsAmountVisibilitySetup(interToInt);
-
-                if (interToInt > 0 && interToInt < 4) {
-                    team2InterruptionsEditSc2.setNextFocusForwardId(R.id.which_over_interruption_1_edit_text_sc2);
-                }
-            }
-        });
-
-    }
 
     //this enables disables visibility of number of interruptions available to edit
     private void InterruptionsAmountVisibilitySetup(int i) {
@@ -757,6 +736,29 @@ public class Scenario2 extends AppCompatActivity {
         }
         Log.v("fieldNotEmpty: ", String.valueOf(fieldNotEmpty));
         return fieldNotEmpty;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        switch (adapterView.getId()){
+            case R.id.interruptions_sc2_spinner:
+                if(position == 0){
+                    InterruptionsAmountVisibilitySetup(1);
+                }
+                else if(position == 1){
+                    InterruptionsAmountVisibilitySetup(2);
+                }
+                else if(position == 2){
+                    InterruptionsAmountVisibilitySetup(3);
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
