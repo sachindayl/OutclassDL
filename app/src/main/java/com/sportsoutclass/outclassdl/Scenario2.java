@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -48,6 +49,14 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
     Intent aboutPg, insPg;
     @BindView(R.id.next_button3)
     Button calcBtn;
+    //Layout Binding
+    @BindView(R.id.interruption_1_sc2_container)
+    LinearLayout interruption_1_sc2_container;
+    @BindView(R.id.interruption_2_sc2_container)
+    LinearLayout interruption_2_sc2_container;
+    @BindView(R.id.interruption_3_sc2_container)
+    LinearLayout interruption_3_sc2_container;
+
     //Textview Bindings
     @BindView(R.id.interruption_1_text_view_sc2)
     TextView interruption1TextViewSc2;
@@ -195,136 +204,26 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
     //this enables disables visibility of number of interruptions available to edit
     private void InterruptionsAmountVisibilitySetup(int i) {
         if (i == 1) {
-            interruption1TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption1TextViewSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption1TextViewSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption1TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption1EditTextSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption1EditTextSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption1EditTextSc2.setVisibility(View.VISIBLE);
-            totalInter1TextViewSc2.setVisibility(View.VISIBLE);
-            totalInter1EditTextSc2.setVisibility(View.VISIBLE);
-
-            interruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter2TextViewSc2.setVisibility(View.INVISIBLE);
-            totalInter2EditTextSc2.setVisibility(View.INVISIBLE);
-            interruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3TextViewSc2.setVisibility(View.INVISIBLE);
+            interruption_1_sc2_container.setVisibility(View.VISIBLE);
+            interruption_2_sc2_container.setVisibility(View.GONE);
+            interruption_3_sc2_container.setVisibility(View.GONE);
+//            interruption_1_sc2_container.setShowDividers(LinearLayout.SHOW_DIVIDER_END);
             oversRemainingInterruption1EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
             oversRemainingInterruption1EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-            interruption2TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption2TextViewSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption2TextViewSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption2TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption2EditTextSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption2EditTextSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption2EditTextSc2.setVisibility(View.VISIBLE);
-            totalInter2TextViewSc2.setVisibility(View.VISIBLE);
-            totalInter2EditTextSc2.setVisibility(View.VISIBLE);
-
-            interruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3TextViewSc2.setVisibility(View.INVISIBLE);
+            interruption_2_sc2_container.setVisibility(View.VISIBLE);
+//            interruption_2_sc2_container.setShowDividers(LinearLayout.SHOW_DIVIDER_END);
+            interruption_3_sc2_container.setVisibility(View.GONE);
             oversRemainingInterruption2EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 3) {
             InterruptionsAmountVisibilitySetup(2);
             oversRemainingInterruption2EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-            interruption3TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption3TextViewSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption3TextViewSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption3TextViewSc2.setVisibility(View.VISIBLE);
-            whichOverInterruption3EditTextSc2.setVisibility(View.VISIBLE);
-            wicketsLostInterruption3EditTextSc2.setVisibility(View.VISIBLE);
-            oversRemainingInterruption3EditTextSc2.setVisibility(View.VISIBLE);
-            totalInter3EditTextSc2.setVisibility(View.VISIBLE);
-            totalInter3TextViewSc2.setVisibility(View.VISIBLE);
+            interruption_3_sc2_container.setVisibility(View.VISIBLE);
             oversRemainingInterruption3EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-
-        } else if (i == 0) {
-
-
-            interruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter1TextViewSc2.setVisibility(View.INVISIBLE);
-            totalInter1EditTextSc2.setVisibility(View.INVISIBLE);
-            interruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter2TextViewSc2.setVisibility(View.INVISIBLE);
-            totalInter2EditTextSc2.setVisibility(View.INVISIBLE);
-            interruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3TextViewSc2.setVisibility(View.INVISIBLE);
-
-        } else {
-
-            interruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter1TextViewSc2.setVisibility(View.INVISIBLE);
-            totalInter1EditTextSc2.setVisibility(View.INVISIBLE);
-            interruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter2TextViewSc2.setVisibility(View.INVISIBLE);
-            totalInter2EditTextSc2.setVisibility(View.INVISIBLE);
-            interruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextViewSc2.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3EditTextSc2.setVisibility(View.INVISIBLE);
-            totalInter3TextViewSc2.setVisibility(View.INVISIBLE);
         }
 
     }

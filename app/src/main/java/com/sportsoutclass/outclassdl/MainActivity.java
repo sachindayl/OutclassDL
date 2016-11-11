@@ -412,9 +412,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setup = new InterruptionSetup();
         usrErrAlert = new AlertDialog.Builder(MainActivity.this);
         nextBtn = (Button) findViewById(R.id.next_button);
-        nextBtn.setBackgroundResource(R.color.primaryColor);
-        nextBtn.setTextColor(Color.WHITE);
-
         retrieveData();
 
     }
