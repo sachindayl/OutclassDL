@@ -11,9 +11,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/about_recycler"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="96dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -39,8 +38,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.attr.name;
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     @BindView(R.id.app_bar)
     Toolbar toolbar;
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @BindView(R.id.team1_revised_info_container) View team1_revised_info_container;
     @BindView(R.id.team_1_revised_total_spinner_container) View team_1_revised_total_spinner_container;
     StateClass state;
-    private Tracker mTracker;
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
     // Obtain the shared Tracker instance.
@@ -84,12 +80,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         state = (StateClass) getApplication();
-        mTracker = state.getDefaultTracker();
+        Tracker mTracker = state.getDefaultTracker();
         Log.i("TAG", "Setting screen name: MainActivity");
+
         mTracker.setScreenName("MainActivity");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want
@@ -106,34 +101,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         team1_revised_info_container.setVisibility(View.GONE);
 
         init();
-
-
-
+        //G50 spinner
         SimpleAdapter adapter = new SimpleAdapter(this, items,
                 android.R.layout.simple_spinner_item,
                 new String[]{"text", "subText"},
                 new int[]{android.R.id.text1, android.R.id.text2}
         );
-
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_2);
-
         g50_Spinner.setAdapter(adapter);
         g50_Spinner.setOnItemSelectedListener(this);
         state.setG50(0);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        //Spinner 2
         ArrayAdapter<CharSequence> did_team_1_bat_adapter = ArrayAdapter.createFromResource(this,
                 R.array.did_team_1_bat_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        did_team_1_bat_spinner.setAdapter(did_team_1_bat_adapter);
-        did_team_1_bat_spinner.setOnItemSelectedListener(this);
 
+        //Spinner 3
         ArrayAdapter<CharSequence> team_1_revised_total_adapter = ArrayAdapter.createFromResource(this,
-                R.array.team_1_revised_total_array, android.R.layout.simple_spinner_item);
+                R.array.team_1_revised_total_array, android.R.layout.simple_spinner_dropdown_item);
         did_team_1_bat_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        did_team_1_bat_spinner.setAdapter(did_team_1_bat_adapter);
         team_1_revised_total_spinner.setAdapter(team_1_revised_total_adapter);
+        did_team_1_bat_spinner.setOnItemSelectedListener(this);
         team_1_revised_total_spinner.setOnItemSelectedListener(this);
 
         //At start team 1 bat the whole amount of overs spinner is set to yes and team revised total is disabled
@@ -152,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     protected void onStop() {
+
+
         super.onStop();
     }
 
@@ -489,5 +482,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
 }
 

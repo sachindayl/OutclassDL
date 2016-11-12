@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_licences"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.sportsoutclass.outclassdl.Licences">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_bar"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <ListView
+            android:id="@+id/recipe_list_view"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:height="100dp"
+            />
+    </RelativeLayout>
+</RelativeLayout>

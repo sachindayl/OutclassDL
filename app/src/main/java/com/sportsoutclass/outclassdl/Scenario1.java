@@ -24,8 +24,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -38,13 +42,17 @@ import butterknife.ButterKnife;
  * In Scenario 1: The team 1 has finished batting their allotted overs and the interruption(s) only
  * occurs to the second team.
  */
-public class Scenario1 extends AppCompatActivity {
+public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Intent aboutPg, insPg;
     @BindView(R.id.app_bar) Toolbar toolbar;
-
+    //Linear Layout Containers
+    @BindView(R.id.interruption_1_container)
+    LinearLayout interruption_1_container;
+    @BindView(R.id.interruption_2_container)
+    LinearLayout interruption_2_container;
+    @BindView(R.id.interruption_3_container)
+    LinearLayout interruption_3_container;
     //TextView Assignments (Butter knife binding)
-    @BindView(R.id.interruption_1_text_view)
-    TextView interruption1TextView;
     @BindView(R.id.team2_total_interruption_1_text_view)
     TextView totalInter1TextView;
     @BindView(R.id.team2_total_interruption_2_text_view)
@@ -80,8 +88,6 @@ public class Scenario1 extends AppCompatActivity {
     EditText totalInter2EditText;
     @BindView(R.id.total_interruption_3_edit_text)
     EditText totalInter3EditText;
-    @BindView(R.id.interruptions_edit_text)
-    EditText team2InterruptionsEdit;
     @BindView(R.id.which_over_interruption_1_edit_text)
     EditText whichOverInterruption1EditText;
     @BindView(R.id.which_over_interruption_2_edit_text)
@@ -100,6 +106,10 @@ public class Scenario1 extends AppCompatActivity {
     EditText oversRemainingInterruption2EditText;
     @BindView(R.id.overs_remaining_interruption_3_edit_text)
     EditText oversRemainingInterruption3EditText;
+    //Spinner Assignment
+    @BindView(R.id.interruptions_spinner)
+    Spinner interruption_Spinner;
+
 
     Button calcBtn;
     int totalWickets, inter1Wickets, inter2Wickets, inter3Wickets, inter1total, inter2total, inter3total;
@@ -137,8 +147,16 @@ public class Scenario1 extends AppCompatActivity {
             setTaskDescription(description);
             bm.recycle();
         }
+
+        ArrayAdapter<CharSequence> interruptions_adapter = ArrayAdapter.createFromResource(this,
+                R.array.interruptions_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        interruptions_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        interruption_Spinner.setAdapter(interruptions_adapter);
+        interruption_Spinner.setOnItemSelectedListener(this);
+
         init();
-        InterruptionsValueEdit();
         editTextData();
 
     }
@@ -172,178 +190,40 @@ public class Scenario1 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //this edits the number for interruptions
-    private void InterruptionsValueEdit() {
-        team2InterruptionsEdit.addTextChangedListener(new TextWatcher() {
-            int interToInt;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String interruptionsToS = s.toString();
-                if (interruptionsToS.equals("")) {
-                    interruptionsToS = "0";
-                }
-                Log.v("interruptionsToS value", interruptionsToS);
-                interToInt = Integer.parseInt(interruptionsToS);
-                state.setInterruptions(interToInt);
-                InterruptionsAmountVisibilitySetup(interToInt);
-
-                if (interToInt > 0 && interToInt < 4) {
-                    team2InterruptionsEdit.setNextFocusForwardId(R.id.which_over_interruption_1_edit_text);
-                }
-            }
-        });
-
-    }
 
     //this enables disables visibility of number of interruptions available to edit
     private void InterruptionsAmountVisibilitySetup(int i) {
         if (i == 1) {
-            interruption1TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption1TextView.setVisibility(View.VISIBLE);
-            wicketsLostInterruption1TextView.setVisibility(View.VISIBLE);
-            oversRemainingInterruption1TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption1EditText.setVisibility(View.VISIBLE);
-            wicketsLostInterruption1EditText.setVisibility(View.VISIBLE);
-            oversRemainingInterruption1EditText.setVisibility(View.VISIBLE);
-            totalInter1TextView.setVisibility(View.VISIBLE);
-            totalInter1EditText.setVisibility(View.VISIBLE);
-
-            interruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
-            totalInter2TextView.setVisibility(View.INVISIBLE);
-            totalInter2EditText.setVisibility(View.INVISIBLE);
-            interruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
-            totalInter3EditText.setVisibility(View.INVISIBLE);
-            totalInter3TextView.setVisibility(View.INVISIBLE);
+            interruption_1_container.setVisibility(View.VISIBLE);
+            interruption_2_container.setVisibility(View.GONE);
+            interruption_3_container.setVisibility(View.GONE);
             oversRemainingInterruption1EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
             oversRemainingInterruption1EditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-            interruption2TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption2TextView.setVisibility(View.VISIBLE);
-            wicketsLostInterruption2TextView.setVisibility(View.VISIBLE);
-            oversRemainingInterruption2TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption2EditText.setVisibility(View.VISIBLE);
-            wicketsLostInterruption2EditText.setVisibility(View.VISIBLE);
-            oversRemainingInterruption2EditText.setVisibility(View.VISIBLE);
-            totalInter2TextView.setVisibility(View.VISIBLE);
-            totalInter2EditText.setVisibility(View.VISIBLE);
-
-            interruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
-            totalInter3EditText.setVisibility(View.INVISIBLE);
-            totalInter3TextView.setVisibility(View.INVISIBLE);
+            interruption_2_container.setVisibility(View.VISIBLE);
+            interruption_3_container.setVisibility(View.GONE);
             oversRemainingInterruption2EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 3) {
             InterruptionsAmountVisibilitySetup(2);
             oversRemainingInterruption2EditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-            interruption3TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption3TextView.setVisibility(View.VISIBLE);
-            wicketsLostInterruption3TextView.setVisibility(View.VISIBLE);
-            oversRemainingInterruption3TextView.setVisibility(View.VISIBLE);
-            whichOverInterruption3EditText.setVisibility(View.VISIBLE);
-            wicketsLostInterruption3EditText.setVisibility(View.VISIBLE);
-            oversRemainingInterruption3EditText.setVisibility(View.VISIBLE);
-            totalInter3EditText.setVisibility(View.VISIBLE);
-            totalInter3TextView.setVisibility(View.VISIBLE);
+            interruption_3_container.setVisibility(View.VISIBLE);
             oversRemainingInterruption3EditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-
-        } else if (i == 0) {
-
-            interruption1TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption1TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption1EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1EditText.setVisibility(View.INVISIBLE);
-            totalInter1TextView.setVisibility(View.INVISIBLE);
-            totalInter1EditText.setVisibility(View.INVISIBLE);
-            interruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
-            totalInter2TextView.setVisibility(View.INVISIBLE);
-            totalInter2EditText.setVisibility(View.INVISIBLE);
-            interruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
-            totalInter3EditText.setVisibility(View.INVISIBLE);
-            totalInter3TextView.setVisibility(View.INVISIBLE);
-
-        } else {
-
-            interruption1TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption1TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption1EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption1EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption1EditText.setVisibility(View.INVISIBLE);
-            totalInter1TextView.setVisibility(View.INVISIBLE);
-            totalInter1EditText.setVisibility(View.INVISIBLE);
-            interruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption2EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption2EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption2EditText.setVisibility(View.INVISIBLE);
-            totalInter2TextView.setVisibility(View.INVISIBLE);
-            totalInter2EditText.setVisibility(View.INVISIBLE);
-            interruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3TextView.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3TextView.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3TextView.setVisibility(View.INVISIBLE);
-            whichOverInterruption3EditText.setVisibility(View.INVISIBLE);
-            wicketsLostInterruption3EditText.setVisibility(View.INVISIBLE);
-            oversRemainingInterruption3EditText.setVisibility(View.INVISIBLE);
-            totalInter3EditText.setVisibility(View.INVISIBLE);
-            totalInter3TextView.setVisibility(View.INVISIBLE);
         }
 
     }
 
-    //activating calculate button
+    /**
+     * This method is activated on Calculate button press. Before giving value necessary edit texts
+     * are checked to see if the necessary values are there. If so, using Async Task, calculates the
+     * value. Otherwise returns errors noting incomplete information
+     * @param v gets button view ID
+     */
     public void activateCalcBtn(View v) {
-
+        //gets the number of interruptions and checks if all the necessary edit texts are filled
         int interrupt = state.getInterruptions();
         boolean allFieldsFilled = whichFieldsTocheck(interrupt);
 
@@ -363,6 +243,10 @@ public class Scenario1 extends AppCompatActivity {
         }
     }
 
+    /**
+     * Containg all the editTexts and uses TextWatcher to see proper values are inserted,
+     * if not send user an alert
+     */
     private void editTextData() {
 
         whichOverInterruption1EditText.addTextChangedListener(new TextWatcher() {
@@ -695,8 +579,6 @@ public class Scenario1 extends AppCompatActivity {
     }
 
     private void init() {
-        calcBtn.setBackgroundResource(R.color.primaryColor);
-        calcBtn.setTextColor(Color.WHITE);
         //Edit Text Assignments
         totalWickets = 10;
         overData = new DataMap();
@@ -740,8 +622,35 @@ public class Scenario1 extends AppCompatActivity {
         int len = x.getText().toString().length();
         if (len != 0) {
             fieldNotEmpty = true;
+        }else if(x.getVisibility() == View.GONE || x.getVisibility() == View.INVISIBLE){
+            fieldNotEmpty = true;
         }
         return fieldNotEmpty;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        switch (adapterView.getId()){
+            case R.id.interruptions_spinner:
+                if(position == 0){
+                    InterruptionsAmountVisibilitySetup(1);
+                    state.setInterruptions(1);
+                }
+                else if(position == 1){
+                    InterruptionsAmountVisibilitySetup(2);
+                    state.setInterruptions(2);
+                }
+                else if(position == 2){
+                    InterruptionsAmountVisibilitySetup(3);
+                    state.setInterruptions(3);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {

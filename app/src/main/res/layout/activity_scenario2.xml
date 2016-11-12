@@ -15,84 +15,107 @@
         android:background="@color/white">
 
 
-        <Button
-            android:id="@+id/next_button3"
+        <LinearLayout
+            android:id="@+id/sc2_button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom"
-            android:clickable="true"
-            android:onClick="activateNextBtnSc2"
-            android:text="@string/calculate" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center">
 
+            <Button
+                android:id="@+id/next_button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_design"
+                android:clickable="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:onClick="activateNextBtnSc2"
+                android:text="@string/calculate"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/team2_overs_sc2"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/next_button3"
-            android:paddingBottom="5dp"
-            android:paddingEnd="0dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="0dp"
-            android:paddingStart="15dp"
-            android:text="@string/team2overs_sc2"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/team1_final_totalsc2"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/team2_overs_sc2"
-            android:layout_marginTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingEnd="0dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="0dp"
-            android:paddingStart="15dp"
-            android:paddingTop="10dp"
-            android:text="@string/team_1_final_total"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/team1_final_totalEditTextsc2"
+        <LinearLayout
+            android:id="@+id/sc2_final_total_container"
+            android:layout_above="@id/sc2_button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/team1_final_totalsc2"
-            android:layout_toEndOf="@id/team1_final_totalsc2"
-            android:layout_toRightOf="@id/team1_final_totalsc2"
-            android:digits="0123456789"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:maxLength="4"
-            android:paddingEnd="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:divider="@drawable/divider"
+            android:showDividers="beginning"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/team2_overs_sc2_editText"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
+                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:weightSum="8">
+                <TextView
+                    android:id="@+id/team1_final_totalsc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/team_1_final_total"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/team1_final_totalEditTextsc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:layout_weight="6"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/team2_overs_sc2"
-            android:layout_toEndOf="@id/team1_final_totalsc2"
-            android:layout_toRightOf="@id/team1_final_totalsc2"
-            android:digits="0123456789."
-            android:imeOptions="actionDone"
-            android:inputType="numberDecimal"
-            android:maxLength="4"
-            android:paddingEnd="15dp"
+            android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:paddingStart="15dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:weightSum="8">
+
+            <TextView
+                android:id="@+id/team2_overs_sc2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/team2overs_sc2"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/team2_overs_sc2_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789."
+                android:layout_weight="6"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+
+        </LinearLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/team1_final_totalsc2"
+            android:layout_above="@id/sc2_final_total_container"
             android:fillViewport="true">
 
             <RelativeLayout
@@ -132,7 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/interruption_sc2_spinner_container"
-                    android:divider="@drawable/border"
+                    android:divider="@drawable/divider"
                     android:showDividers="beginning|end"
                     android:orientation="vertical">
 
@@ -302,7 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/interruption_1_sc2_container"
-                    android:divider="@drawable/border"
+                    android:divider="@drawable/divider"
                     android:showDividers="end"
                     android:orientation="vertical">
 
@@ -476,7 +499,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/interruption_2_sc2_container"
-                    android:divider="@drawable/border"
+                    android:divider="@drawable/divider"
                     android:showDividers="end"
                     android:orientation="vertical">
 

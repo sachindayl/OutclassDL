@@ -1,5 +1,6 @@
 package com.sportsoutclass.outclassdl;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -30,11 +31,13 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
     private static final String GooglePlayStorePackageNameOld = "com.google.market";
     private static final String GooglePlayStorePackageNameNew = "com.android.vending";
 
+
     public static class aboutPageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView about_Title;
         public TextView about_subTitle;
         public aboutPageViewHolder(View v) {
             super(v);
+            ctx.getApplicationContext();
             v.setOnClickListener(this);
             about_Title = (TextView) v.findViewById(R.id.row_mainLine);
             about_subTitle = (TextView) v.findViewById(R.id.row_subLine);
@@ -76,7 +79,12 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
                         Toast.makeText(ctx, "You don't have any app that can open this link", Toast.LENGTH_SHORT).show();
                     }
                 }
+            } else if(position == 4){
+                Intent goto_Licences = new Intent(ctx , Licences.class);
+                goto_Licences.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ctx.startActivity(goto_Licences);
             }
+
         }
 
         /**
@@ -122,6 +130,7 @@ public class aboutPageRVAdapter extends RecyclerView.Adapter<aboutPageRVAdapter.
     public int getItemCount() {
         return tDataset.length;
     }
+
 
 
 }

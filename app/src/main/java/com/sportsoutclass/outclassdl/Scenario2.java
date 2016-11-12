@@ -136,9 +136,8 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
         setContentView(R.layout.activity_scenario2);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         stateSc2 = (StateClass) getApplication();
         mTracker = stateSc2.getDefaultTracker();
         Log.i("TAG", "Setting screen name: Scenario2");
@@ -155,8 +154,6 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
             setTaskDescription(description);
             bm.recycle();
         }
-        calcBtn.setBackgroundResource(R.color.primaryColor);
-        calcBtn.setTextColor(Color.WHITE);
 
         ArrayAdapter<CharSequence> interruptions_adapter = ArrayAdapter.createFromResource(this,
                 R.array.interruptions_array, android.R.layout.simple_spinner_item);
@@ -207,14 +204,12 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
             interruption_1_sc2_container.setVisibility(View.VISIBLE);
             interruption_2_sc2_container.setVisibility(View.GONE);
             interruption_3_sc2_container.setVisibility(View.GONE);
-//            interruption_1_sc2_container.setShowDividers(LinearLayout.SHOW_DIVIDER_END);
             oversRemainingInterruption1EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
             oversRemainingInterruption1EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             interruption_2_sc2_container.setVisibility(View.VISIBLE);
-//            interruption_2_sc2_container.setShowDividers(LinearLayout.SHOW_DIVIDER_END);
             interruption_3_sc2_container.setVisibility(View.GONE);
             oversRemainingInterruption2EditTextSc2.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
@@ -643,12 +638,15 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
             case R.id.interruptions_sc2_spinner:
                 if(position == 0){
                     InterruptionsAmountVisibilitySetup(1);
+                    stateSc2.setInterruptionsSc2(1);
                 }
                 else if(position == 1){
                     InterruptionsAmountVisibilitySetup(2);
+                    stateSc2.setInterruptionsSc2(2);
                 }
                 else if(position == 2){
                     InterruptionsAmountVisibilitySetup(3);
+                    stateSc2.setInterruptionsSc2(3);
                 }
                 break;
         }
@@ -706,9 +704,6 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     private void init() {
-
-        //TextView Assignments
-        //Edit Text Assignments
 
         totalWicketsSc2 = 10;
         overDataSc2 = new DataMap();

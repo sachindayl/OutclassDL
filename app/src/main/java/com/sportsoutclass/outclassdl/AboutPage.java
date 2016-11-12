@@ -8,12 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,11 +70,11 @@ public class AboutPage extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Log.d("Home Pressed","Pressing home button in AboutPage");
+                onBackPressed();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -84,14 +84,9 @@ public class AboutPage extends AppCompatActivity {
 
         aboutRecycler = (RecyclerView) findViewById(R.id.about_recycler);
         String version = BuildConfig.VERSION_NAME;
-        titleValues = new String[]{"Developer", "Version", "Feedback", "Rate"};
-        subTitleValues = new String[]{"Sachinda Liyanaarachchi", version, "Give your feedback @ dlcalculatorapp@gmail.com", "Please rate this app on store"};
+        titleValues = new String[]{"Developer", "Version", "Feedback", "Rate", "Licences"};
+        subTitleValues = new String[]{"Sachinda Liyanaarachchi", version, "Give your feedback at dlcalculatorapp@gmail.com", "Please rate this app on store", "Open source licences used"};
     }
 
-    public void howTo(){
-        Intent howTo = new Intent(this, HowToPage.class);
-        startActivity(howTo);
-        finish();
-    }
 
 }

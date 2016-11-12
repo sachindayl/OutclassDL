@@ -155,11 +155,11 @@ public class StateClass extends Application {
     }
 
     public int getTotalT1int2Sc2() {
-        return this.totalT1int1_sc2;
+        return this.totalT1int2_sc2;
     }
 
     public int getTotalT1int3Sc2() {
-        return this.totalT1int1_sc2;
+        return this.totalT1int3_sc2;
     }
 
     public double getInter1StartOverSc2() {
