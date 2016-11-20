@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     StateClass state;
     double overs, oversTwo;
     int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
-    // Obtain the shared Tracker instance.
+    // Obtain the shared Tracking instance.
 
     Button nextBtn;
     InterruptionSetup setup;
@@ -80,11 +80,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         state = (StateClass) getApplication();
-        Tracker mTracker = state.getDefaultTracker();
-        Log.i("TAG", "Setting screen name: MainActivity");
+        Tracking analyticsTracker = new Tracking("MainActivity", state);
+        analyticsTracker.doTracking();
 
-        mTracker.setScreenName("MainActivity");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); // Initialize this to whatever you want

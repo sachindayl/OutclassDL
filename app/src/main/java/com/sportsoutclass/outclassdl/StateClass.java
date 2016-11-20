@@ -4,8 +4,10 @@ import android.app.Application;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.util.Log;
+
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+
 /**
  * Created by Sachinda on 12/24/2015.
  * Contains all the states that will be saved from edit texts
@@ -51,60 +53,107 @@ public class StateClass extends Application {
     public static Context getContext() {
         return mContext;
     }
+
     /**
      * Getters Scenario 1
      */
+
+    //Team 1 wickets at the end of their innings
+    public int getWickets() {
+        return this.wickets;
+    }
+
+    public void setWickets(int value) {
+        this.wickets = value;
+    }
+
+
     public String getErrorMessageValue() {
         return this.errorMsgValue;
+    }
+
+    public void setErrorMessageValue(String value) {
+        this.errorMsgValue = value;
     }
 
     public int getG50() {
         return this.g50;
     }
+
+    public void setG50(int value) {
+        this.g50 = value;
+    }
+
     public String getErrorMessageTitle() {
         return this.errorMsgTitle;
+    }
+
+    public void setErrorMessageTitle(String value) {
+        this.errorMsgTitle = value;
     }
 
     public int getInterruptions() {
         return this.interruptions;
     }
+    public void setInterruptions(int value) {
+        this.interruptions = value;
+    }
 
     public double getOvers() {
         return this.overs;
+    }
+    public void setOvers(double value) {
+        this.overs = value;
     }
 
     public int getTotalT1() {
         return this.totalT1;
     }
+    public void setTotalT1(int value) {
+        this.totalT1 = value;
+    }
 
     public int getTotalT2int1() {
         return this.totalT2int1;
+    }
+    public void setTotalT2int1(int value) {
+        this.totalT2int1 = value;
     }
 
     public int getTotalT2int2() {
         return this.totalT2int2;
     }
+    public void setTotalT2int2(int value) {
+        this.totalT2int2 = value;
+    }
 
     public int getTotalT2int3() {
         return this.totalT2int3;
     }
-
-    public int getWickets() {
-        return this.wickets;
+    public void setTotalT2int3(int value) {
+        this.totalT2int3 = value;
     }
 
     public double getInter1StartOver() {
         return this.inter1StartOver;
     }
+    public void setInter1StartOver(double value) {
+        this.inter1StartOver = value;
+    }
 
     public double getInter2StartOver() {
         return this.inter2StartOver;
     }
+    public void setInter2StartOver(double value) {
+        this.inter2StartOver = value;
+    }
 
     public double getInter3StartOver() {
         double answer = this.inter3StartOver;
-        Log.v("getInter3StartOver: ", String.valueOf(answer));
         return answer;
+    }
+    public void setInter3StartOver(double value) {
+        this.inter3StartOver = value;
     }
 
     public int getInter1Wickets() {
@@ -207,56 +256,26 @@ public class StateClass extends Application {
     /**
      * Setters for scenario 1
      */
-    public void setG50(int value) {
-        this.g50 = value;
-    }
-    public void setErrorMessageValue(String value) {
-        this.errorMsgValue = value;
-    }
 
-    public void setErrorMessageTitle(String value) {
-        this.errorMsgTitle = value;
-    }
-    public void setInterruptions(int value) {
-        this.interruptions = value;
-    }
 
-    public void setOvers(double value) {
-        this.overs = value;
-    }
 
-    public void setWickets(int value) {
-        this.wickets = value;
-    }
 
-    public void setTotalT1(int value) {
-        this.totalT1 = value;
-    }
 
-    public void setTotalT2int1(int value) {
-        this.totalT2int1 = value;
-    }
 
-    public void setTotalT2int2(int value) {
-        this.totalT2int2 = value;
-    }
 
-    public void setTotalT2int3(int value) {
-        this.totalT2int3 = value;
-    }
 
-    public void setInter1StartOver(double value) {
-        this.inter1StartOver = value;
-    }
 
-    public void setInter2StartOver(double value) {
-        this.inter2StartOver = value;
-    }
 
-    public void setInter3StartOver(double value) {
-        this.inter3StartOver = value;
-        Log.v("inter3StartOverVal: ", String.valueOf(value));
-    }
+
+
+
+
+
+
+
+
+
+
 
     public void setInter1Wickets(int value) {
         this.inter1Wickets = value;

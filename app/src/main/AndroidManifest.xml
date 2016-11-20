@@ -88,7 +88,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.MainActivity" />
         </activity>
-        <activity android:name=".Licences"
+        <activity
+            android:name=".Licences"
             android:label="Licences"
             android:parentActivityName=".AboutPage"
             android:windowSoftInputMode="adjustPan">
@@ -96,6 +97,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sportsoutclass.outclassdl.AboutPage" />
         </activity>
+        <activity android:name=".DLTable"></activity>
     </application>
 
 </manifest>

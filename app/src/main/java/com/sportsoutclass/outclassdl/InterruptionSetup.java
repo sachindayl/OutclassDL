@@ -88,7 +88,7 @@ class InterruptionSetup {
         state.setEndInterRes(resourcesLeftAtEndInter);
         Log.v("resourcesAvailable: ", String.valueOf(resourcesLeftAtEndInter));
         //setting up target
-        target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartOfMatch)) + 1.5);
+        target = (int) ((t1TotalScore * (resourcesLeftAtEndInter / resAtStartOfMatch)) + 1);
         Log.v("Target@calculations: ", String.valueOf(target));
 
         return target;
@@ -156,7 +156,7 @@ class InterruptionSetup {
         double resLeftAtInt2 = resourcesLeftAtEndInter - resLostAtInt2;
         state.setEndInterRes(resLeftAtInt2);
         Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
-        target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartOfMatch)) + 1.5);
+        target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartOfMatch)) + 1);
         Log.v("targetInt2: ", String.valueOf(target));
 
         return target;
@@ -225,7 +225,7 @@ class InterruptionSetup {
         Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
         double resLeftAtInt3 = resLeftAtInt2 - resLostAtInt3;
         Log.v("resourcesAvailable: ", String.valueOf(resLeftAtInt3));
-        target = (int) ((t1TotalScore * (resLeftAtInt3 / resAtStartOfMatch)) + 1.5);
+        target = (int) ((t1TotalScore * (resLeftAtInt3 / resAtStartOfMatch)) + 1);
         Log.v("target: ", String.valueOf(target));
         return target;
     }
@@ -347,9 +347,9 @@ class InterruptionSetup {
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
 
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
-            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1);
         } else {
-            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1.5);
+            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1);
         }
         return target;
     }
@@ -438,9 +438,9 @@ class InterruptionSetup {
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
         if (resForT2AtStartSc2 > resourcesLeftAtEndInterSc2) {
-            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resourcesLeftAtEndInterSc2) / 100 + 1);
         } else {
-            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1.5);
+            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resourcesLeftAtEndInterSc2 + 1);
         }
         return target;
     }
@@ -529,9 +529,9 @@ class InterruptionSetup {
         double oversForT2AtStartSc2 = state.getOversT2startSc2();
         double resForT2AtStartSc2 = overData.DataSet((int) oversForT2AtStartSc2 * 100);
         if (resForT2AtStartSc2 > resLeftAtInt2Sc2) {
-            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resLeftAtInt2Sc2) / 100 + 1.5);
+            target = (int) (team1FinalTotalb4Rev + g50_value * (resForT2AtStartSc2 - resLeftAtInt2Sc2) / 100 + 1);
         } else {
-            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resLeftAtInt2Sc2 + 1.5);
+            target = (int) (team1FinalTotalb4Rev * resForT2AtStartSc2 / resLeftAtInt2Sc2 + 1);
         }
         Log.v("target: ", String.valueOf(target));
         return target;
@@ -599,6 +599,7 @@ class InterruptionSetup {
         state = (StateClass) StateClass.getContext();
         overData = new DataMap();
         target = 0;
+        //Team1 total
         t1TotalScore = state.getTotalT1();
         Log.v("t1TotalScoreInISInit: ", String.valueOf(t1TotalScore));
         //Overs both teams has at the start of the match

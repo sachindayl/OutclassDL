@@ -36,6 +36,10 @@ public class AboutPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        StateClass state = (StateClass) getApplication();
+        Tracking analyticsTracker = new Tracking("AboutPage", state);
+        analyticsTracker.doTracking();
+
         init();
         ll = (LinearLayout) findViewById(R.id.about_row_ll);
         aboutRecycler.setHasFixedSize(true);

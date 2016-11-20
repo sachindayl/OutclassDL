@@ -116,7 +116,6 @@ public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSe
     double inter1Over, inter2Over, inter3Over, inter1OversAtEnd, inter2OversAtEnd, inter3OversAtEnd;
     DataMap overData;
     StateClass state;
-    Tracker mTracker;
     AlertDialog.Builder t2WinScore, usrErrAlert;
     InterruptionSetup fix;
 
@@ -130,10 +129,8 @@ public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSe
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         state = (StateClass) getApplication();
-        mTracker = state.getDefaultTracker();
-        Log.i("TAG", "Setting screen name: Scenario1");
-        mTracker.setScreenName("Scenario1");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        Tracking analyticsTracker = new Tracking("Scenario1", state);
+        analyticsTracker.doTracking();
 
         calcBtn = (Button) findViewById(R.id.calc_button1);
 
