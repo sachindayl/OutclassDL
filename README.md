@@ -1,4 +1,4 @@
-# OutclassDL # [![CircleCI](https://img.shields.io/circleci/project/github/sachindayl/OutclassDL.svg)]()
+# OutclassDL [![CircleCI](https://img.shields.io/circleci/project/github/sachindayl/OutclassDL.svg)]()
 
 
 Outclass DL is an Android application to calculate the score according to Duckworth Lewis method without a hassel. 
