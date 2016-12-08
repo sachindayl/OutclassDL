@@ -16,8 +16,8 @@ dependencies:
     pre:
         - mkdir -p ${ANDROID_HOME}/licenses
     override:
-        - cp $/home/sachinda/Android/Sdk/licences/android-sdk-license > ${ANDROID_HOME}/licenses/android-sdk-license
-        - cp $/home/sachinda/Android/Sdk/licences/android-sdk-preview-license > ${ANDROID_HOME}/licenses/android-sdk-preview-license
+        - cp $/home/sachinda/Android/Sdk/licences/android-sdk-license ${ANDROID_HOME}/licenses/android-sdk-license
+        - cp $/home/sachinda/Android/Sdk/licences/android-sdk-preview-license ${ANDROID_HOME}/licenses/android-sdk-preview-license
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.1,android-25,extra-google-m2repository,extra-google-google_play_services,extra-android-support
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
