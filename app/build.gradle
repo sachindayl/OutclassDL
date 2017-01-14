@@ -4,7 +4,6 @@ apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
-
     defaultConfig {
         applicationId "com.sportsoutclass.outclassdl"
         minSdkVersion 16
@@ -20,6 +19,9 @@ android {
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+    dexOptions {
+        javaMaxHeapSize "2g"
     }
 }
 
