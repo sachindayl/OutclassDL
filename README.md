@@ -5,10 +5,15 @@ Duckworth Lewis method is used in the sport of cricket to calculate the score af
 
 ## Libraries Used ##
 Android Compatibility Library v4
+
 Android Compatibility Library v7
+
 Android Design Support Library
+
 Android SDK
+
 [Butter Knife](http://jakewharton.github.io/butterknife/) 
+
 Google Play Services
 
 
