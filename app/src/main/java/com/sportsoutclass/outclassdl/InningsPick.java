@@ -35,7 +35,7 @@ public class InningsPick extends BaseFragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         inningsPicker.setLayoutManager(llm);
 
-        InningsPickerRVAdapter adapter = new InningsPickerRVAdapter(context, titleValues, subTitleValues);
+        InningsPickerRVAdapter adapter = new InningsPickerRVAdapter(titleValues, subTitleValues);
         inningsPicker.setAdapter(adapter);
 
         //for app bar
