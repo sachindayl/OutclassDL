@@ -12,16 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container">
-        <fragment android:name="com.sportsoutclass.outclassdl.TeamPick"
+        <fragment android:name="com.sportsoutclass.outclassdl.InningsPick"
             android:id="@+id/team_pick_fragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_team_pick" />
+            tools:layout="@layout/fragment_innings_pick" />
         <fragment android:name="com.sportsoutclass.outclassdl.FirstInnings"
             android:id="@+id/first_innings_fragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_team_pick" />
+            tools:layout="@layout/fragment_innings_pick" />
     </FrameLayout>
 
 </RelativeLayout>

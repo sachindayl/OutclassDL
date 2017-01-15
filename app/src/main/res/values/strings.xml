@@ -70,4 +70,5 @@
     <string name="g50_expected_average_score">G50 - Expected Average Score</string>
     <string name="number_of_interruptions">Number of interruptions</string>
     <string name="title_activity_team_selection">TeamSelection</string>
+    <string name="calculate_total_headline">Please Select an Inning to Calculate Total</string>
 </resources>

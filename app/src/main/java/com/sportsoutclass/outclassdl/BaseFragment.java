@@ -1,13 +1,13 @@
 package com.sportsoutclass.outclassdl;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by sachinda on 1/14/17.
+ * This abstract class adds action bar title changer and fragment replacer method
  */
 
 public abstract class BaseFragment extends Fragment {

@@ -2,13 +2,11 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,15 +15,13 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
 public class AboutPage extends AppCompatActivity {
 
     private Toolbar toolbar;
     String[] titleValues, subTitleValues;
     RecyclerView aboutRecycler;
-    private aboutPageRVAdapter adapter;
-    LinearLayout ll;
+    private AboutPageRVAdapter adapter;
     final Context context = StateClass.getContext();
 
     @Override
@@ -34,19 +30,20 @@ public class AboutPage extends AppCompatActivity {
         setContentView(R.layout.activity_about_page);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         StateClass state = (StateClass) getApplication();
         Tracking analyticsTracker = new Tracking("AboutPage", state);
         analyticsTracker.doTracking();
 
         init();
-        ll = (LinearLayout) findViewById(R.id.about_row_ll);
         aboutRecycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         aboutRecycler.setLayoutManager(llm);
 
-        adapter = new aboutPageRVAdapter(context, titleValues, subTitleValues);
+        adapter = new AboutPageRVAdapter(context, titleValues, subTitleValues);
         aboutRecycler.setAdapter(adapter);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
