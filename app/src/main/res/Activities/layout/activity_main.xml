@@ -306,7 +306,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="15dp"
-                            android:text="@string/team2overs_sc2"
+                            android:text="@string/team2overs_first_innings"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/black" />
 

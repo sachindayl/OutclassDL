@@ -31,8 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.Tracker;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -47,7 +45,7 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
     @BindView(R.id.next_button3)
     Button calcBtn;
     //Layout Binding
-    @BindView(R.id.interruption_1_sc2_container)
+    @BindView(R.id.first_innings_interruption_1_container)
     LinearLayout interruption_1_sc2_container;
     @BindView(R.id.interruption_2_sc2_container)
     LinearLayout interruption_2_sc2_container;
@@ -218,7 +216,7 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     //activating calculate button
-    public void activateNextBtnSc2(View v) {
+    public void firstInningsActivateNextBtn(View v) {
 
         int interrupt = stateSc2.getInterruptionsSc2();
         allFieldsFilled = whichFieldsTocheck(interrupt);

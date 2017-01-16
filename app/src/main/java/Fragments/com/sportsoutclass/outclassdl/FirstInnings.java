@@ -9,10 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,15 +34,90 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         // Required empty public constructor
     }
 
-    @BindView(R.id.number_overs_edit_text)
-    EditText totalOvers;
+    //Layout Binding
+    @BindView(R.id.first_innings_interruption_1_container)
+    LinearLayout first_innings_interruption_1_container;
+    @BindView(R.id.first_innings_interruption_2_container)
+    LinearLayout first_innings_interruption_2_container;
+    @BindView(R.id.first_innings_interruption_3_container)
+    LinearLayout first_innings_interruption_3_container;
+
+    //TextView Bindings
+    @BindView(R.id.first_innings_interruption_1_tv)
+    TextView first_innings_interruption_1_tv;
+    @BindView(R.id.first_innings_team2_total_interruption_1_tv)
+    TextView first_innings_team2_total_interruption_1_tv;
+    @BindView(R.id.first_innings_team2_total_interruption_2_tv)
+    TextView first_innings_team2_total_interruption_2_tv;
+    @BindView(R.id.first_innings_team2_total_interruption_3_tv)
+    TextView first_innings_team2_total_interruption_3_tv;
+    @BindView(R.id.first_innings_interruption_2_tv)
+    TextView first_innings_interruption_2_tv;
+    @BindView(R.id.first_innings_interruption_3_tv)
+    TextView first_innings_interruption_3_tv;
+    @BindView(R.id.first_innings_which_over_interruption_1_tv)
+    TextView first_innings_which_over_interruption_1_tv;
+    @BindView(R.id.first_innings_which_over_interruption_2_tv)
+    TextView first_innings_which_over_interruption_2_tv;
+    @BindView(R.id.first_innings_which_over_interruption_3_tv)
+    TextView first_innings_which_over_interruption_3_tv;
+    @BindView(R.id.first_innings_wickets_lost_interruption_1_tv)
+    TextView first_innings_wickets_lost_interruption_1_tv;
+    @BindView(R.id.first_innings_wickets_lost_interruption_2_tv)
+    TextView first_innings_wickets_lost_interruption_2_tv;
+    @BindView(R.id.first_innings_wickets_lost_interruption_3_tv)
+    TextView first_innings_wickets_lost_interruption_3_tv;
+    @BindView(R.id.first_innings_overs_remaining_interruption_1_tv)
+    TextView first_innings_overs_remaining_interruption_1_tv;
+    @BindView(R.id.first_innings_overs_remaining_interruption_2_tv)
+    TextView first_innings_overs_remaining_interruption_2_tv;
+    @BindView(R.id.first_innings_overs_remaining_interruption_3_tv)
+    TextView first_innings_overs_remaining_interruption_3_tv;
+    //EditText Bindings
+    @BindView(R.id.first_innings_total_interruption_1_et)
+    EditText first_innings_total_interruption_1_et;
+    @BindView(R.id.first_innings_total_interruption_2_et)
+    EditText first_innings_total_interruption_2_et;
+    @BindView(R.id.first_innings_total_interruption_3_et)
+    EditText first_innings_total_interruption_3_et;
+    @BindView(R.id.first_innings_which_over_interruption_1_et)
+    EditText first_innings_which_over_interruption_1_et;
+    @BindView(R.id.first_innings_which_over_interruption_2_et)
+    EditText first_innings_which_over_interruption_2_et;
+    @BindView(R.id.first_innings_which_over_interruption_3_et)
+    EditText first_innings_which_over_interruption_3_et;
+    @BindView(R.id.first_innings_wickets_lost_interruption_1_et)
+    EditText first_innings_wickets_lost_interruption_1_et;
+    @BindView(R.id.first_innings_wickets_lost_interruption_2_et)
+    EditText first_innings_wickets_lost_interruption_2_et;
+    @BindView(R.id.first_innings_wickets_lost_interruption_3_et)
+    EditText first_innings_wickets_lost_interruption_3_et;
+    @BindView(R.id.first_innings_overs_remaining_interruption_1_et)
+    EditText first_innings_overs_remaining_interruption_1_et;
+    @BindView(R.id.first_innings_overs_remaining_interruption_2_et)
+    EditText first_innings_overs_remaining_interruption_2_et;
+    @BindView(R.id.first_innings_overs_remaining_interruption_3_et)
+    EditText first_innings_overs_remaining_interruption_3_et;
+    @BindView(R.id.first_innings_team2_overs_et)
+    EditText first_innings_team2_overs_et;
+    @BindView(R.id.first_innings_team1_final_total_et)
+    EditText first_innings_team1_final_total_et;
+    @BindView(R.id.first_innings_interruptions_spinner)
+    Spinner first_innings_interruptions_spinner;
+
+    @BindView(R.id.first_innings_number_overs_edit_text)
+    EditText first_innings_number_overs_edit_text;
     @BindView(R.id.g50_spinner)
     Spinner g50_Spinner;
     View view;
     StateClass state;
+    DataMap firstInningsOverData;
+    InterruptionSetup fix;
     List<Map<String, String>> items;
+    AlertDialog.Builder t1WinTarget;
     AlertDialog.Builder usrErrAlert;
-    Double overs;
+    double overs;
+    boolean allFieldsFilled;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +127,14 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         items = new ArrayList<>();
         state = (StateClass) getActivity().getApplication();
         usrErrAlert = new AlertDialog.Builder(getActivity());
+        t1WinTarget = new AlertDialog.Builder(getActivity());
+        firstInningsOverData = new DataMap();
+        fix = new InterruptionSetup();
+        allFieldsFilled = false;
+
+        Tracking analyticsTracker = new Tracking("FirstInnings", state);
+        analyticsTracker.doTracking();
+
         Map<String, String> item0 = new HashMap<>(2);
         item0.put("text", "200");
         item0.put("subText", "U-19, U-15, Associate Nations and Below");
@@ -68,16 +155,15 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         g50_Spinner.setOnItemSelectedListener(this);
         state.setG50(0);
 
+        ArrayAdapter<CharSequence> interruptions_adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.interruptions_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        interruptions_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        first_innings_interruptions_spinner.setAdapter(interruptions_adapter);
+        first_innings_interruptions_spinner.setOnItemSelectedListener(this);
+
         editTextWatcher();
-//        TextView t1 = (TextView)view.findViewById(R.id.text_v2);
-//        Button b1 = (Button) view.findViewById(R.id.frag_btn2);
-//        b1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment fragment = new InningsPick();
-//                replaceFragment(fragment, R.id.fragment_container);
-//            }
-//        });
 
 
         //for app bar
@@ -99,7 +185,22 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 if (position == 0) state.setG50(0);
                 else if (position == 1) state.setG50(1);
                 break;
+            case R.id.first_innings_interruptions_spinner:
+                if(position == 0){
+                    InterruptionsAmountVisibilitySetup(1);
+                    state.setInterruptionsSc2(1);
+                }
+                else if(position == 1){
+                    InterruptionsAmountVisibilitySetup(2);
+                    state.setInterruptionsSc2(2);
+                }
+                else if(position == 2){
+                    InterruptionsAmountVisibilitySetup(3);
+                    state.setInterruptionsSc2(3);
+                }
+                break;
         }
+
     }
 
     @Override
@@ -107,8 +208,33 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
     }
 
-    private void editTextWatcher(){
-        totalOvers.addTextChangedListener(new TextWatcher() {
+    //this enables disables visibility of number of interruptions available to edit
+    private void InterruptionsAmountVisibilitySetup(int i) {
+        if (i == 1) {
+            first_innings_interruption_1_container.setVisibility(View.VISIBLE);
+            first_innings_interruption_2_container.setVisibility(View.GONE);
+            first_innings_interruption_3_container.setVisibility(View.GONE);
+            first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        } else if (i == 2) {
+            InterruptionsAmountVisibilitySetup(1);
+            first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_interruption_2_container.setVisibility(View.VISIBLE);
+            first_innings_interruption_3_container.setVisibility(View.GONE);
+            first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        } else if (i == 3) {
+            InterruptionsAmountVisibilitySetup(2);
+            first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_interruption_3_container.setVisibility(View.VISIBLE);
+            first_innings_overs_remaining_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        }
+
+    }
+
+    private void editTextWatcher() {
+        first_innings_number_overs_edit_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

@@ -9,7 +9,7 @@
     <string name="title_activity_about_page">About</string>
     <string name="title_activity_scenario1">Team 2 Interruptions</string>
     <string name="title_activity_how_to_page">Instructions</string>
-    <string name="start_innings_overs">Number of overs per side (50 or less)</string>
+    <string name="start_innings_overs">Initial Number of overs</string>
     <string name="team_1_full_amount">Team 1 batted the allotted overs?</string>
     <string name="team_1_revised">Team 1 revised total calculated?</string>
     <string name="interruptions">How many interruptions were in Team 2\'s inning? (Max. 3)</string>
@@ -29,7 +29,7 @@
     <string name="wickets">Wickets</string>
     <string name="total_at_interruption">Total at interruption</string>
     <string name="calculate">Calculate</string>
-    <string name="team2overs_sc2">How many overs will Team 2 play</string>
+    <string name="team2overs_first_innings">How many overs will Team 2 play</string>
     <string name="team_1_final_total">Team 1 final total</string>
     <string name="app_bar_about">About</string>
     <string name="app_bar_instructions">Instructions</string>
