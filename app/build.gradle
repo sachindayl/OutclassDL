@@ -23,6 +23,12 @@ android {
     dexOptions {
         javaMaxHeapSize "2g"
     }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java/Activities', 'src/main/java/Fragments', 'src/main/java/Base']
+            res.srcDirs = ['src/main/res', 'src/main/res/Activities', 'src/main/res/Fragments']
+        }
+    }
 }
 
 apt {
