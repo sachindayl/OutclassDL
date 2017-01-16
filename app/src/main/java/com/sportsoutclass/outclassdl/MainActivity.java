@@ -38,32 +38,55 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public final class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     @BindView(R.id.app_bar)
     Toolbar toolbar;
-    //If the variable contains Two it is regarding scenario 2
-    Intent scenario1, scenario2, aboutPg, insPg;
+    Intent scenario1,
+            scenario2,
+    aboutPg,
+    insPg;
     //Using butter knife to bind views
-    @BindView(R.id.team_1_score) TextView team1TotalScoreText;
-    @BindView(R.id.team_1_wickets) TextView team1WicketsText;
-    @BindView(R.id.team_1_scoreTwo) TextView team1TotalScoreDL;
-    @BindView(R.id.team_1_wicketsTwo) TextView team1WicketsDL;
-    @BindView(R.id.team_1_oversTwo) TextView team1OversDL;
-    @BindView(R.id.number_overs_edit_text) EditText numberOfOversEditText;
-    @BindView(R.id.team_1_score_edit) EditText team1TotalScoreEditText;
-    @BindView(R.id.team_1_wickets_edit) EditText team1WicketsEditText;
-    @BindView(R.id.team_1_score_editTwo) EditText team1TotalScoreDLEditText;
-    @BindView(R.id.team_1_wickets_editTwo) EditText team1WicketsDLEditText;
-    @BindView(R.id.team_1_overs_editTwo) EditText team2OversDLEditText;
-    @BindView(R.id.g50_spinner) Spinner g50_Spinner;
-    @BindView(R.id.did_team_1_bat_spinner) Spinner did_team_1_bat_spinner;
-    @BindView(R.id.team_1_revised_total_spinner) Spinner team_1_revised_total_spinner;
-    @BindView(R.id.team1_info_container) View team1_info_container;
-    @BindView(R.id.team1_revised_info_container) View team1_revised_info_container;
-    @BindView(R.id.team_1_revised_total_spinner_container) View team_1_revised_total_spinner_container;
+    @BindView(R.id.team_1_score)
+    TextView team1TotalScoreText;
+    @BindView(R.id.team_1_wickets)
+    TextView team1WicketsText;
+    @BindView(R.id.team_1_scoreTwo)
+    TextView team1TotalScoreDL;
+    @BindView(R.id.team_1_wicketsTwo)
+    TextView team1WicketsDL;
+    @BindView(R.id.team_1_oversTwo)
+    TextView team1OversDL;
+    @BindView(R.id.number_overs_edit_text)
+    EditText numberOfOversEditText;
+    @BindView(R.id.team_1_score_edit)
+    EditText team1TotalScoreEditText;
+    @BindView(R.id.team_1_wickets_edit)
+    EditText team1WicketsEditText;
+    @BindView(R.id.team_1_score_editTwo)
+    EditText team1TotalScoreDLEditText;
+    @BindView(R.id.team_1_wickets_editTwo)
+    EditText team1WicketsDLEditText;
+    @BindView(R.id.team_1_overs_editTwo)
+    EditText team2OversDLEditText;
+    @BindView(R.id.g50_spinner)
+    Spinner g50_Spinner;
+    @BindView(R.id.did_team_1_bat_spinner)
+    Spinner did_team_1_bat_spinner;
+    @BindView(R.id.team_1_revised_total_spinner)
+    Spinner team_1_revised_total_spinner;
+    @BindView(R.id.team1_info_container)
+    View team1_info_container;
+    @BindView(R.id.team1_revised_info_container)
+    View team1_revised_info_container;
+    @BindView(R.id.team_1_revised_total_spinner_container)
+    View team_1_revised_total_spinner_container;
     StateClass state;
-    double overs, oversTwo;
-    int total, totalT1AfterRevised, wickets, wicketsAfterRevised;
+    double overs,
+    oversTwo;
+    int total,
+    totalT1AfterRevised,
+    wickets,
+    wicketsAfterRevised;
     // Obtain the shared Tracking instance.
 
     Button nextBtn;
@@ -173,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
-    public void scenarioBtn(View v) {
+    public void scenarioBtn(final View v) {
         //overs at the start of the innings for both teams
         double innStartOvers = state.getOvers();
         //wickets fell for team 1
@@ -187,47 +210,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //overs available to team 2 because of revision
         double revisedT1Overs = state.getOvers();
 
-            if (did_team_1_bat_spinner.getSelectedItemPosition() == 0) {
-                if (innStartOvers != 0 && innStartTotal != 0) {
+        if (did_team_1_bat_spinner.getSelectedItemPosition() == 0) {
+            if (innStartOvers != 0 && innStartTotal != 0) {
 
-                    if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
-                        scenario1 = new Intent(this, Scenario1.class);
-                        startActivity(scenario1);
-                    } else {
-                        InterruptionSetup.interruptionErrors(usrErrAlert, -10008, "Error", "");
-                    }
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && innStartWickets <= 10) {
+                    scenario1 = new Intent(this, Scenario1.class);
+                    startActivity(scenario1);
                 } else {
-                    if (innStartOvers == 0 && innStartTotal == 0) {
-                        InterruptionSetup.interruptionErrors(usrErrAlert, -10009, "Error", "");
-                    } else if (innStartTotal == 0) {
-                        InterruptionSetup.interruptionErrors(usrErrAlert, -10010, "Error", "");
-                    } else {
-                        InterruptionSetup.interruptionErrors(usrErrAlert, -10011, "Error", "");
-                    }
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10008, "Error", "");
                 }
             } else {
-                if (team_1_revised_total_spinner.getSelectedItemPosition() == 0) {
-                    if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
-                        scenario1 = new Intent(this, Scenario1.class);
-                        startActivity(scenario1);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                if (innStartOvers == 0 && innStartTotal == 0) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10009, "Error", "");
+                } else if (innStartTotal == 0) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10010, "Error", "");
+                } else {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10011, "Error", "");
+                }
+            }
+        } else {
+            if (team_1_revised_total_spinner.getSelectedItemPosition() == 0) {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0 && revisedT1Total > 0 && revisedT1Overs > 0.0 && revisedT1Wickets <= 10) {
+                    scenario1 = new Intent(this, Scenario1.class);
+                    startActivity(scenario1);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Please enter valid information",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                if (innStartOvers > 0.0 && innStartOvers <= 50.0) {
+                    scenario2 = new Intent(this, Scenario2.class);
+                    startActivity(scenario2);
+                } else {
+                    if (innStartOvers == 0) {
+                        Toast.makeText(getApplicationContext(), "Error: Please enter the number of overs",
                                 Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    if (innStartOvers > 0.0 && innStartOvers <= 50.0) {
-                        scenario2 = new Intent(this, Scenario2.class);
-                        startActivity(scenario2);
-                    } else {
-                        if(innStartOvers == 0){
-                            Toast.makeText(getApplicationContext(), "Error: Please enter the number of overs",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
                 }
 
             }
+
+        }
 
 
     }
@@ -407,9 +430,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    /**
-     * Saving state to use on back press
-     */
     private void retrieveData() {
         double retrieveOvers = state.getOvers();
         if (retrieveOvers == 0.0) {
@@ -435,20 +455,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //Spinner functionality happens here according id of spinner
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-        switch (adapterView.getId()){
+        switch (adapterView.getId()) {
             case R.id.g50_spinner:
                 if (pos == 0) state.setG50(0);
                 else if (pos == 1) state.setG50(1);
                 break;
             case R.id.did_team_1_bat_spinner:
-                if(pos == 0){
+                if (pos == 0) {
                     numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                     team_1_revised_total_spinner.setSelection(0);
                     team_1_revised_total_spinner_container.setVisibility(View.GONE);
                     team1_revised_info_container.setVisibility(View.GONE);
                     team1_info_container.setVisibility(View.VISIBLE);
 
-                }else if(pos == 1){
+                } else if (pos == 1) {
                     numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                     team_1_revised_total_spinner_container.setVisibility(View.VISIBLE);
                     team1_revised_info_container.setVisibility(View.VISIBLE);
@@ -459,11 +479,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 break;
             case R.id.team_1_revised_total_spinner:
-                if(pos == 0){
+                if (pos == 0) {
                     numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                     team1_revised_info_container.setVisibility(View.VISIBLE);
 
-                }else if(pos == 1){
+                } else if (pos == 1) {
                     numberOfOversEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     team1_info_container.setVisibility(View.GONE);
                     team1_revised_info_container.setVisibility(View.GONE);

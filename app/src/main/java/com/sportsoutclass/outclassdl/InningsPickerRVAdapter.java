@@ -36,14 +36,13 @@ class InningsPickerRVAdapter extends RecyclerView.Adapter<InningsPickerRVAdapter
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            TeamSelection teamSelect = (TeamSelection) v.getContext();
             if (position == 0) {
-                TeamSelection teamSelect = (TeamSelection) v.getContext();
                 Fragment firstInnings = new FirstInnings();
                 teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, firstInnings).addToBackStack(null).commit();
             } else if (position == 1) {
-                TeamSelection teamSelect = (TeamSelection) v.getContext();
-                Fragment firstInnings = new FirstInnings();
-                teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, firstInnings).addToBackStack(null).commit();
+                Fragment secondInnings = new SecondInnings();
+                teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, secondInnings).addToBackStack(null).commit();
             }
         }
     }
