@@ -82,6 +82,7 @@ public class StateClass extends Application {
 
     public void setG50(int value) {
         this.g50 = value;
+        Log.v("G50", "G50 Set to " + value);
     }
 
     public String getErrorMessageTitle() {

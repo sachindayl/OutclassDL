@@ -99,10 +99,89 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/interruption_spinner_container"
+                android:id="@+id/team1_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/total_overs_container"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:divider="@drawable/divider"
+                android:layout_marginTop="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:weightSum="8">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/team_1_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:text="@string/team_1_final_score"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/team_1_wickets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:text="@string/wickets"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/team_1_score_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:hint="@string/total"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:nextFocusForward="@+id/team_1_wickets_edit"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
+                        android:id="@id/team_1_wickets_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/interruption_spinner_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team1_info_container"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
