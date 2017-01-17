@@ -44,6 +44,7 @@
         <activity
             android:name=".TeamSelection"
             android:label="@string/title_activity_team_selection"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,8 @@
 package com.sportsoutclass.outclassdl;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -10,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
@@ -29,11 +34,12 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FirstInnings extends BaseFragment implements AdapterView.OnItemSelectedListener {
+public class FirstInnings extends BaseFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     public FirstInnings() {
         // Required empty public constructor
     }
-
+    @BindView(R.id.first_innings_calc_button)
+    Button calculate_Btn;
     //Layout Binding
     @BindView(R.id.first_innings_interruption_1_container)
     LinearLayout first_innings_interruption_1_container;
@@ -45,11 +51,11 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     //TextView Bindings
     @BindView(R.id.first_innings_interruption_1_tv)
     TextView first_innings_interruption_1_tv;
-    @BindView(R.id.first_innings_team2_total_interruption_1_tv)
+    @BindView(R.id.first_innings_total_interruption_1_tv)
     TextView first_innings_team2_total_interruption_1_tv;
-    @BindView(R.id.first_innings_team2_total_interruption_2_tv)
+    @BindView(R.id.first_innings_total_interruption_2_tv)
     TextView first_innings_team2_total_interruption_2_tv;
-    @BindView(R.id.first_innings_team2_total_interruption_3_tv)
+    @BindView(R.id.first_innings_total_interruption_3_tv)
     TextView first_innings_team2_total_interruption_3_tv;
     @BindView(R.id.first_innings_interruption_2_tv)
     TextView first_innings_interruption_2_tv;
@@ -116,7 +122,8 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     List<Map<String, String>> items;
     AlertDialog.Builder t1WinTarget;
     AlertDialog.Builder usrErrAlert;
-    double overs;
+    int totalWicketsSc2, inter1WicketsFirstInnings, inter2WicketsSc2, inter3WicketsSc2, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
+    double overs, inter1OversFirstInnings, inter2OversFirstInnings, inter3OversFirstInnings, inter1OversAtEndFirstInnings, inter2OversAtEndFirstInnings, inter3OversAtEndFirstInnings, team2OversAtStartFirstInnings;
     boolean allFieldsFilled;
 
     @Override
@@ -132,6 +139,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         fix = new InterruptionSetup();
         allFieldsFilled = false;
 
+        calculate_Btn.setOnClickListener(this);
         Tracking analyticsTracker = new Tracking("FirstInnings", state);
         analyticsTracker.doTracking();
 
@@ -214,20 +222,31 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
             first_innings_interruption_1_container.setVisibility(View.VISIBLE);
             first_innings_interruption_2_container.setVisibility(View.GONE);
             first_innings_interruption_3_container.setVisibility(View.GONE);
+            first_innings_which_over_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_total_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_wickets_lost_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
-            first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+
             first_innings_interruption_2_container.setVisibility(View.VISIBLE);
             first_innings_interruption_3_container.setVisibility(View.GONE);
+            first_innings_which_over_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_total_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_wickets_lost_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 
         } else if (i == 3) {
             InterruptionsAmountVisibilitySetup(2);
-            first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+
             first_innings_interruption_3_container.setVisibility(View.VISIBLE);
+            first_innings_which_over_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_total_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            first_innings_wickets_lost_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 
         }
 
@@ -260,6 +279,473 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 Log.v("TotalOvers: ", numberOfOversToS);
             }
         });
+
+        //overs at the start of interruption
+        first_innings_which_over_interruption_1_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter1OversFirstInnings = 0;
+                String inter1overToS = s.toString();
+                if (inter1overToS.equals("")) {
+                    inter1overToS = "0";
+                }
+                inter1OversFirstInnings = Double.parseDouble(inter1overToS);
+                state.setInter1StartOverSc2(inter1OversFirstInnings);
+            }
+        });
+        first_innings_which_over_interruption_2_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2OversFirstInnings = 0;
+                String inter2overToS = s.toString();
+                if (inter2overToS.equals("")) {
+                    inter2overToS = "0";
+                }
+                inter2OversFirstInnings = Double.parseDouble(inter2overToS);
+                state.setInter2StartOverSc2(inter2OversFirstInnings);
+            }
+        });
+        first_innings_which_over_interruption_3_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3OversFirstInnings = 0;
+                String inter3overToS = s.toString();
+                if (inter3overToS.equals("")) {
+                    inter3overToS = "0";
+                }
+                inter3OversFirstInnings = Double.parseDouble(inter3overToS);
+                state.setInter3StartOverSc2(inter3OversFirstInnings);
+            }
+        });
+        //wickets at the start of interruption
+        first_innings_wickets_lost_interruption_1_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter1WicketsFirstInnings = 0;
+                String inter1WicketsToS = s.toString();
+                if (inter1WicketsToS.equals("")) {
+                    inter1WicketsToS = "0";
+                }
+                inter1WicketsFirstInnings = Integer.parseInt(inter1WicketsToS);
+                if (inter1WicketsFirstInnings > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10002, "Error", inter1WicketsToS);
+                }
+                state.setInter1WicketsSc2(inter1WicketsFirstInnings);
+            }
+        });
+        first_innings_wickets_lost_interruption_2_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2WicketsSc2 = 0;
+                String inter2WicketsToS = s.toString();
+                if (inter2WicketsToS.equals("")) {
+                    inter2WicketsToS = "0";
+                }
+                inter2WicketsSc2 = Integer.parseInt(inter2WicketsToS);
+                if (inter2WicketsSc2 > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter2WicketsToS);
+                }
+                state.setInter2WicketsSc2(inter2WicketsSc2);
+            }
+        });
+        first_innings_wickets_lost_interruption_3_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3WicketsSc2 = 0;
+                String inter3WicketsToS = s.toString();
+                if (inter3WicketsToS.equals("")) {
+                    inter3WicketsToS = "0";
+                }
+                inter3WicketsSc2 = Integer.parseInt(inter3WicketsToS);
+                if (inter3WicketsSc2 > 10) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter3WicketsToS);
+                }
+                state.setInter3WicketsSc2(inter3WicketsSc2);
+            }
+        });
+        //overs remaining till end of play
+        first_innings_overs_remaining_interruption_1_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter1OversAtEndFirstInnings = 0;
+                String inter1OversAtEndToS = s.toString();
+                if (inter1OversAtEndToS.equals("")) {
+                    inter1OversAtEndToS = "0";
+                }
+                inter1OversAtEndFirstInnings = Double.parseDouble(inter1OversAtEndToS);
+                state.setInter1EndOverSc2(inter1OversAtEndFirstInnings);
+            }
+        });
+        first_innings_overs_remaining_interruption_2_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2OversAtEndFirstInnings = 0;
+                String inter2OversAtEndToS = s.toString();
+                if (inter2OversAtEndToS.equals("")) {
+                    inter2OversAtEndToS = "0";
+                }
+                inter2OversAtEndFirstInnings = Double.parseDouble(inter2OversAtEndToS);
+                state.setInter2EndOverSc2(inter2OversAtEndFirstInnings);
+            }
+        });
+        first_innings_overs_remaining_interruption_3_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3OversAtEndFirstInnings = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                inter3OversAtEndFirstInnings = Double.parseDouble(inter3OversAtEndToS);
+                state.setInter3EndOverSc2(inter3OversAtEndFirstInnings);
+            }
+        });
+        //total at the interruption
+        first_innings_total_interruption_1_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter1totalFirstInnings = 0;
+                String inter1OversAtEndToS = s.toString();
+                if (inter1OversAtEndToS.equals("")) {
+                    inter1OversAtEndToS = "0";
+                }
+                inter1totalFirstInnings = Integer.parseInt(inter1OversAtEndToS);
+                state.setTotalT1int1Sc2(inter1totalFirstInnings);
+            }
+        });
+        first_innings_total_interruption_2_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter2totalFirstInnings = 0;
+                String inter2OversAtEndToS = s.toString();
+                if (inter2OversAtEndToS.equals("")) {
+                    inter2OversAtEndToS = "0";
+                }
+                inter2totalFirstInnings = Integer.parseInt(inter2OversAtEndToS);
+                state.setTotalT1int2Sc2(inter2totalFirstInnings);
+            }
+        });
+        first_innings_total_interruption_3_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inter3totalFirstInnings = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                inter3totalFirstInnings = Integer.parseInt(inter3OversAtEndToS);
+                state.setTotalT1int3Sc2(inter3totalFirstInnings);
+            }
+        });
+        //overs given for team 2
+        first_innings_team2_overs_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                team2OversAtStartFirstInnings = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                team2OversAtStartFirstInnings = Double.parseDouble(inter3OversAtEndToS);
+                state.setOversT2StartSc2(team2OversAtStartFirstInnings);
+            }
+        });
+        //team1 final total before is revised
+        first_innings_team1_final_total_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                team1finalTotB4rev = 0;
+                String inter3OversAtEndToS = s.toString();
+                if (inter3OversAtEndToS.equals("")) {
+                    inter3OversAtEndToS = "0";
+                }
+                team1finalTotB4rev = Integer.parseInt(inter3OversAtEndToS);
+                state.setTotalT1Sc2(team1finalTotB4rev);
+            }
+        });
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.first_innings_calc_button:
+                int interrupt = state.getInterruptionsSc2();
+                allFieldsFilled = whichFieldsToCheck(interrupt);
+
+                Log.v("allFieldsFilledBtn: ", String.valueOf(allFieldsFilled));
+                if (allFieldsFilled) {
+
+                    new AsyncCalculation().execute(interrupt);
+                    InputMethodManager iMM = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    try{
+                        iMM.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }catch (NullPointerException nPE){
+                        nPE.printStackTrace();
+                    }
+                } else {
+                    usrErrAlert.setTitle("Incomplete Information");
+                    usrErrAlert.setMessage("Please fill all the blanks");
+                    usrErrAlert.setPositiveButton("OK", null);
+                    usrErrAlert.show();
+                }
+                break;
+        }
+    }
+
+    private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {
+        ProgressDialog pd = new ProgressDialog(getActivity());
+        InterruptionSetup interNew = new InterruptionSetup();
+        String response = "";
+        int target = 0;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd.setMessage("\tCalculating...");
+            pd.show();
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... interruptions) {
+            int interruption = interruptions[0];
+            try {
+                if (interruption == 1) {
+                    target = interNew.one_Interruption_Sc2();
+                } else if (interruption == 2) {
+                    target = interNew.two_Interruptions_Sc2();
+                } else if (interruption == 3) {
+                    target = interNew.three_Interruptions_Sc2();
+                }
+
+                Log.v("theCalculatedTarget: ", String.valueOf(target));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = e.getMessage();
+            }
+            return target;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+            Log.v("theCalculatedTrgtPE: ", String.valueOf(result));
+            team1ScoreCalc(result);
+            pd.dismiss();
+        }
+    }
+
+    /**
+     * Shows the user the final target needed to be achieved
+     * @param target score found by calculation
+     */
+    public void team1ScoreCalc(int target) {
+//        int inter = stateSc2.getInterruptionsSc2();
+        //values less than -10000 contains error codes
+        if (target > -10000) {
+            t1WinTarget.setTitle("Par Score");
+            t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " runs to win.");
+            t1WinTarget.setPositiveButton("OK", null);
+            t1WinTarget.show();
+        } else {
+            String value = state.getErrorMessageValue();
+            String title = state.getErrorMessageTitle();
+            InterruptionSetup.interruptionErrors(usrErrAlert, target, title, value);
+        }
+    }
+
+    /**
+     * Checks if the edit text fields contain necessary data before calculation starts.
+     * @param interruptions number of interruptions user needs to check
+     * @return true if the necessary fields are not empty.
+     */
+    public boolean whichFieldsToCheck(int interruptions) {
+        boolean notEmpty = false;
+        if (interruptions == 1) {
+            boolean x1 = editTextFieldCheck(first_innings_total_interruption_1_et);
+            boolean x2 = editTextFieldCheck(first_innings_which_over_interruption_1_et);
+            boolean x3 = editTextFieldCheck(first_innings_wickets_lost_interruption_1_et);
+            boolean x4 = editTextFieldCheck(first_innings_team1_final_total_et);
+            boolean x5 = editTextFieldCheck(first_innings_team2_overs_et);
+
+            if (x1 && x2 && x3 && x4 && x5) {
+                notEmpty = true;
+            }
+
+        } else if (interruptions == 2) {
+            boolean x1 = whichFieldsToCheck(1);
+            boolean x2 = editTextFieldCheck(first_innings_total_interruption_2_et);
+            boolean x3 = editTextFieldCheck(first_innings_which_over_interruption_2_et);
+            boolean x4 = editTextFieldCheck(first_innings_wickets_lost_interruption_2_et);
+            if (x1 && x2 && x3 && x4) {
+                notEmpty = true;
+            }
+
+        } else if (interruptions == 3) {
+            boolean x1 = whichFieldsToCheck(2);
+            boolean x2 = editTextFieldCheck(first_innings_total_interruption_3_et);
+            boolean x3 = editTextFieldCheck(first_innings_which_over_interruption_3_et);
+            boolean x4 = editTextFieldCheck(first_innings_wickets_lost_interruption_3_et);
+            if (x1 && x2 && x3 && x4) {
+                notEmpty = true;
+            }
+        }
+        return notEmpty;
+    }
+
+    /**
+     *Checks if the selected edit text is empty or not
+     * @param x EditText that will be checked
+     * @return true if not empty
+     */
+    public boolean editTextFieldCheck(EditText x) {
+        boolean fieldNotEmpty = false;
+        if(x.getText().toString().trim().length() > 0) fieldNotEmpty = true;
+        Log.v("EditTextNotEmptyCheck: ", "Edit Text " + x + "is " + String.valueOf(fieldNotEmpty));
+        return fieldNotEmpty;
+    }
+
 
 }
