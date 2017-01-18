@@ -90,6 +90,7 @@
                         android:gravity="center"
                         android:hint="@string/overs"
                         android:inputType="numberDecimal"
+                        android:nextFocusForward="@+id/second_innings_team_1_score_et"
                         android:maxLength="4"
                         android:paddingTop="15dp"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -144,7 +145,7 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/second_innings_team_1_score_et"
+                        android:id="@id/second_innings_team_1_score_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789"
@@ -166,6 +167,7 @@
                         android:gravity="center"
                         android:imeOptions="actionDone"
                         android:inputType="number"
+                        android:nextFocusForward="@+id/second_innings_which_over_interruption_1_et"
                         android:maxLength="2"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
@@ -248,7 +250,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_which_over_interruption_1_et"
+                            android:id="@id/second_innings_which_over_interruption_1_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -256,6 +258,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789."
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_total_interruption_1_et"
                             android:hint="@string/overs"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
@@ -278,12 +281,12 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="2"
-                            android:text="@string/total_at_interruption"
+                            android:text="@string/t2_total_at_interruption"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_total_interruption_1_et"
+                            android:id="@id/second_innings_total_interruption_1_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -291,6 +294,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_wickets_lost_interruption_1_et"
                             android:hint="@string/total"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -317,7 +321,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_wickets_lost_interruption_1_et"
+                            android:id="@id/second_innings_wickets_lost_interruption_1_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -325,6 +329,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_overs_remaining_interruption_1_et"
                             android:hint="@string/wickets"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -359,6 +364,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789."
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_which_over_interruption_2_et"
                             android:hint="@string/overs"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
@@ -419,7 +425,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_which_over_interruption_2_et"
+                            android:id="@id/second_innings_which_over_interruption_2_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -427,6 +433,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789."
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_total_interruption_2_et"
                             android:hint="@string/overs"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
@@ -450,12 +457,12 @@
                             android:layout_marginTop="5dp"
                             android:layout_weight="2"
                             android:paddingBottom="10dp"
-                            android:text="@string/total_at_interruption"
+                            android:text="@string/t2_total_at_interruption"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_total_interruption_2_et"
+                            android:id="@id/second_innings_total_interruption_2_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -463,6 +470,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_wickets_lost_interruption_2_tv"
                             android:hint="@string/total"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -478,7 +486,7 @@
                         android:weightSum="8">
 
                         <TextView
-                            android:id="@+id/second_innings_wickets_lost_interruption_2_tv"
+                            android:id="@id/second_innings_wickets_lost_interruption_2_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -498,6 +506,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_overs_remaining_interruption_2_et"
                             android:hint="@string/wickets"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -532,6 +541,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789."
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_which_over_interruption_3_et"
                             android:hint="@string/overs"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
@@ -592,7 +602,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_which_over_interruption_3_et"
+                            android:id="@id/second_innings_which_over_interruption_3_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -600,6 +610,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789."
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_total_interruption_3_et"
                             android:hint="@string/overs"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
@@ -623,12 +634,12 @@
                             android:layout_marginTop="5dp"
                             android:layout_weight="2"
                             android:paddingBottom="10dp"
-                            android:text="@string/total_at_interruption"
+                            android:text="@string/t2_total_at_interruption"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_total_interruption_3_et"
+                            android:id="@id/second_innings_total_interruption_3_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -636,6 +647,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_wickets_lost_interruption_3_et"
                             android:hint="@string/total"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -663,7 +675,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_wickets_lost_interruption_3_et"
+                            android:id="@id/second_innings_wickets_lost_interruption_3_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -671,6 +683,7 @@
                             android:layout_weight="6"
                             android:digits="0123456789"
                             android:gravity="center"
+                            android:nextFocusForward="@+id/second_innings_overs_remaining_interruption_3_et"
                             android:hint="@string/wickets"
                             android:imeOptions="actionNext"
                             android:inputType="number"
@@ -697,7 +710,7 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/second_innings_overs_remaining_interruption_3_et"
+                            android:id="@id/second_innings_overs_remaining_interruption_3_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"

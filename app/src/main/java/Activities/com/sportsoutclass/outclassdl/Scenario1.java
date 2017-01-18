@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,9 +30,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -588,25 +584,25 @@ public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSe
     public boolean whichFieldsTocheck(int inter) {
         boolean empty = false;
         if (inter == 1) {
-            boolean x1 = editTextFieldCheck(totalInter1EditText);
-            boolean x2 = editTextFieldCheck(whichOverInterruption1EditText);
-            boolean x3 = editTextFieldCheck(wicketsLostInterruption1EditText);
+            boolean x1 = fix.editTextFieldCheck(totalInter1EditText);
+            boolean x2 = fix.editTextFieldCheck(whichOverInterruption1EditText);
+            boolean x3 = fix.editTextFieldCheck(wicketsLostInterruption1EditText);
             if (x1 && x2 && x3) {
                 empty = true;
             }
         } else if (inter == 2) {
             boolean x1 = whichFieldsTocheck(1);
-            boolean x2 = editTextFieldCheck(totalInter2EditText);
-            boolean x3 = editTextFieldCheck(whichOverInterruption2EditText);
-            boolean x4 = editTextFieldCheck(wicketsLostInterruption2EditText);
+            boolean x2 = fix.editTextFieldCheck(totalInter2EditText);
+            boolean x3 = fix.editTextFieldCheck(whichOverInterruption2EditText);
+            boolean x4 = fix.editTextFieldCheck(wicketsLostInterruption2EditText);
             if (x1 && x2 && x3 && x4) {
                 empty = true;
             }
         } else if (inter == 3) {
             boolean x1 = whichFieldsTocheck(2);
-            boolean x2 = editTextFieldCheck(totalInter3EditText);
-            boolean x3 = editTextFieldCheck(whichOverInterruption3EditText);
-            boolean x4 = editTextFieldCheck(wicketsLostInterruption3EditText);
+            boolean x2 = fix.editTextFieldCheck(totalInter3EditText);
+            boolean x3 = fix.editTextFieldCheck(whichOverInterruption3EditText);
+            boolean x4 = fix.editTextFieldCheck(wicketsLostInterruption3EditText);
             if (x1 && x2 && x3 && x4) {
                 empty = true;
             }
@@ -614,16 +610,7 @@ public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSe
         return empty;
     }
 
-    public boolean editTextFieldCheck(EditText x) {
-        boolean fieldNotEmpty = false;
-        int len = x.getText().toString().length();
-        if (len != 0) {
-            fieldNotEmpty = true;
-        }else if(x.getVisibility() == View.GONE || x.getVisibility() == View.INVISIBLE){
-            fieldNotEmpty = true;
-        }
-        return fieldNotEmpty;
-    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -668,11 +655,11 @@ public class Scenario1 extends AppCompatActivity implements AdapterView.OnItemSe
             int interruption = interruptions[0];
             try {
                 if (interruption == 1) {
-                    target = interNew.one_interruption();
+                    target = interNew.one_interruption_SecondInnings();
                 } else if (interruption == 2) {
-                    target = interNew.two_interruptions();
+                    target = interNew.two_interruptions_SecondInnings();
                 } else if (interruption == 3) {
-                    target = interNew.three_interruptions();
+                    target = interNew.three_interruptions_SecondInnings();
                 }
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
 

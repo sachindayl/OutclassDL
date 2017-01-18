@@ -669,11 +669,11 @@ public class Scenario2 extends AppCompatActivity implements AdapterView.OnItemSe
             int interruption = interruptions[0];
             try {
                 if (interruption == 1) {
-                    target = interNew.one_Interruption_Sc2();
+                    target = interNew.one_Interruption_FirstInnings();
                 } else if (interruption == 2) {
-                    target = interNew.two_Interruptions_Sc2();
+                    target = interNew.two_Interruptions_FirstInnings();
                 } else if (interruption == 3) {
-                    target = interNew.three_Interruptions_Sc2();
+                    target = interNew.three_Interruptions_FirstInnings();
                 }
 
                 Log.v("theCalculatedTarget: ", String.valueOf(target));

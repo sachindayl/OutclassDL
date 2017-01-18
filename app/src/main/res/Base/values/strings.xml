@@ -28,6 +28,7 @@
     <string name="total">Total</string>
     <string name="wickets">Wickets</string>
     <string name="total_at_interruption">Total at interruption</string>
+    <string name="t2_total_at_interruption">Team 2 Total at interruption</string>
     <string name="calculate">Calculate</string>
     <string name="team2overs_first_innings">How many overs will Team 2 play</string>
     <string name="team_1_final_total">Team 1 final total</string>

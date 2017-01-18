@@ -38,6 +38,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     public FirstInnings() {
         // Required empty public constructor
     }
+
     @BindView(R.id.first_innings_calc_button)
     Button calculate_Btn;
     //Layout Binding
@@ -122,7 +123,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     List<Map<String, String>> items;
     AlertDialog.Builder t1WinTarget;
     AlertDialog.Builder usrErrAlert;
-    int totalWickets, inter1WicketsFirstInnings, inter2WicketsSc2, inter3WicketsSc2, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
+    private int totalWickets, inter1WicketsFirstInnings, inter2WicketsFirstInnings, inter3WicketsFirstInnings, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
     double overs, inter1OversFirstInnings, inter2OversFirstInnings, inter3OversFirstInnings, inter1OversAtEndFirstInnings, inter2OversAtEndFirstInnings, inter3OversAtEndFirstInnings, team2OversAtStartFirstInnings;
     boolean allFieldsFilled;
 
@@ -195,15 +196,13 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 else if (position == 1) state.setG50(1);
                 break;
             case R.id.first_innings_interruptions_spinner:
-                if(position == 0){
+                if (position == 0) {
                     InterruptionsAmountVisibilitySetup(1);
                     state.setInterruptionsSc2(1);
-                }
-                else if(position == 1){
+                } else if (position == 1) {
                     InterruptionsAmountVisibilitySetup(2);
                     state.setInterruptionsSc2(2);
-                }
-                else if(position == 2){
+                } else if (position == 2) {
                     InterruptionsAmountVisibilitySetup(3);
                     state.setInterruptionsSc2(3);
                 }
@@ -273,7 +272,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 }
                 overs = Double.parseDouble(numberOfOversToS);
                 if (overs > 50.0) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10012, "Error", "");
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10013, "Error", "");
 
                 }
                 state.setOvers(overs);
@@ -369,7 +368,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 }
                 inter1WicketsFirstInnings = Integer.parseInt(inter1WicketsToS);
                 if (inter1WicketsFirstInnings > totalWickets) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10002, "Error", inter1WicketsToS);
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter1WicketsToS);
                 }
                 state.setInter1WicketsSc2(inter1WicketsFirstInnings);
             }
@@ -387,16 +386,16 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
             @Override
             public void afterTextChanged(Editable s) {
-                inter2WicketsSc2 = 0;
+                inter2WicketsFirstInnings = 0;
                 String inter2WicketsToS = s.toString();
                 if (inter2WicketsToS.equals("")) {
                     inter2WicketsToS = "0";
                 }
-                inter2WicketsSc2 = Integer.parseInt(inter2WicketsToS);
-                if (inter2WicketsSc2 > totalWickets) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter2WicketsToS);
+                inter2WicketsFirstInnings = Integer.parseInt(inter2WicketsToS);
+                if (inter2WicketsFirstInnings > totalWickets) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter2WicketsToS);
                 }
-                state.setInter2WicketsSc2(inter2WicketsSc2);
+                state.setInter2WicketsSc2(inter2WicketsFirstInnings);
             }
         });
         first_innings_wickets_lost_interruption_3_et.addTextChangedListener(new TextWatcher() {
@@ -412,16 +411,16 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
             @Override
             public void afterTextChanged(Editable s) {
-                inter3WicketsSc2 = 0;
+                inter3WicketsFirstInnings = 0;
                 String inter3WicketsToS = s.toString();
                 if (inter3WicketsToS.equals("")) {
                     inter3WicketsToS = "0";
                 }
-                inter3WicketsSc2 = Integer.parseInt(inter3WicketsToS);
-                if (inter3WicketsSc2 > totalWickets) {
-                    InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter3WicketsToS);
+                inter3WicketsFirstInnings = Integer.parseInt(inter3WicketsToS);
+                if (inter3WicketsFirstInnings > totalWickets) {
+                    InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Error", inter3WicketsToS);
                 }
-                state.setInter3WicketsSc2(inter3WicketsSc2);
+                state.setInter3WicketsSc2(inter3WicketsFirstInnings);
             }
         });
         //overs remaining till end of play
@@ -608,7 +607,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.first_innings_calc_button:
                 int interrupt = state.getInterruptionsSc2();
                 allFieldsFilled = whichFieldsToCheck(interrupt);
@@ -618,11 +617,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
                     new AsyncCalculation().execute(interrupt);
                     InputMethodManager iMM = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    try{
-                        iMM.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    }catch (NullPointerException nPE){
-                        nPE.printStackTrace();
-                    }
+                    iMM.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 } else {
                     usrErrAlert.setTitle("Incomplete Information");
                     usrErrAlert.setMessage("Please fill all the blanks");
@@ -652,11 +647,11 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
             int interruption = interruptions[0];
             try {
                 if (interruption == 1) {
-                    target = interNew.one_Interruption_Sc2();
+                    target = interNew.one_Interruption_FirstInnings();
                 } else if (interruption == 2) {
-                    target = interNew.two_Interruptions_Sc2();
+                    target = interNew.two_Interruptions_FirstInnings();
                 } else if (interruption == 3) {
-                    target = interNew.three_Interruptions_Sc2();
+                    target = interNew.three_Interruptions_FirstInnings();
                 }
 
                 Log.v("theCalculatedTarget: ", String.valueOf(target));
@@ -680,11 +675,13 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
     /**
      * Shows the user the final target needed to be achieved
+     *
      * @param target score found by calculation
      */
     public void team1ScoreCalc(int target) {
 //        int inter = stateSc2.getInterruptionsSc2();
         //values less than -10000 contains error codes
+        Log.v("Error Code: ", String.valueOf(target));
         if (target > -10000) {
             t1WinTarget.setTitle("Par Score");
             t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " runs to win.");
@@ -699,54 +696,45 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
     /**
      * Checks if the edit text fields contain necessary data before calculation starts.
+     *
      * @param interruptions number of interruptions user needs to check
      * @return true if the necessary fields are not empty.
      */
     public boolean whichFieldsToCheck(int interruptions) {
         boolean notEmpty = false;
         if (interruptions == 1) {
-            boolean x1 = editTextFieldCheck(first_innings_total_interruption_1_et);
-            boolean x2 = editTextFieldCheck(first_innings_which_over_interruption_1_et);
-            boolean x3 = editTextFieldCheck(first_innings_wickets_lost_interruption_1_et);
-            boolean x4 = editTextFieldCheck(first_innings_team1_final_total_et);
-            boolean x5 = editTextFieldCheck(first_innings_team2_overs_et);
+            boolean x1 = fix.editTextFieldCheck(first_innings_total_interruption_1_et);
+            boolean x2 = fix.editTextFieldCheck(first_innings_which_over_interruption_1_et);
+            boolean x3 = fix.editTextFieldCheck(first_innings_wickets_lost_interruption_1_et);
+            boolean x4 = fix.editTextFieldCheck(first_innings_team1_final_total_et);
+            boolean x5 = fix.editTextFieldCheck(first_innings_team2_overs_et);
+            boolean x6 = fix.editTextFieldCheck(first_innings_number_overs_edit_text);
+            boolean x7 = fix.editTextFieldCheck(first_innings_overs_remaining_interruption_1_et);
 
-            if (x1 && x2 && x3 && x4 && x5) {
+            if (x1 && x2 && x3 && x4 && x5 && x6 && x7) {
                 notEmpty = true;
             }
 
         } else if (interruptions == 2) {
             boolean x1 = whichFieldsToCheck(1);
-            boolean x2 = editTextFieldCheck(first_innings_total_interruption_2_et);
-            boolean x3 = editTextFieldCheck(first_innings_which_over_interruption_2_et);
-            boolean x4 = editTextFieldCheck(first_innings_wickets_lost_interruption_2_et);
-            if (x1 && x2 && x3 && x4) {
+            boolean x2 = fix.editTextFieldCheck(first_innings_total_interruption_2_et);
+            boolean x3 = fix.editTextFieldCheck(first_innings_which_over_interruption_2_et);
+            boolean x4 = fix.editTextFieldCheck(first_innings_wickets_lost_interruption_2_et);
+            boolean x5 = fix.editTextFieldCheck(first_innings_overs_remaining_interruption_2_et);
+            if (x1 && x2 && x3 && x4 && x5) {
                 notEmpty = true;
             }
 
         } else if (interruptions == 3) {
             boolean x1 = whichFieldsToCheck(2);
-            boolean x2 = editTextFieldCheck(first_innings_total_interruption_3_et);
-            boolean x3 = editTextFieldCheck(first_innings_which_over_interruption_3_et);
-            boolean x4 = editTextFieldCheck(first_innings_wickets_lost_interruption_3_et);
-            if (x1 && x2 && x3 && x4) {
+            boolean x2 = fix.editTextFieldCheck(first_innings_total_interruption_3_et);
+            boolean x3 = fix.editTextFieldCheck(first_innings_which_over_interruption_3_et);
+            boolean x4 = fix.editTextFieldCheck(first_innings_wickets_lost_interruption_3_et);
+            boolean x5 = fix.editTextFieldCheck(first_innings_overs_remaining_interruption_3_et);
+            if (x1 && x2 && x3 && x4 && x5) {
                 notEmpty = true;
             }
         }
         return notEmpty;
     }
-
-    /**
-     *Checks if the selected edit text is empty or not
-     * @param x EditText that will be checked
-     * @return true if not empty
-     */
-    public boolean editTextFieldCheck(EditText x) {
-        boolean fieldNotEmpty = false;
-        if(x.getText().toString().trim().length() > 0) fieldNotEmpty = true;
-        Log.v("EditTextNotEmptyCheck: ", "Edit Text " + x + "is " + String.valueOf(fieldNotEmpty));
-        return fieldNotEmpty;
-    }
-
-
 }

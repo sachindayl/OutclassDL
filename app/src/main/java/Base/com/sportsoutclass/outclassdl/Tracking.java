@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.google.android.gms.analytics.HitBuilders;
 
-public class Tracking {
+class Tracking {
     private StateClass state;
     private String className;
 
@@ -15,10 +15,10 @@ public class Tracking {
 
     void doTracking(){
         //TODO: Uncomment Track before publishing
-//        com.google.android.gms.analytics.Tracker mTracker = state.getDefaultTracker();
-//        Log.i("TAG", "Setting screen name: " + className);
-//        mTracker.setScreenName(className);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        com.google.android.gms.analytics.Tracker mTracker = state.getDefaultTracker();
+        Log.i("TAG", "Setting screen name: " + className);
+        mTracker.setScreenName(className);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 

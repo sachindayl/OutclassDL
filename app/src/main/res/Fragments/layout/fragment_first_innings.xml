@@ -61,7 +61,9 @@
                 android:layout_weight="6"
                 android:digits="0123456789"
                 android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/first_innings_team2_overs_et"
                 android:inputType="number"
+                android:gravity="center"
                 android:maxLength="4"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
         </LinearLayout>
@@ -92,6 +94,7 @@
                 android:layout_weight="6"
                 android:digits="0123456789."
                 android:imeOptions="actionDone"
+                android:gravity="center"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
