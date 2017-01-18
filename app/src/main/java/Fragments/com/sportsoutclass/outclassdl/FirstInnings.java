@@ -122,7 +122,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     List<Map<String, String>> items;
     AlertDialog.Builder t1WinTarget;
     AlertDialog.Builder usrErrAlert;
-    int totalWicketsSc2, inter1WicketsFirstInnings, inter2WicketsSc2, inter3WicketsSc2, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
+    int totalWickets, inter1WicketsFirstInnings, inter2WicketsSc2, inter3WicketsSc2, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
     double overs, inter1OversFirstInnings, inter2OversFirstInnings, inter3OversFirstInnings, inter1OversAtEndFirstInnings, inter2OversAtEndFirstInnings, inter3OversAtEndFirstInnings, team2OversAtStartFirstInnings;
     boolean allFieldsFilled;
 
@@ -131,6 +131,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first_innings, container, false);
         ButterKnife.bind(this, view);
+        totalWickets = 10;
         items = new ArrayList<>();
         state = (StateClass) getActivity().getApplication();
         usrErrAlert = new AlertDialog.Builder(getActivity());
@@ -367,7 +368,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                     inter1WicketsToS = "0";
                 }
                 inter1WicketsFirstInnings = Integer.parseInt(inter1WicketsToS);
-                if (inter1WicketsFirstInnings > 10) {
+                if (inter1WicketsFirstInnings > totalWickets) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10002, "Error", inter1WicketsToS);
                 }
                 state.setInter1WicketsSc2(inter1WicketsFirstInnings);
@@ -392,7 +393,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                     inter2WicketsToS = "0";
                 }
                 inter2WicketsSc2 = Integer.parseInt(inter2WicketsToS);
-                if (inter2WicketsSc2 > 10) {
+                if (inter2WicketsSc2 > totalWickets) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter2WicketsToS);
                 }
                 state.setInter2WicketsSc2(inter2WicketsSc2);
@@ -417,7 +418,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                     inter3WicketsToS = "0";
                 }
                 inter3WicketsSc2 = Integer.parseInt(inter3WicketsToS);
-                if (inter3WicketsSc2 > 10) {
+                if (inter3WicketsSc2 > totalWickets) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter3WicketsToS);
                 }
                 state.setInter3WicketsSc2(inter3WicketsSc2);

@@ -16,6 +16,7 @@ public class InningsPick extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_innings_pick, container, false);
+
 //        b1.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
