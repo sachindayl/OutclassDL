@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Sachinda on 1/22/2016.
  * This class connects the about page recycler view with its activities
  */
-class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.aboutPageViewHolder> {
+final class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.aboutPageViewHolder> {
 
     private String[] t_Data_set;
     private String[] st_Data_set;
@@ -72,6 +72,12 @@ class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.aboutPa
                 final String appPackageName = ctx.getPackageName(); // getPackageName() from Context or Activity object
                 Uri uri = Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") + appPackageName);
                 Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                //Checking if there are activities that can handle going to market
+                //required for crash safety
+                PackageManager packageManager = ctx.getPackageManager();
+                List activities = packageManager.queryIntentActivities(goToMarket,
+                        PackageManager.MATCH_DEFAULT_ONLY);
+                boolean isIntentSafe = activities.size() > 0;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                             Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
@@ -80,16 +86,18 @@ class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.aboutPa
                     goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                             Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
-
-                try {
-                    ctx.startActivity(goToMarket);
-                } catch (android.content.ActivityNotFoundException a) {
+                if(isIntentSafe){
                     try {
-                        ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "https://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") + appPackageName)));
-                    } catch (ActivityNotFoundException e2) {
-                        Toast.makeText(ctx, "You don't have any app that can open this link", Toast.LENGTH_SHORT).show();
+                        ctx.startActivity(goToMarket);
+                    } catch (android.content.ActivityNotFoundException a) {
+                        try {
+                            ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "https://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") + appPackageName)));
+                        } catch (ActivityNotFoundException e2) {
+                            Toast.makeText(ctx, "You don't have any app that can open this link", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
+
             } else if(position == 4){
                 Intent goto_Licences = new Intent(ctx , Licences.class);
                 goto_Licences.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -103,7 +111,7 @@ class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.aboutPa
          *
          * @return true if installed
          */
-        private boolean checkWhichStore() {
+        public boolean checkWhichStore() {
             PackageManager packageManager = ctx.getPackageManager();
             boolean googlePlayStoreInstalled = false;
             List<PackageInfo> packages = packageManager.getInstalledPackages(0);

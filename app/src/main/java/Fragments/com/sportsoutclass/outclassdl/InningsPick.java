@@ -17,13 +17,7 @@ public class InningsPick extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_innings_pick, container, false);
 
-//        b1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment fragment = new FirstInnings();
-//                replaceFragment(fragment, R.id.fragment_container);
-//            }
-//        });
+        AppRater.app_launched(getContext());
         inningsPicker = (RecyclerView)view.findViewById(R.id.team_pick_recycler);
         String[] titleValues = new String[]{"First Innings" , "Second Innings"};
         String[] subTitleValues = new String[]{"If Team 1 innings was interrupted", "If Team 2 was unable to bat the alotted overs"};
