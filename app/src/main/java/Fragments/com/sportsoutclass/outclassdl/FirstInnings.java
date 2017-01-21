@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -133,6 +135,8 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first_innings, container, false);
         ButterKnife.bind(this, view);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
         totalWickets = 10;
         items = new ArrayList<>();
         state = (StateClass) getActivity().getApplication();

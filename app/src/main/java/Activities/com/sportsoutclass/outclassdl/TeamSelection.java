@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +15,7 @@ import android.view.MenuItem;
  */
 public final class TeamSelection extends AppCompatActivity {
 
+    FragmentManager fm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +30,9 @@ public final class TeamSelection extends AppCompatActivity {
 
             InningsPick inningsPick = new InningsPick();
             inningsPick.setArguments(getIntent().getExtras());
-            FragmentManager fm = getSupportFragmentManager();
+            fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.add(R.id.fragment_container, inningsPick);
+            fragmentTransaction.add(R.id.fragment_container, inningsPick, "inningsPick");
             fragmentTransaction.commit();
         }
 
@@ -59,6 +61,12 @@ public final class TeamSelection extends AppCompatActivity {
         } else if (id == R.id.action_instructions) {
             insPg = new Intent(this, HowToPage.class);
             startActivity(insPg);
+        }
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                fm.popBackStack();
+                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -92,7 +94,8 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second_innings, container, false);
         ButterKnife.bind(this, view);
-
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
         totalWicketsSI = 10;
         overData = new DataMap();
         state = (StateClass) getActivity().getApplication();
