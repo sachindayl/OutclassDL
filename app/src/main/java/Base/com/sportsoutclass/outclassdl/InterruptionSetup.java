@@ -49,13 +49,13 @@ class InterruptionSetup {
             String wholeOversToS = String.valueOf(oversForT2);
             state.setErrorMessageValue(wholeOversToS);
             state.setErrorMessageTitle("Invalid Information");
-            return -10006;
+            return -10007;
         }
         if (oversCanPut <= oversRemainingInterEnd) {
             String oversCanPutToS = String.valueOf(oversCanPut);
             state.setErrorMessageValue(oversCanPutToS);
             state.setErrorMessageTitle("Invalid Information");
-            return -10007;
+            return -10008;
         }
 
         Log.v("oversAtInter1Start: ", String.valueOf(oversAtInter1Start));
@@ -66,7 +66,7 @@ class InterruptionSetup {
         //Team 2 Wickets at the start of the interruption 1
         int wicketsAtInter1Start = state.getInter1Wickets();
         if (wicketsAtInter1Start > 10) {
-            return -10002;
+            return -10003;
         }
         //overs remaining at the start of the interruption
         double remainingOversAtInterStart = overCalculations(startOfInnsOvers, oversAtInter1Start, "minus");
@@ -115,21 +115,27 @@ class InterruptionSetup {
             state.setErrorMessageTitle("Invalid Information");
             return -10017;
         }
+        /*  if overs available to bowl is less than user entered number
+            of overs remaining */
         if (oversCanPut <= oversRemainingAtInter2End) {
             String oversCanPutToS = String.valueOf(oversCanPut);
             state.setErrorMessageValue(oversCanPutToS);
             state.setErrorMessageTitle("Invalid Information");
             return -10019;
         }
+        //checking if user entered wickets at interruption 2 is correct
         if (wicketsAtInter2Start > 10) {
             return -10004;
         }
+
+        //checks if the over that inter 2 happened is less than inter 1
         if (oversAtInter2Start < oversAtInter1Start) {
             String intOversStartToS = String.valueOf(oversAtInter1Start);
             state.setErrorMessageValue(intOversStartToS);
             state.setErrorMessageTitle("Invalid Information");
             return -10006;
         }
+        //checks if the wickets at inter 2 is less than inter 1
         if (wicketsAtInter2Start < wicketsAtInter1Start) {
             String int1WicketsToS = String.valueOf(wicketsAtInter1Start);
             state.setErrorMessageValue(int1WicketsToS);
@@ -294,13 +300,15 @@ class InterruptionSetup {
         //overs remaining at the end of the interruption
         double oversRemainingInterEndSc2 = state.getInter1EndOverSc2();
         double oversCanPut = overCalculations(oversForT2Sc2, oversAtInter1StartSc2, "minus");
-
+        //if overs available to bowl are less than 0 at interruption 1
         if (oversCanPut <= 0) {
             String wholeOversToS = String.valueOf(oversForT2Sc2);
             state.setErrorMessageValue(wholeOversToS);
             state.setErrorMessageTitle("Invalid Information");
             return -10007;
         }
+        //if the number of available to put is less than the number
+        //of remaining at this interruption
         if (oversCanPut <= oversRemainingInterEndSc2) {
             String oversCanPutToS = String.valueOf(oversCanPut);
             state.setErrorMessageValue(oversCanPutToS);
@@ -308,6 +316,11 @@ class InterruptionSetup {
             return -10008;
         }
         int TotalT1int1Sc2 = state.getTotalT1int1Sc2();
+
+        /*
+            if overs remaining is 0 at inter 1, total team 1 made should be equal to
+            team 1 final total
+         */
         if (oversRemainingInterEndSc2 == 0 && TotalT1int1Sc2 != team1FinalTotalb4Rev) {
             String TotalT1int1Sc2ToS = String.valueOf(TotalT1int1Sc2);
             state.setErrorMessageValue(TotalT1int1Sc2ToS);
@@ -368,6 +381,7 @@ class InterruptionSetup {
         //Team 2 Wickets at the start of the interruption 1
         int wicketsAtInter1StartSc2 = state.getInter1WicketsSc2();
         int wicketsAtInter2StartSc2 = state.getInter2WicketsSc2();
+        //checking if wickets at start of int 2 is greater than 10
         if (wicketsAtInter2StartSc2 > 10) {
             target = -10004;
             return target;
@@ -462,6 +476,7 @@ class InterruptionSetup {
         int wicketsAtInter3StartSc2 = state.getInter3WicketsSc2();
         int team1FinalTotalb4Rev = state.getTotalT1Sc2();
         Log.v("wicketsAtInter3Start: ", String.valueOf(wicketsAtInter3StartSc2));
+        //checks if user entered a wrong number of wickets
         if (wicketsAtInter3StartSc2 > 10) {
             target = -10005;
             return target;
@@ -492,6 +507,10 @@ class InterruptionSetup {
         }
 
         int TotalT1int3Sc2 = state.getTotalT1int3Sc2();
+        /*
+            if overs remaining is 0 at inter 3, total team 1 made should be equal to
+            team 1 final total
+         */
         if (oversRemainingAtInter3EndSc2 == 0 && TotalT1int3Sc2 != team1FinalTotalb4Rev) {
             String TotalT1int3Sc2ToS = String.valueOf(TotalT1int3Sc2);
             state.setErrorMessageValue(TotalT1int3Sc2ToS);
@@ -545,8 +564,8 @@ class InterruptionSetup {
      *
      * @param usrErr    alertBuilder for different scenarios
      * @param errorCode error code
-     * @param title Title that will be used in alert builder
-     * @param value passing any value that needs to be shown in the builder
+     * @param title     Title that will be used in alert builder
+     * @param value     passing any value that needs to be shown in the builder
      */
     static void interruptionErrors(AlertDialog.Builder usrErr, int errorCode, String title, String value) {
 
@@ -625,6 +644,7 @@ class InterruptionSetup {
 
     /**
      * Checks if the selected edit text is empty or not
+     *
      * @param x EditText that will be checked
      * @return true if not empty
      */
@@ -633,7 +653,7 @@ class InterruptionSetup {
         int len = x.getText().toString().length();
         if (len != 0) {
             fieldNotEmpty = true;
-        }else if(x.getVisibility() == View.GONE || x.getVisibility() == View.INVISIBLE){
+        } else if (x.getVisibility() == View.GONE || x.getVisibility() == View.INVISIBLE) {
             fieldNotEmpty = true;
         }
         return fieldNotEmpty;

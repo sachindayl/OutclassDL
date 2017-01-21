@@ -39,8 +39,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingEnd="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
             android:paddingStart="15dp"
             android:weightSum="8">
 
@@ -72,8 +70,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingEnd="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
             android:paddingStart="15dp"
             android:weightSum="8">
 
@@ -151,8 +147,6 @@
                     android:layout_weight="2"
                     android:orientation="vertical"
                     android:paddingEnd="0dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="0dp"
                     android:paddingStart="10dp">
 
                     <TextView
@@ -172,8 +166,6 @@
                     android:layout_weight="6"
                     android:orientation="vertical"
                     android:paddingEnd="10dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="10dp"
                     android:paddingStart="0dp">
 
                     <EditText
@@ -223,6 +215,8 @@
                 android:layout_below="@+id/first_innings_interruption_spinner_container"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
                 card_view:cardCornerRadius="10dp">
 
@@ -252,8 +246,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingEnd="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="10dp"
                         android:paddingStart="20dp">
 
                         <LinearLayout
@@ -288,6 +280,7 @@
                                 android:maxLength="4"
                                 android:nextFocusForward="@+id/first_innings_total_interruption_1_et"
                                 android:textAppearance="?android:attr/textAppearanceSmall"/>
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -405,6 +398,8 @@
                 android:layout_below="@id/card_view"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
                 card_view:cardCornerRadius="10dp">
 
@@ -434,8 +429,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingEnd="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="10dp"
                         android:paddingStart="20dp">
 
                         <LinearLayout
@@ -590,6 +583,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
                 card_view:cardCornerRadius="10dp">
 
@@ -619,8 +614,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingEnd="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="10dp"
                         android:paddingStart="20dp">
 
                         <LinearLayout
