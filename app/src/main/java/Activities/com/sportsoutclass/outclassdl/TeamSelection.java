@@ -50,22 +50,20 @@ public final class TeamSelection extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        Intent aboutPg, insPg;
-
-        //noinspection SimplifiableIfStatement.
-        if (id == R.id.action_about) {
-            aboutPg = new Intent(this, AboutPage.class);
-            startActivity(aboutPg);
-        } else if (id == R.id.action_instructions) {
-            insPg = new Intent(this, HowToPage.class);
-            startActivity(insPg);
-        }
 
         switch (item.getItemId()) {
             case android.R.id.home:
                 fm.popBackStack();
+                break;
+            case R.id.action_about:
+                AboutFrag aboutFrag = new AboutFrag();
+                aboutFrag.setArguments(getIntent().getExtras());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutFrag, "aboutPage").addToBackStack(null).commit();
+                break;
+            case R.id.action_instructions:
+                HowToFrag howToFrag = new HowToFrag();
+                howToFrag.setArguments(getIntent().getExtras());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, howToFrag, "howToPage").addToBackStack(null).commit();
                 break;
         }
 

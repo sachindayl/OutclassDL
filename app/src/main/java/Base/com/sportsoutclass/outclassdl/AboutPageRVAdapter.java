@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -99,9 +100,9 @@ final class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.a
                 }
 
             } else if(position == 4){
-                Intent goto_Licences = new Intent(ctx , Licences.class);
-                goto_Licences.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ctx.startActivity(goto_Licences);
+                TeamSelection teamSelect = (TeamSelection) v.getContext();
+                Fragment licences = new LicencesFrag();
+                teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, licences, "licences").addToBackStack(null).commit();
             }
 
         }
@@ -111,7 +112,7 @@ final class AboutPageRVAdapter extends RecyclerView.Adapter<AboutPageRVAdapter.a
          *
          * @return true if installed
          */
-        public boolean checkWhichStore() {
+        boolean checkWhichStore() {
             PackageManager packageManager = ctx.getPackageManager();
             boolean googlePlayStoreInstalled = false;
             List<PackageInfo> packages = packageManager.getInstalledPackages(0);

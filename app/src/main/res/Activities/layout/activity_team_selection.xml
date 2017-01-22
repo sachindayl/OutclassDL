@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <include
         android:id="@+id/app_bar"
@@ -12,16 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container">
-        <fragment android:name="com.sportsoutclass.outclassdl.InningsPick"
-            android:id="@+id/team_pick_fragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_innings_pick" />
-        <fragment android:name="com.sportsoutclass.outclassdl.FirstInnings"
-            android:id="@+id/first_innings_fragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_innings_pick" />
+
     </FrameLayout>
 
 </RelativeLayout>

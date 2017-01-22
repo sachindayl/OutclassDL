@@ -9,22 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class InningsPick extends BaseFragment {
     public InningsPick() {
     }
-
+    @BindView(R.id.team_pick_recycler)
     RecyclerView inningsPicker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_innings_pick, container, false);
+        ButterKnife.bind(this, view);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(false);
 
         AppRater.app_launched(getContext());
-        inningsPicker = (RecyclerView) view.findViewById(R.id.team_pick_recycler);
         String[] titleValues = new String[]{"First Innings", "Second Innings"};
         String[] subTitleValues = new String[]{"If Team 1 innings was interrupted", "If Team 2 was unable to bat the alotted overs"};
         inningsPicker.setHasFixedSize(true);
