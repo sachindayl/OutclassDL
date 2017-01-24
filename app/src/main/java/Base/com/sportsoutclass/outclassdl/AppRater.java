@@ -21,7 +21,7 @@ import java.util.List;
  */
 class AppRater {
     private final static String APP_TITLE = "DL Calculator";// App Name
-    private final static int DAYS_UNTIL_PROMPT = 3;//Min number of days
+    private static int DAYS_UNTIL_PROMPT;//Min number of days
     private final static int LAUNCHES_UNTIL_PROMPT = 3;//Min number of launches
     private static final String GooglePlayStorePackageNameOld = "com.google.market";
     private static final String GooglePlayStorePackageNameNew = "com.android.vending";
@@ -36,6 +36,9 @@ class AppRater {
         // Increment launch counter
         long launch_count = prefs.getLong("launch_count", 0) + 1;
         editor.putLong("launch_count", launch_count);
+
+        DAYS_UNTIL_PROMPT = prefs.getInt("days_to_remind", 3);
+        Log.v("Remind Date:", String.valueOf(DAYS_UNTIL_PROMPT));
 
         // Get date of first launch
         Long date_firstLaunch = prefs.getLong("date_firstLaunch", 0);
@@ -103,6 +106,10 @@ class AppRater {
         dialog.setNeutralButton("Remind Me Later", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                DAYS_UNTIL_PROMPT = DAYS_UNTIL_PROMPT + 7;
+                editor.putInt("days_to_remind", DAYS_UNTIL_PROMPT);
+                Log.v("Remind Date:", String.valueOf(DAYS_UNTIL_PROMPT));
+                editor.commit();
                 dialog.dismiss();
             }
         });

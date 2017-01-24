@@ -64,7 +64,6 @@
                     />
             </intent-filter>
         </activity>
-        <activity android:name=".DLTable"/>
     </application>
 
 </manifest>
