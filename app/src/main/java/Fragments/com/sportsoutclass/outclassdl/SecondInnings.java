@@ -685,23 +685,23 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     toWin = Math.abs(toWin);
                     toWinToS = String.valueOf(toWin);
                     t2WinTarget.setTitle("Final Result");
-                    t2WinTarget.setMessage("Team 2 has won the match by " + toWinToS + " run(s).");
+                    t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
                 } else {
                     Log.v("Need to win: ", String.valueOf(toWin));
-                    toWinToS = String.valueOf(toWin);
+                    toWinToS = String.valueOf(toWin-1);
                     t2WinTarget.setTitle("Final Result");
-                    t2WinTarget.setMessage("Team 1 has won the match by " + toWinToS + " run(s).");
+                    t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 1 has won the match by " + toWinToS + " run(s).");
                 }
 
             } else if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
                 t2WinTarget.setTitle("Final Result");
-                t2WinTarget.setMessage("Team 2 has won the match by " + toWinToS + " run(s).");
+                t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
             } else {
                 Log.v("Need to win: ", String.valueOf(toWin));
-                t2WinTarget.setTitle("Par Score");
-                t2WinTarget.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
+                t2WinTarget.setTitle("Target");
+                t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
             }
             t2WinTarget.setPositiveButton("OK", null);
             t2WinTarget.show();

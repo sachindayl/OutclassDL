@@ -688,7 +688,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         //values less than -10000 contains error codes
         Log.v("Error Code: ", String.valueOf(target));
         if (target > -10000) {
-            t1WinTarget.setTitle("Par Score");
+            t1WinTarget.setTitle("Target");
             t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " runs to win.");
             t1WinTarget.setPositiveButton("OK", null);
             t1WinTarget.show();

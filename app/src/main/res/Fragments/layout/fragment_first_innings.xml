@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
-                        android:text="@string/start_innings_overs"
+                        android:text="@string/start_inning_1_overs"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/black"/>
                 </LinearLayout>

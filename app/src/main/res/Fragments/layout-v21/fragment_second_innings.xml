@@ -42,9 +42,29 @@
             android:paddingRight="10dp"
             tools:context=".Scenario2">
 
+            <LinearLayout
+                android:id="@+id/tip_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="8">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/second_innings_tip"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/second_innings_total_overs_container"
+                android:layout_below="@id/tip_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
@@ -65,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
-                        android:text="@string/start_innings_overs"
+                        android:text="@string/start_inning_2_overs"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -127,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
-                        android:text="@string/wickets"
+                        android:text="@string/wickets_inning_1"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/black"/>
 

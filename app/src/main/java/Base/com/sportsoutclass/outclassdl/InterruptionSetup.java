@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
+
 /**
  * This page contains the process that works for Scenario 1 which is the DL Method for 2nd team.
  * This page also converts decimal values to over values.
@@ -242,8 +244,10 @@ class InterruptionSetup {
     //changing over decimal to base 6
     private double overCalculations(double x, double y, String function) {
         double z = 0.0;
+        DecimalFormat df = new DecimalFormat("#.0");
         if (function.equals("plus")) {
-            z = x + y;
+            double zRaw = x + y;
+            z = Double.parseDouble(df.format(zRaw));
             String doubleToS = String.valueOf(z);
             int digitCheck = (int) (z + 0.5);
             digitCheck = digitCheck / 10;
@@ -258,9 +262,12 @@ class InterruptionSetup {
                 z = z + 0.4;
             }
         } else if (function.equals("minus")) {
-            z = x - y;
+            double zRaw = x - y;
+            z = Double.parseDouble(df.format(zRaw));
+            Log.v("z in minus: ", String.valueOf(z));
             String doubleToS = String.valueOf(z);
             int digitCheck = (int) (z + 0.5);
+            Log.v("z after digitCheck: ", String.valueOf(digitCheck));
             digitCheck = digitCheck / 10;
             char decimal;
             if (z < 0) {
@@ -287,9 +294,9 @@ class InterruptionSetup {
     int one_Interruption_FirstInnings() {
         init();
         g50_setup();
-        //overs team2 will play
-        double oversForT2FI = state.getOversT2StartFI();
-        Log.v("oversForT2FI: ", String.valueOf(oversForT2FI));
+        //overs team1 will play
+        double oversForT1FI = state.getOvers();
+        Log.v("oversForT2FI: ", String.valueOf(oversForT1FI));
         int team1FinalTotalb4Rev = state.getTotalT1FI();
         //Team 1 Overs at the start of the interruption 1
         double oversAtInter1StartFI = state.getInter1StartOverFI();
@@ -302,11 +309,11 @@ class InterruptionSetup {
         double remainingOversAtInterStartFI = overCalculations(startOfInnsOvers, oversAtInter1StartFI, "minus");
         //overs remaining at the end of the interruption
         double oversRemainingInterEndFI = state.getInter1EndOverFI();
-        double oversCanPut = overCalculations(oversForT2FI, oversAtInter1StartFI, "minus");
-        Log.v("oversAtInter1Start: ", String.valueOf(oversCanPut));
+        double oversCanPut = overCalculations(oversForT1FI, oversAtInter1StartFI, "minus");
+        Log.v("oversCanPut: ", String.valueOf(oversCanPut));
         //if overs available to bowl are less than 0 at interruption 1
         if (oversCanPut <= 0) {
-            String wholeOversToS = String.valueOf(oversForT2FI);
+            String wholeOversToS = String.valueOf(oversForT1FI);
             state.setErrorMessageValue(wholeOversToS);
             state.setErrorMessageTitle("Invalid Information");
             return -10007;
@@ -333,7 +340,7 @@ class InterruptionSetup {
         }
 
 
-        if (oversAtInter1StartFI > oversForT2FI) {
+        if (oversAtInter1StartFI > oversForT1FI) {
             return -10001;
         }
         //Team 2 Wickets at the start of the interruption 1

@@ -46,10 +46,10 @@ class InningsPickerRVAdapter extends RecyclerView.Adapter<InningsPickerRVAdapter
                     Fragment secondInnings = new SecondInnings();
                     teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, secondInnings, "secondInnings").addToBackStack("inningsPick").commit();
                     break;
-                case 2:
-                    Fragment rateTable = new RateTable();
-                    teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, rateTable, "rateTable").addToBackStack("inningsPick").commit();
-                    break;
+//                case 2:
+//                    Fragment rateTable = new RateTable();
+//                    teamSelect.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, rateTable, "rateTable").addToBackStack("inningsPick").commit();
+//                    break;
             }
 
         }

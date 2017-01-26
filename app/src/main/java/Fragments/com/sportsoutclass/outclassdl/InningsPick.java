@@ -28,8 +28,8 @@ public class InningsPick extends BaseFragment {
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(false);
 
         AppRater.app_launched(getContext());
-        String[] titleValues = new String[]{"First Innings", "Second Innings", "Rate Table"};
-        String[] subTitleValues = new String[]{"If Team 1 innings was interrupted", "If Team 2 was unable to bat the alotted overs", "Find scores for future possible interruptions"};
+        String[] titleValues = new String[]{"First Innings", "Second Innings"};
+        String[] subTitleValues = new String[]{"If Team 1 innings was interrupted", "If Team 2 was unable to bat the alotted overs"};
         inningsPicker.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         inningsPicker.setLayoutManager(llm);
