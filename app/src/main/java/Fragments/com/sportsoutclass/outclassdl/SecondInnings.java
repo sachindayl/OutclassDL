@@ -2,10 +2,8 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -137,7 +135,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
         switch (v.getId()) {
             case R.id.second_innings_calc_button:
                 //gets the number of interruptions and checks if all the necessary edit texts are filled
-                int interrupt = state.getInterruptions();
+                int interrupt = state.getInterruptionsSI();
                 boolean allFieldsFilled = whichFieldsToCheck(interrupt);
 
                 if (allFieldsFilled) {
@@ -162,13 +160,13 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
             case R.id.second_innings_interruptions_spinner:
                 if (position == 0) {
                     InterruptionsAmountVisibilitySetup(1);
-                    state.setInterruptions(1);
+                    state.setInterruptionsSI(1);
                 } else if (position == 1) {
                     InterruptionsAmountVisibilitySetup(2);
-                    state.setInterruptions(2);
+                    state.setInterruptionsSI(2);
                 } else if (position == 2) {
                     InterruptionsAmountVisibilitySetup(3);
-                    state.setInterruptions(3);
+                    state.setInterruptionsSI(3);
                 }
                 break;
         }
@@ -397,7 +395,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter1overToS = "0";
                 }
                 inter1OversSI = Double.parseDouble(inter1overToS);
-                state.setInter1StartOver(inter1OversSI);
+                state.setInter1StartOverSI(inter1OversSI);
                 Log.v("int1oversSI: ", inter1overToS);
             }
         });
@@ -420,7 +418,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter2overToS = "0";
                 }
                 inter2OversSI = Double.parseDouble(inter2overToS);
-                state.setInter2StartOver(inter2OversSI);
+                state.setInter2StartOverSI(inter2OversSI);
             }
         });
         second_innings_which_over_interruption_3_et.addTextChangedListener(new TextWatcher() {
@@ -442,7 +440,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter3overToS = "0";
                 }
                 inter3OversSI = Double.parseDouble(inter3overToS);
-                state.setInter3StartOver(inter3OversSI);
+                state.setInter3StartOverSI(inter3OversSI);
             }
         });
         //wickets at the start of interruption
@@ -468,7 +466,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 if (inter1WicketsSI > totalWicketsSI) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10003, "Error", inter1WicketsToS);
                 }
-                state.setInter1Wickets(inter1WicketsSI);
+                state.setInter1WicketsSI(inter1WicketsSI);
                 Log.v("int1wicketsSI: ", inter1WicketsToS);
             }
         });
@@ -494,7 +492,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 if (inter2WicketsSI > totalWicketsSI) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10004, "Error", inter2WicketsToS);
                 }
-                state.setInter2Wickets(inter2WicketsSI);
+                state.setInter2WicketsSI(inter2WicketsSI);
             }
         });
         second_innings_wickets_lost_interruption_3_et.addTextChangedListener(new TextWatcher() {
@@ -519,7 +517,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 if (inter3WicketsSI > totalWicketsSI) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10005, "Error", inter3WicketsToS);
                 }
-                state.setInter3Wickets(inter3WicketsSI);
+                state.setInter3WicketsSI(inter3WicketsSI);
             }
         });
         //overs remaining till end of play
@@ -542,7 +540,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter1OversAtEndToS = "0";
                 }
                 inter1OversAtEndSI = Double.parseDouble(inter1OversAtEndToS);
-                state.setInter1EndOver(inter1OversAtEndSI);
+                state.setInter1EndOverSI(inter1OversAtEndSI);
                 Log.v("int1oversRemainSI: ", inter1OversAtEndToS);
             }
         });
@@ -565,7 +563,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter2OversAtEndToS = "0";
                 }
                 inter2OversAtEndSI = Double.parseDouble(inter2OversAtEndToS);
-                state.setInter2EndOver(inter2OversAtEndSI);
+                state.setInter2EndOverSI(inter2OversAtEndSI);
             }
         });
         second_innings_overs_remaining_interruption_3_et.addTextChangedListener(new TextWatcher() {
@@ -587,7 +585,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter3OversAtEndToS = "0";
                 }
                 inter3OversAtEndSI = Double.parseDouble(inter3OversAtEndToS);
-                state.setInter3EndOver(inter3OversAtEndSI);
+                state.setInter3EndOverSI(inter3OversAtEndSI);
             }
         });
         //total at the interruption
@@ -610,7 +608,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter1OversAtEndToS = "0";
                 }
                 inter1totalSI = Integer.parseInt(inter1OversAtEndToS);
-                state.setTotalT2int1(inter1totalSI);
+                state.setTotalT2int1SI(inter1totalSI);
                 Log.v("int1TotalSI: ", inter1OversAtEndToS);
             }
         });
@@ -633,7 +631,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter2OversAtEndToS = "0";
                 }
                 inter2totalSI = Integer.parseInt(inter2OversAtEndToS);
-                state.setTotalT2int2(inter2totalSI);
+                state.setTotalT2int2SI(inter2totalSI);
             }
         });
         second_innings_total_interruption_3_et.addTextChangedListener(new TextWatcher() {
@@ -655,7 +653,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     inter3OversAtEndToS = "0";
                 }
                 inter3totalSI = Integer.parseInt(inter3OversAtEndToS);
-                state.setTotalT2int3(inter3totalSI);
+                state.setTotalT2int3SI(inter3totalSI);
             }
         });
     }
@@ -665,17 +663,17 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
         int team2score = 0;
         double remainingOvers = 0.0;
         if (target > -10000) {
-            int interruptions = state.getInterruptions();
+            int interruptions = state.getInterruptionsSI();
             if (interruptions == 1) {
-                team2score = state.getTotalT2int1();
-                remainingOvers = state.getInter1EndOver();
+                team2score = state.getTotalT2int1SI();
+                remainingOvers = state.getInter1EndOverSI();
             } else if (interruptions == 2) {
-                team2score = state.getTotalT2int2();
-                remainingOvers = state.getInter2EndOver();
+                team2score = state.getTotalT2int2SI();
+                remainingOvers = state.getInter2EndOverSI();
             } else if (interruptions == 3) {
-                team2score = state.getTotalT2int3();
+                team2score = state.getTotalT2int3SI();
                 Log.v("team2scoreInt3: ", String.valueOf(team2score));
-                remainingOvers = state.getInter3EndOver();
+                remainingOvers = state.getInter3EndOverSI();
             }
             toWin = target - team2score;
             String toWinToS = String.valueOf(toWin);
@@ -701,6 +699,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 t2WinTarget.setTitle("Final Result");
                 t2WinTarget.setMessage("Team 2 has won the match by " + toWinToS + " run(s).");
             } else {
+                Log.v("Need to win: ", String.valueOf(toWin));
                 t2WinTarget.setTitle("Par Score");
                 t2WinTarget.setMessage("Team 2 needs " + toWinToS + " run(s) to Win.");
             }
