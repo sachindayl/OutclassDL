@@ -15,10 +15,10 @@ class Tracking {
 
     void doTracking(){
         //TODO: Uncomment Track before publishing
-//        com.google.android.gms.analytics.Tracker mTracker = state.getDefaultTracker();
-//        Log.i("TAG", "Setting screen name: " + className);
-//        mTracker.setScreenName(className);
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        com.google.android.gms.analytics.Tracker mTracker = state.getDefaultTracker();
+        Log.i("TAG", "Setting screen name: " + className);
+        mTracker.setScreenName(className);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 
