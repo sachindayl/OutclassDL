@@ -1,5 +1,7 @@
 package com.sportsoutclass.outclassdl;
 
+import android.util.SparseArray;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,9 +9,9 @@ import java.util.Map;
  * Created by Sachinda on 8/1/2015.
  * All the over rate data on 5 hash maps
  */
-public class DataMap {
-    public double DataSet(int key) {
-        Map<Integer, Double> data = new HashMap<Integer, Double>();
+class DataMap {
+    double DataSet(int key) {
+        SparseArray<Double> data = new SparseArray<>();
         data.put(5000, 100.0);
         data.put(5001, 93.4);
         data.put(5002, 85.1);

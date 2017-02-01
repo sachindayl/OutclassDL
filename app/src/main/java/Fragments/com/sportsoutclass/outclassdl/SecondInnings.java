@@ -2,8 +2,10 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -658,7 +660,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
         });
     }
 
-    private void toWinTarget(int target) {
+    private void toWinTarget(final int target) {
         int toWin;
         int team2score = 0;
         double remainingOvers = 0.0;
@@ -688,7 +690,8 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
                 } else {
                     Log.v("Need to win: ", String.valueOf(toWin));
-                    toWinToS = String.valueOf(toWin-1);
+                    //when team 1 wins 1 run less is counted
+                    toWinToS = String.valueOf(toWin - 1);
                     t2WinTarget.setTitle("Final Result");
                     t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 1 has won the match by " + toWinToS + " run(s).");
                 }
@@ -702,6 +705,14 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 Log.v("Need to win: ", String.valueOf(toWin));
                 t2WinTarget.setTitle("Target");
                 t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
+                t2WinTarget.setNeutralButton("Map", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        state.setParScoreTarget(target);
+                        Fragment rateTable = new RateTable();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, rateTable, "rateTable").addToBackStack("inningsPick").commit();
+                    }
+                });
             }
             t2WinTarget.setPositiveButton("OK", null);
             t2WinTarget.show();

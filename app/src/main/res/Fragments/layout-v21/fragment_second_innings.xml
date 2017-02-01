@@ -48,77 +48,24 @@
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="5dp"
                 android:weightSum="8">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="5dp"
                     android:text="@string/second_innings_tip"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"/>
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:id="@+id/second_innings_total_overs_container"
-                android:layout_below="@id/tip_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="8">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:paddingEnd="0dp"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:id="@+id/second_innings_number_overs_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp"
-                        android:text="@string/start_inning_2_overs"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:orientation="vertical"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="0dp">
-
-                    <EditText
-                        android:id="@+id/second_innings_number_overs_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="0123456789."
-                        android:gravity="center"
-                        android:hint="@string/overs"
-                        android:inputType="numberDecimal"
-                        android:maxLength="4"
-                        android:nextFocusForward="@+id/second_innings_team_1_score_et"
-                        android:paddingTop="15dp"
-                        android:textAppearance="?android:attr/textAppearanceSmall"/>
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/second_innings_team1_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/second_innings_total_overs_container"
-                android:layout_marginTop="0dp"
+                android:layout_below="@id/tip_container"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
@@ -151,6 +98,16 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/black"/>
 
+                    <TextView
+                        android:id="@+id/second_innings_number_overs_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:text="@string/start_inning_2_overs"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,8 +116,9 @@
                     android:layout_weight="6"
                     android:orientation="vertical">
 
+
                     <EditText
-                        android:id="@id/second_innings_team_1_score_et"
+                        android:id="@+id/second_innings_team_1_score_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789"
@@ -183,11 +141,24 @@
                         android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="2"
-                        android:nextFocusForward="@+id/second_innings_which_over_interruption_1_et"
+                        android:nextFocusForward="@+id/second_innings_number_overs_et"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
+                    <EditText
+                        android:id="@id/second_innings_number_overs_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789."
+                        android:gravity="center"
+                        android:hint="@string/overs"
+                        android:inputType="numberDecimal"
+                        android:maxLength="4"
+                        android:nextFocusForward="@+id/second_innings_which_over_interruption_1_et"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
                 </LinearLayout>
             </LinearLayout>

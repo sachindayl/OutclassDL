@@ -10,7 +10,7 @@
     <string name="title_activity_scenario1">Team 2 Interruptions</string>
     <string name="title_activity_how_to_page">Instructions</string>
     <string name="start_inning_1_overs">Initial Number of overs</string>
-    <string name="start_inning_2_overs">Number of overs allocated</string>
+    <string name="start_inning_2_overs">Overs allocated for Team 2</string>
     <string name="team_1_full_amount">Team 1 batted the allotted overs?</string>
     <string name="team_1_revised">Team 1 revised total calculated?</string>
     <string name="interruptions">How many interruptions were in Team 2\'s inning? (Max. 3)</string>

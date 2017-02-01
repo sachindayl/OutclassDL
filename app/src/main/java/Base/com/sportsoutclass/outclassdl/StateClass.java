@@ -21,7 +21,7 @@ public class StateClass extends Application {
     public double overs_sc2, inter1StartOver_sc2, inter2StartOver_sc2, inter3StartOver_sc2,
             inter1EndOver_sc2, inter2EndOver_sc2, inter3EndOver_sc2, resAtEndInter_sc2;
     public int wickets, wicketsTwo, totalT1, totalT1Two, totalT2int1, totalT2int2,
-            totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions;
+            totalT2int3, inter1Wickets, inter2Wickets, inter3Wickets, interruptions, parScoreTarget;
     public int totalT1_sc2, totalT1int1_sc2, totalT1int2_sc2,
             totalT1int3_sc2, inter1Wickets_sc2, inter2Wickets_sc2, inter3Wickets_sc2, interruptions_sc2, g50;
     public String errorMsgValue, errorMsgTitle;
@@ -372,6 +372,14 @@ public class StateClass extends Application {
 
     public void setInter3EndOverSI(double value) {
         this.inter3EndOver = value;
+    }
+
+    public int getParScoreTarget() {
+        return this.parScoreTarget;
+    }
+
+    public void setParScoreTarget(int parScore) {
+        this.parScoreTarget = parScore;
     }
 
 }

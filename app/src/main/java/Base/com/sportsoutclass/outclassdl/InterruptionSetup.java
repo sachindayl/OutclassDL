@@ -242,7 +242,7 @@ class InterruptionSetup {
     }
 
     //changing over decimal to base 6
-    private double overCalculations(double x, double y, String function) {
+    double overCalculations(double x, double y, String function) {
         double z = 0.0;
         DecimalFormat df = new DecimalFormat("#.0");
         if (function.equals("plus")) {
