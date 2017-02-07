@@ -61,7 +61,7 @@ class AppRater {
     private static void showRateDialog(final Context mContext, final SharedPreferences.Editor editor) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
         dialog.setTitle("Rate " + APP_TITLE);
-        dialog.setMessage("If you enjoy using " + APP_TITLE + ", please take a moment to rate it. Thanks for your support!");
+        dialog.setMessage("If you enjoy using " + APP_TITLE + ", please take a moment to rate it. \n\nThank you for your support!");
         dialog.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

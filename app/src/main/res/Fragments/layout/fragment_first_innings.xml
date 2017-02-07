@@ -2,7 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FAFAFA">
+                android:background="@color/backgroundColor">
 
     <LinearLayout
         android:id="@+id/first_innings_button_container"
@@ -288,6 +288,7 @@
                                 android:maxLength="4"
                                 android:nextFocusForward="@+id/first_innings_total_interruption_1_et"
                                 android:textAppearance="?android:attr/textAppearanceSmall"/>
+
                         </LinearLayout>
 
                         <LinearLayout

@@ -45,7 +45,7 @@
         <item>No</item>
     </string-array>
 
-    <string-array name="team_1_revised_total_array">
+    <string-array name="yes_no_array">
         <item>Yes</item>
         <item>No</item>
     </string-array>
@@ -75,4 +75,7 @@
     <string name="number_of_interruptions">Number of interruptions</string>
     <string name="title_activity_team_selection">TeamSelection</string>
     <string name="calculate_total_headline">Please Select an Inning to Calculate Total</string>
+
+    <!--Shared Preference-->
+    <string name="first_innings_resources"/>
 </resources>

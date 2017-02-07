@@ -3,6 +3,7 @@ package com.sportsoutclass.outclassdl;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +75,8 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
 
     @BindView(R.id.second_innings_interruptions_spinner)
     Spinner second_innings_interruptions_spinner;
+    @BindView(R.id.first_innings_interruption_check_spinner)
+    Spinner first_innings_interruption_check_spinner;
     @BindView(R.id.second_innings_calc_button)
     Button second_innings_calc_button;
 
@@ -83,9 +87,9 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
     InterruptionSetup interruptionSetup;
     AlertDialog.Builder t2WinTarget;
     AlertDialog.Builder usrErrAlert;
-    boolean allFieldsFilled;
+    boolean allFieldsFilled, firstInningsHadInterCheck;
     int team1FinalTotal, totalWicketsSI, team1TotalWicketsOfMatch, inter1WicketsSI, inter2WicketsSI, inter3WicketsSI, inter1totalSI, inter2totalSI, inter3totalSI;
-    double totalOversOfMatch, inter1OversSI, inter2OversSI, inter3OversSI, inter1OversAtEndSI, inter2OversAtEndSI, inter3OversAtEndSI;
+    double totalOversOfMatch, inter1OversSI, inter2OversSI, inter3OversSI, inter1OversAtEndSI, inter2OversAtEndSI, inter3OversAtEndSI, team1Resources;
 
     public SecondInnings() {
         // Required empty public constructor
@@ -109,6 +113,15 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
         second_innings_calc_button.setOnClickListener(this);
         Tracking analyticsTracker = new Tracking("SecondInnings", state);
         analyticsTracker.doTracking();
+
+        ArrayAdapter<CharSequence> check_adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.yes_no_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        check_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        first_innings_interruption_check_spinner.setAdapter(check_adapter);
+        first_innings_interruption_check_spinner.setOnItemSelectedListener(this);
+        first_innings_interruption_check_spinner.setSelection(1);
 
         ArrayAdapter<CharSequence> interruptions_adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.interruptions_array, android.R.layout.simple_spinner_item);
@@ -171,7 +184,24 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     state.setInterruptionsSI(3);
                 }
                 break;
+            case R.id.first_innings_interruption_check_spinner:
+                if (position == 0) {
+                    //get shared pref value if there was an interruption in the first innings
+                    firstInningsHadInterCheck = true;
+                    SharedPreferences pref = state.getApplicationContext().getSharedPreferences("MyPref", 0);
+                    team1Resources = pref.getFloat("firstInningsResource", 0); // getting Float
+                    state.setTeam1StartResourcesForSI(team1Resources);
+                    Toast.makeText(getContext(), "Last First Innings Calculation Data has been Loaded", Toast.LENGTH_SHORT).show();
+                    Log.v("team1Resources@pref: ", String.valueOf(team1Resources));
+                } else if (position == 1) {
+                    firstInningsHadInterCheck = false;
+                    team1Resources = overData.DataSet((int) totalOversOfMatch * 100);
+                    Log.v("team1Resources@noPref: ", String.valueOf(team1Resources));
+                    state.setTeam1StartResourcesForSI(team1Resources);
+                }
+                break;
         }
+
     }
 
     @Override
@@ -319,13 +349,16 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 totalOversOfMatch = Double.parseDouble(numberOfOversToS);
                 if (totalOversOfMatch > 50.0) {
                     InterruptionSetup.interruptionErrors(usrErrAlert, -10013, "Error", "");
-
+                }
+                if (!firstInningsHadInterCheck) {
+                    team1Resources = overData.DataSet((int) totalOversOfMatch * 100);
+                    Log.v("team1Resources@ET: ", String.valueOf(team1Resources));
+                    state.setTeam1StartResourcesForSI(team1Resources);
                 }
                 state.setOvers(totalOversOfMatch);
                 Log.v("TotalOvers: ", numberOfOversToS);
             }
         });
-
         //Total team 1 final total
         second_innings_team_1_score_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -349,7 +382,6 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 Log.v("Final Total: ", team1TotalToS);
             }
         });
-
         //Total team 1 wickets fallen.
         second_innings_team_1_wickets_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -496,6 +528,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                 }
                 state.setInter2WicketsSI(inter2WicketsSI);
             }
+
         });
         second_innings_wickets_lost_interruption_3_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -660,6 +693,12 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
         });
     }
 
+    /**
+     * Calculates the to win score and checks if there is a target to chase or if the
+     * game is over. shows an Alert Dialog accordingly
+     *
+     * @param target the score team has to chase
+     */
     private void toWinTarget(final int target) {
         int toWin;
         int team2score = 0;
@@ -687,25 +726,25 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
                     toWin = Math.abs(toWin);
                     toWinToS = String.valueOf(toWin);
                     t2WinTarget.setTitle("Final Result");
-                    t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
+                    t2WinTarget.setMessage("\nTarget was " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
                 } else {
                     Log.v("Need to win: ", String.valueOf(toWin));
                     //when team 1 wins 1 run less is counted
                     toWinToS = String.valueOf(toWin - 1);
                     t2WinTarget.setTitle("Final Result");
-                    t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 1 has won the match by " + toWinToS + " run(s).");
+                    t2WinTarget.setMessage("\nTarget was " + target + ". \n\nTeam 1 has won the match by " + toWinToS + " run(s).");
                 }
 
             } else if (toWin <= 0) {
                 toWin = Math.abs(toWin);
                 toWinToS = String.valueOf(toWin);
                 t2WinTarget.setTitle("Final Result");
-                t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
+                t2WinTarget.setMessage("\nTarget was " + target + ". \n\nTeam 2 has won the match by " + toWinToS + " run(s).");
             } else {
                 Log.v("Need to win: ", String.valueOf(toWin));
                 t2WinTarget.setTitle("Target");
-                t2WinTarget.setMessage("Par Score is " + target + ". \n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
-                t2WinTarget.setNeutralButton("Map", new DialogInterface.OnClickListener() {
+                t2WinTarget.setMessage("\nTarget is " + target + ". \n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
+                t2WinTarget.setNeutralButton("Par Score Table", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         state.setParScoreTarget(target);

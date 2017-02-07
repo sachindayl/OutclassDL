@@ -1,10 +1,6 @@
 package com.sportsoutclass.outclassdl;
 
 import android.util.SparseArray;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Sachinda on 8/1/2015.
  * All the over rate data on 5 hash maps
@@ -3323,8 +3319,7 @@ class DataMap {
         data.put(8, 0.0);
         data.put(9, 0.0);
 
-        Double value = data.get(key);
-        return value;
+        return data.get(key);
     }
 
 }

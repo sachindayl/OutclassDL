@@ -29,7 +29,7 @@ public class AboutFrag extends BaseFragment {
     String[] titleValues, subTitleValues;
     @BindView(R.id.about_recycler)
     RecyclerView aboutRecycler;
-    final Context context = StateClass.getContext();
+    final Context context = (StateClass) StateClass.getContext();
     View view;
 
     @Override

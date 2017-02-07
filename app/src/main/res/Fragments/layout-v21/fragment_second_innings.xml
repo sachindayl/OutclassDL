@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="5dp"
                 android:weightSum="8">
@@ -58,6 +58,28 @@
                     android:text="@string/second_innings_tip"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"/>
+
+                <LinearLayout
+                    android:id="@+id/first_innings_interruption_check_spinner_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Team 1 had Interruptions?"/>
+
+                    <Spinner
+                        android:id="@+id/first_innings_interruption_check_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -71,6 +93,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:weightSum="8">
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

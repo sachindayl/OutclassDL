@@ -2,6 +2,7 @@ package com.sportsoutclass.outclassdl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -688,8 +689,14 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
         //values less than -10000 contains error codes
         Log.v("Error Code: ", String.valueOf(target));
         if (target > -10000) {
+
+            SharedPreferences pref = state.getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putFloat("firstInningsResource", (float) state.getEndInterResFI());
+            editor.apply();
+
             t1WinTarget.setTitle("Target");
-            t1WinTarget.setMessage("Team 2 needs " + String.valueOf(target) + " runs to win.");
+            t1WinTarget.setMessage("\nTeam 2 needs " + String.valueOf(target) + " runs to win.");
             t1WinTarget.setPositiveButton("OK", null);
             t1WinTarget.show();
         } else {

@@ -3,60 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     tools:context="com.sportsoutclass.outclassdl.RateTable">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/backgroundColor"
-        >
-
-        <TableLayout
-            android:id="@+id/rate_table_title_container"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:stretchColumns="1">
+            android:layout_margin="5dp"
+            android:fillViewport="true"
+            android:nestedScrollingEnabled="true"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/backgroundColor"
+                android:orientation="vertical">
 
-            <TableRow
-                android:background="@color/primaryColor"
-                android:padding="5dp">
-
-                <TextView
-                    android:layout_width="60dp"
+                <TableLayout
+                    android:id="@+id/rate_table_title_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="Over"
-                    android:textColor="@color/white"/>
+                    android:layout_marginTop="10dp"
+                    android:stretchColumns="*">
 
-                <TextView
+                    <TableRow
+                        android:background="@color/primaryColor"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:text="Over"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_span="5"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="Wickets"
+                            android:textColor="@color/white"/>
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/rate_table_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_span="5"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="Wickets"
-                    android:textColor="@color/white"/>
-            </TableRow>
-        </TableLayout>
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:stretchColumns="*">
 
-        <TableLayout
-            android:id="@+id/rate_table_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@id/rate_table_title_container"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:stretchColumns="*">
+                </TableLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
 
-        </TableLayout>
-    </RelativeLayout>
+
 </ScrollView>
 
 

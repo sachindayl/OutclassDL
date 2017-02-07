@@ -1,7 +1,5 @@
 package com.sportsoutclass.outclassdl;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -17,8 +15,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,34 +97,44 @@ public class RateTable extends BaseFragment {
         TextView tv = new TextView(getActivity());
         tv.setText("");
         wicketsRow.addView(tv);
-        if(wickets > 5) showColumns = 10;
-        else showColumns = wickets + 5;
+//        if(wickets > 5) showColumns = 10;
+//        else showColumns = wickets + 6;
+        showColumns = 10;
         //adding number of wickets to first row
         for (int i = wickets; i < showColumns; i++) {
             tv = new TextView(getActivity());
             tv.setGravity(Gravity.CENTER);
+            tv.setPadding(20,0,20,0);
             tv.setText(String.valueOf(i));
+            tv.setTextColor(ContextCompat.getColor(getContext(),R.color.accentColor));
             wicketsRow.addView(tv);
         }
         rateTableContainer.addView(wicketsRow);
 
     }
 
+    /**
+     * This method dynamically creates rows and shows par scores for second innings targets
+     */
     private void rowCreator() {
         double[] data = getRateData();
         double numOfRows = data[1];
         //adding one because we don't need to check first over its already shown
         double startOver = data[2] + 1;
-        //calculation start after one later
+        double resourcesAtStartOver = dataMap.DataSet((int)state.getOvers()*100);
+        Log.v("startOverBefore: ", String.valueOf(startOver));
         double oversLeft = data[1] - 1;
+        Log.v("oversLeftBefore: ", String.valueOf(oversLeft));
         int resourceKey;
         int numOfWickets = (int) data[0];
         boolean rowColor = false;
         int numOfRowsToInt;
         //if there are decimals in remaining overs, adding another row
-        if ((numOfRows * 10) % 10 > 0) numOfRowsToInt = (int) numOfRows + 1;
+        if (numOfRows % 1 != 0) numOfRowsToInt = (int) numOfRows + 1;
         else numOfRowsToInt = (int) numOfRows;
-
+        Log.v("numOfRowsToInt: ", String.valueOf(numOfRowsToInt));
+        double team1Resources = state.getTeam1StartResourcesForSI();
+        Log.v("team1 resources: ", String.valueOf(team1Resources));
         for (int i = 0; i < numOfRowsToInt; i++) {
             //creating rows and adding color
             tr = new TableRow(getActivity());
@@ -142,27 +148,41 @@ public class RateTable extends BaseFragment {
             }
             //adding over number to row
             TextView tv = new TextView(getActivity());
-            tv.setText(String.valueOf(startOver));
+
+            DecimalFormat df = new DecimalFormat("#.0");
+            String startOverToS = df.format(startOver);
+            tv.setText(startOverToS);
+            tv.setGravity(Gravity.CENTER);
+            tv.setTextColor(ContextCompat.getColor(getContext(),R.color.accentColor));
             tr.addView(tv);
 
+            //adding the par scores to every over according to the number of overs
             for (int j = numOfWickets; j < showColumns; j++) {
                 resourceKey = (int) ((oversLeft * 100) + j);
-                double resourceValue = dataMap.DataSet(resourceKey);
-                double parScoreDouble = (state.getTotalT1() * resourceValue) /100;
-                int parScoreToInt = (int) parScoreDouble;
-                int parScoreFinal = state.getParScoreTarget() - parScoreToInt;
-                createTextView(String.valueOf(parScoreFinal));
-//                if(parScoreFinal == state.getParScoreTarget()) break;
                 Log.v("resourceKey: ", String.valueOf(resourceKey));
+                double resourceValue = dataMap.DataSet(resourceKey);
+                Log.v("resourceValue: ", String.valueOf(resourceValue));
+                double resourcesForRemainingOvers = team1Resources - resourceValue;
+                Log.v("resForRemainingOvers: ", String.valueOf(resourcesForRemainingOvers));
+                //dividing team2 resources by team 1 for par score
+                double parScoreDouble = state.getParScoreTarget() * (resourcesForRemainingOvers / team1Resources);
+                Log.v("parScoreEquation: ", String.valueOf(parScoreDouble));
+                double parScore = Math.abs(parScoreDouble) ;
+                Log.v("pScore b4 decimal fix: ", String.valueOf(parScore));
+                int parScoreFinal = (int) parScore;
+                Log.v("final par score: ", String.valueOf(parScoreFinal));
+                createTextView(String.valueOf(parScoreFinal));
+
             }
-            //noinspection unchecked
-
-            Log.v("RowCalculation: ", String.valueOf(startOver));
-
-//            InputMethodManager iMM = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//            iMM.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            startOver++;
             oversLeft--;
+            Log.v("oversLeftAfter: ", String.valueOf(oversLeft));
+//            lessThanOver = checkBallsLeft(oversLeft);
+//            if(lessThanOver) startOver = startOver + oversLeft;
+//            else startOver++;
+            startOver++;
+            Log.v("startOverAfter: ", String.valueOf(startOver));
+
+
             rateTableContainer.addView(tr);
         }
 
@@ -172,7 +192,7 @@ public class RateTable extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //set title on action bar
-        getActionBar().setTitle("DL Table");
+        getActionBar().setTitle("Par Score Table");
         rowCreator();
     }
 
@@ -201,7 +221,14 @@ public class RateTable extends BaseFragment {
     private void createTextView(String result){
         tview = new TextView(getActivity());
         tview.setGravity(Gravity.CENTER);
+        tview.setPadding(20,0,20,0);
         tview.setText(result);
         tr.addView(tview);
+    }
+
+    private boolean checkBallsLeft(double x){
+        boolean onlyBallsLeft = false;
+        if(x > 0 && x < 0.6) onlyBallsLeft = true;
+        return onlyBallsLeft;
     }
 }

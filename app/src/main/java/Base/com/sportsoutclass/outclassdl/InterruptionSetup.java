@@ -241,7 +241,14 @@ class InterruptionSetup {
         return target;
     }
 
-    //changing over decimal to base 6
+    /**
+     * This method is used to calculate overs since there's only have 6 balls per over
+     *
+     * @param x start value
+     * @param y end value
+     * @param function plus or minus
+     * @return number of overs
+     */
     double overCalculations(double x, double y, String function) {
         double z = 0.0;
         DecimalFormat df = new DecimalFormat("#.0");
