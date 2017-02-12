@@ -743,7 +743,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
             } else {
                 Log.v("Need to win: ", String.valueOf(toWin));
                 t2WinTarget.setTitle("Target");
-                t2WinTarget.setMessage("\nTarget is " + target + ". \n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
+                t2WinTarget.setMessage("\nTarget is " + target + ".\n\nTeam 2 needs " + toWinToS + " run(s) to Win.");
                 t2WinTarget.setNeutralButton("Par Score Table", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
