@@ -24,8 +24,8 @@ dependencies:
 
 test:
     override:
-#        - (./gradlew assemble):
-#            timeout: 360
+        - (./gradlew assemble):
+            timeout: 360
         # start the emulator
         - emulator -avd circleci-android24 -no-audio -no-window:
             background: true

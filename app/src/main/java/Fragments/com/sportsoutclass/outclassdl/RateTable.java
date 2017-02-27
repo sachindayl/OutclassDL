@@ -87,6 +87,9 @@ public class RateTable extends BaseFragment {
         return data;
     }
 
+    /**
+     * Adding data for every over according to the number of wickets remaining
+     */
     private void addWicketsRow() {
         double[] data = getRateData();
         int wickets = (int) data[0];
@@ -118,12 +121,19 @@ public class RateTable extends BaseFragment {
      */
     private void rowCreator() {
         double[] data = getRateData();
+        //number of rows created according to overs remaining at the end of interruption
         double numOfRows = data[1];
-        //adding one because we don't need to check first over its already shown
         double startOver = data[2] + 1;
-        double resourcesAtStartOver = dataMap.DataSet((int)state.getOvers()*100);
-        Log.v("startOverBefore: ", String.valueOf(startOver));
         double oversLeft = data[1] - 1;
+        if(oversLeft % 1 != 0) {
+            numOfRows = (int) numOfRows + 1;
+            startOver = (int) startOver;
+            oversLeft = (int) oversLeft + 1;
+        }
+        //adding one because we don't need to check first over its already shown
+
+        Log.v("startOverBefore: ", String.valueOf(startOver));
+
         Log.v("oversLeftBefore: ", String.valueOf(oversLeft));
         int resourceKey;
         int numOfWickets = (int) data[0];

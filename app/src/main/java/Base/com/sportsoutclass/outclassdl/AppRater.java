@@ -38,7 +38,7 @@ class AppRater {
         editor.putLong("launch_count", launch_count);
 
         DAYS_UNTIL_PROMPT = prefs.getInt("days_to_remind", 3);
-        Log.v("Remind Date:", String.valueOf(DAYS_UNTIL_PROMPT));
+        Log.v("Remind Date at Start:", String.valueOf(DAYS_UNTIL_PROMPT));
 
         // Get date of first launch
         Long date_firstLaunch = prefs.getLong("date_firstLaunch", 0);
@@ -108,7 +108,7 @@ class AppRater {
             public void onClick(DialogInterface dialog, int which) {
                 DAYS_UNTIL_PROMPT = DAYS_UNTIL_PROMPT + 7;
                 editor.putInt("days_to_remind", DAYS_UNTIL_PROMPT);
-                Log.v("Remind Date:", String.valueOf(DAYS_UNTIL_PROMPT));
+                Log.v("Remind Date set again:", String.valueOf(DAYS_UNTIL_PROMPT));
                 editor.commit();
                 dialog.dismiss();
             }

@@ -47,6 +47,14 @@ class InterruptionSetup {
         double oversCanPut = overCalculations(oversForT2, oversAtInter1Start, "minus");
         //overs remaining at the end of the interruption
         double oversRemainingInterEnd = state.getInter1EndOverSI();
+
+        double completeOverCheck = overCalculations(oversAtInter1Start, oversRemainingInterEnd, "plus");
+        Log.v("completeOverCheckInt1: ", String.valueOf(completeOverCheck));
+        if(completeOverCheck % 1 != 0 ){
+            Log.v("completeOverCheckInt1: ", String.valueOf("Returning error code"));
+            return -10023;
+        }
+
         if (oversCanPut <= 0) {
             String wholeOversToS = String.valueOf(oversForT2);
             state.setErrorMessageValue(wholeOversToS);
@@ -101,7 +109,7 @@ class InterruptionSetup {
 
     int two_interruptions_SecondInnings() {
         init();
-        one_interruption_SecondInnings();
+        int oneInterSafetyCheck = one_interruption_SecondInnings();
         target = -1000;
         double oversAtInter1Start = state.getInter1StartOverSI();
         double oversRemainingInter1End = state.getInter1EndOverSI();
@@ -112,6 +120,12 @@ class InterruptionSetup {
         double oversFinalizedAtInter1End = overCalculations(oversAtInter1Start, oversRemainingInter1End, "plus");
         double oversCanPut = overCalculations(oversFinalizedAtInter1End, oversAtInter2Start, "minus");
         double oversRemainingAtInter2End = state.getInter2EndOverSI();
+
+        double completeOverCheck = overCalculations(oversAtInter2Start, oversRemainingAtInter2End, "plus");
+        Log.v("completeOverCheckInt2: ", String.valueOf(completeOverCheck));
+        if(completeOverCheck % 1 != 0){
+            return -10024;
+        }
         if (oversCanPut <= 0) {
             String wholeOversToS = String.valueOf(oversFinalizedAtInter1End);
             state.setErrorMessageValue(wholeOversToS);
@@ -169,14 +183,17 @@ class InterruptionSetup {
         Log.v("resLeftAtInt2: ", String.valueOf(resLeftAtInt2));
         target = (int) ((t1TotalScore * (resLeftAtInt2 / resAtStartOfMatch)) + 1);
         Log.v("targetInt2: ", String.valueOf(target));
-
+        //Checking if return value from other interruptions give errors
+        if(oneInterSafetyCheck < -10000){
+            target = oneInterSafetyCheck;
+        }
         return target;
     }
 
     int three_interruptions_SecondInnings() {
         init();
-        one_interruption_SecondInnings();
-        two_interruptions_SecondInnings();
+        int oneInterSafetyCheck = one_interruption_SecondInnings();
+        int twoInterSafetyCheck = two_interruptions_SecondInnings();
         target = -1000;
         double oversAtInter2Start = state.getInter2StartOverSI();
         double oversAtInter3Start = state.getInter3StartOverSI();
@@ -187,6 +204,11 @@ class InterruptionSetup {
         double oversFinalizedAtInter2End = overCalculations(state.getInter2StartOverSI(), state.getInter2EndOverSI(), "plus");
         double oversRemainingAtInter3End = state.getInter3EndOverSI();
         double oversCanPut = overCalculations(oversFinalizedAtInter2End, state.getInter3StartOverSI(), "minus");
+        double completeOverCheck = overCalculations(oversAtInter3Start, oversRemainingAtInter3End, "plus");
+        Log.v("completeOverCheckInt2: ", String.valueOf(completeOverCheck));
+        if(completeOverCheck % 1 != 0){
+            return -10025;
+        }
         if (oversCanPut <= 0) {
             String wholeOversToS = String.valueOf(oversFinalizedAtInter2End);
             state.setErrorMessageValue(wholeOversToS);
@@ -238,6 +260,12 @@ class InterruptionSetup {
         Log.v("resourcesAvailable: ", String.valueOf(resLeftAtInt3));
         target = (int) ((t1TotalScore * (resLeftAtInt3 / resAtStartOfMatch)) + 1);
         Log.v("target: ", String.valueOf(target));
+        //Checking if return value from other interruptions give errors
+        if(oneInterSafetyCheck < -10000){
+            target = oneInterSafetyCheck;
+        }else if(twoInterSafetyCheck < -10000){
+            target = twoInterSafetyCheck;
+        }
         return target;
     }
 
@@ -654,6 +682,15 @@ class InterruptionSetup {
                 break;
             case -10022:
                 usrErr.setMessage("Please enter the number of overs");
+                break;
+            case -10023:
+                usrErr.setMessage("Interruption 1: Remaining overs must add up to complete an over!");
+                break;
+            case -10024:
+                usrErr.setMessage("Interruption 2: Remaining overs must add up to complete an over!");
+                break;
+            case -10025:
+                usrErr.setMessage("Interruption 3: Remaining overs must add up to complete an over!");
                 break;
         }
         usrErr.setPositiveButton("OK", null);
