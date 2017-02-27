@@ -24,7 +24,7 @@ test:
         - (./gradlew assemble):
             timeout: 360
         # start the emulator
-        - emulator -avd circleci-android24 -no-audio -no-window:
+        - emulator -avd circleci-android24 -no-window -gpu off:
             background: true
             parallel: true
         # wait for it to have booted
@@ -33,7 +33,7 @@ test:
         - sleep 30
         - adb shell input keyevent 82
         # run tests  against the emulator.
-        - ./gradlew connectedDevelopmentDebugAndroidTest -PdisablePreDex
+        - ./gradlew connectedAndroidTest -PdisablePreDex
         # copy the build outputs to artifacts
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS
         # copy the test results to the test results directory.
