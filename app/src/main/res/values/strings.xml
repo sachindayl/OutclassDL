@@ -23,7 +23,7 @@
     <string name="interruption_1_remaining">Overs remaining at the end of interruption</string>
     <string name="overs">Overs</string>
     <string name="next">next</string>
-    <string name="team_1_final_score">Team 1 final score</string>
+    <string name="team_1_final_score">Target for second innings</string>
     <string name="team_1_score">Team 1 score</string>
     <string name="team_1_score_DL">Team 1 score after DL calculation</string>
     <string name="total">Total</string>
@@ -78,4 +78,5 @@
 
     <!--Shared Preference-->
     <string name="first_innings_resources"/>
+    <string name="over">Over</string>
 </resources>

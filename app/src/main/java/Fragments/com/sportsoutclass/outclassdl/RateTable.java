@@ -94,26 +94,51 @@ public class RateTable extends BaseFragment {
         double[] data = getRateData();
         int wickets = (int) data[0];
         Log.v("wicketsRT", String.valueOf(wickets));
+        //title row creation
+        TableRow titleRow = new TableRow(getActivity());
+        titleRow.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primaryColor));
+        titleRow.setPadding(20, 20, 20, 20);
+        //Over title
+        TextView overTitle = new TextView(getActivity());
+        overTitle.setText(R.string.over);
+        overTitle.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        overTitle.setWidth(100);
+        overTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorPrimary));
+        titleRow.addView(overTitle);
+        TableRow.LayoutParams oTParams = (TableRow.LayoutParams) overTitle.getLayoutParams();
+        oTParams.setMargins(0, 0, 40, 0);
+        oTParams.span = 1;
+        overTitle.setLayoutParams(oTParams);
+        //Wickets title
+        TextView wicketsTitle = new TextView(getActivity());
+        wicketsTitle.setText(R.string.wickets);
+        wicketsTitle.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+        wicketsTitle.setGravity(Gravity.CENTER_HORIZONTAL);
+        wicketsTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorPrimary));
+        titleRow.addView(wicketsTitle);
+        TableRow.LayoutParams wTParams = (TableRow.LayoutParams) wicketsTitle.getLayoutParams();
+        wTParams.span = 7;
+        wicketsTitle.setLayoutParams(wTParams);
+        //adding title row to the view
+        rateTableContainer.addView(titleRow);
+
         TableRow wicketsRow = new TableRow(getActivity());
         wicketsRow.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.tableRowGrey));
         wicketsRow.setPadding(20, 20, 20, 20);
         TextView tv = new TextView(getActivity());
         tv.setText("");
         wicketsRow.addView(tv);
-//        if(wickets > 5) showColumns = 10;
-//        else showColumns = wickets + 6;
         showColumns = 10;
         //adding number of wickets to first row
         for (int i = wickets; i < showColumns; i++) {
             tv = new TextView(getActivity());
             tv.setGravity(Gravity.CENTER);
-            tv.setPadding(20,0,20,0);
+            tv.setPadding(20, 0, 40, 0);
             tv.setText(String.valueOf(i));
-            tv.setTextColor(ContextCompat.getColor(getContext(),R.color.accentColor));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.accentColor));
             wicketsRow.addView(tv);
         }
         rateTableContainer.addView(wicketsRow);
-
     }
 
     /**
@@ -125,7 +150,7 @@ public class RateTable extends BaseFragment {
         double numOfRows = data[1];
         double startOver = data[2] + 1;
         double oversLeft = data[1] - 1;
-        if(oversLeft % 1 != 0) {
+        if (oversLeft % 1 != 0) {
             numOfRows = (int) numOfRows + 1;
             startOver = (int) startOver;
             oversLeft = (int) oversLeft + 1;
@@ -162,8 +187,8 @@ public class RateTable extends BaseFragment {
             DecimalFormat df = new DecimalFormat("#.0");
             String startOverToS = df.format(startOver);
             tv.setText(startOverToS);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTextColor(ContextCompat.getColor(getContext(),R.color.accentColor));
+//            tv.setGravity(Gravity.CENTER);
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.accentColor));
             tr.addView(tv);
 
             //adding the par scores to every over according to the number of overs
@@ -177,22 +202,16 @@ public class RateTable extends BaseFragment {
                 //dividing team2 resources by team 1 for par score
                 double parScoreDouble = state.getParScoreTarget() * (resourcesForRemainingOvers / team1Resources);
                 Log.v("parScoreEquation: ", String.valueOf(parScoreDouble));
-                double parScore = Math.abs(parScoreDouble) ;
+                double parScore = Math.abs(parScoreDouble);
                 Log.v("pScore b4 decimal fix: ", String.valueOf(parScore));
                 int parScoreFinal = (int) parScore;
                 Log.v("final par score: ", String.valueOf(parScoreFinal));
                 createTextView(String.valueOf(parScoreFinal));
-
             }
             oversLeft--;
             Log.v("oversLeftAfter: ", String.valueOf(oversLeft));
-//            lessThanOver = checkBallsLeft(oversLeft);
-//            if(lessThanOver) startOver = startOver + oversLeft;
-//            else startOver++;
             startOver++;
             Log.v("startOverAfter: ", String.valueOf(startOver));
-
-
             rateTableContainer.addView(tr);
         }
 
@@ -206,39 +225,17 @@ public class RateTable extends BaseFragment {
         rowCreator();
     }
 
-//    private class RowCalculation extends AsyncTask<String, Double, String> {
-//        ProgressDialog pd = new ProgressDialog(getActivity());
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            pd.setMessage("\tCalculating...");
-//            pd.show();
-//        }
-//
-//        @Override
-//        final protected String doInBackground(String... resourceKeys) {
-//            rowCreator();
-//            return null;
-//        }
-//
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            pd.dismiss();
-//        }
-//    }
-
-    private void createTextView(String result){
+    /**
+     * Creates text views for all the rows
+     *
+     * @param result value that needs to be added to the text view
+     */
+    private void createTextView(String result) {
         tview = new TextView(getActivity());
         tview.setGravity(Gravity.CENTER);
-        tview.setPadding(20,0,20,0);
+        tview.setPadding(20, 0, 40, 0);
         tview.setText(result);
         tr.addView(tview);
     }
 
-    private boolean checkBallsLeft(double x){
-        boolean onlyBallsLeft = false;
-        if(x > 0 && x < 0.6) onlyBallsLeft = true;
-        return onlyBallsLeft;
-    }
 }

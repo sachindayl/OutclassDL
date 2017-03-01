@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -44,6 +45,14 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
 
     @BindView(R.id.first_innings_calc_button)
     Button calculate_Btn;
+
+    //CardView Binding
+    @BindView(R.id.card_view_1_fi)
+    CardView card_view_1;
+    @BindView(R.id.card_view_2_fi)
+    CardView card_view_2;
+    @BindView(R.id.card_view_3_fi)
+    CardView card_view_3;
     //Layout Binding
     @BindView(R.id.first_innings_interruption_1_container)
     LinearLayout first_innings_interruption_1_container;
@@ -232,6 +241,9 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
             first_innings_total_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_wickets_lost_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            card_view_1.setVisibility(View.VISIBLE);
+            card_view_2.setVisibility(View.GONE);
+            card_view_3.setVisibility(View.GONE);
 
         } else if (i == 2) {
             InterruptionsAmountVisibilitySetup(1);
@@ -243,6 +255,8 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
             first_innings_wickets_lost_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
             first_innings_overs_remaining_interruption_1_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            card_view_2.setVisibility(View.VISIBLE);
+            card_view_3.setVisibility(View.GONE);
 
         } else if (i == 3) {
             InterruptionsAmountVisibilitySetup(2);
@@ -253,6 +267,7 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
             first_innings_wickets_lost_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
             first_innings_overs_remaining_interruption_3_et.setImeOptions(EditorInfo.IME_ACTION_DONE);
             first_innings_overs_remaining_interruption_2_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+            card_view_3.setVisibility(View.VISIBLE);
 
         }
 

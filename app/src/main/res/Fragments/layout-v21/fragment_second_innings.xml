@@ -46,18 +46,18 @@
                 android:id="@+id/tip_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="16dp"
                 android:baselineAligned="false"
                 android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="5dp"
                 android:weightSum="8">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/second_innings_tip"
+                    android:paddingEnd="10dp"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"/>
+                    android:text="@string/second_innings_tip"/>
 
                 <LinearLayout
                     android:id="@+id/first_innings_interruption_check_spinner_container"
@@ -93,8 +93,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:weightSum="8">
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,8 +178,8 @@
                         android:inputType="numberDecimal"
                         android:maxLength="4"
                         android:nextFocusForward="@+id/second_innings_which_over_interruption_1_et"
-                        android:paddingTop="15dp"
                         android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
                 </LinearLayout>
@@ -212,16 +210,16 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_1"
+                android:id="@+id/card_view_1_si"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/second_innings_interruption_spinner_container"
                 android:layout_gravity="center"
-                card_view:cardBackgroundColor="@color/white"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardElevation="4dp"
                 android:layout_marginTop="5dp"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/second_innings_interruption_1_container"
@@ -396,16 +394,16 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_2"
+                android:id="@+id/card_view_2_si"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view_1"
+                android:layout_below="@id/card_view_1_si"
                 android:layout_gravity="center"
-                card_view:cardBackgroundColor="@color/white"
                 android:layout_marginTop="5dp"
-                card_view:cardUseCompatPadding="true"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="4dp"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/second_innings_interruption_2_container"
@@ -584,17 +582,17 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_3"
+                android:id="@+id/card_view_3_si"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view_2"
+                android:layout_below="@id/card_view_2_si"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardElevation="4dp"
-                card_view:cardBackgroundColor="@color/white"
                 android:layout_marginBottom="10dp"
-                card_view:cardCornerRadius="10dp">
+                android:layout_marginTop="5dp"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/second_innings_interruption_3_container"
@@ -768,11 +766,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
         </RelativeLayout>
-
-
     </ScrollView>
-
 </RelativeLayout>
 

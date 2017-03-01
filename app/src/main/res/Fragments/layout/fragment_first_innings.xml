@@ -217,7 +217,7 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view"
+                android:id="@+id/card_view_1_fi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/first_innings_interruption_spinner_container"
@@ -400,10 +400,10 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_2"
+                android:id="@+id/card_view_2_fi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view"
+                android:layout_below="@id/card_view_1_fi"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 card_view:cardBackgroundColor="@color/white"
@@ -584,10 +584,10 @@
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_3"
+                android:id="@+id/card_view_3_fi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view_2"
+                android:layout_below="@id/card_view_2_fi"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
