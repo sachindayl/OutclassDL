@@ -3,6 +3,7 @@ package com.sportsoutclass.outclassdl;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.WindowManager;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,6 +34,19 @@ public class ApplicationTest {
 
     @Rule
     public final ActivityTestRule<TeamSelection> mActivityRule = new ActivityTestRule<>(TeamSelection.class);
+
+    @Before
+    public void setUp() {
+        final TeamSelection activity = mActivityRule.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
+    }
 
     @Test
     public void firstInningsInterruption1Test1() {
