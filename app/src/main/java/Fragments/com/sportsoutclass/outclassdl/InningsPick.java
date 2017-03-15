@@ -9,23 +9,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class InningsPick extends BaseFragment {
+public class InningsPick extends BaseFragment implements FragmentContract {
     public InningsPick() {
     }
+
     @BindView(R.id.team_pick_recycler)
     RecyclerView inningsPicker;
+    private static final String TAG = "InningsPicker";
+    private AdView mAdView;
+    StateClass state;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_innings_pick, container, false);
+        view = inflater.inflate(R.layout.fragment_innings_pick, container, false);
         ButterKnife.bind(this, view);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBarImplementation();
+        state = (StateClass) getActivity().getApplication();
+        adMobImplementation();
 
         AppRater.app_launched(getContext());
         String[] titleValues = new String[]{"First Innings", "Second Innings"};
@@ -49,4 +59,18 @@ public class InningsPick extends BaseFragment {
     }
 
 
+    @Override
+    public void actionBarImplementation() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void adMobImplementation() {
+        //Admob Initialization
+        MobileAds.initialize(getContext(), state.getAdmobAppId());
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 }

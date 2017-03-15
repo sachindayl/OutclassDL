@@ -25,7 +25,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +41,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FirstInnings extends BaseFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class FirstInnings extends BaseFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, FragmentContract {
     public FirstInnings() {
         // Required empty public constructor
     }
@@ -61,37 +64,6 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     @BindView(R.id.first_innings_interruption_3_container)
     LinearLayout first_innings_interruption_3_container;
 
-    //TextView Bindings
-    @BindView(R.id.first_innings_interruption_1_tv)
-    TextView first_innings_interruption_1_tv;
-    @BindView(R.id.first_innings_total_interruption_1_tv)
-    TextView first_innings_team2_total_interruption_1_tv;
-    @BindView(R.id.first_innings_total_interruption_2_tv)
-    TextView first_innings_team2_total_interruption_2_tv;
-    @BindView(R.id.first_innings_total_interruption_3_tv)
-    TextView first_innings_team2_total_interruption_3_tv;
-    @BindView(R.id.first_innings_interruption_2_tv)
-    TextView first_innings_interruption_2_tv;
-    @BindView(R.id.first_innings_interruption_3_tv)
-    TextView first_innings_interruption_3_tv;
-    @BindView(R.id.first_innings_which_over_interruption_1_tv)
-    TextView first_innings_which_over_interruption_1_tv;
-    @BindView(R.id.first_innings_which_over_interruption_2_tv)
-    TextView first_innings_which_over_interruption_2_tv;
-    @BindView(R.id.first_innings_which_over_interruption_3_tv)
-    TextView first_innings_which_over_interruption_3_tv;
-    @BindView(R.id.first_innings_wickets_lost_interruption_1_tv)
-    TextView first_innings_wickets_lost_interruption_1_tv;
-    @BindView(R.id.first_innings_wickets_lost_interruption_2_tv)
-    TextView first_innings_wickets_lost_interruption_2_tv;
-    @BindView(R.id.first_innings_wickets_lost_interruption_3_tv)
-    TextView first_innings_wickets_lost_interruption_3_tv;
-    @BindView(R.id.first_innings_overs_remaining_interruption_1_tv)
-    TextView first_innings_overs_remaining_interruption_1_tv;
-    @BindView(R.id.first_innings_overs_remaining_interruption_2_tv)
-    TextView first_innings_overs_remaining_interruption_2_tv;
-    @BindView(R.id.first_innings_overs_remaining_interruption_3_tv)
-    TextView first_innings_overs_remaining_interruption_3_tv;
     //EditText Bindings
     @BindView(R.id.first_innings_total_interruption_1_et)
     EditText first_innings_total_interruption_1_et;
@@ -138,17 +110,19 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
     private int totalWickets, inter1WicketsFirstInnings, inter2WicketsFirstInnings, inter3WicketsFirstInnings, inter1totalFirstInnings, inter2totalFirstInnings, inter3totalFirstInnings, team1finalTotB4rev;
     double overs, inter1OversFirstInnings, inter2OversFirstInnings, inter3OversFirstInnings, inter1OversAtEndFirstInnings, inter2OversAtEndFirstInnings, inter3OversAtEndFirstInnings, team2OversAtStartFirstInnings;
     boolean allFieldsFilled;
+    private static final String TAG = "FirstInnings";
+    private AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first_innings, container, false);
         ButterKnife.bind(this, view);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBarImplementation();
+        state = (StateClass) getActivity().getApplication();
+        adMobImplementation();
         totalWickets = 10;
         items = new ArrayList<>();
-        state = (StateClass) getActivity().getApplication();
         usrErrAlert = new AlertDialog.Builder(getActivity());
         t1WinTarget = new AlertDialog.Builder(getActivity());
         firstInningsOverData = new DataMap();
@@ -647,6 +621,20 @@ public class FirstInnings extends BaseFragment implements AdapterView.OnItemSele
                 }
                 break;
         }
+    }
+
+    @Override
+    public void actionBarImplementation() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void adMobImplementation() {
+        MobileAds.initialize(getContext(), state.getAdmobAppId());
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {

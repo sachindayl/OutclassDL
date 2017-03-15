@@ -1,35 +1,52 @@
 {
   "project_info": {
-    "project_number": "634872618273",
-    "project_id": "firebase-dlcalculator"
+    "project_number": "569788881060",
+    "firebase_url": "https://dlcalculator-594d2.firebaseio.com",
+    "project_id": "dlcalculator-594d2",
+    "storage_bucket": "dlcalculator-594d2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:634872618273:android:bc7e3287aa43052e",
+        "mobilesdk_app_id": "1:569788881060:android:bc7e3287aa43052e",
         "android_client_info": {
           "package_name": "com.sportsoutclass.outclassdl"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "569788881060-067890fg3b3bqpe0qeu9pj8gjmou6vhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sportsoutclass.outclassdl",
+            "certificate_hash": "513fe7e2ff994c9c2a7d01d060e2e98e408fe92d"
+          }
+        },
+        {
+          "client_id": "569788881060-d3upfeal4p2ckct8q99jiagbagfpgi9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVJq0n1RYGqYvzFNRubHNWUwByQhumDKU"
+          "current_key": "AIzaSyCOorTAPojHp1J1n27rO7ZddfR3c1xHkA4"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-86158813-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569788881060-d3upfeal4p2ckct8q99jiagbagfpgi9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

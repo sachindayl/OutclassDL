@@ -2,13 +2,24 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:background="@color/backgroundColor">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+    </com.google.android.gms.ads.AdView>
 
     <LinearLayout
         android:id="@+id/first_innings_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/adView"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
 
@@ -176,9 +187,9 @@
                         android:gravity="center"
                         android:hint="@string/overs"
                         android:imeOptions="actionNext"
-                        android:nextFocusForward="@+id/first_innings_which_over_interruption_1_et"
                         android:inputType="numberDecimal"
                         android:maxLength="4"
+                        android:nextFocusForward="@+id/first_innings_which_over_interruption_1_et"
                         android:paddingTop="15dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
                 </LinearLayout>
@@ -215,10 +226,10 @@
                 android:layout_below="@+id/first_innings_interruption_spinner_container"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/first_innings_interruption_1_container"
@@ -398,10 +409,10 @@
                 android:layout_below="@id/card_view_1_fi"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/first_innings_interruption_2_container"
@@ -583,10 +594,10 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:cardElevation="4dp"
                 card_view:cardBackgroundColor="@color/white"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:id="@+id/first_innings_interruption_3_container"

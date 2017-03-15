@@ -12,6 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -19,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AboutFrag extends BaseFragment {
+public class AboutFrag extends BaseFragment implements FragmentContract{
 
 
     public AboutFrag() {
@@ -31,15 +35,17 @@ public class AboutFrag extends BaseFragment {
     RecyclerView aboutRecycler;
     final Context context = (StateClass) StateClass.getContext();
     View view;
+    private AdView mAdView;
+    StateClass state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_about, container, false);
         ButterKnife.bind(this, view);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-        StateClass state = (StateClass) getActivity().getApplication();
+        actionBarImplementation();
+        state = (StateClass) getActivity().getApplication();
+        adMobImplementation();
         Tracking analyticsTracker = new Tracking("AboutPage", state);
         analyticsTracker.doTracking();
 
@@ -52,8 +58,6 @@ public class AboutFrag extends BaseFragment {
 
         AboutPageRVAdapter adapter = new AboutPageRVAdapter(context, titleValues, subTitleValues);
         aboutRecycler.setAdapter(adapter);
-
-
         return view;
     }
 
@@ -64,4 +68,17 @@ public class AboutFrag extends BaseFragment {
         getActionBar().setTitle("About");
     }
 
+    @Override
+    public void adMobImplementation() {
+        MobileAds.initialize(getContext(), state.getAdmobAppId());
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    @Override
+    public void actionBarImplementation() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+    }
 }

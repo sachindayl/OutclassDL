@@ -14,16 +14,19 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RateTable extends BaseFragment {
+public class RateTable extends BaseFragment implements FragmentContract {
 
 
     public RateTable() {
@@ -39,7 +42,7 @@ public class RateTable extends BaseFragment {
     TableRow tr;
     TextView tview;
     int showColumns;
-
+    private AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +50,9 @@ public class RateTable extends BaseFragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_rate_table, container, false);
         ButterKnife.bind(this, view);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBarImplementation();
         state = (StateClass) getActivity().getApplication();
+        adMobImplementation();
         interruptionSetup = new InterruptionSetup();
         dataMap = new DataMap();
         addWicketsRow();
@@ -238,4 +241,17 @@ public class RateTable extends BaseFragment {
         tr.addView(tview);
     }
 
+    @Override
+    public void adMobImplementation() {
+        MobileAds.initialize(getContext(), state.getAdmobAppId());
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    @Override
+    public void actionBarImplementation() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+    }
 }

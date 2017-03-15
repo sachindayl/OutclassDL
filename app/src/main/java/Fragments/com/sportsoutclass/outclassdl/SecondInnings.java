@@ -27,10 +27,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SecondInnings extends BaseFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SecondInnings extends BaseFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, FragmentContract {
 
     //CardView Binding
     @BindView(R.id.card_view_1_si)
@@ -99,6 +103,7 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
     boolean allFieldsFilled, firstInningsHadInterCheck;
     int team1FinalTotal, totalWicketsSI, team1TotalWicketsOfMatch, inter1WicketsSI, inter2WicketsSI, inter3WicketsSI, inter1totalSI, inter2totalSI, inter3totalSI;
     double totalOversOfMatch, inter1OversSI, inter2OversSI, inter3OversSI, inter1OversAtEndSI, inter2OversAtEndSI, inter3OversAtEndSI, team1Resources;
+    private AdView mAdView;
 
     public SecondInnings() {
         // Required empty public constructor
@@ -107,13 +112,14 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_second_innings, container, false);
+        view = inflater.inflate(R.layout.fragment_second_innings, container, false);
         ButterKnife.bind(this, view);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBarImplementation();
+        state = (StateClass) getActivity().getApplication();
+        adMobImplementation();
         totalWicketsSI = 10;
         overData = new DataMap();
-        state = (StateClass) getActivity().getApplication();
+
         usrErrAlert = new AlertDialog.Builder(getActivity());
         t2WinTarget = new AlertDialog.Builder(getActivity());
         firstInningsOverData = new DataMap();
@@ -216,6 +222,20 @@ public class SecondInnings extends BaseFragment implements AdapterView.OnItemSel
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void actionBarImplementation() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void adMobImplementation() {
+        MobileAds.initialize(getContext(), state.getAdmobAppId());
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private class AsyncCalculation extends AsyncTask<Integer, Void, Integer> {

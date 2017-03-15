@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
@@ -28,6 +31,8 @@ public class StateClass extends Application {
 
     private static Context mContext;
 
+    static final String admob_AppId = "ca-app-pub-7942440273858612~6758605083";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,6 +53,9 @@ public class StateClass extends Application {
         return mTracker;
     }
 
+    final String getAdmobAppId(){
+        return admob_AppId;
+    }
 
     public static Context getContext() {
         return mContext;
