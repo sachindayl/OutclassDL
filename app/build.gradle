@@ -8,8 +8,8 @@ android {
         applicationId "com.sportsoutclass.outclassdl"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 20
-        versionName "2.5.3.3"
+        versionCode 21
+        versionName "2.5.3.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
